@@ -23,34 +23,28 @@ exports.warehousePost = function(req,res,next){
     })
 }
 exports.warehousePut = function(req,res,next){
-Warehouse.find({_id: req.params.id},(err,data) => {
-  data.name = req.body.name
-  data.userId = req.body.userId
-  data.type = req.body.type
-  data.location = req.body.location
-    data.save((err) => {
+    Warehouse.find({_id: req.params.id}, (err,warehouse)=>{
       if(err){
         console.log(err)
-        return res.json({success: false, message: "warehouse not found"})
+        return res.json({success: false,message: "fail edit warehouse"})
       }
-      res.json({success: true, message: "update warehouse success"})
+      warehouse.profilePicture = req.body.picture
+      warehouse.save((err) => {
+        if(err){
+          console.log(err)
+          return res.json({success: false, message: "save warehouse picture failed"})
+        }
+        res.json({success: true, message: "save warehouse picture success"})
+      })
     })
-  })
 }
-exports.warehousePicturePut = function(req,res,next){
-Warehouse.find({_id: req.params.id},(err,data) => {
-  data.profilePicture = req.body.profile
-  data.profilePictureThumb = req.body.thumb  
-    data.save((err) => {
-      if(err){
-        console.log(err)
-        return res.json({success: false, message: "warehouse not found"})
-      }
-      res.json({success: true, message: "update warehouse success"})
-    })
-  })
-}
+
 exports.warehouseGet = function(req,res,next){
+    Warehouse.find({_id: req.params.id}).populate('userId').exec((err,data) => {
+      res.json(data)
+    })
+}
+exports.warehouseGetAll = function(req,res,next){
     Warehouse.find({}).populate('userId').exec((err,data) => {
       res.json(data)
     })

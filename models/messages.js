@@ -7,28 +7,26 @@ const messageSchema =  new Schema({
     ref: 'users'
   },
   content: String,
-  comments: [
-    {{
-      userId: Schema.Types.ObjectId,
+  comments: [{
+    commenter:{
+      type: Schema.Types.ObjectId,
       ref: 'users'
-    },comment: String,
-    likes: [
-      {
-        userId: Schema.Types.ObjectId,
+    },
+    comment: String,
+    likes: [{
+        type: Schema.Types.ObjectId,
         ref: 'users'
-      }
-    ]
-    }
-  ],
+      }]
+  }],
   likes: [
     {
-      userId: Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: 'users'
     }
   ],
   tags: [
     {
-      userId: Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: 'users'
     }
   ]
@@ -37,4 +35,4 @@ const messageSchema =  new Schema({
 })
 
 let Messages = mongoose.model('messages', messageSchema)
-module.exports = TimeLines
+module.exports = Messages
