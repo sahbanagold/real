@@ -8,6 +8,8 @@ const mongoose = require('mongoose')
 const path = require('path')
 const routes = require('./routes')
 const users = require('./routes/users')
+const warehouse = require('./routes/warehouse')
+const messages = require('./routes/messages')
 const transactions = require('./routes/transactions')
 
 const expressValidator = require('express-validator')
@@ -48,6 +50,8 @@ mongoose.connect('mongodb://localhost:27017/superman')
 app.use('/', routes)
 
 app.use('/api/users', users);
+app.use('/api/warehouse', warehouse);
+app.use('/api/messages', messages);
 app.use('/api/transactions', transactions);
 
 app.get('*', function(req, res){

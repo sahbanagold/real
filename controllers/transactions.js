@@ -1,9 +1,21 @@
-var Transactions = require('../models/transactions');
+var Transactions = require('../models/transactions')
 
 exports.transactionsGet = function(req,res,next){
-  let pinId = "582ac8caf0e19e56aaf82580" //nannti ganti req.params.id
+    Transactions.find({_id:req.params.id},(err,data) => {
+      if(err){
+        console.log(err)
+        return res.json({success: false, message: "transaction not found"})
+      }
+      res.json({success: true, data: data})
+    })
+}
+exports.allTransactionsGet = function(req,res,next){
     Transactions.find({},(err,data) => {
-      res.json(data)
+      if(err){
+        console.log(err)
+        return res.json({success: false, message: "transaction not found"})
+      }
+      res.json({success: true, data: data})
     })
 }
 exports.transactionsPost = function(req,res,next){
@@ -52,5 +64,17 @@ exports.transactionsPost = function(req,res,next){
   } else{
     res.json({success: false,message: "no transactions saved"})
   }
+}
 
+exports.transactionsPut = function(req,res,next){
+    Transactions.find({_id: req.params.id},(err,transaction) => {
+      transaction.status = "Paid"
+      transaction.save(function (err) {
+        if (err){
+          console.log(err)
+          return res.json({success: false,message: "update transaction payment status failed"})
+        }
+        res.json({success: true,message: "success save transaction payment status"})
+    })
+  })
 }
