@@ -6,7 +6,6 @@ var bcrypt   = require('bcrypt-nodejs');
 const userSchema = new Schema({
   userEmail: { type: String, unique: true},
   name: String,
-  dateJoined: Date,
   isActive: {
               type: String,
               enum: ['Active', 'NonActive']
