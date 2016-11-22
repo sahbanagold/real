@@ -3,10 +3,10 @@ let router = express.Router();
 let warehouse = require('../controllers/warehouse')
 
 
-router.get('/getOne/:id', warehouse.userGet)
-router.get('/getAll', warehouse.allUserGet)
-router.post('/', warehouse.userPost)
-router.post('/activate/:id', warehouse.activateUserPost)
-router.post('/deactivate/:id', warehouse.deactivateUserPost )
+router.get('/:id', warehouse.warehouseGet)
+router.get('/', warehouse.warehouseGetAll)
+router.post('/', warehouse.warehousePost)
+router.delete('/',warehouse.warehouseDelete)
+router.put('/', warehouse.warehousePut)
 
 module.exports = router;

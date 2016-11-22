@@ -52,7 +52,7 @@ exports.MessagesCommentPut = function(req,res,next){
     })
   })
 }
-exports.MessagesLiketPut = function(req,res,next){
+exports.MessagesLikePut = function(req,res,next){
   Messages.find({_id: req.params.id},(err,data)=>{
     data.likes.push({userId: req.body.userId})
     data.save((err) => {
