@@ -32,7 +32,7 @@ exports.userGet = function(req, res) {
     res.json({success: true, message: "user has been deactivated", data: data})
   })
 }
-exports.userPost = function(req, res, next) {
+exports.userRegisterPost = function(req, res, next) {
   let newUser = new User()
   newUser.name = req.body.name
   newUser.email = req.body.email
@@ -44,7 +44,6 @@ exports.userPost = function(req, res, next) {
       return res.json({success: false, message: "save new user failed"})
     }
     res.json({success: true, message: "new user success saved"})
-  })
   })
 }
 exports.deactivateUserPost = function(req, res) {
