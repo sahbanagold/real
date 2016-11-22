@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="/stylesheets/animate.min.css">
+    <link rel="stylesheet" href="/stylesheets/metisMenu.min.css">
+    <link rel="stylesheet" href="/stylesheets/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="/stylesheets/waves.min.css">
+    <link rel="stylesheet" href="/stylesheets/toastr.css">
+    <link rel="stylesheet" href="/stylesheets/bootstrap-select.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+
+  </head>
+  <body>
+    <!-- <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p> -->
+
+    <div class="row">
+        <div class="col-lg-6 ">
+         <!-- <div class="alert alert-danger"><b>Add New Transaction</b></div> -->
+          <div class="content-box">
+            <!-- <div class="content">
+              <div class="row">
+                <div class="col-md-12">
+                  <form class="form-horizontal">
+                    <div class="form-group">
+                      <label for="inputText" class="col-sm-2 control-label">Nama Penerima</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control material" id="penerima" placeholder="Rony">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputText" class="col-sm-2 control-label">Nomor Rekening</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control material" id="rekening" placeholder="1234 4567 1239 8457">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputText" class="col-sm-2 control-label">Nama Bank</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control material" id="bank" placeholder="BRI">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputText" class="col-sm-2 control-label">Nominal</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control material" id="nominal" placeholder="5000000">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label">Keterangan</label>
+                      <div class="col-sm-10">
+                        <textarea class="form-control material" placeholder="Tambahkan keterangan..." id="keterangan" rows="3"></textarea>
+                      </div>
+                    </div>
+                    <hr>
+                    <button type="submit" class="btn btn-success btn-lg raised waves-effect" >POST </button>
+                  </form>
+                </div>
+              </div>
+            </div> -->
+          </div>
+        </div>
+
+        <div class="col-md-8 col-lg-offset-2">
+          <div class="content-box">
+            <div class="head warning-bg clearfix">
+              <h5 class="content-title pull-left">Add New Transaction Request</h5>
+              <div class="functions-btns pull-right">
+                <a class="refresh-btn" href="#"><i class="zmdi zmdi-refresh"></i></a>
+                <a class="fullscreen-btn" href="#"><i class="zmdi zmdi-fullscreen"></i></a>
+                <a class="close-btn" href="#"><i class="zmdi zmdi-close"></i></a>
+              </div>
+            </div>
+
+            <div class="content">
+              <div id="progress-wizard" class="form-wizard">
+                <ul class="nav nav-tabs fw-nav">
+                  <li class="active">
+                    <a href="#tab-33" data-toggle="tab" aria-expanded="true"><b>Transactions Detail</b></a>
+                  </li>
+                  <li class="">
+                    <a href="#tab-31" data-toggle="tab" aria-expanded="false">Items List</a>
+                  </li>
+                  <li class="">
+                    <a href="#tab-32" data-toggle="tab" aria-expanded="false">Finish</a>
+                  </li>
+                </ul>
+                <form class="tab-content" role="form" method="POST" action="/api/transactions">
+                  <div id="progressbar-wizard" class="progress">
+                    <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="26" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                    </div>
+                  </div>
+                  <!-- <form role="form"> -->
+                  <div class="tab-pane fade" id="tab-31">
+                    <div class="form-inline">
+                      <div class="form-group">
+                        <!-- <label class="control-label">Nama Item</label> -->
+                        <input type="text" class="form-control" placeholder="Nama Item" name="itemname">
+                      </div>
+                      <div class="form-group">
+                        <!-- <label class="control-label">Harga Satuan</label> -->
+                        <input type="text" class="form-control" placeholder="Harga Satuan" name="itemprice" value=1000>
+                        <label class="control-label">Rp</label>
+                      </div>
+                      <div class="form-group">
+                        <!-- <label class="control-label">Quantity (Kg)</label> -->
+                        <input type="text" class="form-control" placeholder="Quantity" name="quantity" value=500>
+                        <label class="control-label">Kg</label>
+                      </div>
+                      <div class="form-group">
+                        <!-- <label class="control-label">Harga Total</label> -->
+                        <input type="text" class="form-control" placeholder="Harga Total" value=500000 disabled="true">
+                        <input type="hidden" name="totalprice" value=500000 id="total1">
+                        <label class="control-label">Rp</label>
+                      </div>
+                      <hr>
+                      <div class="form-group">
+                        <!-- <label class="control-label">Nama Item</label> -->
+                        <input type="text" class="form-control" placeholder="Nama Item" name="itemname" value="botol aqua">
+                      </div>
+                      <div class="form-group">
+                        <!-- <label class="control-label">Harga Satuan</label> -->
+                        <input type="text" class="form-control" placeholder="Harga Satuan" name="itemprice" >
+                        <label class="control-label">Rp</label>
+                      </div>
+                      <div class="form-group">
+                        <!-- <label class="control-label">Quantity (Kg)</label> -->
+                        <input type="text" class="form-control" placeholder="Quantity" name="quantity" value=500>
+                        <label class="control-label">Kg</label>
+                      </div>
+                      <div class="form-group">
+                        <!-- <label class="control-label">Harga Total</label> -->
+                        <input type="text" class="form-control" placeholder="Harga Total" name="totalprice" value=500000 disabled="true">
+                        <input type="hidden" name="totalprice" value=500000 id="total2">
+                        <label class="control-label">Rp</label>
+                      </div>
+                      <hr>
+                      <div class="form-group">
+                        <!-- <label class="control-label">Nama Item</label> -->
+                        <input type="text" class="form-control" placeholder="Nama Item" name="itemname" value="botol aqua">
+                      </div>
+                      <div class="form-group">
+                        <!-- <label class="control-label">Harga Satuan</label> -->
+                        <input type="text" class="form-control" placeholder="Harga Satuan" name="itemprice" value=1000>
+                        <label class="control-label">Rp</label>
+                      </div>
+                      <div class="form-group">
+                        <!-- <label class="control-label">Quantity (Kg)</label> -->
+                        <input type="text" class="form-control" placeholder="Quantity" name="quantity" >
+                        <label class="control-label">Kg</label>
+                      </div>
+                      <div class="form-group">
+                        <!-- <label class="control-label">Harga Total</label> -->
+                        <input type="text" class="form-control" placeholder="Harga Total" name="totalprice" value=500000 disabled="true">
+                        <input type="hidden" name="totalprice" value=500000 id="total3">
+                        <label class="control-label">Rp</label>
+                      </div>
+                      <hr>
+                      <div class="form-group">
+                        <!-- <label class="control-label">Nama Item</label> -->
+                        <input type="text" class="form-control" placeholder="Nama Item" name="itemname" value="botol aqua">
+                      </div>
+                      <div class="form-group">
+                        <!-- <label class="control-label">Harga Satuan</label> -->
+                        <input type="text" class="form-control" placeholder="Harga Satuan" name="itemprice" >
+                        <label class="control-label">Rp</label>
+                      </div>
+                      <div class="form-group">
+                        <!-- <label class="control-label">Quantity (Kg)</label> -->
+                        <input type="text" class="form-control" placeholder="Quantity" name="quantity" value=500>
+                        <label class="control-label">Kg</label>
+                      </div>
+                      <div class="form-group">
+                        <!-- <label class="control-label">Harga Total</label> -->
+                        <input type="text" class="form-control" placeholder="Harga Total" name="totalprice" value=500000 disabled="true">
+                        <input type="hidden" name="totalprice" value=500000 id="total4">
+                        <label class="control-label">Rp</label>
+                      </div>
+                      <button type="button" class="btn btn-danger btn-lg icon raised waves-effect"><i class="zmdi zmdi-plus"></i></button>
+                      <hr>
+                    </div>
+                  </div>
+                  <div class="tab-pane fade" id="tab-32">
+                    <div>
+                      <!-- <div class="form-group">
+                        <label class="control-label">Password</label>
+                        <input type="password" class="form-control" value="password">
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label">Repeat password</label>
+                        <input type="password" class="form-control" value="password">
+                      </div> -->
+                      <div class="form-group">
+                        <label for="inputText" class="col-sm-2 control-label">Nama Penerima</label>
+                        <label class="col-sm-1 control-label">:</label>
+                        <div class="col-sm-9">
+                          <!-- <input type="text" class="form-control material" id="penerima" name="penerima" placeholder="Rony"> -->
+                          <label for="inputText" class="control-label">Rony</label>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="inputText" class="col-sm-2 control-label">Nomor Rekening</label>
+                        <label class="col-sm-1 control-label">:</label>
+                        <div class="col-sm-9">
+                          <!-- <input type="text" class="form-control material" id="rekening" name="rekening" placeholder="1234 4567 1239 8457"> -->
+                          <label for="inputText" class="control-label">1234 4567 1239 8457</label>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="inputText" class="col-sm-2 control-label">Nama Bank</label>
+                        <label class="col-sm-1 control-label">:</label>
+                        <div class="col-sm-9">
+                          <!-- <input type="text" class="form-control material" id="bank" name="bank" placeholder="BRI"> -->
+                          <label for="inputText" class="control-label">BRI</label>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="inputText" class="col-sm-2 control-label">Nominal</label>
+                        <label class="col-sm-1 control-label">:</label>
+                        <div class="col-sm-9">
+                          <!-- <input type="text" class="form-control material" id="nominal" name="nominal" placeholder="5000000"> -->
+                          <label for="inputText" class="control-label">5000000</label>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">Keterangan</label>
+                        <label class="col-sm-1 control-label">:</label>
+                        <div class="col-sm-9">
+                          <!-- <textarea class="form-control material" placeholder="Tambahkan keterangan..." id="keterangan" name="keterangan" rows="3"></textarea> -->
+                          <label for="inputText" class="control-label">Masih Banyak Barang yang Pembayarannya Menunggak. Mungkin Karena ada konser, jadi banyak stock botol minuman</label>
+                        </div>
+                      </div>
+                      <table class="table">
+                  <caption id="tablecaption">Detail Item</caption>
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Nama Item</th>
+                      <th>Harga (Rp)</th>
+                      <th>Quantity (Kg)</th>
+                      <th>Total Harga Item (Rp)</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tabeldetail">
+                    <tr>
+                      <th scope="row">1</th>
+                      <td>Botol Aqua</td>
+                      <td>1000</td>
+                      <td>500</td>
+                      <td>500000</td>
+                    </tr>
+                  </tbody>
+                </table>
+                      <button type="submit" class="btn btn-success btn-lg raised waves-effect" >Request Transactions </button>
+                    </div>
+                  </div>
+                  <div class="tab-pane fade active in" id="tab-33">
+                    <div class="form-horizontal">
+                      <div class="form-group">
+                        <label for="inputText" class="col-sm-2 control-label">Nama Penerima</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control material" id="penerima" name="penerima" placeholder="Rony" value="Rony">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="inputText" class="col-sm-2 control-label">Nomor Rekening</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control material" id="rekening" name="rekening" placeholder="1234 4567 1239 8457" value="1234 4567 1239 8457">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="inputText" class="col-sm-2 control-label">Nama Bank</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control material" id="bank" name="bank" placeholder="BRI" value="BRI">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="inputText" class="col-sm-2 control-label">Nominal</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control material" id="nominal" name="nominal" placeholder="5000000" value=5000000>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">Keterangan</label>
+                        <div class="col-sm-10">
+                          <textarea class="form-control material" placeholder="Tambahkan keterangan..." value="test keterangan" id="keterangan" name="keterangan" rows="3"></textarea>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                  <!-- </form> -->
+                  <div class="fw-footer">
+                    <div class="pull-right">
+                      <button type="button" class="btn btn-primary next waves-effect disabled" name="next" value="Next">Next</button>
+                    </div>
+                    <div class="pull-left">
+                      <button type="button" class="btn btn-primary previous waves-effect" name="previous" value="Previous">Previous</button>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </body>
+  <script src="/javascripts/jquery.js"></script>
+ <script src="/javascripts/bootstrap.min.js"></script>
+ <script src="/javascripts/metisMenu.min.js"></script>
+ <script src="/javascripts/jquery.mCustomScrollbar.js"></script>
+ <script src="/javascripts/waves.min.js"></script>
+ <script src="/javascripts/jquery.bootstrap.wizard.min.js"></script>
+ <script src="/javascripts/jquery.validate.js"></script>
+
+
+ <!-- <script src="/javascripts/toastr.js"></script> -->
+
+
+ <script src="/javascripts/bootstrap-select.js"></script>
+
+   <script src="/javascripts/common.js"></script>
+ <script src="/javascripts/demo-switch.js"></script>
+
+ <script>
+   if($(window).width() >= 1200){
+     $("body").addClass("boxed-layout");
+   }
+   else{
+     $("body").removeClass("boxed-layout");
+   }
+
+
+
+
+   $(window).resize(function(){
+         if($(window).width() >= 1200){
+     $("body").addClass("boxed-layout");
+   }
+   else{
+     $("body").removeClass("boxed-layout");
+   }
+   });
+
+ </script>
+ <script>
+   if($(window).width() >= 1200){
+     $("body").addClass("fixed-sidebar");
+   }
+   else{
+     $("body").removeClass("fixed-sidebar");
+   }
+
+   $(window).resize(function(){
+   if($(window).width() >= 1200){
+     $("body").addClass("fixed-sidebar");
+   }
+   else{
+     $("body").removeClass("fixed-sidebar");
+   }
+   });
+ </script>
+ <script>
+  $(document).ready(function() {
+    $('#basic-wizard').bootstrapWizard({
+        tabClass: 'fw-nav',
+        'nextSelector': '.next',
+        'previousSelector': '.previous',
+        'firstSelector': '.button-first',
+        'lastSelector': '.button-last'
+    });
+
+    $('#btn-wizard').bootstrapWizard({
+        tabClass: 'fw-nav',
+        'nextSelector': '.next',
+        'previousSelector': '.previous',
+        'firstSelector': '.button-first',
+        'lastSelector': '.button-last'
+    });
+
+    $('#progress-wizard').bootstrapWizard({onTabShow: function(tab, navigation, index) {
+        var $total = navigation.find('li').length;
+        var $current = index+1;
+        var $percent = ($current/$total) * 100;
+        $('#progressbar-wizard').find('.progress-bar').css({width:$percent+'%'});
+    },
+    'tabClass': 'fw-nav',
+    'nextSelector': '.next',
+    'previousSelector': '.previous'
+    });
+
+    $('#root-wizard').bootstrapWizard({
+        'tabClass': 'fw-nav',
+        'nextSelector': '.next',
+        'previousSelector': '.previous',
+        'onNext': function (tab, navigation, index) {
+            var $valid = $("#wizard-form").valid();
+            if (!$valid) {
+                $validator.focusInvalid();
+                return false;
+            }
+        }
+    });
+
+    var $validator = $("#wizard-form").validate({
+        rules: {
+            emailfield: {
+                required: true,
+                email: true,
+                minlength: 3
+            },
+            username: {
+                required: true,
+                minlength: 3
+            },
+            password: {
+                required: true,
+                minlength: 5
+            },
+            password2: {
+                required: true,
+                minlength: 5,
+                equalTo: "#password"
+            }
+        },
+        messages: {
+            password: {
+                required: "Please provide a password",
+                minlength: "Your password must be at least 5 characters long"
+            },
+            password2: {
+                required: "Please provide a password",
+                minlength: "Your password must be at least 5 characters long",
+                equalTo: "Please enter the same password as above"
+            }
+        }
+    });
+
+    $('body').on('click', '.a-prevent', function(e){
+        e.preventDefault();
+    });
+  });
+  </script>
+
+  <script type="text/javascript">
+            $(document).ready(function() {
+//                $('#basicwizard').bootstrapWizard({'tabClass': 'nav nav-tabs navtab-wizard nav-justified bg-muted'});
+
+//                $('#progressbarwizard').bootstrapWizard({onTabShow: function(tab, navigation, index) {
+//                    var $total = navigation.find('li').length;
+//                    var $current = index+1;
+//                    var $percent = ($current/$total) * 100;
+//                    $('#progressbarwizard').find('.bar').css({width:$percent+'%'});
+//                },
+//                'tabClass': 'nav nav-tabs navtab-wizard nav-justified bg-muted'});
+
+//                $('#btnwizard').bootstrapWizard({'tabClass': 'nav nav-tabs navtab-wizard','nextSelector': '.button-next', 'previousSelector': '.button-previous', 'firstSelector': '.button-first', 'lastSelector': '.button-last'});
+
+//                var $validator = $("#commentForm").validate({
+//                    rules: {
+//                        emailfield: {
+//                            required: true,
+//                            email: true,
+//                            minlength: 3
+//                        },
+//                        namefield: {
+//                            required: true,
+//                            minlength: 3
+//                        },
+//                        urlfield: {
+//                            required: true,
+//                            minlength: 3,
+//                            url: true
+//                        }
+//                    }
+//                });
+
+//                $('#rootwizard').bootstrapWizard({
+//                    'tabClass': 'nav nav-tabs navtab-wizard nav-justified bg-muted',
+//                    'onNext': function (tab, navigation, index) {
+//                        var $valid = $("#commentForm").valid();
+//                        if (!$valid) {
+//                            $validator.focusInvalid();
+//                            return false;
+//                        }
+//                    }
+//                });
+            });
+
+        </script>
+  <script>
+    if($(window).width() >= 1200){
+      $("body").addClass("boxed-layout");
+    }
+    else{
+      $("body").removeClass("boxed-layout");
+    }
+
+
+
+
+    $(window).resize(function(){
+          if($(window).width() >= 1200){
+      $("body").addClass("boxed-layout");
+    }
+    else{
+      $("body").removeClass("boxed-layout");
+    }
+    });
+
+  </script>
+  <script>
+    if($(window).width() >= 1200){
+      $("body").addClass("fixed-sidebar");
+    }
+    else{
+      $("body").removeClass("fixed-sidebar");
+    }
+
+    $(window).resize(function(){
+    if($(window).width() >= 1200){
+      $("body").addClass("fixed-sidebar");
+    }
+    else{
+      $("body").removeClass("fixed-sidebar");
+    }
+    });
+  </script>
+
+</html>

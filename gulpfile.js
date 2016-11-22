@@ -26,7 +26,7 @@ gulp.task("serve", function() {
     //gulp.watch("./index.html")
     // gulp.watch("./resource/assets/js/**/*.js", ['script']);
     gulp.watch("./css/*.css").on("change", browserSync.reload) //stiap ada perubahan reload
-    gulp.watch("./public/assets/js/app.js").on("change", browserSync.reload)
+    gulp.watch("./views/*.ejs").on("change", browserSync.reload)
     gulp.watch("./*.html").on("change", browserSync.reload)
 
 })

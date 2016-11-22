@@ -11,7 +11,7 @@ exports.allUserGet = function(req, res) {
       console.log(err)
       return res.json({success: false, message: "something error, no user found"})
     }
-    res.json({success: true, message: "user has been deactivated", data: data})
+    res.json({success: true, data: data})
   })
 }
 exports.findName = function(req, res) {
@@ -29,13 +29,13 @@ exports.userGet = function(req, res) {
       console.log(err)
       return res.json({success: false, message: "user not found"})
     }
-    res.json({success: true, message: "user has been deactivated", data: data})
+    res.json({success: true, data: data})
   })
 }
 exports.userRegisterPost = function(req, res, next) {
   let newUser = new User()
   newUser.name = req.body.name
-  newUser.email = req.body.email
+  newUser.userEmail = req.body.email
   newUser.encryptedPassword = newUser.generateHash(req.body.password)
   newUser.aktif = true
   newUser.save(function (err) {

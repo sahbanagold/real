@@ -42,25 +42,26 @@ exports.MessagesPost = function(req,res,next){
 }
 exports.MessagesCommentPut = function(req,res,next){
   Messages.find({_id: req.params.id},(err,data)=>{
-    data.comments.push({userId: req.body.userId, comment: req.body.comment})
-    data.save((err) => {
+    data[0].comments.push({commenter: req.body.userId, comment: req.body.comment})
+
+    data[0].save((err) => {
       if(err){
         console.log(err)
         return res.json({success: false, message: "save new comment failed"})
       }
-      res.json({success: true, message: "save new comment success", count: data.comments.length})
+      res.json({success: true, message: "save new comment success", count: data[0].comments.length})
     })
   })
 }
 exports.MessagesLikePut = function(req,res,next){
   Messages.find({_id: req.params.id},(err,data)=>{
-    data.likes.push({userId: req.body.userId})
-    data.save((err) => {
+    data[0].likes.push(req.body.userId)
+    data[0].save((err) => {
       if(err){
         console.log(err)
         return res.json({success: false, message: "save new like failed"})
       }
-      res.json({success: true, message: "save new like success", count: data.likes.length})
+      res.json({success: true, message: "save new like success", count: data[0].likes.length})
     })
   })
 }
