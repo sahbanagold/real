@@ -1,6 +1,7 @@
 let express = require('express');
 let router = express.Router();
 let users = require('../controllers/users')
+let passport = require('passport')
 
 
 router.get('/getOne/:id', users.userGet)

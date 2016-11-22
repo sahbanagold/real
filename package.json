@@ -14,6 +14,7 @@
     "babel-register": "^6.18.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.2",
+    "browser-sync": "^2.18.2",
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
     "connect-flash": "^0.1.1",
@@ -27,6 +28,9 @@
     "express": "^4.14.0",
     "express-session": "^1.14.2",
     "express-validator": "^2.21.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-sass": "^2.3.2",
     "mongoose": "^4.6.6",
     "morgan": "^1.7.0",
     "node-cron": "^1.1.2",
@@ -34,7 +38,8 @@
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "password": "^0.1.1",
-    "q": "^1.4.1"
+    "q": "^1.4.1",
+    "webpack-stream": "^3.2.0"
   },
   "devDependencies": {
     "babel-core": "^6.18.0",
