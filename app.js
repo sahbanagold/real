@@ -53,7 +53,12 @@ app.use('/api/users', users);
 app.use('/api/warehouse', warehouse);
 app.use('/api/messages', messages);
 app.use('/api/transactions', transactions);
-
+app.get('/logout', function(req, res) {
+  console.log(req.session, 'inin session')
+  req.logout()
+  req.session.destroy()
+  res.redirect('/')
+  })
 app.get('*', function(req, res){
   let img = Math.ceil((Math.random()*3))
       res.render('404.ejs', {url: req.url,imagesrc:`/images/${img}.jpg`})

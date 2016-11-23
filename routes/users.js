@@ -11,4 +11,5 @@ router.post('/activate/:id', users.activateUserPost)
 router.post('/deactivate/:id', users.deactivateUserPost )
 router.post('/login',
 passport.authenticate('local-login', {successRedirect : '/home', failureRedirect : '/', failureFlash : true}));
+
 module.exports = router;

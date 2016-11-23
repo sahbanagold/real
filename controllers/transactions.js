@@ -18,7 +18,7 @@ exports.allTransactionsGet = function(req,res,next){
     let datas = []
     let i = 1
     data.forEach((warehouse)=>{
-      Transactions.find({userId: warehouse.userId},(err,transactions) => {
+      Transactions.find({userId: warehouse.userId}).populate('userId').exec((err,transactions) => {
         if(err){
           console.log(err)
           return res.json({success: false, message: "transaction not found"})
