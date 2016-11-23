@@ -138,7 +138,7 @@
 								<h5>Order Complete</h5>
 							</li>
 						</ul>
-												<div>
+												<form role="form" method="POST" action="/api/transactions">
 													<div id="ptab1" aria-labelledby="ui-id-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-hidden="false" style="display: block;">
 
 														<h2 class="center">Input Your Transaction In Here !</h2>
@@ -148,7 +148,7 @@
 															<table class="table cart">
 																<thead>
 																	<tr>
-																		<th class="cart-product-remove">&nbsp;</th>
+																		<th >&nbsp;</th>
 																		<th class="cart-product-name">Product</th>
 																		<th class="cart-product-price">Unit Price</th>
 																		<th class="cart-product-quantity">Quantity</th>
@@ -157,53 +157,68 @@
 																</thead>
 																<tbody>
 																	<tr class="cart_item">
-																		<td class="cart-product-remove">
+																		<td >
 																			<a href="#" class="remove" title="Remove this item"><i class="icon-trash2"></i></a>
 																		</td>
 
 																		<td class="cart-product-name">
-																			<a href="#">Pink Printed Dress</a>
+																			<input type="text" name="itemname" size="15">
 																		</td>
 
 																		<td class="cart-product-price">
-																			<span class="amount">IDR <input type="text" size="5"></span>
+																			<span class="amount">IDR <input class="price" mark="1" type="text" id="1price" name="itemprice" size="5"></span>
 																		</td>
 
 																		<td class="cart-product-quantity">
-																			<div class="quantity clearfix">
+																			<div class="clearfix">
 
-																				<span class="amount"> <input type="text" size="5"> KG</span>
+																				<span class="amount"> <input class="quantity" mark="1" type="text" id="1quantity" name="quantity" size="5"> KG</span>
 
 																			</div>
 																		</td>
 
 																		<td class="cart-product-subtotal">
-																			<span class="amount">IDR 132.000.000</span>
+																			<span class="amount">IDR <b id="1">0</b><b>,00</b></span>
+																			<input type="hidden" id="1total" name="totalprice">
 																		</td>
 																	</tr>
 																	<tr class="cart_item">
-																		<td class="cart-product-remove">
+																		<td >
 																			<a href="#" class="remove" title="Remove this item"><i class="icon-trash2"></i></a>
 																		</td>
 
 																		<td class="cart-product-name">
-																			<a href="#">Pink Printed Dress</a>
+																			<input type="text" name="itemname" size="15">
 																		</td>
 
 																		<td class="cart-product-price">
-																			<span class="amount">IDR <input type="text" size="5"></span>
+																			<span class="amount">IDR <input class="price" mark="2" type="text" id="2price" name="itemprice" size="5"></span>
 																		</td>
 
 																		<td class="cart-product-quantity">
-																			<div class="quantity clearfix">
+																			<div class="clearfix">
 
-																				<span class="amount"> <input type="text" size="5"> KG</span>
+																				<span class="amount"> <input class="quantity" mark="2" type="text" id="2quantity" name="quantity" size="5"> KG</span>
 
 																			</div>
 																		</td>
 
 																		<td class="cart-product-subtotal">
-																			<span class="amount">IDR 132.000.000</span>
+																			<span class="amount">IDR <b id="2">0</b><b>,00</b></span>
+																			<input type="hidden" id="2total" name="totalprice">
+																		</td>
+																	</tr>
+																	<tr id="btnadd">
+																		<td>
+																			<span id="btn-plus" class="button button-3d nomargin fright"><i class="icon-line-circle-plus"></i></span>
+																		</td>
+																		<td>
+																		</td>
+																		<td>
+																		</td>
+																		<td>
+																		</td>
+																		<td>
 																		</td>
 																	</tr>
 																</tbody>
@@ -216,27 +231,90 @@
 
 													</div>
 													<div id="ptab2" aria-labelledby="ui-id-2" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-hidden="true" style="display: none;">
-														<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt, deleniti, atque soluta ratione blanditiis maxime at architecto laudantium eius eaque distinctio dolorem voluptatem nam ab molestias velit nemo. Illo, hic.</p>
-														<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores, modi, odit, aspernatur veritatis ipsum molestiae impedit iusto blanditiis voluptatem ab voluptas ullam expedita repellendus porro assumenda non deserunt repellat eius
-															rem dolorem corporis temporibus voluptatibus ut! Quod, corporis, tempora, dolore, sint earum minus deserunt eveniet natus error magnam aliquam nemo.</p>
+														<div class="form-group">
+			                        <label for="inputText" >Nama Penerima</label>
+			                          <input type="text" class="form-control" id="penerima" name="penerima" placeholder="Rony">
+			                      </div>
+			                      <div class="form-group">
+			                        <label for="inputText">Nomor Rekening</label>
+			                          <input type="text" class="form-control" id="rekening" name="rekening" placeholder="1234 4567 1239 8457">
+			                      </div>
+			                      <div class="form-group">
+			                        <label for="inputText">Nama Bank</label>
+			                          <input type="text" class="form-control" id="bank" name="bank" placeholder="BRI">
+			                      </div>
+			                      <div class="form-group">
+			                        <label for="inputText">Nominal</label>
+			                        <input type="text" class="form-control" id="nominal" name="nominal" placeholder="5000000">
+			                      </div>
+
+			                      <div class="form-group">
+			                        <label>Keterangan</label>
+			                          <textarea class="form-control material" placeholder="Tambahkan keterangan..." value="test keterangan" id="keterangan" name="keterangan" rows="3"></textarea>
+			                      </div>
+
 														<div class="line"></div>
 														<a href="#" class="button button-3d nomargin tab-linker" rel="1">Previous</a>
 														<a href="#" class="button button-3d nomargin fright tab-linker" rel="3">Pay Now</a>
 													</div>
 													<div id="ptab3" aria-labelledby="ui-id-3" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-hidden="true" style="display: none;">
-														<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, sit, culpa, placeat, tempora quibusdam molestiae cupiditate atque tempore nemo tenetur facere voluptates autem aliquid provident distinctio beatae odio maxime pariatur
-															eos ratione quae itaque quod. Distinctio, temporibus, cupiditate, eaque vero illo molestiae vel doloremque dolorum repellat ullam possimus modi dicta eum debitis ratione est in sunt et corrupti adipisci quibusdam praesentium optio laborum
-															tempora ipsam aut cum consectetur veritatis dolorem.</p>
+														<div class="form-group">
+			                        <label for="inputText" class="control-label">Nama Penerima</label>
+			                        <label class="control-label">:</label>
+			                        <label class="">Rony</label>
+			                      </div>
+			                      <div class="form-group">
+			                        <label for="inputText" class="control-label">Nomor Rekening</label>
+			                        <label class="control-label">:</label>
+			                        <label class="">1234 4567 1239 8457</label>
+			                      </div>
+			                      <div class="form-group">
+			                        <label for="inputText" class="control-label">Nama Bank</label>
+			                        <label class="control-label">:</label>
+															<label class="">BRI</label>
+			                      </div>
+			                      <div class="form-group">
+			                        <label for="inputText" class="control-label">Nominal</label>
+			                        <label class="control-label">:</label>
+															<label class="">5000000</label>
+			                      </div>
+
+			                      <div class="form-group">
+			                        <label class="control-label">Keterangan</label>
+			                        <label class="control-label">:</label>
+															<label class="">Masih Banyak Barang yang Pembayarannya Menunggak. Mungkin Karena ada konser, jadi banyak stock botol minuman</label>
+			                      </div>
+			                      <table class="table">
+			                  <caption id="tablecaption">Detail Item</caption>
+			                  <thead>
+			                    <tr>
+			                      <th>#</th>
+			                      <th>Nama Item</th>
+			                      <th>Harga (Rp)</th>
+			                      <th>Quantity (Kg)</th>
+			                      <th>Total Harga Item (Rp)</th>
+			                    </tr>
+			                  </thead>
+			                  <tbody id="tabeldetail">
+			                    <tr>
+			                      <th scope="row">1</th>
+			                      <td>Botol Aqua</td>
+			                      <td>1000</td>
+			                      <td>500</td>
+			                      <td>500000</td>
+			                    </tr>
+			                  </tbody>
+			                </table>
 														<div class="line"></div>
 														<a href="#" class="button button-3d nomargin tab-linker" rel="2">Previous</a>
-														<a href="#" class="button button-3d nomargin fright tab-linker" rel="4">Complete Order</a>
+														<button type="submit" class="button button-3d nomargin fright">Complete Order</button>
 													</div>
 													<div id="ptab4" aria-labelledby="ui-id-4" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-hidden="true" style="display: none;">
 														<div class="alert alert-success">
 															<strong>Thank You.</strong> Your order will be processed once we verify the Payment.
 														</div>
 													</div>
-												</div>
+												</form>
 											</div>
 										</div>
 										<div class="tab-content clearfix ui-tabs-panel ui-widget-content ui-corner-bottom" id="tabs-11" aria-labelledby="ui-id-23" role="tabpanel" aria-hidden="true" style="display: none;">
@@ -623,8 +701,41 @@
 
 	<script>
 		jQuery(document).ready(function($) {
+			var trindex = 2			
 			getMessages()
 			listgudang()
+			bindprice()
+			bindquantity()
+			$("#btn-plus").on("click", function(event) {
+				var newtr = `<tr class="cart_item">
+					<td>
+						<a href="#" class="remove" title="Remove this item"><i class="icon-trash2"></i></a>
+					</td>
+
+					<td class="cart-product-name">
+						<input type="text" name="itemname" size="15">
+					</td>
+
+					<td class="cart-product-price">
+						<span class="amount">IDR <input class="price" mark=${++trindex} id=${trindex}price type="text" name="itemprice" size="5"></span>
+					</td>
+
+					<td class="cart-product-quantity">
+						<div class="clearfix">
+
+							<span class="amount"> <input class="quantity" mark=${trindex} id=${trindex}quantity type="text" name="quantity" size="5"> KG</span>
+
+						</div>
+					</td>
+
+					<td class="cart-product-subtotal">
+						<span class="amount">IDR <b id=${trindex}>0</b><b>,00</b></span>
+						<input type="hidden" id=${trindex}total name="totalprice">
+					</td>`
+					$(newtr).insertBefore('#btnadd')
+					bindprice()
+					bindquantity()
+			})
 			$("#post-message").unbind().on("click", function(event) {
 					event.preventDefault()
 							$.ajax({
@@ -966,6 +1077,40 @@ function resultPost (result){
 			})
 
 
+		}
+		function bindprice() {
+			$('.price').unbind('keypress').bind("keypress", function(e) {
+					if (e.keyCode < 48 || e.keyCode > 57) {
+						e.preventDefault()
+					}
+			})
+			$('.price').each(function(){
+				var id = $(this).attr('id')
+				var mark = $(this).attr('mark')
+				$(this).on('keyup',function () {
+					var prc = parseInt($(`#${id}`).val())
+					var qty = parseInt($(`#${mark}quantity`).val())
+					$(`#${mark}`).html(prc*qty)
+					$(`#${mark}total`).val(prc*qty)
+				})
+			})
+		}
+		function bindquantity() {
+			$('.quantity').unbind('keypress').bind("keypress", function(e) {
+					if (e.keyCode < 48 || e.keyCode > 57) {
+						e.preventDefault()
+					}
+			})
+			$('.quantity').each(function(){
+				var id = $(this).attr('id')
+				var mark = $(this).attr('mark')
+				$(this).on('keyup',function () {
+					var qty = parseInt($(`#${id}`).val())
+					var prc = parseInt($(`#${mark}price`).val())
+					$(`#${mark}`).html(prc*qty)
+					$(`#${mark}total`).val(prc*qty)
+				})
+			})
 		}
 
 	</script>

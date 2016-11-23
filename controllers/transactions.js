@@ -70,7 +70,7 @@ exports.transactionsPost = function(req,res,next){
   console.log(newItems,"tst item")
   if(newItems.length > 0){
     let newTransactions = new Transactions()
-      newTransactions.userId= req.body.userId
+      newTransactions.userId= req.session.userId
       newTransactions.nominal= req.body.nominal
       newTransactions.recipient= req.body.penerima
       newTransactions.account= req.body.rekening
