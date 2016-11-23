@@ -16,19 +16,31 @@ exports.allTransactionsGet = function(req,res,next){
       return res.json({success: false, message: "error, wareHouse not found"})
     }
     let datas = []
+    let i = 1
     data.forEach((warehouse)=>{
       Transactions.find({userId: warehouse.userId},(err,transactions) => {
         if(err){
           console.log(err)
           return res.json({success: false, message: "transaction not found"})
         }
+        let newobject = Object.assign({},{
+          userId: warehouse.userId,
+          name: warehouse.name,
+          profilePicture: warehouse.profilePicture,
+          profilePictureThumb: warehouse.profilePictureThumb,
+          type: warehouse.type,
+          location: warehouse.location,
+          transactions: transactions
+          })
 
-        let newobject =  Object.assign(warehouse,{transactions: transactions})
         datas.push(newobject)
+        if(i++ == data.length){
+            res.json({success: true, data: datas})
+        }
 
       })
     })
-    res.json({success: true, data: datas})
+
   })
 }
 exports.transactionsPost = function(req,res,next){

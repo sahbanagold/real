@@ -794,12 +794,12 @@ function resultPost (result){
 									</div>
 									<div class="panel-footer">
 									<i class="icon-like"> </i> ${result.data[i].likes.length} Likes
-									<a href="#template-contactform-subjec" class="leftmargin-sm " id="btn-comment-list"><i class="icon-comments"></i> ${result.data[i].comments.length} Comments</a>
+									<a href="#${result.data[i]._id}btn-comment-list" mark=${result.data[i]._id} class="leftmargin-sm comment-list-btn" id=${result.data[i]._id}btn-comment-list><i class="icon-comments"></i> ${result.data[i].comments.length} Comments</a>
 									</div>
 
 											<div class="panel-footer">
 												<input type="text" id="template-contactform-subject" name="template-contactform-subject" value="" class="required sm-form-control" aria-required="true">
-												<div class="spost clearfix" id="comment-list">
+												<div class="spost clearfix" id=${result.data[i]._id}comment-list>
 
 
 											</div>
@@ -824,54 +824,62 @@ function resultPost (result){
 									</ul>
 								</div>
 								`
-								$('#comment-list').prepend(commentHTML)
-								$('#comment-list').hide()
-									$("#btn-comment-list").click(function() {
-											$("#comment-list").show()
-
-									})
-
+								$(`#${result.data[i]._id}comment-list`).prepend(commentHTML)
 									}
+									$(`#${result.data[i]._id}comment-list`).hide()
+									$('.comment-list-btn').each(function(){
+										var id = $(this).attr('mark')
+										$(this).on('click',function () {
+											$(`#${id}comment-list`).show()
+										})
+									})
 				      }
 		        }
 		    })
 		 }
 		function listgudang() {
-			var listgudangHTML = `<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title ">Gudang Bogor</h3>
-				</div>
-				<div class="panel-body">
-					<table class="table table-striped">
-						<thead>
-						<tr>
-							<th>#</th>
-							<th>First Name</th>
-							<th>Total</th>
-							<th>Status</th>
-						</tr>
-						</thead>
-						<tbody id='bodylistgudang'>
 
-
-						</tbody>
-					</table>
-				</div>
-			</div>
-			`
 			$.get({
 					url: "/api/transactions/",
 					success: function(result) {
-						$('#listgudang').prepend(listgudangHTML)
+						console.log(result.data)
 						for (var k in result.data){
-							var listrequestHTML = `
-							<tr>
-								<td>${~~(k+1)}</td>
-								<td>${result.data[k].recipient}</td>
-								<td>IDR ${result.data[k].nominal}</td>
-								<td><span class="label label-success">${result.data[k].status}</span></td>
-							</tr>`
-							$('#bodylistgudang').append(listrequestHTML)
+							var listgudangHTML = `<div class="panel panel-default">
+								<div class="panel-heading">
+									<h3 class="panel-title ">${result.data[k].name}</h3>
+								</div>
+								<div class="panel-body">
+									<table class="table table-striped">
+										<thead>
+										<tr>
+											<th>#</th>
+											<th>First Name</th>
+											<th>Total</th>
+											<th>Status</th>
+										</tr>
+										</thead>
+										<tbody id='bodylistgudang'>
+
+
+										</tbody>
+									</table>
+								</div>
+							</div>
+							`
+							$('#listgudang').prepend(listgudangHTML)
+							if(result.data[k].transactions){
+								for (let i = 0; i < result.data[k].transactions.length; i++) {
+									var listrequestHTML = `
+									<tr>
+										<td>${~~(i+1)}</td>
+										<td>${result.data[k].transactions[i].recipient}</td>
+										<td>IDR ${result.data[k].transactions[i].nominal}</td>
+										<td><span class="label label-success">${result.data[k].transactions[i].status}</span></td>
+									</tr>`
+									$('#bodylistgudang').append(listrequestHTML)
+								}
+							}
+
 
 						}
 					}
