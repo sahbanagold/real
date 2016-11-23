@@ -634,8 +634,7 @@
 										content: $("#content-text").val()
 									},
 									success: function(result) {
-											let test = $("#content-text").val()
-											resultPost(test)
+											resultPost(result)
 									}
 							})
 					});
@@ -730,6 +729,23 @@
 //////////////////////////
 function resultPost (result){
 	console.log("ini resultpost",result)
+	var time = new Date(result.data.createdAt)
+	var nowtime = new Date()
+	var postedtime
+	var timeDiff = Math.abs(nowtime.getTime() - time.getTime());
+	var diffDays = Math.floor(timeDiff / (1000 * 3600 * 24))
+	var diffHours = Math.floor(timeDiff / (1000 * 3600))
+	var diffMinutes = Math.floor(timeDiff / (1000 * 60))
+	var diffSeconds = Math.ceil(timeDiff / (1000))
+	if(diffDays > 0){
+		postedtime = `${diffDays} days ago`
+	} else if(diffHours > 0){
+		postedtime = `${diffHours} hours ago`
+	}else if(diffMinutes > 0){
+		postedtime = `${diffMinutes} minutes ago`
+	}else if(diffSeconds > 0){
+		postedtime = `${diffSeconds} seconds ago`
+	}
 	var insidePost = `
 	<div class="panel panel-default">
 		<div class="panel-heading">
@@ -742,13 +758,13 @@ function resultPost (result){
 						<h4><a href="#">Ivan Gerard</a></h4>
 					</div>
 					<ul class="entry-meta">
-						<li>5 days ago</li>
+						<li>${postedtime}</li>
 					</ul>
 				</div>
 			</div>
 		</div>
 		<div class="panel-body">
-		${result}
+		${result.data.content}
 		</div>
 		<div class="panel-footer">
 		<i class="icon-like"> </i> 0 Likes
@@ -771,6 +787,24 @@ function resultPost (result){
 		        url: "/api/messages/",
 		        success: function(result) {
 							for (var i in result.data){
+								var time = new Date(result.data[i].createdAt)
+								var nowtime = new Date()
+								var postedtime
+								var timeDiff = Math.abs(nowtime.getTime() - time.getTime());
+								var diffDays = Math.floor(timeDiff / (1000 * 3600 * 24))
+								var diffHours = Math.floor(timeDiff / (1000 * 3600))
+								var diffMinutes = Math.floor(timeDiff / (1000 * 60))
+								var diffSeconds = Math.ceil(timeDiff / (1000))
+								if(diffDays > 0){
+									postedtime = `${diffDays} days ago`
+								} else if(diffHours > 0){
+									postedtime = `${diffHours} hours ago`
+								}else if(diffMinutes > 0){
+									postedtime = `${diffMinutes} minutes ago`
+								}else if(diffSeconds > 0){
+									postedtime = `${diffSeconds} seconds ago`
+								}
+
 				        var insideHTML =
 				        `
 								<div class="panel panel-default">
@@ -784,7 +818,7 @@ function resultPost (result){
 													<h4><a href="#">Ivan Gerard</a></h4>
 												</div>
 												<ul class="entry-meta">
-													<li>5 days ago</li>
+													<li>${postedtime}</li>
 												</ul>
 											</div>
 										</div>
@@ -797,8 +831,8 @@ function resultPost (result){
 									<a href="#${result.data[i]._id}btn-comment-list" mark=${result.data[i]._id} class="leftmargin-sm comment-list-btn" id=${result.data[i]._id}btn-comment-list><i class="icon-comments"></i> ${result.data[i].comments.length} Comments</a>
 									</div>
 
-											<div class="panel-footer">
-												<input type="text" id="template-contactform-subject" name="template-contactform-subject" value="" class="required sm-form-control" aria-required="true">
+											<div class="panel-footer" id=${result.data[i]._id}panel-footer>
+												<input type="text" id="template-contactform-subject" mark=${result.data[i]._id} name="template-contactform-subject" value="" class="required sm-form-control comment-box" aria-required="true">
 												<div class="spost clearfix" id=${result.data[i]._id}comment-list>
 
 
@@ -832,6 +866,51 @@ function resultPost (result){
 										$(this).on('click',function () {
 											$(`#${id}comment-list`).show()
 										})
+									})
+									$('.comment-box').unbind('keyup').bind("keyup", function(e) {
+
+										var enterkey = event.keyCode
+										var inputtext =  $(this)
+										var id = $(this).attr("mark")
+										if(enterkey == 13){
+											var commenttext = $(this).val()
+											$.ajax({
+											  url: `/api/messages/comment/${id}`,
+											  type: 'PUT',
+												dataType: 'json',
+												headers: {"X-HTTP-Method-Override": "PUT"},
+												data: JSON.stringify({
+													comment: commenttext,
+													userId: '583463cdc0c5931b95d03431'}),
+								        contentType: "application/json; charset=utf-8",
+
+											  success: function(data) {
+											    $(`#${id}btn-comment-list`).html(`<i class="icon-comments"></i> ${data.count} Comments`)
+													var commentHTML = `
+													<div class="panel-footer">
+													<div class="spost clearfix" style="display: block;">
+													<div class="entry-image">
+														<a href="#" class="nobg"><img class="img-circle" src="images/testimonials/1.jpg" alt=""></a>
+													</div>
+													<div class="entry-c">
+														<div class="entry-title">
+															<h4><a href="#">Ivan Gerard</a></h4>
+															${commenttext}
+															<p></p>
+														</div>
+														<ul class="entry-meta">
+														</ul>
+													</div>
+													</div>
+													</div>
+													`
+													$(commentHTML).insertAfter(inputtext)
+
+											  }
+											});
+											console.log($(this).val())
+											$(this).val("")
+										}
 									})
 				      }
 		        }
