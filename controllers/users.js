@@ -36,6 +36,7 @@ exports.userRegisterPost = function(req, res, next) {
   let newUser = new User()
   newUser.name = req.body.name
   newUser.userEmail = req.body.email
+  newUser.role = [1]
   newUser.encryptedPassword = newUser.generateHash(req.body.password)
   newUser.aktif = true
   newUser.save(function (err) {

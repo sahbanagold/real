@@ -14,7 +14,8 @@ const userSchema = new Schema({
   passwordResetToken: String,
   passwordResetExpires: Date,
   profilePicture: String,
-  profilePictureThumb: String
+  profilePictureThumb: String,
+  role: [Number]
 })
 // generating a hash
 userSchema.methods.generateHash = function(encryptedPassword) {
