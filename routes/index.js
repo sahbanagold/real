@@ -10,6 +10,10 @@ router.get('/home', function(req, res, next) {
   res.render('home', { title: 'Superman ' });
 });
 
+router.get('/cms', function(req, res, next) {
+  res.render('cms-dashboard', { title: 'Superman - Dashboard ' });
+});
+
 
 router.post('/', function(req, res, next) {
   console.log(req.body, "form")

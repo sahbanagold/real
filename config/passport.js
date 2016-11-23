@@ -76,7 +76,10 @@ module.exports = function(passport) {
       passwordField : 'password',
       passReqToCallback : true // allows us to pass back the entire request to the callback
     }, function(req, email, password, done) {
+      console.log("INI REQ BODY YA BRO",req.body.eamil);
       Users.findOne({ 'userEmail' :  email }, function(err, user) {
+        console.log("INI USER Ketemeu", email);
+
         if (err){
           return done(err);
         }
