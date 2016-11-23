@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":1,"key":{"_id":1},"name":"_id_","ns":"superman.users"},{"v":1,"unique":true,"key":{"userEmail":1},"name":"userEmail_1","ns":"superman.users","background":true}]}
