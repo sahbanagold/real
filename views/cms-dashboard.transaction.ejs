@@ -72,133 +72,54 @@
 					<div class="row clearfix">
 
 						<div class="col-sm-12">
-							<h3>Superman Dashboard</h3>
+								<h3>Superman Dashboard</h3>
+								<ul class="nav nav-tabs nav-justified">
+									<li class="active"><a href="/cms-transaction"><i class="icon-note"></i> Transaction</a></li>
+									<li class=""><a href="/cms-user"><i class="icon-user4"></i> User</a></li>
+									<li class=""><a href="/cms-gudang"><i class="icon-home2"></i> Gudang</a></li>
+						</ul>
+						<br>
+
 							<div class="clear"></div>
 
 							<div class="row clearfix">
 
 								<div class="col-md-12">
+									<div class="table-responsive">
+				<table class="table table-bordered table-striped">
+					<colgroup>
+						<col class="col-xs-1">
+						<col class="col-xs-2">
+						<col class="col-xs-1">
 
-									<div class="tabs tabs-alt clearfix" id="tabs-profile">
+						<col class="col-xs-1">
 
-										<ul class="tab-nav clearfix">
-											<li><a href="#tab-feeds"><i class="icon-note"></i> Transaction</a></li>
-											<li><a href="#tab-user"><i class="icon-user4"></i> User</a></li>
-											<li><a href="#tab-gudang"><i class="icon-home2"></i> Gudang</a></li>
-										</ul>
+						<col class="col-xs-1">
 
-										<div class="tab-container">
+						<col class="col-xs-1">
 
-											<div class="tab-content clearfix" id="tab-feeds">
+						<col class="col-xs-1">
 
-												<div class="table-responsive">
-							<table class="table table-bordered table-striped">
-							  <colgroup>
-									<col class="col-xs-1">
-									<col class="col-xs-2">
-									<col class="col-xs-1">
+					</colgroup>
+					<thead>
+					<tr>
+						<th>Created At <br>
+						<span style="font-size:12px">MM/DD/YYYY</span></th>
+						<th>Warehouse Name</th>
+						<th>Transactions</th>
+						<th>Recipient</th>
+						<th>Bank Name</th>
+						<th>Status</th>
+						<th>Action</th>
+					</tr>
+					</thead>
+					<tbody id="list-transaction">
 
-									<col class="col-xs-1">
-
-									<col class="col-xs-1">
-
-									<col class="col-xs-1">
-
-									<col class="col-xs-1">
-
-							  </colgroup>
-							  <thead>
-								<tr>
-									<th>Created At <br>
-									<span style="font-size:12px">MM/DD/YYYY</span></th>
-									<th>Warehouse Name</th>
-									<th>Transactions</th>
-									<th>Recipient</th>
-									<th>Bank Name</th>
-									<th>Status</th>
-									<th>Action</th>
-								</tr>
-							  </thead>
-							  <tbody id="list-transaction">
-
-							  </tbody>
-							</table>
-						  </div>
+					</tbody>
+				</table>
+				</div>
 
 
-											</div>
-
-
-											<div class="tab-content clearfix" id="tab-gudang">
-
-												<div class="row topmargin-sm clearfix">
-
-													<div class="col-xs-12 bottommargin-sm">
-														<div class="ipost clearfix">
-															<div class="row clearfix">
-																<div class="col-sm-4">
-																	<div class="entry-image">
-																		<a href="images/portfolio/full/17.jpg" data-lightbox="image"><img class="image_fade" src="images/blog/grid/17.jpg" alt="Standard Post with Image"></a>
-																	</div>
-																</div>
-																<div class="col-sm-8">
-																	<div class="entry-title">
-																		<h3><a href="blog-single.html">This is a Standard post with a Preview Image</a></h3>
-																	</div>
-																	<ul class="entry-meta clearfix">
-																		<li><i class="icon-calendar3"></i> 10th Feb 2014</li>
-																		<li><a href="blog-single.html#comments"><i class="icon-comments"></i> 13</a></li>
-																		<li><a href="#"><i class="icon-camera-retro"></i></a></li>
-																	</ul>
-																	<div class="entry-content">
-																		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, asperiores quod est tenetur in.</p>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-													<div class="col-xs-12 bottommargin-sm">
-														<div class="ipost clearfix">
-															<div class="row clearfix">
-																<div class="col-sm-4">
-																	<div class="entry-image">
-																		<div class="fslider" data-arrows="false">
-																			<div class="flexslider">
-																				<div class="slider-wrap">
-																					<div class="slide"><img class="image_fade" src="images/blog/grid/10.jpg" alt="Standard Post with Gallery"></div>
-																					<div class="slide"><img class="image_fade" src="images/blog/grid/20.jpg" alt="Standard Post with Gallery"></div>
-																					<div class="slide"><img class="image_fade" src="images/blog/grid/21.jpg" alt="Standard Post with Gallery"></div>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-																<div class="col-sm-8">
-																	<div class="entry-title">
-																		<h3><a href="blog-single.html">This is a Standard post with a Slider Gallery</a></h3>
-																	</div>
-																	<ul class="entry-meta clearfix">
-																		<li><i class="icon-calendar3"></i> 10th Feb 2014</li>
-																		<li><a href="blog-single.html#comments"><i class="icon-comments"></i> 13</a></li>
-																		<li><a href="#"><i class="icon-camera-retro"></i></a></li>
-																	</ul>
-																	<div class="entry-content">
-																		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, asperiores quod est tenetur in.</p>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-
-												</div>
-
-											</div>
-
-
-
-										</div>
-
-									</div>
 
 								</div>
 
@@ -271,7 +192,7 @@
 	<script>
 	$(document).ready(function() {
 
-			listTransaction()
+		listTransaction()
 
 
 
@@ -290,32 +211,32 @@
 							if(result.data[k].transactions[l].status == "UnPaid"){
                     status =  `<span class="label label-default">Unpaid</span>`
 						}else{
-							status =  `<span class="label label-default">Paid</span>`
+							status =  `<span class="label label-success">Paid</span>`
 						}
 						var date = new Date(result.data[k].transactions[l].createdAt)
 						var getMonth = date.getMonth()+1
 						var getDate = date.getDate()
 						var getYear = date.getYear()+1900
+						var price = String(result.data[k].transactions[l].nominal);
+						var priceDel = price.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
 							var listdataHTML =
 							`
 										<tr>
 											<td>${getMonth+'-'+getDate+'-'+getYear}</td>
 											<td>${result.data[k].name}
 											<br /><span style="font-size:12px">PIC : ${result.data[k].transactions[l].userId.name}</span></td>
-											<td>${result.data[k].transactions[l].nominal}</td>
+											<td>${priceDel}</td>
 											<td>${result.data[k].transactions[l].recipient}</td>
 											<td>${result.data[k].transactions[l].bank}</td>
-											<td>${status}</td>
-											<td><a href="#" data-id='${result.data[k].transactions[l]._id}'class="remove update-trx"  title="Update this item"><i class="icon-pencil"></i></a></td>
+											<td id=${result.data[k].transactions[l]._id}label>${status}</td>
+											<td><a href="#" data-id='${result.data[k].transactions[l]._id}'class="remove update-trx button  button-mini button-rounded button-green"  title="Update this item">Process</a>
+											</td>
 										</tr>
 							`
 						}
 						$('#list-transaction').prepend(listdataHTML)
 						$(".update-trx").click(function() {
-
-
 								updateTrx($(this).attr('data-id'))
-
 						})
 
 					}
@@ -344,6 +265,7 @@ function updateTrx(id){
 				url: '/api/transactions/'+id,
 				type: 'PUT',
 				success: function(result) {
+			$(`#${id}label`).html('<span class="label label-success">Paid</span>')
 				}
 		})
 	})

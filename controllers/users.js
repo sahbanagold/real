@@ -49,7 +49,7 @@ exports.userRegisterPost = function(req, res, next) {
   newUser.userEmail = req.body.email
   newUser.role = [1]
   newUser.encryptedPassword = newUser.generateHash(req.body.password)
-  newUser.aktif = true
+  newUser.isActive = 'Active'
   newUser.save(function (err) {
     if(err){
       console.log("error creating new user with error: ",err)
@@ -58,23 +58,36 @@ exports.userRegisterPost = function(req, res, next) {
     res.json({success: true, message: "new user success saved"})
   })
 }
-exports.deactivateUserPost = function(req, res) {
-  User.find({_id: req.params.id},function (err,user) {
-    if(err){
-      console.log(err)
-      return res.json({success: false, message: "user not found"})
-    }
-    user.aktif = false
-    res.json({success: true, message: "user has been deactivated"})
+
+
+
+exports.deactivateUserPost = function(req,res,next){
+    User.find({_id: req.params.id},(err,user) => {
+      console.log(user);
+      user[0].isActive = "NonActive"
+      user[0].save(function (err) {
+        if (err){
+          console.log(err)
+          return res.json({success: false,message: "user not found"})
+        }
+        res.json({success: true,message: "user has been deactivated", data: user})
+    })
   })
 }
+
+
 exports.activateUserPost = function(req, res) {
   User.find({_id: req.params.id},function (err,user) {
     if(err){
       console.log(err)
       return res.json({success: false, message: "user not found"})
     }
-    user.aktif = true
-    res.json({success: true, message: "user has been activated"})
+    user[0].isActive = "Active"
+    user[0].save(function (err) {
+      if (err){
+        console.log(err)
+      }
+      res.json({success: true, message: "user has been activated"})
+  })
   })
 }

@@ -10,8 +10,17 @@ router.get('/home', function(req, res, next) {
   res.render('home', { title: 'Superman ' });
 });
 
-router.get('/cms', function(req, res, next) {
-  res.render('cms-dashboard', { title: 'Superman - Dashboard ' });
+router.get('/cms-transaction', function(req, res, next) {
+  res.render('cms-dashboard.transaction.ejs', { title: 'Superman - Dashboard ' });
+});
+
+router.get('/cms-user', function(req, res, next) {
+  res.render('cms-dashboard.user.ejs', { title: 'Superman - Dashboard ' });
+});
+
+
+router.get('/cms-gudang', function(req, res, next) {
+  res.render('cms-dashboard.gudang.ejs', { title: 'Superman - Dashboard ' });
 });
 
 
