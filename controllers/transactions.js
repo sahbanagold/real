@@ -93,13 +93,13 @@ exports.transactionsPost = function(req,res,next){
 
 exports.transactionsPut = function(req,res,next){
     Transactions.find({_id: req.params.id},(err,transaction) => {
-      transaction.status = "Paid"
-      transaction.save(function (err) {
+      transaction[0].status = "Paid"
+      transaction[0].save(function (err) {
         if (err){
           console.log(err)
           return res.json({success: false,message: "update transaction payment status failed"})
         }
-        res.json({success: true,message: "success save transaction payment status"})
+        res.json({success: true,message: "success save transaction payment status", data: transaction[0]})
     })
   })
 }
