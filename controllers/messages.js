@@ -37,7 +37,7 @@ exports.MessagesPost = function(req,res,next){
         console.log(err)
         return res.json({success: false, message: "save new message failed"})
       }
-      res.json({success: true, message: "save new message success"})
+      res.json({success: true, message: "save new message success", data=newMessage})
     })
 }
 exports.MessagesCommentPut = function(req,res,next){

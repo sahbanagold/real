@@ -1,5 +1,5 @@
 var Transactions = require('../models/transactions')
-
+var Warehouse = require('../models/warehouse')
 exports.transactionsGet = function(req,res,next){
     Transactions.find({_id:req.params.id},(err,data) => {
       if(err){
@@ -10,13 +10,26 @@ exports.transactionsGet = function(req,res,next){
     })
 }
 exports.allTransactionsGet = function(req,res,next){
-    Transactions.find({},(err,data) => {
-      if(err){
-        console.log(err)
-        return res.json({success: false, message: "transaction not found"})
-      }
-      res.json({success: true, data: data})
+  Warehouse.find({},(err,data) => {
+    if(err){
+      console.log(err)
+      return res.json({success: false, message: "error, wareHouse not found"})
+    }
+    let datas = []
+    data.forEach((warehouse)=>{
+      Transactions.find({userId: warehouse.userId},(err,transactions) => {
+        if(err){
+          console.log(err)
+          return res.json({success: false, message: "transaction not found"})
+        }
+
+        let newobject =  Object.assign(warehouse,{transactions: transactions})
+        datas.push(newobject)
+
+      })
     })
+    res.json({success: true, data: datas})
+  })
 }
 exports.transactionsPost = function(req,res,next){
   let newItems = []
