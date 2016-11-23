@@ -96,8 +96,8 @@
 				<div class="container clearfix">
 
 
-					<div class="col_three_fifth" id="content-list">
-						<div class="panel panel-default">
+					<div class="col_three_fifth" id="content-list" >
+						<div class="panel panel-default" id="kotak-post">
 							<div class="panel-body">
 								<div class="tabs clearfix ui-tabs ui-widget ui-widget-content ui-corner-all" id="tab-3">
 
@@ -255,101 +255,7 @@
 								</div>
 							</div>
 						</div>
-
-
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<div class="spost clearfix">
-													<div class="entry-image">
-														<a href="#" class="nobg"><img class="img-circle" src="images/testimonials/1.jpg" alt=""></a>
-													</div>
-													<div class="entry-c">
-														<div class="entry-title">
-															<h4><a href="#">Ivan Gerard</a></h4>
-														</div>
-														<ul class="entry-meta">
-															<li>2 days ago</li>
-														</ul>
-													</div>
-							</div>
-
-							</div>
-							<div class="panel-body">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel, esse, velit, eaque officiis mollitia inventore ipsum minus quo itaque provident error adipisci quisquam ratione assumenda at illo doloribus beatae totam?
-							</div>
-						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<div class="spost clearfix">
-													<div class="entry-image">
-														<a href="#" class="nobg"><img class="img-circle" src="images/testimonials/1.jpg" alt=""></a>
-													</div>
-													<div class="entry-c">
-														<div class="entry-title">
-															<h4><a href="#">Ivan Gerard</a></h4>
-														</div>
-														<ul class="entry-meta">
-															<li>4 days ago</li>
-
-														</ul>
-													</div>
-							</div>
-
-							</div>
-							<div class="panel-body">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel, esse, velit, eaque officiis mollitia inventore ipsum minus quo itaque provident error adipisci quisquam ratione assumenda at illo doloribus beatae totam?
-							</div>
-						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<div class="spost clearfix">
-													<div class="entry-image">
-														<a href="#" class="nobg"><img class="img-circle" src="images/testimonials/1.jpg" alt=""></a>
-													</div>
-													<div class="entry-c">
-														<div class="entry-title">
-															<h4><a href="#">Ivan Gerard</a></h4>
-														</div>
-														<ul class="entry-meta">
-															<li>5 days ago</li>
-														</ul>
-													</div>
-							</div>
-
-							</div>
-							<div class="panel-body">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel, esse, velit, eaque officiis mollitia inventore ipsum minus quo itaque provident error adipisci quisquam ratione assumenda at illo doloribus beatae totam?
-							</div>
-							<div class="panel-footer">
-								<a href=""><i class="icon-like"> </i> 50 Likes</a>
-								<a href=""><i class="icon-comments"></i> 23 Comments</a>
-
-						</div>
-						<div class="panel-footer">
-							<input type="text" id="template-contactform-subject" name="template-contactform-subject" value="" class="required sm-form-control" aria-required="true">
-							<div class="spost clearfix">
-												<div class="entry-image">
-													<a href="#" class="nobg"><img class="img-circle" src="images/testimonials/1.jpg" alt=""></a>
-												</div>
-												<div class="entry-c">
-													<div class="entry-title">
-														<h4><a href="#">Ivan Gerard</a></h4> <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet, deleniti, voluptatibus. Deserunt odit officiis sapiente, non pariatur aut eum, inventore quas libero velit magnam nam, vel doloremque consectetur. Aspernatur, suscipit.</p>
-													</div>
-													<ul class="entry-meta">
-													</ul>
-												</div>
-						</div>
-
 					</div>
-
-						</div>
-
-
-
-
-
-					</div>
-
 					<div class="col_two_fifth col_last  nomargin" id="listgudang">
 						<div class="panel panel-default">
 							<div class="panel-heading">
@@ -716,28 +622,23 @@
 
 	<script>
 		jQuery(document).ready(function($) {
-
-
-
 			getMessages()
 			listgudang()
-			$("#form-message").unbind().on("submit", function(event) {
+			$("#post-message").unbind().on("click", function(event) {
 					event.preventDefault()
 							$.ajax({
 									url: '/api/messages',
 									type: 'POST',
 									data: {
 										userId: $("#userId").val(),
-											content: $("#content-text").val()
+										content: $("#content-text").val()
 									},
 									success: function(result) {
-
-											$("#content").val("")
+											let test = $("#content-text").val()
+											resultPost(test)
 									}
 							})
 					});
-
-
 			$( "#processTabs" ).tabs({ show: { effect: "fade", duration: 400 } });
 			$( ".tab-linker" ).click(function() {
 				$( "#processTabs" ).tabs("option", "active", $(this).attr('rel') - 1);
@@ -821,25 +722,55 @@
 					});
 				}
 			});
-
 			$('[data-pricing-plan]').click(function() {
 				getStartedForm.find('#get-started-form-package').val($(this).attr('data-pricing-plan'));
 				getStartedForm.find('#modal-get-started-package').html($(this).attr('data-pricing-plan'));
 			});
-
-
-
-
 		});
+//////////////////////////
+function resultPost (result){
+	console.log("ini resultpost",result)
+	var insidePost = `
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<div class="spost clearfix">
+				<div class="entry-image">
+					<a href="#" class="nobg"><img class="img-circle" src="images/testimonials/1.jpg" alt=""></a>
+				</div>
+				<div class="entry-c">
+					<div class="entry-title">
+						<h4><a href="#">Ivan Gerard</a></h4>
+					</div>
+					<ul class="entry-meta">
+						<li>5 days ago</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="panel-body">
+		${result}
+		</div>
+		<div class="panel-footer">
+		<i class="icon-like"> </i> 0 Likes
+		<a href="#template-contactform-subjec" class="leftmargin-sm " id="btn-comment-list"><i class="icon-comments"></i> 0
+		 Comments</a>
+		</div>
 
+				<div class="panel-footer">
+					<input type="text" id="template-contactform-subject" name="template-contactform-subject" value="" class="required sm-form-control" aria-required="true">
+					<div class="spost clearfix" id="comment-list">
+				</div>
+			</div>
+	</div>
+	`
+	$(insidePost).insertAfter('#kotak-post')
+}
 ///////// List of function //////////
 		 function getMessages() {
 		    $.get({
 		        url: "/api/messages/",
 		        success: function(result) {
 							for (var i in result.data){
-
-								console.log(result.data[i].content)
 				        var insideHTML =
 				        `
 								<div class="panel panel-default">
@@ -877,7 +808,7 @@
 
 								</div>
 								`
-				        $('#content-list').append(insideHTML)
+								$(insideHTML).insertAfter('#kotak-post')
 								for (var j= 0 ; j< result.data[i].comments.length;j++){
 								var commentHTML = `
 								<div class="entry-image">
@@ -897,7 +828,6 @@
 								$('#comment-list').hide()
 									$("#btn-comment-list").click(function() {
 											$("#comment-list").show()
-
 
 									})
 
