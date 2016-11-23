@@ -54,14 +54,14 @@ exports.MessagesCommentPut = function(req,res,next){
   })
 }
 exports.MessagesLikePut = function(req,res,next){
-  Messages.find({_id: req.params.id},(err,data)=>{
-    data[0].likes.push(req.body.userId)
-    data[0].save((err) => {
+  Messages.findOne({_id: req.params.id},(err,data)=>{
+    data.likes.push(req.body.userId)
+    data.save((err) => {
       if(err){
         console.log(err)
         return res.json({success: false, message: "save new like failed"})
       }
-      res.json({success: true, message: "save new like success", count: data[0].likes.length})
+      res.json({success: true, message: "save new like success", count: data.likes.length})
     })
   })
 }

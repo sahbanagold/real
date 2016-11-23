@@ -96,7 +96,7 @@
 				<div class="container clearfix">
 
 
-					<div class="col_three_fifth">
+					<div class="col_three_fifth" id="content-list">
 						<div class="panel panel-default">
 							<div class="panel-body">
 								<div class="tabs clearfix ui-tabs ui-widget ui-widget-content ui-corner-all" id="tab-3">
@@ -108,9 +108,15 @@
 									</ul>
 									<div class="tab-container">
 										<div class="tab-content clearfix ui-tabs-panel ui-widget-content ui-corner-bottom" id="tabs-post" aria-labelledby="ui-id-21" role="tabpanel" aria-hidden="false" style="display: block;">
-											<textarea class="required sm-form-control" id="template-contactform-message" name="template-contactform-message" rows="6" cols="30" aria-required="true"></textarea>
-											<a href="#" class="button button-3d button-small button-rounded button-green fright topmargin-sm">Post</a>
+											<form  id="form-message" action="" >
+												<textarea class="required sm-form-control" id="content-text" name="content-text" rows="6" cols="30" aria-required="true"></textarea>
+												<input type="hidden" name="userId" id="userId" value="583463cdc0c5931b95d03431">
+												<button type="submit" id="post-message" class="button button-3d button-small button-rounded button-green fright topmargin-sm">Post</a>
+											</form>
+
 										</div>
+
+
 										<div class="tab-content clearfix ui-tabs-panel ui-widget-content ui-corner-bottom " id="tabs-transaction" aria-labelledby="ui-id-22" role="tabpanel" aria-hidden="true" style="display: none;">
 											<div id="processTabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all ">
 												<ul class="process-steps bottommargin clearfix ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
@@ -344,54 +350,54 @@
 
 					</div>
 
-					<div class="col_two_fifth col_last nomargin">
+					<div class="col_two_fifth col_last  nomargin" id="listgudang">
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h3 class="panel-title ">Gudang Bogor</h3>
 							</div>
 							<div class="panel-body">
 								<table class="table table-striped">
-					<thead>
-					<tr>
-						<th>#</th>
-						<th>First Name</th>
-						<th>Total</th>
-						<th>Status</th>
-					</tr>
-					</thead>
-					<tbody>
-					<tr>
-						<td>1</td>
-						<td>Mark Zuck</td>
-						<td>IDR 2,000,000</td>
-						<td><span class="label label-success">Paid</span></td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td>Jacob</td>
-						<td>IDR 500,000</td>
-						<td><span class="label label-default">Unpaid</span></td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td>Larry</td>
-						<td>IDR 1,500,000</td>
-						<td><span class="label label-default">Unpaid</span></td>
-					</tr>
-					<tr>
-						<td>4</td>
-						<td>Mark Zuck</td>
-						<td>IDR 2,000,000</td>
-						<td><span class="label label-success">Paid</span></td>
-					</tr>
-					<tr>
-						<td>5</td>
-						<td>Mark Zuck</td>
-						<td>IDR 2,000,000</td>
-						<td><span class="label label-success">Paid</span></td>
-					</tr>
-					</tbody>
-				</table>
+									<thead>
+									<tr>
+										<th>#</th>
+										<th>First Name</th>
+										<th>Total</th>
+										<th>Status</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr>
+										<td>1</td>
+										<td>Mark Zuck</td>
+										<td>IDR 2,000,000</td>
+										<td><span class="label label-success">Paid</span></td>
+									</tr>
+									<tr>
+										<td>2</td>
+										<td>Jacob</td>
+										<td>IDR 500,000</td>
+										<td><span class="label label-default">Unpaid</span></td>
+									</tr>
+									<tr>
+										<td>3</td>
+										<td>Larry</td>
+										<td>IDR 1,500,000</td>
+										<td><span class="label label-default">Unpaid</span></td>
+									</tr>
+									<tr>
+										<td>4</td>
+										<td>Mark Zuck</td>
+										<td>IDR 2,000,000</td>
+										<td><span class="label label-success">Paid</span></td>
+									</tr>
+									<tr>
+										<td>5</td>
+										<td>Mark Zuck</td>
+										<td>IDR 2,000,000</td>
+										<td><span class="label label-success">Paid</span></td>
+									</tr>
+									</tbody>
+								</table>
 							</div>
 						</div>
 						<div class="panel panel-default">
@@ -400,47 +406,47 @@
 							</div>
 							<div class="panel-body">
 								<table class="table table-striped">
-					<thead>
-					<tr>
-						<th>#</th>
-						<th>First Name</th>
-						<th>Total</th>
-						<th>Status</th>
-					</tr>
-					</thead>
-					<tbody>
-					<tr>
-						<td>1</td>
-						<td>Mark Zuck</td>
-						<td>IDR 2,000,000</td>
-						<td><span class="label label-success">Paid</span></td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td>Jacob</td>
-						<td>IDR 500,000</td>
-						<td><span class="label label-default">Unpaid</span></td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td>Larry</td>
-						<td>IDR 1,500,000</td>
-						<td><span class="label label-default">Unpaid</span></td>
-					</tr>
-					<tr>
-						<td>4</td>
-						<td>Mark Zuck</td>
-						<td>IDR 2,000,000</td>
-						<td><span class="label label-success">Paid</span></td>
-					</tr>
-					<tr>
-						<td>5</td>
-						<td>Mark Zuck</td>
-						<td>IDR 2,000,000</td>
-						<td><span class="label label-success">Paid</span></td>
-					</tr>
-					</tbody>
-				</table>
+									<thead>
+									<tr>
+										<th>#</th>
+										<th>First Name</th>
+										<th>Total</th>
+										<th>Status</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr>
+										<td>1</td>
+										<td>Mark Zuck</td>
+										<td>IDR 2,000,000</td>
+										<td><span class="label label-success">Paid</span></td>
+									</tr>
+									<tr>
+										<td>2</td>
+										<td>Jacob</td>
+										<td>IDR 500,000</td>
+										<td><span class="label label-default">Unpaid</span></td>
+									</tr>
+									<tr>
+										<td>3</td>
+										<td>Larry</td>
+										<td>IDR 1,500,000</td>
+										<td><span class="label label-default">Unpaid</span></td>
+									</tr>
+									<tr>
+										<td>4</td>
+										<td>Mark Zuck</td>
+										<td>IDR 2,000,000</td>
+										<td><span class="label label-success">Paid</span></td>
+									</tr>
+									<tr>
+										<td>5</td>
+										<td>Mark Zuck</td>
+										<td>IDR 2,000,000</td>
+										<td><span class="label label-success">Paid</span></td>
+									</tr>
+									</tbody>
+								</table>
 							</div>
 						</div>
 						<div class="panel panel-default">
@@ -449,47 +455,47 @@
 							</div>
 							<div class="panel-body">
 								<table class="table table-striped">
-					<thead>
-					<tr>
-						<th>#</th>
-						<th>First Name</th>
-						<th>Total</th>
-						<th>Status</th>
-					</tr>
-					</thead>
-					<tbody>
-					<tr>
-						<td>1</td>
-						<td>Mark Zuck</td>
-						<td>IDR 2,000,000</td>
-						<td><span class="label label-success">Paid</span></td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td>Jacob</td>
-						<td>IDR 500,000</td>
-						<td><span class="label label-default">Unpaid</span></td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td>Larry</td>
-						<td>IDR 1,500,000</td>
-						<td><span class="label label-default">Unpaid</span></td>
-					</tr>
-					<tr>
-						<td>4</td>
-						<td>Mark Zuck</td>
-						<td>IDR 2,000,000</td>
-						<td><span class="label label-success">Paid</span></td>
-					</tr>
-					<tr>
-						<td>5</td>
-						<td>Mark Zuck</td>
-						<td>IDR 2,000,000</td>
-						<td><span class="label label-success">Paid</span></td>
-					</tr>
-					</tbody>
-				</table>
+										<thead>
+										<tr>
+											<th>#</th>
+											<th>First Name</th>
+											<th>Total</th>
+											<th>Status</th>
+										</tr>
+										</thead>
+										<tbody>
+										<tr>
+											<td>1</td>
+											<td>Mark Zuck</td>
+											<td>IDR 2,000,000</td>
+											<td><span class="label label-success">Paid</span></td>
+										</tr>
+										<tr>
+											<td>2</td>
+											<td>Jacob</td>
+											<td>IDR 500,000</td>
+											<td><span class="label label-default">Unpaid</span></td>
+										</tr>
+										<tr>
+											<td>3</td>
+											<td>Larry</td>
+											<td>IDR 1,500,000</td>
+											<td><span class="label label-default">Unpaid</span></td>
+										</tr>
+										<tr>
+											<td>4</td>
+											<td>Mark Zuck</td>
+											<td>IDR 2,000,000</td>
+											<td><span class="label label-success">Paid</span></td>
+										</tr>
+										<tr>
+											<td>5</td>
+											<td>Mark Zuck</td>
+											<td>IDR 2,000,000</td>
+											<td><span class="label label-success">Paid</span></td>
+										</tr>
+										</tbody>
+									</table>
 							</div>
 						</div>
 						<div class="panel panel-default">
@@ -498,47 +504,47 @@
 							</div>
 							<div class="panel-body">
 								<table class="table table-striped">
-					<thead>
-					<tr>
-						<th>#</th>
-						<th>First Name</th>
-						<th>Total</th>
-						<th>Status</th>
-					</tr>
-					</thead>
-					<tbody>
-					<tr>
-						<td>1</td>
-						<td>Mark Zuck</td>
-						<td>IDR 2,000,000</td>
-						<td><span class="label label-success">Paid</span></td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td>Jacob</td>
-						<td>IDR 500,000</td>
-						<td><span class="label label-default">Unpaid</span></td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td>Larry</td>
-						<td>IDR 1,500,000</td>
-						<td><span class="label label-default">Unpaid</span></td>
-					</tr>
-					<tr>
-						<td>4</td>
-						<td>Mark Zuck</td>
-						<td>IDR 2,000,000</td>
-						<td><span class="label label-success">Paid</span></td>
-					</tr>
-					<tr>
-						<td>5</td>
-						<td>Mark Zuck</td>
-						<td>IDR 2,000,000</td>
-						<td><span class="label label-success">Paid</span></td>
-					</tr>
-					</tbody>
-				</table>
+									<thead>
+									<tr>
+										<th>#</th>
+										<th>First Name</th>
+										<th>Total</th>
+										<th>Status</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr>
+										<td>1</td>
+										<td>Mark Zuck</td>
+										<td>IDR 2,000,000</td>
+										<td><span class="label label-success">Paid</span></td>
+									</tr>
+									<tr>
+										<td>2</td>
+										<td>Jacob</td>
+										<td>IDR 500,000</td>
+										<td><span class="label label-default">Unpaid</span></td>
+									</tr>
+									<tr>
+										<td>3</td>
+										<td>Larry</td>
+										<td>IDR 1,500,000</td>
+										<td><span class="label label-default">Unpaid</span></td>
+									</tr>
+									<tr>
+										<td>4</td>
+										<td>Mark Zuck</td>
+										<td>IDR 2,000,000</td>
+										<td><span class="label label-success">Paid</span></td>
+									</tr>
+									<tr>
+										<td>5</td>
+										<td>Mark Zuck</td>
+										<td>IDR 2,000,000</td>
+										<td><span class="label label-success">Paid</span></td>
+									</tr>
+									</tbody>
+								</table>
 							</div>
 						</div>
 						<div class="panel panel-default">
@@ -547,47 +553,47 @@
 							</div>
 							<div class="panel-body">
 								<table class="table table-striped">
-					<thead>
-					<tr>
-						<th>#</th>
-						<th>First Name</th>
-						<th>Total</th>
-						<th>Status</th>
-					</tr>
-					</thead>
-					<tbody>
-					<tr>
-						<td>1</td>
-						<td>Mark Zuck</td>
-						<td>IDR 2,000,000</td>
-						<td><span class="label label-success">Paid</span></td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td>Jacob</td>
-						<td>IDR 500,000</td>
-						<td><span class="label label-default">Unpaid</span></td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td>Larry</td>
-						<td>IDR 1,500,000</td>
-						<td><span class="label label-default">Unpaid</span></td>
-					</tr>
-					<tr>
-						<td>4</td>
-						<td>Mark Zuck</td>
-						<td>IDR 2,000,000</td>
-						<td><span class="label label-success">Paid</span></td>
-					</tr>
-					<tr>
-						<td>5</td>
-						<td>Mark Zuck</td>
-						<td>IDR 2,000,000</td>
-						<td><span class="label label-success">Paid</span></td>
-					</tr>
-					</tbody>
-				</table>
+									<thead>
+									<tr>
+										<th>#</th>
+										<th>First Name</th>
+										<th>Total</th>
+										<th>Status</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr>
+										<td>1</td>
+										<td>Mark Zuck</td>
+										<td>IDR 2,000,000</td>
+										<td><span class="label label-success">Paid</span></td>
+									</tr>
+									<tr>
+										<td>2</td>
+										<td>Jacob</td>
+										<td>IDR 500,000</td>
+										<td><span class="label label-default">Unpaid</span></td>
+									</tr>
+									<tr>
+										<td>3</td>
+										<td>Larry</td>
+										<td>IDR 1,500,000</td>
+										<td><span class="label label-default">Unpaid</span></td>
+									</tr>
+									<tr>
+										<td>4</td>
+										<td>Mark Zuck</td>
+										<td>IDR 2,000,000</td>
+										<td><span class="label label-success">Paid</span></td>
+									</tr>
+									<tr>
+										<td>5</td>
+										<td>Mark Zuck</td>
+										<td>IDR 2,000,000</td>
+										<td><span class="label label-success">Paid</span></td>
+									</tr>
+									</tbody>
+								</table>
 							</div>
 						</div>
 						<div class="panel panel-default">
@@ -596,47 +602,47 @@
 							</div>
 							<div class="panel-body">
 								<table class="table table-striped">
-					<thead>
-					<tr>
-						<th>#</th>
-						<th>First Name</th>
-						<th>Total</th>
-						<th>Status</th>
-					</tr>
-					</thead>
-					<tbody>
-					<tr>
-						<td>1</td>
-						<td>Mark Zuck</td>
-						<td>IDR 2,000,000</td>
-						<td><span class="label label-success">Paid</span></td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td>Jacob</td>
-						<td>IDR 500,000</td>
-						<td><span class="label label-default">Unpaid</span></td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td>Larry</td>
-						<td>IDR 1,500,000</td>
-						<td><span class="label label-default">Unpaid</span></td>
-					</tr>
-					<tr>
-						<td>4</td>
-						<td>Mark Zuck</td>
-						<td>IDR 2,000,000</td>
-						<td><span class="label label-success">Paid</span></td>
-					</tr>
-					<tr>
-						<td>5</td>
-						<td>Mark Zuck</td>
-						<td>IDR 2,000,000</td>
-						<td><span class="label label-success">Paid</span></td>
-					</tr>
-					</tbody>
-				</table>
+									<thead>
+									<tr>
+										<th>#</th>
+										<th>First Name</th>
+										<th>Total</th>
+										<th>Status</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr>
+										<td>1</td>
+										<td>Mark Zuck</td>
+										<td>IDR 2,000,000</td>
+										<td><span class="label label-success">Paid</span></td>
+									</tr>
+									<tr>
+										<td>2</td>
+										<td>Jacob</td>
+										<td>IDR 500,000</td>
+										<td><span class="label label-default">Unpaid</span></td>
+									</tr>
+									<tr>
+										<td>3</td>
+										<td>Larry</td>
+										<td>IDR 1,500,000</td>
+										<td><span class="label label-default">Unpaid</span></td>
+									</tr>
+									<tr>
+										<td>4</td>
+										<td>Mark Zuck</td>
+										<td>IDR 2,000,000</td>
+										<td><span class="label label-success">Paid</span></td>
+									</tr>
+									<tr>
+										<td>5</td>
+										<td>Mark Zuck</td>
+										<td>IDR 2,000,000</td>
+										<td><span class="label label-success">Paid</span></td>
+									</tr>
+									</tbody>
+								</table>
 							</div>
 						</div>
 
@@ -710,6 +716,28 @@
 
 	<script>
 		jQuery(document).ready(function($) {
+
+
+
+			getMessages()
+			listgudang()
+			$("#form-message").unbind().on("submit", function(event) {
+					event.preventDefault()
+							$.ajax({
+									url: '/api/messages',
+									type: 'POST',
+									data: {
+										userId: $("#userId").val(),
+											content: $("#content-text").val()
+									},
+									success: function(result) {
+
+											$("#content").val("")
+									}
+							})
+					});
+
+
 			$( "#processTabs" ).tabs({ show: { effect: "fade", duration: 400 } });
 			$( ".tab-linker" ).click(function() {
 				$( "#processTabs" ).tabs("option", "active", $(this).attr('rel') - 1);
@@ -799,9 +827,132 @@
 				getStartedForm.find('#modal-get-started-package').html($(this).attr('data-pricing-plan'));
 			});
 
+
+
+
 		});
+
+///////// List of function //////////
+		 function getMessages() {
+		    $.get({
+		        url: "/api/messages/",
+		        success: function(result) {
+							for (var i in result.data){
+
+								console.log(result.data[i].content)
+				        var insideHTML =
+				        `
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<div class="spost clearfix">
+											<div class="entry-image">
+												<a href="#" class="nobg"><img class="img-circle" src="images/testimonials/1.jpg" alt=""></a>
+											</div>
+											<div class="entry-c">
+												<div class="entry-title">
+													<h4><a href="#">Ivan Gerard</a></h4>
+												</div>
+												<ul class="entry-meta">
+													<li>5 days ago</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+									<div class="panel-body">
+									${result.data[i].content}
+									</div>
+									<div class="panel-footer">
+									<i class="icon-like"> </i> ${result.data[i].likes.length} Likes
+									<a href="#template-contactform-subjec" class="leftmargin-sm " id="btn-comment-list"><i class="icon-comments"></i> ${result.data[i].comments.length} Comments</a>
+									</div>
+
+											<div class="panel-footer">
+												<input type="text" id="template-contactform-subject" name="template-contactform-subject" value="" class="required sm-form-control" aria-required="true">
+												<div class="spost clearfix" id="comment-list">
+
+
+											</div>
+
+										</div>
+
+								</div>
+								`
+				        $('#content-list').append(insideHTML)
+								for (var j= 0 ; j< result.data[i].comments.length;j++){
+								var commentHTML = `
+								<div class="entry-image">
+									<a href="#" class="nobg"><img class="img-circle" src="images/testimonials/1.jpg" alt=""></a>
+								</div>
+								<div class="entry-c">
+									<div class="entry-title">
+										<h4><a href="#">Ivan Gerard</a></h4>
+										${result.data[i].comments[j].comment}
+										<p></p>
+									</div>
+									<ul class="entry-meta">
+									</ul>
+								</div>
+								`
+								$('#comment-list').prepend(commentHTML)
+								$('#comment-list').hide()
+									$("#btn-comment-list").click(function() {
+											$("#comment-list").show()
+
+
+									})
+
+									}
+				      }
+		        }
+		    })
+		 }
+		function listgudang() {
+			var listgudangHTML = `<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title ">Gudang Bogor</h3>
+				</div>
+				<div class="panel-body">
+					<table class="table table-striped">
+						<thead>
+						<tr>
+							<th>#</th>
+							<th>First Name</th>
+							<th>Total</th>
+							<th>Status</th>
+						</tr>
+						</thead>
+						<tbody id='bodylistgudang'>
+
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+			`
+			$.get({
+					url: "/api/transactions/",
+					success: function(result) {
+						$('#listgudang').prepend(listgudangHTML)
+						for (var k in result.data){
+							var listrequestHTML = `
+							<tr>
+								<td>${~~(k+1)}</td>
+								<td>${result.data[k].recipient}</td>
+								<td>IDR ${result.data[k].nominal}</td>
+								<td><span class="label label-success">${result.data[k].status}</span></td>
+							</tr>`
+							$('#bodylistgudang').append(listrequestHTML)
+
+						}
+					}
+			})
+
+
+		}
+
 	</script>
 
 </body>
+
 
 </html>
