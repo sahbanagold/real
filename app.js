@@ -24,7 +24,7 @@ require('./config/passport')(passport)
 app.set('view engine', 'ejs');
 app.use(cors())
 app.use(morgan())
-app.use(fileUpload())
+
 app.use(bodyParser.json({
   type: 'application/vnd.api+json'
 }))
@@ -47,6 +47,7 @@ app.use(flash());
 app.use('/', express.static(path.join(__dirname, 'public')))
 
 mongoose.Promise = global.Promise;
+app.use(fileUpload())
 mongoose.connect('mongodb://localhost:27017/superman')
 
 app.use('/', routes)
