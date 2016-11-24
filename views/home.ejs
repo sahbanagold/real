@@ -110,7 +110,6 @@
 										<div class="tab-content clearfix ui-tabs-panel ui-widget-content ui-corner-bottom" id="tabs-post" aria-labelledby="ui-id-21" role="tabpanel" aria-hidden="false" style="display: block;">
 											<form  id="form-message" action="" >
 												<textarea class="required sm-form-control" id="content-text" name="content-text" rows="6" cols="30" aria-required="true"></textarea>
-												<input type="hidden" name="userId" id="userId" value="583463cdc0c5931b95d03431">
 												<button type="submit" id="post-message" class="button button-3d button-small button-rounded button-green fright topmargin-sm">Post</a>
 											</form>
 
@@ -723,36 +722,62 @@
 					bindquantity()
 			})
 			$("#post-message").unbind().on("click", function(event) {
-					event.preventDefault()
-							$.ajax({
-									url: '/api/messages',
-									type: 'POST',
-									data: {
-										userId: $("#userId").val(),
-										content: $("#content-text").val()
-									},
-									success: function(result) {
-											resultPost(result)
-									}
-							})
-					});
+						event.preventDefault()
+					 	postMessage($("#content-text").val())
+			})
+
+			function postMessage(content) {
+						$.ajax({
+								url: '/api/messages',
+								type: 'POST',
+								data: {
+									content: content
+								},
+								success: function(result) {
+										resultPost(result)
+								}
+						})
+			}
 			$("#order").unbind().on("click", function(event) {
 				$("#ajaxform").submit(function(e)
 				{
 						var postData = $(this).serializeArray();
+						console.log(postData);
 						var formURL = $(this).attr("action");
 						$.ajax(
 						{
 								url : formURL,
 								type: "POST",
 								data : postData,
-								success:function(data, textStatus, jqXHR)
+								success:function(result, textStatus, jqXHR)
 								{
-										if(data.success){
-											console.log(data)
+										if(result.success){
+											console.log(result);
 											$('#ptab4').html(`<div class="alert alert-success" >
 												<strong>Thank You.</strong> Your order will be processed once we verify the Payment.
 											</div>`)
+											var itemdetail = ""
+											for (var i = 0; i < result.data.items.length; i++) {
+												var totalprice = (result.data.items[i].totalprice+"").replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+												itemdetail += `Item Name: <b>${result.data.items[i].name}</b><br>
+												Item Price: <b>${result.data.items[i].price}</b><br>
+												Item Quantity: <b>${result.data.items[i].quantity}</b><br>
+												Total Price: <b>Rp. ${totalprice}</b><br><br>`
+											}
+											var totalsetor = (result.data.nominal+"").replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+											var content = `<b>${result.data.userId.name}</b> request Payment to:<br>
+											------------------------<br>
+											Penerima: <b>${result.data.recipient}</b><br>
+											Account: <b>${result.data.account}</b><br>
+											Bank: <b>${result.data.bank}</b><br>
+											Ammount: <b>Rp. ${totalsetor}</b><br>
+											Notes: <b>${result.data.notes}</b><br>
+											------------------------<br>
+											Item Details:<br>
+											------------------------<br>
+											${itemdetail}`
+											console.log(content)
+											postMessage(content)
 										} else{
 											$('#ptab4').html(`<div class="alert alert-danger" >
 												<strong>Sorry.</strong> Your order not Aproved,  Please Check Inputs Detail.

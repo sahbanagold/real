@@ -30,7 +30,7 @@ exports.MessagesPost = function(req,res,next){
 
   let newMessage = new Messages()
   newMessage.content = req.body.content
-  newMessage.userId = req.body.userId
+  newMessage.userId = req.session.userId
   newMessage.tags = req.body.tags
     newMessage.save((err) => {
       if(err){
