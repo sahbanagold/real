@@ -63,11 +63,11 @@ exports.transactionsPost = function(req,res,next){
                 quantity: newitemquantity,
                 sums: newitemtotalprice
               })
-              console.log(newItems,"item pushed")
+
       }
     }
   }
-  console.log(newItems,"tst item")
+
   if(newItems.length > 0){
     let newTransactions = new Transactions()
       newTransactions.userId= req.session.userId
@@ -84,7 +84,7 @@ exports.transactionsPost = function(req,res,next){
         console.log(err)
         return
       }
-      res.json({success: true,message: "success save transactions"})
+      res.json({success: true,message: "success save transactions", data: newTransactions})
     })
   } else{
     res.json({success: false,message: "no transactions saved"})

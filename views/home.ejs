@@ -122,22 +122,22 @@
 												<ul class="process-steps bottommargin clearfix ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
 							<li class="ui-state-default ui-corner-top ui-tabs-active ui-state-active" role="tab" tabindex="0" aria-controls="ptab1" aria-labelledby="ui-id-1" aria-selected="true" aria-expanded="true">
 								<a href="#ptab1" class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-1">1</a>
-								<h5>Review Cart</h5>
+								<h5>Items Detail</h5>
 							</li>
 							<li class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="ptab2" aria-labelledby="ui-id-2" aria-selected="false" aria-expanded="false">
 								<a href="#ptab2" class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-2">2</a>
-								<h5>Enter Shipping Info</h5>
+								<h5>Account Detail</h5>
 							</li>
 							<li class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="ptab3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false">
 								<a href="#ptab3" class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-3">3</a>
-								<h5>Complete Payment</h5>
+								<h5>Summary</h5>
 							</li>
 							<li class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="ptab4" aria-labelledby="ui-id-4" aria-selected="false" aria-expanded="false">
 								<a href="#ptab4" class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-4">4</a>
-								<h5>Order Complete</h5>
+								<h5>Complete</h5>
 							</li>
 						</ul>
-												<form role="form" method="POST" action="/api/transactions">
+												<form role="form" id="ajaxform" method="POST" action="/api/transactions">
 													<div id="ptab1" aria-labelledby="ui-id-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-hidden="false" style="display: block;">
 
 														<h2 class="center">Input Your Transaction In Here !</h2>
@@ -148,7 +148,7 @@
 																<thead>
 																	<tr>
 																		<th >&nbsp;</th>
-																		<th class="cart-product-name">Product</th>
+																		<th class="cart-product-name">Items</th>
 																		<th class="cart-product-price">Unit Price</th>
 																		<th class="cart-product-quantity">Quantity</th>
 																		<th class="cart-product-subtotal">Total</th>
@@ -161,7 +161,7 @@
 																		</td>
 
 																		<td class="cart-product-name">
-																			<input type="text" name="itemname" size="15">
+																			<input type="text" id="1item" mark="1" class="item" name="itemname" size="15">
 																		</td>
 
 																		<td class="cart-product-price">
@@ -187,7 +187,7 @@
 																		</td>
 
 																		<td class="cart-product-name">
-																			<input type="text" name="itemname" size="15">
+																			<input type="text" id="2item" mark="2" class="item" name="itemname" size="15">
 																		</td>
 
 																		<td class="cart-product-price">
@@ -232,62 +232,62 @@
 													<div id="ptab2" aria-labelledby="ui-id-2" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-hidden="true" style="display: none;">
 														<div class="form-group">
 			                        <label for="inputText" >Nama Penerima</label>
-			                          <input type="text" class="form-control" id="penerima" name="penerima" placeholder="Rony">
+			                          <input type="text" class="form-control detail-rekening" id="penerima" name="penerima" placeholder="Rony">
 			                      </div>
 			                      <div class="form-group">
 			                        <label for="inputText">Nomor Rekening</label>
-			                          <input type="text" class="form-control" id="rekening" name="rekening" placeholder="1234 4567 1239 8457">
+			                          <input type="text" class="form-control detail-rekening" id="rekening" name="rekening" placeholder="1234 4567 1239 8457">
 			                      </div>
 			                      <div class="form-group">
 			                        <label for="inputText">Nama Bank</label>
-			                          <input type="text" class="form-control" id="bank" name="bank" placeholder="BRI">
+			                          <input type="text" class="form-control detail-rekening" id="bank" name="bank" placeholder="BRI">
 			                      </div>
 			                      <div class="form-group">
 			                        <label for="inputText">Nominal</label>
-			                        <input type="text" class="form-control" id="nominal" name="nominal" placeholder="5000000">
+			                        <input type="text" class="form-control detail-rekening" id="nominal" name="nominal" placeholder="5000000">
 			                      </div>
 
 			                      <div class="form-group">
 			                        <label>Keterangan</label>
-			                          <textarea class="form-control material" placeholder="Tambahkan keterangan..." value="test keterangan" id="keterangan" name="keterangan" rows="3"></textarea>
+			                        <textarea id="keterangan" class="form-control detail-rekening" placeholder="Tambahkan keterangan..." value="test keterangan" name="keterangan" rows="3"></textarea>
 			                      </div>
 
 														<div class="line"></div>
 														<a href="#" class="button button-3d nomargin tab-linker" rel="1">Previous</a>
-														<a href="#" class="button button-3d nomargin fright tab-linker" rel="3">Pay Now</a>
+														<a href="#" class="button button-3d nomargin fright tab-linker" rel="3">Next</a>
 													</div>
 													<div id="ptab3" aria-labelledby="ui-id-3" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-hidden="true" style="display: none;">
 														<div class="form-group">
 			                        <label for="inputText" class="control-label">Nama Penerima</label>
 			                        <label class="control-label">:</label>
-			                        <label class="">Rony</label>
+			                        <label id="penerimasummary"></label>
 			                      </div>
 			                      <div class="form-group">
 			                        <label for="inputText" class="control-label">Nomor Rekening</label>
 			                        <label class="control-label">:</label>
-			                        <label class="">1234 4567 1239 8457</label>
+			                        <label id="rekeningsummary"></label>
 			                      </div>
 			                      <div class="form-group">
 			                        <label for="inputText" class="control-label">Nama Bank</label>
 			                        <label class="control-label">:</label>
-															<label class="">BRI</label>
+															<label id="banksummary"></label>
 			                      </div>
 			                      <div class="form-group">
 			                        <label for="inputText" class="control-label">Nominal</label>
 			                        <label class="control-label">:</label>
-															<label class="">5000000</label>
+															<label id="nominalsummary"></label>
 			                      </div>
 
 			                      <div class="form-group">
 			                        <label class="control-label">Keterangan</label>
 			                        <label class="control-label">:</label>
-															<label class="">Masih Banyak Barang yang Pembayarannya Menunggak. Mungkin Karena ada konser, jadi banyak stock botol minuman</label>
+															<label id="keterangansummary"></label>
 			                      </div>
 			                      <table class="table">
 			                  <caption id="tablecaption">Detail Item</caption>
 			                  <thead>
 			                    <tr>
-			                      <th>#</th>
+			                      <th></th>
 			                      <th>Nama Item</th>
 			                      <th>Harga (Rp)</th>
 			                      <th>Quantity (Kg)</th>
@@ -295,23 +295,14 @@
 			                    </tr>
 			                  </thead>
 			                  <tbody id="tabeldetail">
-			                    <tr>
-			                      <th scope="row">1</th>
-			                      <td>Botol Aqua</td>
-			                      <td>1000</td>
-			                      <td>500</td>
-			                      <td>500000</td>
-			                    </tr>
 			                  </tbody>
 			                </table>
 														<div class="line"></div>
 														<a href="#" class="button button-3d nomargin tab-linker" rel="2">Previous</a>
-														<button type="submit" class="button button-3d nomargin fright">Complete Order</button>
+														<button id="order" class="button button-3d nomargin fright tab-linker" rel="4">Complete Order</button>
 													</div>
 													<div id="ptab4" aria-labelledby="ui-id-4" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-hidden="true" style="display: none;">
-														<div class="alert alert-success">
-															<strong>Thank You.</strong> Your order will be processed once we verify the Payment.
-														</div>
+
 													</div>
 												</form>
 											</div>
@@ -699,8 +690,10 @@
 	<script type="text/javascript" src="js/functions.js"></script>
 
 	<script>
+		var trindexdetail = 1
 		jQuery(document).ready(function($) {
-			var trindex = 2			
+			var trindex = 2
+			var trindexdetail = 1
 			getMessages()
 			listgudang()
 			bindprice()
@@ -712,11 +705,11 @@
 					</td>
 
 					<td class="cart-product-name">
-						<input type="text" name="itemname" size="15">
+						<input type="text" class="item" id=${++trindex}item mark=${trindex} name="itemname" size="15">
 					</td>
 
 					<td class="cart-product-price">
-						<span class="amount">IDR <input class="price" mark=${++trindex} id=${trindex}price type="text" name="itemprice" size="5"></span>
+						<span class="amount">IDR <input class="price" mark=${trindex} id=${trindex}price type="text" name="itemprice" size="5"></span>
 					</td>
 
 					<td class="cart-product-quantity">
@@ -745,16 +738,48 @@
 										content: $("#content-text").val()
 									},
 									success: function(result) {
-											let test = $("#content-text").val()
-											resultPost(test)
+											resultPost(result)
 									}
 							})
 					});
+			$("#order").unbind().on("click", function(event) {
+				$("#ajaxform").submit(function(e)
+				{
+						var postData = $(this).serializeArray();
+						var formURL = $(this).attr("action");
+						$.ajax(
+						{
+								url : formURL,
+								type: "POST",
+								data : postData,
+								success:function(data, textStatus, jqXHR)
+								{
+										if(data.success){
+											console.log(data)
+											$('#ptab4').html(`<div class="alert alert-success" >
+												<strong>Thank You.</strong> Your order will be processed once we verify the Payment.
+											</div>`)
+										} else{
+											$('#ptab4').html(`<div class="alert alert-danger" >
+												<strong>Sorry.</strong> Your order not Aproved,  Please Check Inputs Detail.
+											</div>`)
+										}
+								},
+								error: function(jqXHR, textStatus, errorThrown)
+								{
+										//if fails
+								}
+						});
+						e.preventDefault()
+				})
+				$("#ajaxform").submit()
+			})
 			$( "#processTabs" ).tabs({ show: { effect: "fade", duration: 400 } });
 			$( ".tab-linker" ).click(function() {
-				$( "#processTabs" ).tabs("option", "active", $(this).attr('rel') - 1);
-				return false;
-			});
+				$( "#processTabs" ).tabs("option", "active", $(this).attr('rel') - 1)
+				return false
+			})
+
 
 			function pricingSwitcher(elementCheck, elementParent, elementPricing) {
 				elementParent.find('.pts-left,.pts-right').removeClass('pts-switch-active');
@@ -808,6 +833,7 @@
 						dataType: 'json',
 						resetForm: true,
 						success: function(data) {
+							console.log(data);
 							if (getStartedFormLoader == 'button') {
 								defButton.html(defButtonText);
 							} else {
@@ -840,7 +866,23 @@
 		});
 //////////////////////////
 function resultPost (result){
-	console.log("ini resultpost",result)
+	var time = new Date(result.data.createdAt)
+	var nowtime = new Date()
+	var postedtime
+	var timeDiff = Math.abs(nowtime.getTime() - time.getTime());
+	var diffDays = Math.floor(timeDiff / (1000 * 3600 * 24))
+	var diffHours = Math.floor(timeDiff / (1000 * 3600))
+	var diffMinutes = Math.floor(timeDiff / (1000 * 60))
+	var diffSeconds = Math.ceil(timeDiff / (1000))
+	if(diffDays > 0){
+		postedtime = `${diffDays} days ago`
+	} else if(diffHours > 0){
+		postedtime = `${diffHours} hours ago`
+	}else if(diffMinutes > 0){
+		postedtime = `${diffMinutes} minutes ago`
+	}else if(diffSeconds > 0){
+		postedtime = `${diffSeconds} seconds ago`
+	}
 	var insidePost = `
 	<div class="panel panel-default">
 		<div class="panel-heading">
@@ -853,28 +895,28 @@ function resultPost (result){
 						<h4><a href="#">Ivan Gerard</a></h4>
 					</div>
 					<ul class="entry-meta">
-						<li>5 days ago</li>
+						<li>${postedtime}</li>
 					</ul>
 				</div>
 			</div>
 		</div>
 		<div class="panel-body">
-		${result}
+		${result.data.content}
 		</div>
 		<div class="panel-footer">
-		<i class="icon-like"> </i> 0 Likes
-		<a href="#template-contactform-subjec" class="leftmargin-sm " id="btn-comment-list"><i class="icon-comments"></i> 0
-		 Comments</a>
+		<i class="icon-like"> </i> ${result.data.likes.length} Likes
+		<a href="#${result.data._id}btn-comment-list" mark=${result.data._id} class="leftmargin-sm comment-list-btn" id=${result.data._id}btn-comment-list><i class="icon-comments"></i> ${result.data.comments.length} Comments</a>
 		</div>
 
-				<div class="panel-footer">
-					<input type="text" id="template-contactform-subject" name="template-contactform-subject" value="" class="required sm-form-control" aria-required="true">
-					<div class="spost clearfix" id="comment-list">
+				<div class="panel-footer" id=${result.data._id}panel-footer>
+					<input type="text" id="template-contactform-subject" mark=${result.data._id} name="template-contactform-subject" value="" class="required sm-form-control comment-box" aria-required="true">
+					<div class="spost clearfix" id=${result.data._id}comment-list>
 				</div>
 			</div>
 	</div>
 	`
 	$(insidePost).insertAfter('#kotak-post')
+	bindcommentbox()
 }
 ///////// List of function //////////
 		 function getMessages() {
@@ -882,6 +924,23 @@ function resultPost (result){
 		        url: "/api/messages/",
 		        success: function(result) {
 							for (var i in result.data){
+								var time = new Date(result.data[i].createdAt)
+								var nowtime = new Date()
+								var postedtime
+								var timeDiff = Math.abs(nowtime.getTime() - time.getTime());
+								var diffDays = Math.floor(timeDiff / (1000 * 3600 * 24))
+								var diffHours = Math.floor(timeDiff / (1000 * 3600))
+								var diffMinutes = Math.floor(timeDiff / (1000 * 60))
+								var diffSeconds = Math.ceil(timeDiff / (1000))
+								if(diffDays > 0){
+									postedtime = `${diffDays} days ago`
+								} else if(diffHours > 0){
+									postedtime = `${diffHours} hours ago`
+								}else if(diffMinutes > 0){
+									postedtime = `${diffMinutes} minutes ago`
+								}else if(diffSeconds > 0){
+									postedtime = `${diffSeconds} seconds ago`
+								}
 				        var insideHTML =
 				        `
 								<div class="panel panel-default">
@@ -895,7 +954,7 @@ function resultPost (result){
 													<h4><a href="#">Ivan Gerard</a></h4>
 												</div>
 												<ul class="entry-meta">
-													<li>5 days ago</li>
+													<li>${postedtime}</li>
 												</ul>
 											</div>
 										</div>
@@ -908,8 +967,8 @@ function resultPost (result){
 									<a href="#${result.data[i]._id}btn-comment-list" mark=${result.data[i]._id} class="leftmargin-sm comment-list-btn" id=${result.data[i]._id}btn-comment-list><i class="icon-comments"></i> ${result.data[i].comments.length} Comments</a>
 									</div>
 
-											<div class="panel-footer">
-												<input type="text" id="template-contactform-subject" name="template-contactform-subject" value="" class="required sm-form-control" aria-required="true">
+											<div class="panel-footer" id=${result.data[i]._id}panel-footer>
+												<input type="text" id="template-contactform-subject" mark=${result.data[i]._id} name="template-contactform-subject" value="" class="required sm-form-control comment-box" aria-required="true">
 												<div class="spost clearfix" id=${result.data[i]._id}comment-list>
 
 
@@ -944,9 +1003,59 @@ function resultPost (result){
 											$(`#${id}comment-list`).show()
 										})
 									})
-				      }
+									bindcommentbox()
+									}
 		        }
 		    })
+		 }
+		 function bindcommentbox() {
+			 $('.comment-box').unbind('keyup').bind("keyup", function(e) {
+
+ 				var enterkey = event.keyCode
+ 				var inputtext =  $(this)
+ 				var id = $(this).attr("mark")
+
+ 				if(enterkey == 13){
+ 					var commenttext = $(this).val()
+ 					$.ajax({
+ 						url: `/api/messages/comment/${id}`,
+ 						type: 'PUT',
+ 						dataType: 'json',
+ 						headers: {"X-HTTP-Method-Override": "PUT"},
+ 						data: JSON.stringify({
+ 							comment: commenttext
+ 							}),
+ 						contentType: "application/json; charset=utf-8",
+
+ 						success: function(data) {
+ 							$(`#${id}btn-comment-list`).html(`<i class="icon-comments"></i> ${data.count} Comments`)
+ 							var commentHTML = `
+ 							<div class="panel-footer">
+ 							<div class="spost clearfix" style="display: block;">
+ 							<div class="entry-image">
+ 								<a href="#" class="nobg"><img class="img-circle" src="images/testimonials/1.jpg" alt=""></a>
+ 							</div>
+ 							<div class="entry-c">
+ 								<div class="entry-title">
+ 									<h4><a href="#">Ivan Gerard</a></h4>
+ 									${commenttext}
+ 									<p></p>
+ 								</div>
+ 								<ul class="entry-meta">
+ 								</ul>
+ 							</div>
+ 							</div>
+ 							</div>
+ 							`
+ 							$(commentHTML).insertAfter(inputtext)
+
+ 						}
+ 					});
+ 					console.log($(this).val())
+ 					$(this).val("")
+ 				}
+ 			})
+
 		 }
 		function listgudang() {
 
@@ -998,6 +1107,12 @@ function resultPost (result){
 
 
 		}
+		$('.detail-rekening').each(function () {
+			var id = $(this).attr('id')
+			$(this).on('keyup',function () {
+				$(`#${id}summary`).html($(`#${id}`).val())
+			})
+		})
 		function bindprice() {
 			$('.price').unbind('keypress').bind("keypress", function(e) {
 					if (e.keyCode < 48 || e.keyCode > 57) {
@@ -1012,6 +1127,7 @@ function resultPost (result){
 					var qty = parseInt($(`#${mark}quantity`).val())
 					$(`#${mark}`).html(prc*qty)
 					$(`#${mark}total`).val(prc*qty)
+					filltabel(mark)
 				})
 			})
 		}
@@ -1021,6 +1137,12 @@ function resultPost (result){
 						e.preventDefault()
 					}
 			})
+			$('.item').each(function(){
+				var mark = $(this).attr('mark')
+				$(this).on('keyup',function () {
+					filltabel(mark)
+				})
+			})
 			$('.quantity').each(function(){
 				var id = $(this).attr('id')
 				var mark = $(this).attr('mark')
@@ -1029,10 +1151,32 @@ function resultPost (result){
 					var prc = parseInt($(`#${mark}price`).val())
 					$(`#${mark}`).html(prc*qty)
 					$(`#${mark}total`).val(prc*qty)
+					filltabel(mark)
 				})
 			})
 		}
+		function filltabel(id) {
+			var rowid = $(`#${id}item`).attr('id')
+			var itemname = $(`#${id}item`).val()
+			var itemprice = $(`#${id}price`).val()
+			var itemquantity = $(`#${id}quantity`).val()
+			var itemtotal = $(`#${id}total`).val()
+			if(itemname!='' && itemprice!='' && itemquantity!='' && itemname!= undefined && itemprice!=undefined && itemquantity!=undefined){
+						$(`#${rowid}detail`).remove()
+						var trdetail = `<tr id=${rowid}detail>
+						<th scope="row"></th>
+						<td>${itemname}</td>
+						<td>${itemprice}</td>
+						<td>${itemquantity}</td>
+						<td>${itemtotal}</td>
+					</tr>`
+					$('#tabeldetail').append(trdetail)
 
+
+			}
+		}
+		bindprice()
+		bindquantity()
 	</script>
 
 </body>
