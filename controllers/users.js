@@ -15,14 +15,14 @@ console.log(req.files)
  item_image = req.files.photo
 
  var thumbPath = path.join(__dirname,'../public/images/profile/thumbs/')+item_image['name']
- var realpath = path.join(__dirname,'../public/images/profile/')+item_image['name']
+ var realpath = path.join(__dirname,'../public/images/profile/')+req.session.userId+item_image['name']
  console.log(item_image)
  item_image.mv(realpath, function(err) {
      if (err) {
          return res.status(500).send(err);
      }
      User.find({_id: req.session.userId},(err,user) => {
-       user[0].profilePicture = realpath
+       user[0].profilePicture = 'http://'+req.headers.host+'/images/profile/'+req.session.userId+item_image['name']
        user[0].save(function (err) {
          if (err){
            console.log(err)
