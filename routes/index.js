@@ -8,11 +8,11 @@ router.get('/', function(req, res, next) {
 
 router.get('/home', function(req, res, next) {
   if(req.session.role && req.session.role.indexOf(1) >= 0){
-  res.render('home', { title: 'Superman ',profilepict:req.session.profilePicture, name: req.session.name });
-} else {
-  res.redirect('/')
-}
-});
+    res.render('home', { title: 'Superman ',profilepict:req.session.profilePict, name: req.session.name })
+  } else {
+    res.redirect('/')
+  }
+})
 
 router.get('/cms-transaction', function(req, res, next) {
   if(req.session.role && req.session.role.indexOf(0) >= 0){

@@ -18,10 +18,12 @@ console.log(req.files)
  var realpath = path.join(__dirname,'../public/images/profile/')+req.session.userId+item_image['name']
  console.log(item_image)
  item_image.mv(realpath, function(err) {
+   console.log(req.session,"NIH SESSION LUH");
      if (err) {
          return res.status(500).send(err);
      }
      User.find({_id: req.session.userId},(err,user) => {
+       console.log(user,"SESSION ");
        user[0].profilePicture = 'http://'+req.headers.host+'/images/profile/'+req.session.userId+item_image['name']
        user[0].save(function (err) {
          if (err){
