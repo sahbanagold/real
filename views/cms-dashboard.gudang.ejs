@@ -94,20 +94,22 @@
 										</div>
 
 										<div class="modal-body">
-											<form action="/api/users" method="post" class="nobottommargin">
+											<form action="/api/warehouse" method="post" class="nobottommargin">
 												<div class="col_full">
 													<label class="font-body capitalize" for="warehouse-name">Warehouse Name:</label>
-													<input type="text" id="warehouse-name" name="warehouse-name" value="" class="form-control" />
+													<input type="text" id="warehouse-name" name="name" value="" class="form-control" />
 												</div>
 												<div class="col_full">
 													<label class="font-body capitalize" for="warehouse-location">Location</label>
-													<input type="text" id="warehouse-location" name="warehouse-location" value="" class="form-control" />
+													<input type="text" id="warehouse-location" name="location" value="" class="form-control" />
+												</div>
+												<div class="col_full">
+													<label class="font-body capitalize" for="warehouse-location">Type</label>
+													<input type="text" id="warehouse-type" name="type" value="" class="form-control" />
 												</div>
 
 
-												<div class="col_full">
-													<label class="font-body capitalize" for="warehouse-pic">PIC</label>
-													<input type="text" id="warehouse-pic" name="warehouse-pic" value="" class="form-control" />
+												<div class="col_full" id="userdiv">
 												</div>
 
 												<div class="col_full nobottommargin">
@@ -234,17 +236,38 @@
 
 	<script>
 	$(document).ready(function() {
-
+					function setPicOption() {
+						$.ajax({
+							url: '/api/users',
+							type: 'GET',
+							success: function(result) {
+								if(result.success){
+									var userlist = ""
+									for (var i = 0; i < result.data.length; i++) {
+										userlist += `<option value=${result.data[i]._id} selected="selected">${result.data[i].name}(${result.data[i].userEmail})</option>`
+									}
+									var useroption = `
+									<label class="font-body capitalize" for="warehouse-pic">PIC</label>
+									<select id="warehouse-pic" name="userId" value="" class="form-control">
+								  ${userlist}
+									</select>`
+									$('#userdiv').html(useroption)
+								}
+							}
+						})
+					}
+					setPicOption()
 					$("#warehouse-form-modal-submit").unbind().on("click",function(event){
 
 							event.preventDefault()
 							$.ajax({
-									url: '/api/users',
+									url: '/api/warehouse',
 									type: 'POST',
 									data: {
 											name: $("#warehouse-name").val(),
-											email: $("#warehouse-location").val(),
-											password: $("#warehouse-pic").val()
+											location: $("#warehouse-location").val(),
+											type: $("#warehouse-type").val(),
+											userId: $("#warehouse-pic").val()
 									},
 									success: function(result) {
 										location.reload();
@@ -269,6 +292,7 @@
 
 
 		listGudang()
+		settotaltransactions()
 		jQuery( "#tabs-profile" ).on( "tabsactivate", function( event, ui ) {
 			jQuery( '.flexslider .slide' ).resize();
 		});
@@ -293,7 +317,7 @@
 											</td>
 											<td>${result[k].userId.name}
 											</td>
-											<td id="${result[k]._id}status">${result[k].isActive}</td>
+											<td id="${result[k]._id}status" class="totaltr">${result[k].isActive}</td>
 											<td>
 	<a href="#" data-id='${result[k]._id}'class="remove update-gudang button  button-mini button-rounded button-red"  title="Update this item">Delete</a>
 											</td>
@@ -309,6 +333,33 @@
 					}
 				}
 		})
+	}
+	function settotaltransactions() {
+		$.ajax({
+				url: `/api/transactions`,
+				type: 'GET',
+				success: function(transactions) {
+					console.log(transactions, "testny ok");
+					if(transactions.success){
+						for (var i = 0; i < transactions.data.length; i++) {
+							var total = 0
+
+							console.log(transactions.data[i]._id,"5 kali")
+							for (var j = 0; j < transactions.data[i].transactions.length; j++) {
+
+								total += transactions.data[i].transactions[j].nominal
+							}
+							var trrow = `${transactions.data[i].transactions.length} Transactions <br>`
+							$(`#${transactions.data[i]._id}status`).html(trrow+"Rp. "+(total+"").replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"))
+						}
+					} else{
+						$(".totaltr").each(function () {
+							$(this).html(0)
+						})
+					}
+				}
+			})
+
 	}
 
 

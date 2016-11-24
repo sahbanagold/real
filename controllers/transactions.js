@@ -9,6 +9,15 @@ exports.transactionsGet = function(req,res,next){
       res.json({success: true, data: data})
     })
 }
+exports.transactionsFilterGet = function(req,res,next){
+    Transactions.find({userId:req.params.id},(err,data) => {
+      if(err){
+        console.log(err)
+        return res.json({success: false, message: "transaction not found"})
+      }
+      res.json({success: true, data: data})
+    })
+}
 exports.allTransactionsGet = function(req,res,next){
   Warehouse.find({},(err,data) => {
     if(err){
@@ -29,6 +38,7 @@ exports.allTransactionsGet = function(req,res,next){
           profilePicture: warehouse.profilePicture,
           profilePictureThumb: warehouse.profilePictureThumb,
           type: warehouse.type,
+          _id: warehouse._id,
           location: warehouse.location,
           transactions: transactions
           })
@@ -61,7 +71,7 @@ exports.transactionsPost = function(req,res,next){
                 name: newitemname,
                 price: newitemprice,
                 quantity: newitemquantity,
-                sums: newitemtotalprice
+                totalprice: newitemtotalprice
               })
 
       }
@@ -79,13 +89,19 @@ exports.transactionsPost = function(req,res,next){
       newTransactions.dateRequested= new Date()
       newTransactions.notes= req.body.keterangan
       newTransactions.items= newItems
-    newTransactions.save(function (err) {
-      if (err){
-        console.log(err)
-        return
-      }
-      res.json({success: true,message: "success save transactions", data: newTransactions})
-    })
+      newTransactions.save(function (err) {
+        if (err){
+          console.log(err)
+          return
+        }
+        newTransactions.populate('userId').populate(function (err, saved) {
+          if (err){
+            console.log(err)
+            return
+          }
+          res.json({success: true,message: "success save transactions", data: saved})
+        })
+      })
   } else{
     res.json({success: false,message: "no transactions saved"})
   }
