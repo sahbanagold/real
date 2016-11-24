@@ -76,10 +76,8 @@ module.exports = function(passport) {
       passwordField : 'password',
       passReqToCallback : true // allows us to pass back the entire request to the callback
     }, function(req, email, password, done) {
-      console.log("INI REQ BODY YA BRO",req.body.eamil);
-      Users.findOne({ 'userEmail' :  email }, function(err, user) {
-        console.log("INI USER Ketemeu", email);
 
+      Users.findOne({ 'userEmail' :  email }, function(err, user) {
         if (err){
           return done(err);
         }
@@ -93,6 +91,8 @@ module.exports = function(passport) {
             req.session.role = user.role
             req.session.userId = user._id
             req.session.email = user.userEmail
+            req.session.profilePict = user.profilePicture
+            req.session.name = user.name
             return done(null, user);
           }
         } else {

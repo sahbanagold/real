@@ -73,7 +73,7 @@
 							  <ul class="nav navbar-nav navbar-right nobottommargin">
 								<li><a href="#"></a></li>
 								<li class="dropdown">
-								  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><img class="img-circle" src='<%= profilepict%>' style="width:10%" alt=""> Ivan Gerard <b class="caret"></b></a>
+								  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><img src='<%= profilepict %>'  class="img-rounded" alt="Cinque Terre" width="30" height="30"> <%= name%> <b class="caret"></b></a>
 								  <ul class="dropdown-menu" role="menu">
 
 
@@ -790,16 +790,10 @@
 				        url: formURL,
 				    		type: 'POST',
 				        data:  formData,
-<<<<<<< HEAD
-								processData: false,
-    contentType: false,
-				    		enctype: 'multipart/form-data',
-=======
 				    		mimeType:"multipart/form-data",
 								contentType: false,
 							 cache: false,
 							 processData:false,
->>>>>>> 36cd1736649993fcbe042f061938c6046ccc3621
 								success:function(result, textStatus, jqXHR)
 								{
 									console.log(result);

@@ -7,7 +7,8 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/home', function(req, res, next) {
-  res.render('home', { title: 'Superman ',profilepict:req.session.profilePicture, name: req.session.name });
+  console.log(req.session,"INI SESSION BroW");
+  res.render('home', { title: 'Superman ',profilepict:req.session.profilePict, name: req.session.name });
 });
 
 router.get('/cms-transaction', function(req, res, next) {
