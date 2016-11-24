@@ -781,7 +781,7 @@
 			 });
 			$("#profile-form-modal-submit").unbind().on("click", function(event) {
 				$("#formphoto").submit(function(e){
-						// e.preventDefault()
+						e.preventDefault()
 						var formObj = $(this);
 				    var formURL = formObj.attr("action");
 				    var formData = new FormData(this);
@@ -791,6 +791,9 @@
 				    		type: 'POST',
 				        data:  formData,
 				    		mimeType:"multipart/form-data",
+								contentType: false,
+							 cache: false,
+							 processData:false,
 								success:function(result, textStatus, jqXHR)
 								{
 									console.log(result);
