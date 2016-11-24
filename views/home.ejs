@@ -20,6 +20,8 @@
 	<link rel="stylesheet" href="css/et-line/et-line.css" type="text/css" />
 	<link rel="stylesheet" href="css-global/animate.css" type="text/css" />
 	<link rel="stylesheet" href="css-global/magnific-popup.css" type="text/css" />
+	<link rel="stylesheet" href="css-global/components/bs-filestyle.css" type="text/css" />
+
 
 	<link rel="stylesheet" href="css/fonts.css" type="text/css" />
 
@@ -147,6 +149,12 @@
 													    </label>
 													    <input id="file-input" type="file" name="photo" style="display:none"/>
 													</div>
+													<div class="col-md-6">
+														<br>
+														<input id="input-11" name="input11[]" type="file" multiple class="file-loading" accept="image/*">
+													</div>
+
+
 												<button type="submit" id="post-message" class="button button-3d button-small button-rounded button-green fright topmargin-sm">Post</a>
 
 											</form>
@@ -424,6 +432,8 @@
 	============================================= -->
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/plugins.js"></script>
+	<script type="text/javascript" src="js/components/bs-filestyle.js"></script>
+
 
 	<!-- Footer Scripts
 	============================================= -->
@@ -438,6 +448,11 @@
 			listgudang()
 			bindprice()
 			bindquantity()
+			$("#input-11").fileinput({
+				maxFileCount: 10,
+				allowedFileTypes: ["image", "video"]
+			});
+
 			$("#btn-plus").on("click", function(event) {
 				var newtr = `<tr class="cart_item">
 

@@ -10,6 +10,7 @@ const routes = require('./routes')
 const users = require('./routes/users')
 const warehouse = require('./routes/warehouse')
 const messages = require('./routes/messages')
+
 const transactions = require('./routes/transactions')
 const fileUpload = require('express-fileupload')
 
@@ -55,6 +56,7 @@ app.use('/', routes)
 app.use('/api/users', users);
 app.use('/api/warehouse', warehouse);
 app.use('/api/messages', messages);
+
 app.use('/api/transactions', transactions);
 app.get('/logout', function(req, res) {
   console.log(req.session, 'inin session')

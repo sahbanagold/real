@@ -1,5 +1,6 @@
 var Transactions = require('../models/transactions')
 var Warehouse = require('../models/warehouse')
+var User = require('../models/users')
 exports.transactionsSeeds = function(req,res,next){
   let newItems = []
   console.log(req.body)
@@ -20,7 +21,6 @@ exports.transactionsSeeds = function(req,res,next){
                 quantity: newitemquantity,
                 totalprice: newitemtotalprice
               })
-
       }
     }
   }
@@ -54,8 +54,8 @@ exports.transactionsSeeds = function(req,res,next){
   }
 }
 exports.userSeeds = function(req, res, next) {
-  let name =["sahbana","ivan","ari","rony"]
-  let email = ["sahbanalo@gmail.com","ivan@gmail.com","ari@gmail.com","rony@gmail.com"]
+  let name =["Sahbana Gold","Ivan Gerard","Ari Adi ","Tevin Amos"]
+  let email = ["sahbanalo@gmail.com","ivan@gmail.com","ari@gmail.com","tevin@gmail.com"]
   let password = ["bana","ivan","ari","rony"]
   let role = [0,1]
   for (var i = 0; i < name.length; i++) {
@@ -66,27 +66,40 @@ exports.userSeeds = function(req, res, next) {
     newUser.encryptedPassword = newUser.generateHash(password[i])
     newUser.isActive = 'Active'
     newUser.save(function (err) {
-      // if(err){
-      //   console.log("error creating new user with error: ",err)
-      //   return res.json({success: false, message: "save new user failed"})
-      // }
-      // res.json({success: true, message: "new user success saved"})
+      if(err){
+        console.log("error creating new user with error: ",err)
+        return res.json({success: false, message: "save new user failed"})
+      }
+      res.json({success: true, message: "new user added"})
     })
   }
 }
+
 exports.warehouseSeeds = function(req,res,next){
-  let name = ["Gudang Padang","Gudang Jakarta","Gudang Semarang","Gudang Surabaya"]
-  let name = ["Gudang Padang","Gudang Jakarta","Gudang Semarang","Gudang Surabaya"]
-  let newWarehouse = new Warehouse()
-  newWarehouse.name = req.body.name
-  newWarehouse.userId = req.body.userId
-  newWarehouse.type = req.body.type
-  newWarehouse.location = req.body.location
-    newWarehouse.save((err) => {
+  let gudangName = ["Gudang Padang","Gudang Jakarta","Gudang Semarang","Gudang Surabaya"]
+  let location = ["Padang","Jakarta Barat","Semarang","Surabaya"]
+  for(var i=0;i<gudangName.length;i++) {
+    Users.find({}).exec((err,user) => {
       if(err){
         console.log(err)
-        return res.json({success: false, message: "save new warehouse failed"})
+        return res.json({success: false, message: "message not found "})
       }
-      res.json({success: true, message: "save new warehouse success"})
+      for(let j;j<user.length;j++){
+          for(let k;k<user.length;k++){
+            let newWarehouse = new Warehouse()
+            newWarehouse.name = gudangName[i]
+            newWarehouse.userId = user[j]._id
+            newWarehouse.type = "Gudang Utama"
+            newWarehouse.location = location[k]
+            newWarehouse.save((err) => {
+              if(err){
+                console.log(err)
+                return res.json({success: false, message: "save new warehouse failed"})
+              }
+              res.json({success: true, message: "save new warehouse success"})
+            })
+          }
+      }
     })
+  }
 }
