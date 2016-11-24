@@ -11,6 +11,7 @@ const users = require('./routes/users')
 const warehouse = require('./routes/warehouse')
 const messages = require('./routes/messages')
 const transactions = require('./routes/transactions')
+const fileUpload = require('express-fileupload')
 
 const expressValidator = require('express-validator')
 
@@ -23,6 +24,7 @@ require('./config/passport')(passport)
 app.set('view engine', 'ejs');
 app.use(cors())
 app.use(morgan())
+app.use(fileUpload())
 app.use(bodyParser.json({
   type: 'application/vnd.api+json'
 }))
