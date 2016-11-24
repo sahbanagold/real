@@ -107,26 +107,11 @@
 									</div>
 
 									<div class="modal-body">
-										<form action="/api/users" method="post" class="nobottommargin">
+										<form action="/api/users/profile/upload" method="post" class="nobottommargin" enctype="multipart/form-data" id="formphoto">
 											<div class="col_full">
 												<label class="font-body capitalize" for="profile-form-modal-photo">Change Profile Picture</label>
-														<input type="file" id="profile-form-modal-photo">											</div>
-														<div class="col_full">
-															<label class="font-body capitalize" for="profile-form-modal-fullname">Full Name:</label>
-															<input type="text" id="profile-form-modal-fullname" name="fullname" value="" class="form-control" />
-														</div>
-
-											<div class="col_full">
-												<label class="font-body capitalize" for="profile-form-modal-email">Email Address:</label>
-												<input type="text" id="profile-form-modal-email" name="email" value="" class="form-control" />
+														<input type="file" id="profile-form-modal-photo" name="photo">
 											</div>
-
-
-											<div class="col_full">
-												<label class="font-body capitalize" for="profile-form-modal-password">Password:</label>
-												<input type="password" id="profile-form-modal-password" name="password" value="" class="form-control" />
-											</div>
-
 											<div class="col_full nobottommargin">
 												<button class="button button-rounded nomargin" id="profile-form-modal-submit" name="register-form-modal-submit" type="submit" value="register">Submit</button>
 											</div>
@@ -791,6 +776,34 @@
 								}
 						})
 			}
+			$('#profile-form-modal-photo').bind('change', function() {
+					//  alert('This file size is: ' + this.files[0].size/1024/1024 + "MB");
+			 });
+			$("#profile-form-modal-submit").unbind().on("click", function(event) {
+				$("#formphoto").submit(function(e){
+						// e.preventDefault()
+						var formObj = $(this);
+				    var formURL = formObj.attr("action");
+				    var formData = new FormData(this);
+						console.log(formData,"postData");
+				    $.ajax({
+				        url: formURL,
+				    		type: 'POST',
+				        data:  formData,
+				    		mimeType:"multipart/form-data",
+								success:function(result, textStatus, jqXHR)
+								{
+									console.log(result);
+								},
+								error: function(jqXHR, textStatus, errorThrown)
+								{
+										//if fails
+								}
+						});
+
+				})
+				$("#formphoto").submit()
+			})
 			$("#order").unbind().on("click", function(event) {
 				$("#ajaxform").submit(function(e)
 				{

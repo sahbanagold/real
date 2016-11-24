@@ -7,6 +7,7 @@ let passport = require('passport')
 router.get('/:id', users.userGet)
 router.get('/', users.allUserGet)
 router.post('/', users.userRegisterPost)
+router.post('/profile/upload',users.userProfilePost)
 router.post('/activate/:id', users.activateUserPost)
 router.post('/deactivate/:id', users.deactivateUserPost )
 router.post('/login',
