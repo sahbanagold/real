@@ -9,7 +9,7 @@ exports.MessagesDelete = function(req,res,next){
     })
 }
 exports.MessagesGet = function(req,res,next){
-    Messages.find({_id: req.params.id},(err,data) => {
+    Messages.find({_id: req.params.id}).sort({date:-1}).exec((err,data) => {
       if(err){
         console.log(err)
         return res.json({success: false, message: "message not found "})
@@ -18,7 +18,7 @@ exports.MessagesGet = function(req,res,next){
     })
 }
 exports.AllMessagesGet = function(req,res,next){
-    Messages.find({},(err,data) => {
+    Messages.find({}).sort({date:-1}).exec((err,data) => {
       if(err){
         console.log(err)
         return res.json({success: false, message: "message not found "})

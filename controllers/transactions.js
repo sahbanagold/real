@@ -1,7 +1,7 @@
 var Transactions = require('../models/transactions')
 var Warehouse = require('../models/warehouse')
 exports.transactionsGet = function(req,res,next){
-    Transactions.find({_id:req.params.id},(err,data) => {
+    Transactions.find({_id:req.params.id}).sort({date:-1}).exec((err,data) => {
       if(err){
         console.log(err)
         return res.json({success: false, message: "transaction not found"})
@@ -10,7 +10,7 @@ exports.transactionsGet = function(req,res,next){
     })
 }
 exports.transactionsFilterGet = function(req,res,next){
-    Transactions.find({userId:req.params.id},(err,data) => {
+    Transactions.find({userId:req.params.id}).sort({date:-1}).exec((err,data) => {
       if(err){
         console.log(err)
         return res.json({success: false, message: "transaction not found"})
@@ -18,7 +18,23 @@ exports.transactionsFilterGet = function(req,res,next){
       res.json({success: true, data: data})
     })
 }
+// Maps.find({createdAt:{$gt: startDate, $lt: dateMidnight}}).exec(function(err,result){
+
 exports.allTransactionsGet = function(req,res,next){
+  let startDate = new Date()
+  let dateMidnight = new Date(startDate)
+
+  startDate.setSeconds(0);
+  startDate.setHours(0);
+  startDate.setMinutes(0);
+
+  dateMidnight.setHours(23);
+  dateMidnight.setMinutes(59);
+  dateMidnight.setSeconds(59);
+  //
+  // dateMidnight.setDate(dateMidnight.getDate()-1)
+  // startDate.setDate(startDate.getDate()-1)
+
   Warehouse.find({},(err,data) => {
     if(err){
       console.log(err)
@@ -27,7 +43,12 @@ exports.allTransactionsGet = function(req,res,next){
     let datas = []
     let i = 1
     data.forEach((warehouse)=>{
-      Transactions.find({userId: warehouse.userId}).populate('userId').exec((err,transactions) => {
+      Transactions.find({userId: warehouse.userId}).or([
+        { $or: [
+          {createdAt:{$gt: startDate, $lt: dateMidnight}},
+          {status: "UnPaid"}]
+        }])
+        .sort({date:-1}).populate('userId').exec((err,transactions) => {
         if(err){
           console.log(err)
           return res.json({success: false, message: "transaction not found"})
@@ -53,6 +74,42 @@ exports.allTransactionsGet = function(req,res,next){
 
   })
 }
+/////
+// exports.allTransactionsGet = function(req,res,next){
+//   Warehouse.find({},(err,data) => {
+//     if(err){
+//       console.log(err)
+//       return res.json({success: false, message: "error, wareHouse not found"})
+//     }
+//     let datas = []
+//     let i = 1
+//     data.forEach((warehouse)=>{
+//       Transactions.find({userId: warehouse.userId}).sort({date:-1}).populate('userId').exec((err,transactions) => {
+//         if(err){
+//           console.log(err)
+//           return res.json({success: false, message: "transaction not found"})
+//         }
+//         let newobject = Object.assign({},{
+//           userId: warehouse.userId,
+//           name: warehouse.name,
+//           profilePicture: warehouse.profilePicture,
+//           profilePictureThumb: warehouse.profilePictureThumb,
+//           type: warehouse.type,
+//           _id: warehouse._id,
+//           location: warehouse.location,
+//           transactions: transactions
+//           })
+//
+//         datas.push(newobject)
+//         if(i++ == data.length){
+//             res.json({success: true, data: datas})
+//         }
+//
+//       })
+//     })
+//
+//   })
+// }
 exports.transactionsPost = function(req,res,next){
   let newItems = []
   console.log(req.body)
