@@ -81,7 +81,7 @@
 									<li><a href="#">My Transaction</a></li>
 
 									<li class="divider"></li>
-									<li><a href="#">Logout</a></li>
+									<li><a href="/logout">Logout</a></li>
 								  </ul>
 								</li>
 							  </ul>
@@ -139,13 +139,13 @@
 									</ul>
 									<div class="tab-container">
 										<div class="tab-content clearfix ui-tabs-panel ui-widget-content ui-corner-bottom" id="tabs-post" aria-labelledby="ui-id-21" role="tabpanel" aria-hidden="false" style="display: block;">
-											<form  id="form-message" action="" >
+											<form  id="form-message" action="" name="image-message" enctype="multipart/form-data">
 												<textarea class="required sm-form-control" id="content-text" name="content-text" rows="6" cols="30" aria-required="true"></textarea>
 													<div class="image-upload">
 													    <label for="file-input">
 													        <i class="icon-line-camera" style="font-size:20px"></i> Upload
 													    </label>
-													    <input id="file-input" type="file" style="display:none"/>
+													    <input id="file-input" type="file" name="photo" style="display:none"/>
 													</div>
 												<button type="submit" id="post-message" class="button button-3d button-small button-rounded button-green fright topmargin-sm">Post</a>
 
@@ -359,7 +359,7 @@
 						</div>
 					</div>
 					<div class="col_two_fifth col_last  nomargin" id="listgudang">
-			
+
 
 					</div>
 
@@ -468,16 +468,44 @@
 			})
 			$("#post-message").unbind().on("click", function(event) {
 						event.preventDefault()
-						if($("#content-text").val()!="") postMessage($("#content-text").val())
-			})
 
+							uploadimagemessage($('#form-message'))
+
+			})
+			function uploadimagemessage(image) {
+				var form = document.forms.namedItem("image-message")
+				var formData = new FormData(form)
+				formData.append("content",$("#content-text").val())
+				console.log(formData,"postData");
+				$.ajax({
+						url: '/api/messages',
+						type: 'POST',
+						data:  formData,
+						mimeType:"multipart/form-data",
+						contentType: false,
+						cache: false,
+						processData:false,
+						success:function(result, textStatus, jqXHR)
+						{
+
+							location.reload()
+						},
+						error: function(jqXHR, textStatus, errorThrown)
+						{
+								//if fails
+						}
+				});
+			}
 			function postMessage(content) {
+
+
 						$.ajax({
 								url: '/api/messages',
 								type: 'POST',
-								data: {
-									content: content
-								},
+								data: formData,
+								contentType: false,
+							 	cache: false,
+							 	processData:false,
 								success: function(result) {
 										resultPost(result)
 								}
@@ -504,7 +532,7 @@
 							 	processData:false,
 								success:function(result, textStatus, jqXHR)
 								{
-									console.log(result);
+									location.reload()
 								},
 								error: function(jqXHR, textStatus, errorThrown)
 								{
@@ -697,7 +725,8 @@ function resultPost (result){
 			</div>
 		</div>
 		<div class="panel-body">
-		${result.data.content}
+		${result.data.content}<br>
+		${result.data.image}
 		</div>
 		<div class="panel-footer">
 		<a href="#${result.data._id}likes" mark=${result.data._id} class="leftmargin-sm comment-like-btn" id=${result.data._id}btn-comment-like><i class="icon-like"></i> ${result.data.likes.length} Likes</a>
@@ -720,6 +749,7 @@ function resultPost (result){
 		    $.get({
 		        url: "/api/messages/",
 		        success: function(result) {
+							console.log(result);
 							for (var i in result.data){
 								var time = new Date(result.data[i].createdAt)
 								var nowtime = new Date()
@@ -738,13 +768,26 @@ function resultPost (result){
 								}else if(diffSeconds > 0){
 									postedtime = `${diffSeconds} seconds ago`
 								}
+								var imgsrc
+								if(result.data[i].userId.profilePicture){
+									imgsrc = result.data[i].userId.profilePicture
+								}else{
+									imgsrc = "images/testimonials/1.jpg"
+								}
+								var imagemessage
+								if(result.data[i].image != ""){
+									imagemessage = `<img src='${result.data[i].image}'>`
+								}else{
+									imagemessage = ""
+								}
+
 				        var insideHTML =
 				        `
 								<div class="panel panel-default">
 									<div class="panel-heading">
 										<div class="spost clearfix">
 											<div class="entry-image">
-												<a href="#" class="nobg"><img class="img-circle" src="images/testimonials/1.jpg" alt=""></a>
+												<a href="#" class="nobg"><img class="img-circle" src=${imgsrc} alt=""></a>
 											</div>
 											<div class="entry-c">
 												<div class="entry-title">
@@ -757,7 +800,9 @@ function resultPost (result){
 										</div>
 									</div>
 									<div class="panel-body">
-									${result.data[i].content}
+									${result.data[i].content}<br>
+									${imagemessage}
+
 									</div>
 									<div class="panel-footer">
 

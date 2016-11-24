@@ -1,4 +1,5 @@
 let Messages = require('../models/messages')
+const path = require('path')
 exports.MessagesDelete = function(req,res,next){
     Messages.remove({_id: req.params.id},(err,data) => {
       if(err){
@@ -18,7 +19,7 @@ exports.MessagesGet = function(req,res,next){
     })
 }
 exports.AllMessagesGet = function(req,res,next){
-    Messages.find({}).sort({date:-1}).exec((err,data) => {
+    Messages.find({}).sort({date:-1}).populate('userId').exec((err,data) => {
       if(err){
         console.log(err)
         return res.json({success: false, message: "message not found "})
@@ -26,19 +27,65 @@ exports.AllMessagesGet = function(req,res,next){
       res.json({success: true, data:data})
     })
 }
+// exports.imageMessagesPost = function(req,res,next){
+// console.log(req.files, "ini files message image");
+// console.log(req);
+// res.json({success:true})
+//   // let newMessage = new Messages()
+//   // newMessage.content = req.body.content
+//   // newMessage.userId = req.session.userId
+//   // newMessage.tags = req.body.tags
+//   //   newMessage.save((err) => {
+//   //     if(err){
+//   //       console.log(err)
+//   //       return res.json({success: false, message: "save new message failed"})
+//   //     }
+//   //     res.json({success: true, message: "save new message success", data:newMessage})
+//   //   })
+// }
 exports.MessagesPost = function(req,res,next){
-
+  var item_image
+  var realpath
+  console.log(req.files,"realpath luar")
   let newMessage = new Messages()
   newMessage.content = req.body.content
   newMessage.userId = req.session.userId
   newMessage.tags = req.body.tags
-    newMessage.save((err) => {
-      if(err){
-        console.log(err)
-        return res.json({success: false, message: "save new message failed"})
-      }
+
+      if (req.files.photo.name != "") {
+      item_image = req.files.photo
+      var idimg  = new Date().getTime()
+      realpath = path.join(__dirname,'../public/images/messages/')+idimg+item_image['name']
+      console.log(realpath, "realpath dalam");
+      item_image.mv(realpath, function(err) {
+         if (err) {
+             return res.status(500).send(err);
+         }
+
+           newMessage.image = 'http://'+req.headers.host+'/images/messages/'+idimg+item_image['name']
+           newMessage.save(function (err) {
+             if (err){
+               console.log(err)
+               return res.json({success: false,message: "message not found"})
+             }
+             console.log(newMessage,"new message test");
+             res.json({success: true,message: "success save message", data: newMessage})
+         })
+      })
+    } else{
+      newMessage.image = ""
+      newMessage.save((err) => {
+        if(err){
+          console.log(err)
+          return res.json({success: false, message: "save new message failed"})
+        }
       res.json({success: true, message: "save new message success", data:newMessage})
-    })
+      })
+    }
+
+
+
+
 }
 exports.MessagesCommentPut = function(req,res,next){
   Messages.find({_id: req.params.id},(err,data)=>{

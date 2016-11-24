@@ -3,12 +3,14 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Superman ' });
+  console.log(req.flash('loginMessage'))
+  res.render('index', { title: 'Superman ', message: req.flash('loginMessage') });
 });
 
 router.get('/home', function(req, res, next) {
   if(req.session.role && req.session.role.indexOf(1) >= 0){
-    res.render('home', { title: 'Superman ',profilepict:req.session.profilePict, name: req.session.name })
+    console.log(req.flash('loginMessage'));
+    res.render('home', { title: 'Superman ',profilepict:req.session.profilePict, name: req.session.name, message: req.flash('loginMessage')})
   } else {
     res.redirect('/')
   }

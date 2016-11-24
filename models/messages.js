@@ -7,6 +7,7 @@ const messageSchema =  new Schema({
     ref: 'users'
   },
   content: String,
+  image:String,
   comments: [{
     commenter:{
       type: Schema.Types.ObjectId,
