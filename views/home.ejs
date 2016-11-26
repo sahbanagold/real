@@ -53,43 +53,49 @@
 	<!-- Document Wrapper
 	============================================= -->
 	<div id="wrapper" class="clearfix">
+		<header id="header" class="full-header no-sticky">
+
+			<div id="header-wrap">
+
+				<div class="container clearfix">
+
+					<div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+
+					<!-- Logo
+					============================================= -->
+					<div id="logo">
+						<a href="index.html" class="standard-logo" data-dark-logo="images/logo-super.png"><img src="images/logo-super.svg" width="200"alt="Superman Logo"></a>
+						<a href="index.html" class="retina-logo" data-dark-logo="images/logo-super.png"><img src="images/logo-super.png" width="200"alt="Superman Logo"></a>
+					</div><!-- #logo end -->
+
+					<!-- Primary Navigation
+					============================================= -->
+					<nav id="primary-menu">
+
+						<ul>
+							<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><img src='<%= profilepict%>'
+									 class="img-rounded" alt="Cinque Terre" width="30" height="30"> <%= name%> <b class="caret"></b></a>
+								<ul class="dropdown-menu" role="menu">
+								<li><a href="#" data-toggle="modal" data-target="#change-profile"> Profile</a></li>
+								<li><a href="#">My Transaction</a></li>
+								<li class="divider"></li>
+								<li><a href="/logout">Logout</a></li>
+								</ul>
+							</li>
+						</ul>
+
+					</nav><!-- #primary-menu end -->
+
+				</div>
+
+			</div>
+
+		</header><!-- #header end -->
 
 		<!-- Header
 		============================================= -->
-		<div class="container-fluid">
-							<!-- Brand and toggle get grouped for better mobile display -->
-							<div class="navbar-header">
-							  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-								<span class="sr-only">Toggle navigation</span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-							  </button>
-							  <a class="navbar-brand" href="#">Superman</a>
-							</div>
 
-							<!-- Collect the nav links, forms, and other content for toggling -->
-							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-
-							  <ul class="nav navbar-nav navbar-right nobottommargin">
-								<li><a href="#"></a></li>
-								<li class="dropdown">											
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><img src='<%= profilepict%>'
-										 class="img-rounded" alt="Cinque Terre" width="30" height="30"> <%= name%> <b class="caret"></b></a>
-								  <ul class="dropdown-menu" role="menu">
-
-
-									<li><a href="#" data-toggle="modal" data-target="#change-profile"> Profile</a></li>
-									<li><a href="#">My Transaction</a></li>
-
-									<li class="divider"></li>
-									<li><a href="/logout">Logout</a></li>
-								  </ul>
-								</li>
-							  </ul>
-							</div><!-- /.navbar-collapse -->
-						  </div>
 		<!-- #header end -->
 
 
