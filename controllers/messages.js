@@ -68,18 +68,31 @@ exports.MessagesPost = function(req,res,next){
                console.log(err)
                return res.json({success: false,message: "message not found"})
              }
-             console.log(newMessage,"new message test");
-             res.json({success: true,message: "success save message", data: newMessage})
+             Messages.findOne({_id: newMessage._id}).populate('userId').exec(function (err, message) {
+               if (err){
+                 console.log(err)
+                 return res.json({success: false,message: "message not found"})
+               }
+               res.json({success: true,message: "success save message", data: message})
+             })
+
          })
       })
     } else{
-      newMessage.image = 'http://'+req.headers.host+"images/testimonials/1.jpg"
+      newMessage.image = ""
       newMessage.save((err) => {
         if(err){
           console.log(err)
+
           return res.json({success: false, message: "save new message failed"})
         }
-      res.json({success: true, message: "save new message success", data:newMessage})
+        Messages.findOne({_id: newMessage._id}).populate('userId').exec(function (err, message) {
+          if (err){
+            console.log(err)
+            return res.json({success: false,message: "message not found"})
+          }
+          res.json({success: true,message: "success save message", data: message})
+        })
       })
     }
 

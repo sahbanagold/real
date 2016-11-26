@@ -53,42 +53,49 @@
 	<!-- Document Wrapper
 	============================================= -->
 	<div id="wrapper" class="clearfix">
+		<header id="header" class="full-header no-sticky">
+
+			<div id="header-wrap">
+
+				<div class="container clearfix">
+
+					<div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+
+					<!-- Logo
+					============================================= -->
+					<div id="logo">
+						<a href="index.html" class="standard-logo" data-dark-logo="images/logo-super.png"><img src="images/logo-super.svg" width="200"alt="Superman Logo"></a>
+						<a href="index.html" class="retina-logo" data-dark-logo="images/logo-super.png"><img src="images/logo-super.png" width="200"alt="Superman Logo"></a>
+					</div><!-- #logo end -->
+
+					<!-- Primary Navigation
+					============================================= -->
+					<nav id="primary-menu">
+
+						<ul>
+							<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><img src='<%= profilepict%>'
+									 class="img-rounded" alt="Cinque Terre" width="30" height="30"> <%= name%> <b class="caret"></b></a>
+								<ul class="dropdown-menu" role="menu">
+								<li><a href="#" data-toggle="modal" data-target="#change-profile"> Profile</a></li>
+								<li><a href="#">My Transaction</a></li>
+								<li class="divider"></li>
+								<li><a href="/logout">Logout</a></li>
+								</ul>
+							</li>
+						</ul>
+
+					</nav><!-- #primary-menu end -->
+
+				</div>
+
+			</div>
+
+		</header><!-- #header end -->
 
 		<!-- Header
 		============================================= -->
-		<div class="container-fluid">
-							<!-- Brand and toggle get grouped for better mobile display -->
-							<div class="navbar-header">
-							  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-								<span class="sr-only">Toggle navigation</span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-							  </button>
-							  <a class="navbar-brand" href="#">Superman</a>
-							</div>
 
-							<!-- Collect the nav links, forms, and other content for toggling -->
-							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-
-							  <ul class="nav navbar-nav navbar-right nobottommargin">
-								<li><a href="#"></a></li>
-								<li class="dropdown">
-								  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><img src='<%= profilepict %>'  class="img-rounded" alt="Cinque Terre" width="30" height="30"> <%= name%> <b class="caret"></b></a>
-								  <ul class="dropdown-menu" role="menu">
-
-
-									<li><a href="#" data-toggle="modal" data-target="#change-profile"> Profile</a></li>
-									<li><a href="#">My Transaction</a></li>
-
-									<li class="divider"></li>
-									<li><a href="/logout">Logout</a></li>
-								  </ul>
-								</li>
-							  </ul>
-							</div><!-- /.navbar-collapse -->
-						  </div>
 		<!-- #header end -->
 
 
@@ -262,8 +269,9 @@
 																	<span id="btn-plus" class="button button-3d nomargin fright"><i class="icon-line-circle-plus"></i></span>
 																	<label class="font-body capitalize" for="transactions-type">Transactions Type</label>
 																	<select id="transactions-type" name="type" value="" class="form-control">
-																  <option value="Real" selected="selected">Real</option>
-																	<option value="Estimation" selected="selected">Estimation</option>
+																	<option value="" selected="selected"></option>
+																	<option value="Real">Real</option>
+																	<option value="Estimation">Estimation</option>
 																	</select>
 
 
@@ -324,7 +332,11 @@
 			                        <label class="control-label">:</label>
 															<label id="nominalsummary"></label>
 			                      </div>
-
+														<div class="form-group">
+			                        <label for="inputText" class="control-label">Transactions Type</label>
+			                        <label class="control-label">:</label>
+															<label id="trtype"></label>
+			                      </div>
 			                      <div class="form-group">
 			                        <label class="control-label">Keterangan</label>
 			                        <label class="control-label">:</label>
@@ -500,14 +512,14 @@
 						url: '/api/messages',
 						type: 'POST',
 						data:  formData,
+						dataType: 'json',
 						mimeType:"multipart/form-data",
 						contentType: false,
 						cache: false,
 						processData:false,
 						success:function(result, textStatus, jqXHR)
 						{
-
-							location.reload()
+							resultPost(result)
 						},
 						error: function(jqXHR, textStatus, errorThrown)
 						{
@@ -516,7 +528,6 @@
 				});
 			}
 			function postMessage(content) {
-
 				var form = document.forms.namedItem("image-message")
 				var formData = new FormData(form)
 				formData.append("content",content)
@@ -524,6 +535,7 @@
 						url: '/api/messages',
 						type: 'POST',
 						data:  formData,
+						dataType: 'json',
 						mimeType:"multipart/form-data",
 						contentType: false,
 						cache: false,
@@ -533,8 +545,8 @@
 								}
 						})
 			}
-			$('#profile-form-modal-photo').bind('change', function() {
-					//  alert('This file size is: ' + this.files[0].size/1024/1024 + "MB");
+			$('#transactions-type').bind('change', function() {
+					$('#trtype').html($(this).val())
 			 });
 			$("#profile-form-modal-submit").unbind().on("click", function(event) {
 				$("#formphoto").submit(function(e){
@@ -598,6 +610,7 @@
 											Account: <b>${result.data.account}</b><br>
 											Bank: <b>${result.data.bank}</b><br>
 											Ammount: <b>Rp. ${totalsetor}</b><br>
+											Type: <b>${result.data.transactionsType}</b><br>
 											Notes: <b>${result.data.notes}</b><br>
 											------------------------<br>
 											Item Details:<br>
@@ -734,11 +747,11 @@ function resultPost (result){
 		<div class="panel-heading">
 			<div class="spost clearfix">
 				<div class="entry-image">
-					<a href="#" class="nobg"><img class="img-circle" src="images/testimonials/1.jpg" alt=""></a>
+					<a href="#" class="nobg"><img class="img-circle" src="${result.data.userId.profilePicture}" alt=""></a>
 				</div>
 				<div class="entry-c">
 					<div class="entry-title">
-						<h4><a href="#">Ivan Gerard</a></h4>
+						<h4><a href="#">${result.data.userId.name}</a></h4>
 					</div>
 					<ul class="entry-meta">
 						<li>${postedtime}</li>
