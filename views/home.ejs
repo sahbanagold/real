@@ -74,7 +74,7 @@
 
 						<ul>
 							<li class="dropdown">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><img src='<%= profilepict%>'
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><img id="profilePict" src='<%= profilepict%>'
 									 class="img-rounded" alt="Cinque Terre" width="30" height="30"> <%= name%> <b class="caret"></b></a>
 								<ul class="dropdown-menu" role="menu">
 								<li><a href="#" data-toggle="modal" data-target="#change-profile"> Profile</a></li>
@@ -111,7 +111,7 @@
 							<div class="modal-body">
 								<div class="modal-content">
 									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+										<button type="button" class="close" id="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 										<h4 class="modal-title" id="myModalLabel">Change Profile</h4>
 									</div>
 
@@ -551,6 +551,7 @@
 			$("#profile-form-modal-submit").unbind().on("click", function(event) {
 				$("#formphoto").submit(function(e){
 						event.preventDefault()
+						e.preventDefault()
 
 						var formObj = $(this);
 				    var formURL = formObj.attr("action");
@@ -560,13 +561,15 @@
 				        url: formURL,
 				    		type: 'POST',
 				        data:  formData,
+								dataType: 'json',
 				    		mimeType:"multipart/form-data",
 								contentType: false,
 							 	cache: false,
 							 	processData:false,
 								success:function(result, textStatus, jqXHR)
-								{
-									location.reload()
+								{									
+									$("#profilePict").attr("src",result.data.profilePicture)
+									$('#close').trigger( "click" )
 								},
 								error: function(jqXHR, textStatus, errorThrown)
 								{
