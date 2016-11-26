@@ -30,6 +30,8 @@ console.log(req.files)
            console.log(err)
            return res.json({success: false,message: "user not found"})
          }
+         req.session.profilePict = user[0].profilePicture
+         console.log(req.session.profilePict, "profilePict dirubah")
          res.json({success: true,message: "user has been deactivated", data: user[0]})
      })
    })

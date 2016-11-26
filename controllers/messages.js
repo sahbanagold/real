@@ -73,7 +73,7 @@ exports.MessagesPost = function(req,res,next){
          })
       })
     } else{
-      newMessage.image = ""
+      newMessage.image = 'http://'+req.headers.host+"images/testimonials/1.jpg"
       newMessage.save((err) => {
         if(err){
           console.log(err)

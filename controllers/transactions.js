@@ -142,6 +142,7 @@ exports.transactionsPost = function(req,res,next){
       newTransactions.recipient= req.body.penerima
       newTransactions.account= req.body.rekening
       newTransactions.bank= req.body.bank
+      newTransactions.transactionsType = req.body.type
       newTransactions.status= "UnPaid"
       newTransactions.dateRequested= new Date()
       newTransactions.notes= req.body.keterangan

@@ -11,6 +11,7 @@ router.get('/home', function(req, res, next) {
   if(req.session.role && req.session.role.indexOf(1) >= 0){
     console.log(req.flash('loginMessage'));
     res.render('home', { title: 'Superman ',profilepict:req.session.profilePict, name: req.session.name, message: req.flash('loginMessage')})
+    console.log(req.session.profilePict,"profilepict")
   } else {
     res.redirect('/')
   }

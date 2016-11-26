@@ -260,6 +260,12 @@
 
 																	</tr>
 																	<span id="btn-plus" class="button button-3d nomargin fright"><i class="icon-line-circle-plus"></i></span>
+																	<label class="font-body capitalize" for="transactions-type">Transactions Type</label>
+																	<select id="transactions-type" name="type" value="" class="form-control">
+																  <option value="Real" selected="selected">Real</option>
+																	<option value="Estimation" selected="selected">Estimation</option>
+																	</select>
+
 
 																</tbody>
 
@@ -482,16 +488,14 @@
 					bindquantity()
 			})
 			$("#post-message").unbind().on("click", function(event) {
-						event.preventDefault()
-
-							uploadimagemessage($('#form-message'))
-
+				event.preventDefault()
+				if($('#file-input').val() || $("#content-text").val()) uploadimagemessage($('#form-message'))
 			})
 			function uploadimagemessage(image) {
 				var form = document.forms.namedItem("image-message")
 				var formData = new FormData(form)
 				formData.append("content",$("#content-text").val())
-				console.log(formData,"postData");
+
 				$.ajax({
 						url: '/api/messages',
 						type: 'POST',
@@ -513,15 +517,18 @@
 			}
 			function postMessage(content) {
 
-
-						$.ajax({
-								url: '/api/messages',
-								type: 'POST',
-								data: formData,
-								contentType: false,
-							 	cache: false,
-							 	processData:false,
-								success: function(result) {
+				var form = document.forms.namedItem("image-message")
+				var formData = new FormData(form)
+				formData.append("content",content)
+				$.ajax({
+						url: '/api/messages',
+						type: 'POST',
+						data:  formData,
+						mimeType:"multipart/form-data",
+						contentType: false,
+						cache: false,
+						processData:false,
+						success: function(result) {
 										resultPost(result)
 								}
 						})
@@ -536,7 +543,7 @@
 						var formObj = $(this);
 				    var formURL = formObj.attr("action");
 				    var formData = new FormData(this);
-						console.log(formData,"postData");
+
 				    $.ajax({
 				        url: formURL,
 				    		type: 'POST',
@@ -562,7 +569,7 @@
 				$("#ajaxform").submit(function(e)
 				{
 						var postData = $(this).serializeArray();
-						console.log(postData);
+
 						var formURL = $(this).attr("action");
 						$.ajax(
 						{
@@ -572,7 +579,7 @@
 								success:function(result, textStatus, jqXHR)
 								{
 										if(result.success){
-											console.log(result);
+
 											$('#ptab4').html(`<div class="alert alert-success" >
 												<strong>Thank You.</strong> Your order will be processed once we verify the Payment.
 											</div>`)
@@ -596,7 +603,7 @@
 											Item Details:<br>
 											------------------------<br>
 											${itemdetail}`
-											console.log(content)
+
 											postMessage(content)
 										} else{
 											$('#ptab4').html(`<div class="alert alert-danger" >
@@ -672,7 +679,7 @@
 						dataType: 'json',
 						resetForm: true,
 						success: function(data) {
-							console.log(data);
+
 							if (getStartedFormLoader == 'button') {
 								defButton.html(defButtonText);
 							} else {
@@ -764,7 +771,7 @@ function resultPost (result){
 		    $.get({
 		        url: "/api/messages/",
 		        success: function(result) {
-							console.log(result);
+
 							for (var i in result.data){
 								var time = new Date(result.data[i].createdAt)
 								var nowtime = new Date()
@@ -783,12 +790,8 @@ function resultPost (result){
 								}else if(diffSeconds > 0){
 									postedtime = `${diffSeconds} seconds ago`
 								}
-								var imgsrc
-								if(result.data[i].userId.profilePicture){
-									imgsrc = result.data[i].userId.profilePicture
-								}else{
-									imgsrc = "images/testimonials/1.jpg"
-								}
+
+								var imgsrc = result.data[i].userId.profilePicture || "/images/testimonials/1.jpg"
 								var imagemessage
 								if(result.data[i].image != ""){
 									imagemessage = `<img src='${result.data[i].image}'>`
@@ -806,7 +809,7 @@ function resultPost (result){
 											</div>
 											<div class="entry-c">
 												<div class="entry-title">
-													<h4><a href="#">Ivan Gerard</a></h4>
+													<h4><a href="#">${result.data[i].userId.name}</a></h4>
 												</div>
 												<ul class="entry-meta">
 													<li>${postedtime}</li>
@@ -876,7 +879,6 @@ function resultPost (result){
 					 url: '/api/messages/like/'+id,
 					 type: 'PUT',
 					 success: function(result) {
-						 console.log(id,"like")
 				 			$(`#${id}btn-comment-like`).html(`<i class="icon-like"></i> ${result.count} Likes`)
 					 }
 			 })
@@ -924,7 +926,6 @@ function resultPost (result){
 
  						}
  					});
- 					console.log($(this).val())
  					$(this).val("")
  				}
  			})
@@ -935,7 +936,7 @@ function resultPost (result){
 			$.get({
 					url: "/api/transactions/",
 					success: function(result) {
-						console.log(result.data)
+
 						for (var k in result.data){
 							var listgudangHTML = `<div class="panel panel-default">
 								<div class="panel-heading">
