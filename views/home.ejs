@@ -1029,7 +1029,11 @@ function resultPost (result){
 		$('.detail-rekening').each(function () {
 			var id = $(this).attr('id')
 			$(this).on('keyup',function () {
-				$(`#${id}summary`).html($(`#${id}`).val())
+				if(id=='nominal') {
+					$(`#${id}summary`).html('Rp '+$(`#${id}`).val().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"))
+				} else {
+						$(`#${id}summary`).html($(`#${id}`).val())
+				}
 			})
 		})
 		function bindprice() {
@@ -1078,9 +1082,9 @@ function resultPost (result){
 		function filltabel(id) {
 			var rowid = $(`#${id}item`).attr('id')
 			var itemname = $(`#${id}item`).val()
-			var itemprice = $(`#${id}price`).val()
-			var itemquantity = $(`#${id}quantity`).val()
-			var itemtotal = $(`#${id}total`).val()
+			var itemprice = $(`#${id}price`).val().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+			var itemquantity = $(`#${id}quantity`).val().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+			var itemtotal = $(`#${id}total`).val().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
 			if(itemname!='' && itemprice!='' && itemquantity!='' && itemname!= undefined && itemprice!=undefined && itemquantity!=undefined){
 						$(`#${rowid}detail`).remove()
 						var trdetail = `<tr id=${rowid}detail>
