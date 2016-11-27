@@ -73,6 +73,7 @@
 
 						<div class="col-sm-12">
 								<h3>Superman Dashboard</h3>
+								<button type="button" class="btn btn-default" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="" title="" aria-describedby="popover145208">Popover on top</button>
 								<ul class="nav nav-tabs nav-justified">
 									<li class="active"><a href="/cms-transaction"><i class="icon-note"></i> Transaction</a></li>
 									<li class=""><a href="/cms-user"><i class="icon-user4"></i> User</a></li>
@@ -201,6 +202,7 @@
 		jQuery( "#tabs-profile" ).on( "tabsactivate", function( event, ui ) {
 			jQuery( '.flexslider .slide' ).resize();
 		});
+
 	});
 
 	function listTransaction() {
@@ -236,7 +238,7 @@
 						var priceDel = price.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
 							var listdataHTML =
 							`
-										<tr>
+										<tr data-trigger='hover' id=${result.data[k].transactions[l]._id} data-placement="top">
 											<td>${getMonth+'-'+getDate+'-'+getYear}</td>
 											<td>${result.data[k].name}
 											<br /><span style="font-size:12px">PIC : ${result.data[k].transactions[l].userId.name}</span></td>
@@ -258,6 +260,34 @@
 						})
 
 					}
+					$('#list-transaction tr').each(function (e) {
+						var idtransaction = $(this).attr('id')
+						$(this).bind('hover')
+						$(this).popover({
+			        html : true,
+			        content: function() {
+								var contentdetail = `<div id='hoverdetail'><center><img src='/images/preloader@2x.gif' /></center></div>`
+								$.get({
+									url: `/api/transactions/${idtransaction}`,
+									success: function (result) {
+										var contentdetail2 = ""
+										for (var i = 0; i < result.data.items.length; i++) {
+											var totalprice = (result.data.items[i].totalprice+"").replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+											contentdetail2 += `Item Name: <b>${result.data.items[i].name}</b><br>
+											Item Price: <b>${result.data.items[i].price}</b><br>
+											Item Quantity: <b>${result.data.items[i].quantity}</b><br>
+											Total Price: <b>Rp. ${totalprice}</b><br><br>`
+										}
+										$('#hoverdetail').html(contentdetail2)
+									}
+								})
+			          return contentdetail
+			        },
+			        title: function() {
+			          return 'Transaction detail: ';
+			        }
+			    })
+					})
 				}
 		})
 	}

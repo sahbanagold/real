@@ -5,7 +5,7 @@ exports.transactionsGet = function(req,res,next){
   if (!req.isAuthenticated()) {
     return res.redirect('/');
   }
-    Transactions.find({_id:req.params.id}).sort({date:-1}).exec((err,data) => {
+    Transactions.findOne({_id:req.params.id}).sort({date:-1}).exec((err,data) => {
       if(err){
         console.log(err)
         return res.json({success: false, message: "transaction not found"})
