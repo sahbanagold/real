@@ -132,10 +132,11 @@
 						<th>Warehouse Name</th>
 						<th>Transactions</th>
 						<th>Recipient</th>
-						<th>Bank Name</th>
+						<th>Bank</th>
 						<th>Type</th>
 						<th>Status</th>
 						<th>Verification</th>
+						<th>Notes</th>
 						<th>Action</th>
 					</tr>
 					</thead>
@@ -164,82 +165,16 @@
 			</div>
 
 		</section><!-- #content end -->
-		<button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">52000</button>
 
-		<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		<div id="modaldetail" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-body">
 					<div class="modal-content">
-						<div class="modal-header">
+						<div class="modal-header" id="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 							<h4 class="modal-title" id="myModalLabel">Details Transaciton</h4>
 						</div>
-						<div class="modal-body">
-							<div class="table-responsive">
-													<table class="table table-bordered table-striped">
-													  <colgroup>
-														<col class="col-xs-3">
-														<col class="col-xs-1">
-														<col class="col-xs-2">
-														<col class="col-xs-2">
-													  </colgroup>
-													  <thead>
-														<tr>
-														  <th>Item Name</th>
-														  <th>Item Price</th>
-															<th>Item Quantity</</th>
-															<th>Item Total Price</</th>
-														</tr>
-													  </thead>
-													  <tbody>
-														<tr>
-														  <td>
-															Cangkul
-														  </td>
-														  <td>2000</td>
-															<td>30</td>
-															<td>60000</td>
-														</tr>
-														<tr>
-														  <td>
-															Cangkul
-														  </td>
-														  <td>2000</td>
-															<td>30</td>
-															<td>60000</td>
-														</tr>
-														<tr>
-														  <td>
-															Cangkul
-														  </td>
-														  <td>2000</td>
-															<td>30</td>
-															<td>60000</td>
-														</tr>
-														<tr>
-														  <td>
-															Cangkul
-														  </td>
-														  <td>2000</td>
-															<td>30</td>
-															<td>60000</td>
-														</tr>
-														<tr>
-														  <td>
-															Cangkul
-														  </td>
-														  <td>2000</td>
-															<td>30</td>
-															<td>60000</td>
-														</tr>
-													  </tbody>
 
-													</table>
-												  </div>
-						</div>
-						<div class="modal-footer">
-									<h5><b>Total Transaction : 500000</b>		</h5>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -345,12 +280,13 @@
 											<td>${getMonth+'-'+getDate+'-'+getYear}</td>
 											<td>${result.data[k].name}
 											<br /><span style="font-size:12px">PIC : ${result.data[k].transactions[l].userId.name}</span></td>
-											<td>${priceDel}</td>
+											<td><button mark=${result.data[k].transactions[l]._id} class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Rp. ${priceDel}</button></td>
 											<td>${result.data[k].transactions[l].recipient}</td>
-											<td>${result.data[k].transactions[l].bank}</td>
+											<td>${result.data[k].transactions[l].bank}<br>${result.data[k].transactions[l].account}</td>
 											<td>${trtype}</td>
 											<td id=${result.data[k].transactions[l]._id}label>${status}</td>
 											<td >${verf}</td>
+											<td >${result.data[k].transactions[l].notes}</td>
 											<td><a href="#" data-id='${result.data[k].transactions[l]._id}'class="remove update-trx button  button-mini button-rounded button-green"  title="Update this item">Process</a>
 											</td>
 										</tr>
@@ -390,6 +326,65 @@
 			          return 'Transaction detail: ';
 			        }
 			    })
+					})
+					$("button[class*='btn-primary']").each(function () {
+						var iddetail = $(this).attr('mark')
+
+						$(this).unbind().on('click',function () {
+							var contentdetailreload = `<div id='hoverdetailreload'><center><img src='/images/preloader@2x.gif' /></center></div>`
+							$(contentdetailreload).insertAfter('#modal-header')
+							$('#modal-body-detail').remove()
+							$('#modal-footer').remove()
+							$.get({
+								url: `/api/transactions/${iddetail}`,
+								success: function (result) {
+									var rowdetail = ''
+									var grandtotal = 0
+									for (var i = 0; i < result.data.items.length; i++) {
+										var total = result.data.items[i].totalprice
+										grandtotal += total
+										var totalprice = (total+"").replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+										rowdetail += `<tr>
+											<td>
+											${result.data.items[i].name}
+											</td>
+											<td>${result.data.items[i].price}</td>
+											<td>${result.data.items[i].quantity}</td>
+											<td>Rp. ${totalprice}</td>
+										</tr>`
+									}
+									var detailHTML = `<div class="modal-body" id="modal-body-detail">
+										<div class="table-responsive">
+																<table class="table table-bordered table-striped">
+																  <colgroup>
+																	<col class="col-xs-3">
+																	<col class="col-xs-1">
+																	<col class="col-xs-2">
+																	<col class="col-xs-2">
+																  </colgroup>
+																  <thead>
+																	<tr>
+																	  <th>Item Name</th>
+																	  <th>Item Price</th>
+																		<th>Item Quantity</</th>
+																		<th>Item Total Price</</th>
+																	</tr>
+																  </thead>
+																  <tbody>
+																	${rowdetail}
+																  </tbody>
+
+																</table>
+															  </div>
+									</div>
+									<div class="modal-footer" id="modal-footer">
+												<h5><b>Total Transaction : Rp. ${(grandtotal+'').replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")}</b>		</h5>
+									</div>`
+									$('#hoverdetailreload').remove()
+									$(detailHTML).insertAfter('#modal-header')
+								}
+							})
+						})
 					})
 				}
 		})
