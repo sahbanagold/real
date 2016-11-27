@@ -298,7 +298,7 @@
 			                      </div>
 
 														<div class="line"></div>
-														<a href="#" class="button button-3d nomargin tab-linker" rel="1">Previous</a>
+														<a id="previous1" href="#" class="button button-3d nomargin tab-linker" rel="1">Previous</a>
 														<a id="nextbtn" href="#" class="button button-3d nomargin fright tab-linker" rel="3" >Next</a>
 													</div>
 													<div id="ptab3" aria-labelledby="ui-id-3" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-hidden="true" style="display: none;">
@@ -347,7 +347,7 @@
 			                  </tbody>
 			                </table>
 														<div class="line"></div>
-														<a href="#" class="button button-3d nomargin tab-linker" rel="2">Previous</a>
+														<a href="#" id='previous2' class="button button-3d nomargin tab-linker" rel="2">Previous</a>
 														<button id="order" class="button button-3d nomargin fright tab-linker" rel="4">Complete Order</button>
 													</div>
 													<div id="ptab4" aria-labelledby="ui-id-4" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-hidden="true" style="display: none;">
@@ -458,6 +458,12 @@
 			listItems()
 			bindprice()
 			bindquantity()
+			$('#previous1').unbind().on('click',function () {
+				ptab1btn()
+			})
+			$('#previous2').unbind().on('click',function () {
+				ptab2btn()
+			})
 			$("#li1").html(`
 			<a href="#ptab1" class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-1">1</a>
 			<h5>Items Detail</h5>`)
@@ -500,7 +506,31 @@
 				$("#ptab3").css("display","none")
 				$("#ptab1").css("display","block")
 			}
-			$('#checkoutbtn').on('click',function () {
+			$('#checkoutbtn').unbind().on('click',function () {
+				ptab2btn()
+			})
+			$("#nextbtn").on('click',function () {
+				if($('#penerima').val() == "" || $('#rekening').val() == "" || $('#bank').val() == "" || $('#nominal').val() == "" ){
+					return
+				}
+				$("#li3").html(`
+				<a href="#ptab3" class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-3">3</a>
+				<h5>Summary</h5>`)
+				$("#li2").attr("aria-expanded","false")
+				$("#li2").attr("aria-selected","false")
+				$("#li3").attr("aria-expanded","true")
+				$("#li3").attr("aria-selected","true")
+				$("#li2").removeClass("ui-state-active")
+				$("#li2").removeClass("ui-tabs-active")
+				$("#li3").addClass("ui-state-active")
+				$("#li3").addClass("ui-tabs-active")
+				$("#ptab2").attr("aria-hidden","true")
+				$("#ptab3").attr("aria-hidden","false")
+				$("#ptab2").css("display","none")
+				$("#ptab3").css("display","block")
+
+			})
+			function ptab2btn() {
 				$("#li2").html(`
 				<a href="#ptab2" class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-2">2</a>
 				<h5>Account Detail</h5>`)
@@ -519,25 +549,7 @@
 				$("#ptab2").css("display","block")
 				$("#ptab3").css("display","none")
 				$("#ptab1").css("display","none")
-			})
-			$("#nextbtn").on('click',function () {
-				$("#li3").html(`
-				<a href="#ptab3" class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-3">3</a>
-				<h5>Summary</h5>`)
-				$("#li2").attr("aria-expanded","false")
-				$("#li2").attr("aria-selected","false")
-				$("#li3").attr("aria-expanded","true")
-				$("#li3").attr("aria-selected","true")
-				$("#li2").removeClass("ui-state-active")
-				$("#li2").removeClass("ui-tabs-active")
-				$("#li3").addClass("ui-state-active")
-				$("#li3").addClass("ui-tabs-active")
-				$("#ptab2").attr("aria-hidden","true")
-				$("#ptab3").attr("aria-hidden","false")
-				$("#ptab2").css("display","none")
-				$("#ptab3").css("display","block")
-
-			})
+			}
 			function btnptab3() {
 				$("#li4").html(`
 				<a href="#ptab4" class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-4">4</a>
@@ -600,6 +612,11 @@
 				event.preventDefault()
 				if($('#file-input').val() || $("#content-text").val()) uploadimagemessage($('#form-message'))
 			})
+			function cleartotal() {
+				$("b").each(function () {
+					$(this).html("")
+				})
+			}
 			function uploadimagemessage(image) {
 				var form = document.forms.namedItem("image-message")
 				var formData = new FormData(form)
@@ -733,6 +750,7 @@
 											$(`#${result.warehouseId}bodylistgudang`).append(listrequestHTML)
 											$('input,textarea').each(function(e){
 											$(this).val("")
+											$(this).trigger('keyup')
 											})
 											postMessage(content)
 										} else{
@@ -742,6 +760,8 @@
 										}
 										setTimeout(function functionName() {
 											ptab1btn()
+											cleartotal()
+											$('#tabeldetail').html("")
 											$("#li4").removeClass("ui-tabs-active")
 											$('#ptab4').html("")
 										},1700)
