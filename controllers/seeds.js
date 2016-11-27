@@ -56,7 +56,7 @@ var User = require('../models/users')
 
 exports.userSeeds = function(req, res, next) {
   let name =["Sahbana Gold","Ivan Gerard","Ari Adi ","Tevin Amos","Rony","Andrew","Septian","Raisa"]
-  let email = ["sahbanalo@gmail.com","ivan@gmail.com","ari@gmail.com","tevin@gmail.com","rony@gmail.com","andrew@gmail.com","septian@gmail.com","raisa@gmail.com"]
+  let email = ["sahbanalo@gmail.com","ivan@gmail.com","ari@gmail.com","tevin@gmail.com","ronney.halim@gmail.com","andrew@gmail.com","septian@gmail.com","raisa@gmail.com"]
   let password = ["bana","ivan","ari","tevin","rony","andrew","septian","raisa"]
   let role = [0,1]
   let index = 1
