@@ -94,8 +94,7 @@
 					<div class="row clearfix">
 
 						<div class="col-sm-12">
-								<h3>Superman Dashboard</h3>
-								<button type="button" class="btn btn-default" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="" title="" aria-describedby="popover145208">Popover on top</button>
+								<h3>Superman Dashboard</h3>								
 								<ul class="nav nav-tabs nav-justified">
 									<li class="active"><a href="/cms-transaction"><i class="icon-note"></i> Transaction</a></li>
 									<li class=""><a href="/cms-user"><i class="icon-user4"></i> User</a></li>
@@ -113,7 +112,7 @@
 				<table class="table table-bordered table-striped">
 					<colgroup>
 						<col class="col-xs-1">
-						<col class="col-xs-2">
+						<col class="col-xs-1">
 						<col class="col-xs-1">
 
 						<col class="col-xs-1">
@@ -127,16 +126,16 @@
 					</colgroup>
 					<thead>
 					<tr>
+						<th>Verification</th>
 						<th>Created At <br>
 						<span style="font-size:12px">MM/DD/YYYY</span></th>
 						<th>Warehouse Name</th>
-						<th>Transactions</th>
+						<th>Transfer Request</th>
+						<th>Type</th>
 						<th>Recipient</th>
 						<th>Bank</th>
-						<th>Type</th>
-						<th>Status</th>
-						<th>Verification</th>
 						<th>Notes</th>
+						<th>Status</th>
 						<th>Action</th>
 					</tr>
 					</thead>
@@ -277,16 +276,16 @@
 							var listdataHTML =
 							`
 										<tr data-trigger='hover' id=${result.data[k].transactions[l]._id} data-placement="top">
+											<td >${verf}</td>
 											<td>${getMonth+'-'+getDate+'-'+getYear}</td>
 											<td>${result.data[k].name}
 											<br /><span style="font-size:12px">PIC : ${result.data[k].transactions[l].userId.name}</span></td>
 											<td><button mark=${result.data[k].transactions[l]._id} class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Rp. ${priceDel}</button></td>
+											<td>${trtype}</td>
 											<td>${result.data[k].transactions[l].recipient}</td>
 											<td>${result.data[k].transactions[l].bank}<br>${result.data[k].transactions[l].account}</td>
-											<td>${trtype}</td>
-											<td id=${result.data[k].transactions[l]._id}label>${status}</td>
-											<td >${verf}</td>
 											<td >${result.data[k].transactions[l].notes}</td>
+											<td id=${result.data[k].transactions[l]._id}label>${status}</td>
 											<td><a href="#" data-id='${result.data[k].transactions[l]._id}'class="remove update-trx button  button-mini button-rounded button-green"  title="Update this item">Process</a>
 											</td>
 										</tr>

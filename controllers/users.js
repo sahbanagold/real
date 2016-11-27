@@ -38,18 +38,16 @@ console.log(req.files)
  })
 }
 exports.allUserGet = function(req, res) {
-  // if(req.session.role && req.session.role.indexOf(1) >= 0){
-  //   User.find({},function (err,data) {
-  //     if(err){
-  //       console.log(err)
-  //       return res.json({success: false, message: "something error, no user found"})
-  //     }
-  //     res.json({success: true, data: data})
-  //   })
-  // } else {
-  //   return res.json({success: false, message: "get out from this, mfucker... U R not authorized"})
-  // }
   User.find({},function (err,data) {
+    if(err){
+      console.log(err)
+      return res.json({success: false, message: "something error, no user found"})
+    }
+    res.json({success: true, data: data})
+  })
+}
+exports.activeUserGet = function(req, res) {
+  User.find({isActive: "Active"},function (err,data) {
     if(err){
       console.log(err)
       return res.json({success: false, message: "something error, no user found"})

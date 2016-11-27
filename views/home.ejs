@@ -595,7 +595,8 @@
 										if(result.success){
 
 											$('#ptab4').html(`<div class="alert alert-success" >
-												<strong>Thank You.</strong> Your order will be processed once we verify the Payment.
+												<strong>Thank You.</strong> Your order will be processed once you verify the request Payment.
+												Please check your email to verify your request.
 											</div>`)
 											var itemdetail = ""
 											for (var i = 0; i < result.data.items.length; i++) {
@@ -637,7 +638,8 @@
 										}
 										setTimeout(function functionName() {
 											$('#ui-id-1').trigger('click')
-										},300)
+											$('#ptab4').html("")
+										},1700)
 								},
 								error: function(jqXHR, textStatus, errorThrown)
 								{
