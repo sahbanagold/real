@@ -1,7 +1,9 @@
 var Transactions = require('../models/transactions')
+var Warehouse = require('../models/warehouse')
 var async = require('async');
 var crypto = require('crypto');
 var nodemailer = require('nodemailer');
+var warehouseid = ""
 
 exports.verify = function (id,email,req,res) {
   async.waterfall([
@@ -46,9 +48,12 @@ exports.verify = function (id,email,req,res) {
 
       transporter.sendMail(mailOptions, function(err) {
         req.flash('info', { msg: 'An email has been sent to ' + email + ' with further instructions.' })
-        console.log('email have to been send');
-        res.json({success: true,message: "success save transactions", data: transaction})
-      });
+
+        Warehouse.findOne({userId: transaction.userId},function (err,warehouse) {
+            warehouseid = warehouse._id
+            res.json({success: true,message: "success save transactions", data: transaction, warehouseId : warehouseid})
+        })
+      })
     }
   ])
 }

@@ -176,7 +176,7 @@
 								<a href="#ptab1" class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-1">1</a>
 								<h5>Items Detail</h5>
 							</li>
-							<li class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="ptab2" aria-labelledby="ui-id-2" aria-selected="false" aria-expanded="false">
+							<li class="ui-state-default ui-corner-top ui-state-disabled" role="tab" tabindex="-1" aria-controls="ptab2" aria-labelledby="ui-id-2" aria-selected="false" aria-expanded="false">
 								<a href="#ptab2" class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-2">2</a>
 								<h5>Account Detail</h5>
 							</li>
@@ -588,6 +588,7 @@
 				$("#ajaxform").submit(function(e)
 				{
 						var postData = $(this).serializeArray();
+						 $('#ptab4').html(`<div><center><img src='/images/preloader@2x.gif' /></center></div>`)
 
 						var formURL = $(this).attr("action");
 						$.ajax(
@@ -625,12 +626,12 @@
 											${itemdetail}`
 											var listrequestHTML = `
 											<tr>
-												<td>${~~($(`#${result.data._id}bodylistgudang tr`).length+1)}</td>
+												<td>${~~($(`#${result.warehouseId}bodylistgudang tr`).length+1)}</td>
 												<td>${result.data.userId.name}</td>
 												<td>IDR ${totalsetor}</td>
-												<td><span class="label label-success">${result.data[k].transactions[i].status}</span></td>
+												<td><span class="label label-success">${result.data.status}</span></td>
 											</tr>`
-											$(`#${result.data._id}bodylistgudang`).append(listrequestHTML)
+											$(`#${result.warehouseId}bodylistgudang`).append(listrequestHTML)
 											$('input,textarea').each(function(e){
 											$(this).val("")
 											})
@@ -640,6 +641,9 @@
 												<strong>Sorry.</strong> Your order not Aproved,  Please Check Inputs Detail.
 											</div>`)
 										}
+										setTimeout(function functionName() {
+											$('#ui-id-1').trigger('click')
+										},300)
 								},
 								error: function(jqXHR, textStatus, errorThrown)
 								{
@@ -1112,6 +1116,13 @@ function resultPost (result){
     }
 		bindprice()
 		bindquantity()
+		// $( "li .ui-state-default" ).each(function (e) {
+		// 	$(this).unbind('click')
+		// })
+		// $( "#ui-id-1" ).unbind('click')
+		// $( "#ui-id-2" ).unbind('click')
+		// $( "#ui-id-3" ).unbind('click')
+		// $( "#ui-id-4" ).unbind('click')
 	</script>
 
 </body>

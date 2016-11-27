@@ -109,6 +109,7 @@
 						<th>Transactions</th>
 						<th>Recipient</th>
 						<th>Bank Name</th>
+						<th>Type</th>
 						<th>Status</th>
 						<th>Verification</th>
 						<th>Action</th>
@@ -208,12 +209,19 @@
 				success: function(result) {
 					for (var k in result.data){
 						for(var l =0 ;l<result.data[k].transactions.length;l++){
-							var status, verf
+							var status, verf, trtype
 							if(result.data[k].transactions[l].status == "UnPaid"){
                     status =  `<span class="label label-default">Unpaid</span>`
 						}else{
 							status =  `<span class="label label-success">Paid</span>`
 						}
+						/// set type
+
+						if(result.data[k].transactions[l].transactionsType == "Real"){
+									trtype =  `<span class="label label-info">Real</span>`
+					}else{
+						trtype =  `<span class="label label-warning">Estimation</span>`
+					}
 						//set verf
 						if(result.data[k].transactions[l].verification == "UnVerified"){
 									verf =  `<span class="label label-default">UnVerified</span>`
@@ -235,6 +243,7 @@
 											<td>${priceDel}</td>
 											<td>${result.data[k].transactions[l].recipient}</td>
 											<td>${result.data[k].transactions[l].bank}</td>
+											<td>${trtype}</td>
 											<td id=${result.data[k].transactions[l]._id}label>${status}</td>
 											<td >${verf}</td>
 											<td><a href="#" data-id='${result.data[k].transactions[l]._id}'class="remove update-trx button  button-mini button-rounded button-green"  title="Update this item">Process</a>
