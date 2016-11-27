@@ -196,7 +196,11 @@
 
 
 																		<td class="cart-product-name">
-																			<input type="text" id="1item" mark="1" class="item" name="itemname" size="15">
+																			<select class="selectpicker">
+	  <option>Mustard</option>
+	  <option>Ketchup</option>
+	  <option>Relish</option>
+	</select>
 																		</td>
 
 																		<td class="cart-product-price">
@@ -253,12 +257,16 @@
 
 																	</tr>
 																	<span id="btn-plus" class="button button-3d nomargin fright"><i class="icon-line-circle-plus"></i></span>
-																	<label class="font-body capitalize" for="transactions-type">Transactions Type</label>
-																	<select id="transactions-type" name="type" value="" class="form-control">
-																	<option value="" selected="selected"></option>
-																	<option value="Real">Real</option>
-																	<option value="Estimation">Estimation</option>
-																	</select>
+
+																	<div class="col-xs-6">
+																			<label class="font-body capitalize" for="transactions-type">Transactions Type</label>
+																		<select id="transactions-type" name="type" value="" class="form-control selectpicker">
+																		<option value="" selected="selected"></option>
+																		<option value="Real">Real</option>
+																		<option value="Estimation">Estimation</option>
+																		</select>
+																	</div>
+
 
 
 																</tbody>
