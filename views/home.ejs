@@ -195,7 +195,7 @@
 																	<tr class="cart_item">
 
 
-																		<td class="cart-product-name">
+																		<td class="cart-product-name" id="itemnameinput1">
 																			<input type="text" id="1item" mark="1" class="item" name="itemname" size="15">
 																		</td>
 
@@ -219,7 +219,7 @@
 																	<tr class="cart_item">
 
 
-																		<td class="cart-product-name">
+																		<td class="cart-product-name" id="itemnameinput2">
 																			<input type="text" id="2item" mark="2" class="item" name="itemname" size="15">
 																		</td>
 
@@ -445,11 +445,13 @@
 
 	<script>
 		var trindexdetail = 1
+		var itemsglobal = ""
 		jQuery(document).ready(function($) {
 			var trindex = 2
 			var trindexdetail = 1
 			getMessages()
 			listgudang()
+			listItems()
 			bindprice()
 			bindquantity()
 			$("#input-11").fileinput({
@@ -462,7 +464,9 @@
 
 
 					<td class="cart-product-name">
-						<input type="text" class="item" id=${++trindex}item mark=${trindex} name="itemname" size="15">
+					<select id=${++trindex}item mark=${trindex} name="itemname" value="" class="selectpicker item" size="15">
+					${itemsglobal}
+					</select>
 					</td>
 
 					<td class="cart-product-price">
@@ -956,6 +960,26 @@ function resultPost (result){
  				}
  			})
 
+		 }
+		 function listItems() {
+			 $.get({
+ 					url: "/api/items/",
+ 					success: function(result) {
+						var listItems = ""
+ 						for (var k in result.data){
+ 							listItems += `<option value="${result.data[k].name}" >${result.data[k].name}</option>`
+ 						}
+						itemsglobal = listItems
+						var listItemsOptions1 = `<select id="1item" mark="1" name="itemname" value="" class="selectpicker item" size="15">
+						${listItems}
+						</select>`
+						var listItemsOptions2 = `<select id="2item" mark="2" name="itemname" value="" class="selectpicker item" size="15">
+						${listItems}
+						</select>`
+						$('#itemnameinput1').html(listItemsOptions1)
+						$('#itemnameinput2').html(listItemsOptions2)
+ 					}
+ 			})
 		 }
 		function listgudang() {
 
