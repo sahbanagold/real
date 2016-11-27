@@ -110,6 +110,7 @@
 						<th>Recipient</th>
 						<th>Bank Name</th>
 						<th>Status</th>
+						<th>Verification</th>
 						<th>Action</th>
 					</tr>
 					</thead>
@@ -207,12 +208,18 @@
 				success: function(result) {
 					for (var k in result.data){
 						for(var l =0 ;l<result.data[k].transactions.length;l++){
-							var status
+							var status, verf
 							if(result.data[k].transactions[l].status == "UnPaid"){
                     status =  `<span class="label label-default">Unpaid</span>`
 						}else{
 							status =  `<span class="label label-success">Paid</span>`
 						}
+						//set verf
+						if(result.data[k].transactions[l].verification == "UnVerified"){
+									verf =  `<span class="label label-default">UnVerified</span>`
+					}else{
+						verf =  `<span class="label label-success">Verified</span>`
+					}
 						var date = new Date(result.data[k].transactions[l].createdAt)
 						var getMonth = date.getMonth()+1
 						var getDate = date.getDate()
@@ -229,6 +236,7 @@
 											<td>${result.data[k].transactions[l].recipient}</td>
 											<td>${result.data[k].transactions[l].bank}</td>
 											<td id=${result.data[k].transactions[l]._id}label>${status}</td>
+											<td >${verf}</td>
 											<td><a href="#" data-id='${result.data[k].transactions[l]._id}'class="remove update-trx button  button-mini button-rounded button-green"  title="Update this item">Process</a>
 											</td>
 										</tr>
