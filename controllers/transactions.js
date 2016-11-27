@@ -135,6 +135,9 @@ exports.allTransactionsGet = function(req,res,next){
 //   })
 // }
 exports.transactionsPost = function(req,res,next){
+  if (!req.isAuthenticated()) {
+    return res.redirect('/');
+  }
   let newItems = []
   console.log(req.body)
   if(req.body.itemname){
@@ -192,6 +195,9 @@ exports.transactionsPost = function(req,res,next){
 }
 
 exports.transactionsPut = function(req,res,next){
+  if (!req.isAuthenticated()) {
+    return res.redirect('/');
+  }
     Transactions.find({_id: req.params.id},(err,transaction) => {
       transaction[0].status = "Paid"
       transaction[0].save(function (err) {
@@ -204,6 +210,8 @@ exports.transactionsPut = function(req,res,next){
   })
 }
 exports.transactionsVerificationPost = function(req,res,next){
-    console.log('verification entered');
-      verification.sendVerificationsMail(req,res)
+  if (!req.isAuthenticated()) {
+    return res.redirect('/');
+  }
+  verification.sendVerificationsMail(req,res)
 }

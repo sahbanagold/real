@@ -519,6 +519,9 @@
 						processData:false,
 						success:function(result, textStatus, jqXHR)
 						{
+							$('input,textarea').each(function(e){
+							$(this).val("")
+							})
 							resultPost(result)
 						},
 						error: function(jqXHR, textStatus, errorThrown)
@@ -541,6 +544,7 @@
 						cache: false,
 						processData:false,
 						success: function(result) {
+										 $(".removeLater").val('');
 										resultPost(result)
 								}
 						})
@@ -567,7 +571,7 @@
 							 	cache: false,
 							 	processData:false,
 								success:function(result, textStatus, jqXHR)
-								{									
+								{
 									$("#profilePict").attr("src",result.data.profilePicture)
 									$('#close').trigger( "click" )
 								},
@@ -619,7 +623,17 @@
 											Item Details:<br>
 											------------------------<br>
 											${itemdetail}`
-
+											var listrequestHTML = `
+											<tr>
+												<td>${~~($(`#${result.data._id}bodylistgudang tr`).length+1)}</td>
+												<td>${result.data.userId.name}</td>
+												<td>IDR ${totalsetor}</td>
+												<td><span class="label label-success">${result.data[k].transactions[i].status}</span></td>
+											</tr>`
+											$(`#${result.data._id}bodylistgudang`).append(listrequestHTML)
+											$('input,textarea').each(function(e){
+											$(this).val("")
+											})
 											postMessage(content)
 										} else{
 											$('#ptab4').html(`<div class="alert alert-danger" >
@@ -780,6 +794,12 @@ function resultPost (result){
 	</div>
 	`
 	$(insidePost).insertAfter('#kotak-post')
+	$('.comment-like-btn').each(function(){
+		var id = $(this).attr('mark')
+		$(this).on('click',function () {
+			addLike(id)
+		})
+	})
 	bindcommentbox()
 }
 ///////// List of function //////////
@@ -968,7 +988,7 @@ function resultPost (result){
 											<th>Status</th>
 										</tr>
 										</thead>
-										<tbody id='bodylistgudang'>
+										<tbody id='${result.data[k]._id}bodylistgudang'>
 
 
 										</tbody>
@@ -991,7 +1011,7 @@ function resultPost (result){
 										<td>IDR ${nominalDel}</td>
 										<td><span class="label label-success">${result.data[k].transactions[i].status}</span></td>
 									</tr>`
-									$('#bodylistgudang').append(listrequestHTML)
+									$(`#${result.data[k]._id}bodylistgudang`).append(listrequestHTML)
 								}
 							}
 
@@ -1071,6 +1091,25 @@ function resultPost (result){
 
 			}
 		}
+		function clear_form_elements(ele) {
+
+        $(ele).find(':input').each(function() {
+					console.log($(this),"asdas");
+            switch(this.type) {
+                case 'password':
+                case 'select-multiple':
+                case 'select-one':
+                case 'text':
+                case 'textarea':
+                    $(this).val('');
+                    break;
+                case 'checkbox':
+                case 'radio':
+                    this.checked = false;
+            }
+        });
+
+    }
 		bindprice()
 		bindquantity()
 	</script>
