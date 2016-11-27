@@ -1,6 +1,10 @@
-var Transactions = require('../models/transactions')
-var Warehouse = require('../models/warehouse')
+let Transactions = require('../models/transactions')
+let Warehouse = require('../models/warehouse')
+let verification = require('../helper/verification')
 exports.transactionsGet = function(req,res,next){
+  if (!req.isAuthenticated()) {
+    return res.redirect('/');
+  }
     Transactions.find({_id:req.params.id}).sort({date:-1}).exec((err,data) => {
       if(err){
         console.log(err)
@@ -9,7 +13,24 @@ exports.transactionsGet = function(req,res,next){
       res.json({success: true, data: data})
     })
 }
+exports.transactionsVerificationGet = function (req,res,next){
+  if (!req.isAuthenticated()) {
+    return res.redirect('/');
+  }
+  Transactions.findOne({ verificationToken : req.params.token })
+    .where('verificationTokenExpires').gt(Date.now())
+    .exec(function(err, transaction) {
+      if (!transaction) {
+        req.flash('error', { msg: '❎ token is invalid or has expired.' });
+        return res.redirect('/home');
+      }
+  res.render('verification', { title: 'Superman transactions verification', message: "" });
+})
+}
 exports.transactionsFilterGet = function(req,res,next){
+  if (!req.isAuthenticated()) {
+    return res.redirect('/');
+  }
     Transactions.find({userId:req.params.id}).sort({date:-1}).exec((err,data) => {
       if(err){
         console.log(err)
@@ -21,6 +42,9 @@ exports.transactionsFilterGet = function(req,res,next){
 // Maps.find({createdAt:{$gt: startDate, $lt: dateMidnight}}).exec(function(err,result){
 
 exports.allTransactionsGet = function(req,res,next){
+  if (!req.isAuthenticated()) {
+    return res.redirect('/');
+  }
   let startDate = new Date()
   let dateMidnight = new Date(startDate)
 
@@ -143,6 +167,7 @@ exports.transactionsPost = function(req,res,next){
       newTransactions.account= req.body.rekening
       newTransactions.bank= req.body.bank
       newTransactions.transactionsType = req.body.type
+      newTransactions.verification = "UnVerified"
       newTransactions.status= "UnPaid"
       newTransactions.dateRequested= new Date()
       newTransactions.notes= req.body.keterangan
@@ -157,7 +182,8 @@ exports.transactionsPost = function(req,res,next){
             console.log(err)
             return
           }
-          res.json({success: true,message: "success save transactions", data: saved})
+          console.log(saved, "saved new transactions here");
+          verification.verify(saved._id,saved.userId.userEmail,req,res)
         })
       })
   } else{
@@ -176,4 +202,8 @@ exports.transactionsPut = function(req,res,next){
         res.json({success: true,message: "success save transaction payment status", data: transaction[0]})
     })
   })
+}
+exports.transactionsVerificationPost = function(req,res,next){
+    console.log('verification entered');
+      verification.sendVerificationsMail(req,res)
 }

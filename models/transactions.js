@@ -15,6 +15,12 @@ const transactionsSchema =  new Schema({
             type: String,
             enum: ['Real', 'Estimation']
           },
+  verification: {
+            type: String,
+            enum: ['Verified', 'UnVerified']
+          },
+  verificationToken : String,
+  verificationTokenExpires : Date,
   status: {
             type: String,
             enum: ['Paid', 'UnPaid']
