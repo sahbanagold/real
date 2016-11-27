@@ -115,14 +115,14 @@
 										</div>
 
 										<div class="modal-body">
-											<form action="/api/users" method="post" class="nobottommargin">
+											<form action="/api/items" method="post" class="nobottommargin">
 												<div class="col_full">
 													<label class="font-body capitalize" for="register-form-modal-fullname">Item Name:</label>
-													<input type="text" id="register-form-modal-fullname" name="name" value="" class="form-control" />
+													<input type="text" id="item-name" name="name" value="" class="form-control" />
 												</div>
 
 												<div class="col_full nobottommargin">
-													<button class="button button-rounded nomargin" id="register-form-modal-submit" name="register-form-modal-submit" type="submit" value="register">Submit</button>
+													<button class="button button-rounded nomargin" id="item-form" name="item-form-submit" type="submit" value="register">Submit</button>
 												</div>
 											</form>
 										</div>
@@ -138,7 +138,7 @@
 								<div class="col-md-12">
 
 
-									<span id="total-user">Total Users: </span>
+									<span id="total-items">Total Items: </span>
 									<br>
 
 									<div class="table-responsive">
@@ -159,16 +159,13 @@
 					</colgroup>
 					<thead>
 					<tr>
-						<th>Full Name
-					</th>
-						<th>Email Address</th>
-						<th>Action</th>
-						<th>Status</th>
+						<th>Item Name
+					</th>					
 
 
 					</tr>
 					</thead>
-					<tbody id="list-user">
+					<tbody id="list-item">
 
 					</tbody>
 				</table>
@@ -244,51 +241,34 @@
 	<script>
 	$(document).ready(function() {
 
-					$("#register-form-modal-submit").unbind().on("click",function(event){
+					$("#item-form-submit").unbind().on("click",function(event){
 
 							event.preventDefault()
 							$.ajax({
-									url: '/api/users',
+									url: '/api/items',
 									type: 'POST',
 									data: {
-											name: $("#register-form-modal-fullname").val(),
-											email: $("#register-form-modal-email").val(),
-											password: $("#register-form-modal-password").val()
+											name: $("#item-name").val()
 									},
 									success: function(result) {
 										location.reload();
-
-	// 									var fullname = $("#register-form-modal-fullname").val()
-	// 									console.log(fullname)
-	// 									var email = $("#register-form-modal-email").val()
-	// 									var resultHTML =
-	// 									`
-	// 									<tr>
-	// 										<td>${fullname}</td>
-	// 										<td>${email}
-	// 										</td>
-	// 										<td><a href="#" data-id=''class="remove update-usr button  button-mini button-rounded button-amber"  title="Update this item">Update</a>
-	// <a href="#" data-id=''class="remove update-usr button  button-mini button-rounded button-red"  title="Update this item">Delete</a>
-	// 										</td>
-	// 									</tr>
-	// 									`
 									}
 					})
 				})
 
 
-		listUsers()
+		listItems()
 		jQuery( "#tabs-profile" ).on( "tabsactivate", function( event, ui ) {
 			jQuery( '.flexslider .slide' ).resize();
 		});
 	});
 
-	function listUsers() {
+	function listItems() {
 		$.get({
-				url: "/api/users/",
+				url: "/api/items/",
 				success: function(result) {
-					var jmluser = result.data.length
-						$('#total-user').append(jmluser)
+					var jmlitem = result.data.length
+						$('#total-items').append(jmlitem)
 
 					for (var k in result.data){
 
@@ -296,89 +276,16 @@
 							`
 										<tr>
 											<td>${result.data[k].name}</td>
-											<td>${result.data[k].userEmail}
-											</td>
-											<td id="${result.data[k]._id}status">${result.data[k].isActive}</td>
-											<td>
-	<a href="#" data-id='${result.data[k]._id}'class="remove update-usr button  button-mini button-rounded button-red"  title="Update this item">Deactivate</a>
-	<a href="#" data-id='${result.data[k]._id}'class="remove update-active button  button-mini button-rounded button-blue"  title="Update this item">Activate</a>
-
 											</td>
 										</tr>
 							`
 
-						$('#list-user').prepend(listdataHTML)
-						$(".update-usr").click(function() {
-								deactivate($(this).attr('data-id'))
-						})
-						$(".update-active").click(function() {
-								activate($(this).attr('data-id'))
-						})
+						$('#list-item').prepend(listdataHTML)
 
 					}
 				}
 		})
 	}
-
-
-function deactivate(id){
-	console.log(id)
-	swal({
-  title: 'Are you sure want to deactivate?',
-  text: "This can't be undo",
-  type: 'warning',
-  showCancelButton: true,
-  confirmButtonColor: '#3085d6',
-  cancelButtonColor: '#d33',
-  confirmButtonText: 'Yes, Status Change!'
-}).then(function () {
-  swal(
-    'Edited!',
-    'Your status has been changed.',
-    'success'
-  ).then(function(){
-		$.ajax({
-				url: '/api/users/deactivate/'+id,
-				type: 'POST',
-				success: function(result) {
-					console.log(result)
-			$(`#${id}status`).html('NonActive')
-				}
-		})
-	})
-})
-}
-
-
-
-
-function activate(id){
-	console.log(id)
-	swal({
-  title: 'Are you sure want to deactivate?',
-  text: "This can't be undo",
-  type: 'warning',
-  showCancelButton: true,
-  confirmButtonColor: '#3085d6',
-  cancelButtonColor: '#d33',
-  confirmButtonText: 'Yes, Status Change!'
-}).then(function () {
-  swal(
-    'Edited!',
-    'Your status has been changed.',
-    'success'
-  ).then(function(){
-		$.ajax({
-				url: '/api/users/activate/'+id,
-				type: 'POST',
-				success: function(result) {
-					console.log(result)
-			$(`#${id}status`).html('Active')
-				}
-		})
-	})
-})
-}
 
 	</script>
 

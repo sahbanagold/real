@@ -8,6 +8,7 @@ const mongoose = require('mongoose')
 const path = require('path')
 const routes = require('./routes')
 const users = require('./routes/users')
+const items = require('./routes/items')
 const seeds = require('./routes/seedings')
 const warehouse = require('./routes/warehouse')
 const messages = require('./routes/messages')
@@ -55,6 +56,7 @@ mongoose.connect('mongodb://localhost:27017/superman')
 app.use('/', routes)
 
 app.use('/api/users', users);
+app.use('/api/items', items);
 app.use('/api/seedings', seeds);
 app.use('/api/warehouse', warehouse);
 app.use('/api/messages', messages);
