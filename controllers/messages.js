@@ -1,6 +1,9 @@
 let Messages = require('../models/messages')
 const path = require('path')
 exports.MessagesDelete = function(req,res,next){
+  if (!req.isAuthenticated()) {
+    return res.redirect('/');
+  }
     Messages.remove({_id: req.params.id},(err,data) => {
       if(err){
         console.log(err)
@@ -10,6 +13,9 @@ exports.MessagesDelete = function(req,res,next){
     })
 }
 exports.MessagesGet = function(req,res,next){
+  if (!req.isAuthenticated()) {
+    return res.redirect('/');
+  }
     Messages.find({_id: req.params.id}).sort({date:-1}).exec((err,data) => {
       if(err){
         console.log(err)
@@ -19,6 +25,9 @@ exports.MessagesGet = function(req,res,next){
     })
 }
 exports.AllMessagesGet = function(req,res,next){
+  if (!req.isAuthenticated()) {
+    return res.redirect('/');
+  }
     Messages.find({}).sort({date:-1}).populate('userId').exec((err,data) => {
       if(err){
         console.log(err)
@@ -44,6 +53,9 @@ exports.AllMessagesGet = function(req,res,next){
 //   //   })
 // }
 exports.MessagesPost = function(req,res,next){
+  if (!req.isAuthenticated()) {
+    return res.redirect('/');
+  }
   var item_image
   var realpath
   console.log(req.files,"realpath luar")
@@ -68,8 +80,14 @@ exports.MessagesPost = function(req,res,next){
                console.log(err)
                return res.json({success: false,message: "message not found"})
              }
-             console.log(newMessage,"new message test");
-             res.json({success: true,message: "success save message", data: newMessage})
+             Messages.findOne({_id: newMessage._id}).populate('userId').exec(function (err, message) {
+               if (err){
+                 console.log(err)
+                 return res.json({success: false,message: "message not found"})
+               }
+               res.json({success: true,message: "success save message", data: message})
+             })
+
          })
       })
     } else{
@@ -77,9 +95,16 @@ exports.MessagesPost = function(req,res,next){
       newMessage.save((err) => {
         if(err){
           console.log(err)
+
           return res.json({success: false, message: "save new message failed"})
         }
-      res.json({success: true, message: "save new message success", data:newMessage})
+        Messages.findOne({_id: newMessage._id}).populate('userId').exec(function (err, message) {
+          if (err){
+            console.log(err)
+            return res.json({success: false,message: "message not found"})
+          }
+          res.json({success: true,message: "success save message", data: message})
+        })
       })
     }
 
@@ -88,6 +113,9 @@ exports.MessagesPost = function(req,res,next){
 
 }
 exports.MessagesCommentPut = function(req,res,next){
+  if (!req.isAuthenticated()) {
+    return res.redirect('/');
+  }
   Messages.find({_id: req.params.id},(err,data)=>{
     console.log(req.body, "ini test command body");
     data[0].comments.push({commenter: req.session.userId, comment: req.body.comment})
@@ -102,7 +130,14 @@ exports.MessagesCommentPut = function(req,res,next){
   })
 }
 exports.MessagesLikePut = function(req,res,next){
+  if (!req.isAuthenticated()) {
+    return res.redirect('/');
+  }
   Messages.findOne({_id: req.params.id},(err,data)=>{
+    if(err){
+        return res.json({success: false, message: "post not found"})
+    }
+    if(data.likes.indexOf(req.session.userId) < 0) {
     data.likes.push(req.session.userId)
     data.save((err) => {
       if(err){
@@ -111,5 +146,8 @@ exports.MessagesLikePut = function(req,res,next){
       }
       res.json({success: true, message: "save new like success", count: data.likes.length})
     })
+  } else{
+    return res.json({success: false, message: "you have liked this post",count: data.likes.length})
+  }
   })
 }

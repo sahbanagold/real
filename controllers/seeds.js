@@ -67,7 +67,7 @@ exports.userSeeds = function(req, res, next) {
     newUser.role = role
     newUser.encryptedPassword = newUser.generateHash(password[i])
     newUser.isActive = 'Active'
-    newUser.profilePicture = ""
+    newUser.profilePicture = "/images/testimonials/1.jpg"
     newUser.save(function (err) {
       if(err){
         console.log("error creating new user with error: ",err)

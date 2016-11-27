@@ -11,6 +11,16 @@ const transactionsSchema =  new Schema({
   recipient: String,
   account: String,
   bank: String,
+  transactionsType: {
+            type: String,
+            enum: ['Real', 'Estimation']
+          },
+  verification: {
+            type: String,
+            enum: ['Verified', 'UnVerified']
+          },
+  verificationToken : String,
+  verificationTokenExpires : Date,
   status: {
             type: String,
             enum: ['Paid', 'UnPaid']

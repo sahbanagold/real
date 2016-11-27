@@ -8,27 +8,31 @@
 	<!-- Stylesheets
 	============================================= -->
 	<link href="http://fonts.googleapis.com/css?family=Poppins:300,400,400italic,600,700|Montserrat:400,700|Merriweather" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" href="css-global/bootstrap.css" type="text/css" />
-	<link rel="stylesheet" href="css/style.css" type="text/css" />
-	<link rel="stylesheet" href="css-global/dark.css" type="text/css" />
-	<!-- Media Agency Demo Specific Stylesheet -->
-	<link rel="stylesheet" href="css/app-landing.css" type="text/css" />
-	<!-- / -->
-	<link rel="stylesheet" href="css-global/font-icons.css" type="text/css" />
-	<link rel="stylesheet" href="css/et-line/et-line.css" type="text/css" />
-	<link rel="stylesheet" href="css-global/animate.css" type="text/css" />
-	<link rel="stylesheet" href="css-global/magnific-popup.css" type="text/css" />
-	<link rel="stylesheet" href="css/fonts.css" type="text/css" />
-	<!-- Bootstrap Switch CSS -->
-	<link rel="stylesheet" href="css-global/components/bs-switches.css" type="text/css" />
+	<link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
+	<link rel="stylesheet" href="style.css" type="text/css" />
+	<link rel="stylesheet" href="css/dark.css" type="text/css" />
 
-	<link rel="stylesheet" href="css-global/responsive.css" type="text/css" />
+	<!-- Media Agency Demo Specific Stylesheet -->
+	<link rel="stylesheet" href="demos/app-landing/app-landing.css" type="text/css" />
+	<!-- / -->
+
+	<link rel="stylesheet" href="css/font-icons.css" type="text/css" />
+	<link rel="stylesheet" href="one-page/css/et-line.css" type="text/css" />
+	<link rel="stylesheet" href="css/animate.css" type="text/css" />
+	<link rel="stylesheet" href="css/magnific-popup.css" type="text/css" />
+
+	<link rel="stylesheet" href="demos/app-landing/css/fonts.css" type="text/css" />
+
+	<!-- Bootstrap Switch CSS -->
+	<link rel="stylesheet" href="css/components/bs-switches.css" type="text/css" />
+
+	<link rel="stylesheet" href="css/responsive.css" type="text/css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<!--[if lt IE 9]>
 		<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
 	<![endif]-->
-	<link rel="stylesheet" href="css/colors.css" type="text/css" />
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/sweetalert2/6.1.1/sweetalert2.min.css">
+
+		<link rel="stylesheet" href="demos/app-landing/css/colors.css" type="text/css" />
 	<!-- Document Title
 	============================================= -->
 
@@ -45,21 +49,37 @@
 		<!-- Header
 		============================================= -->
 
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav navbar-right nobottommargin">
-			<li><a href="#"></a></li>
-			<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Ivan Gerard <b class="caret"></b></a>
-				<ul class="dropdown-menu" role="menu">
-				<li><a href="#">Profile</a></li>
-				<li><a href="#">My Transaction</a></li>
+		<header id="header" class="full-header no-sticky">
 
-				<li class="divider"></li>
-				<li><a href="#">Logout</a></li>
-				</ul>
-			</li>
-			</ul>
-		</div>
+			<div id="header-wrap">
+
+				<div class="container clearfix">
+
+					<div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+
+					<!-- Logo
+					============================================= -->
+					<div id="logo">
+						<a href="/home" class="standard-logo" data-dark-logo="images/logo-super.png"><img src="images/logo-super.svg" width="200"alt="Superman Logo"></a>
+						<a href="/home" class="retina-logo" data-dark-logo="images/logo-super.png"><img src="images/logo-super.png" width="200"alt="Superman Logo"></a>
+				</div><!-- #logo end -->
+					<!-- Primary Navigation
+					============================================= -->
+					<nav id="primary-menu">
+						<ul>
+							<li><a href="#"><div> <%= name%> </div></a>
+								<ul>
+									<li><a href="#" data-toggle="modal" data-target="#change-profile">  <img id="profilePict" src='<%= profilepict%>'
+									 class="" alt=""  width="30" height="30"> Change Profile</a></li>
+									<li><a href="/logout">Logout</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</nav><!-- #primary-menu end -->
+				</div>
+			</div>
+		</header>
 
 		<!-- Content
 		============================================= -->
@@ -109,7 +129,9 @@
 						<th>Transactions</th>
 						<th>Recipient</th>
 						<th>Bank Name</th>
+						<th>Type</th>
 						<th>Status</th>
+						<th>Verification</th>
 						<th>Action</th>
 					</tr>
 					</thead>
@@ -207,12 +229,25 @@
 				success: function(result) {
 					for (var k in result.data){
 						for(var l =0 ;l<result.data[k].transactions.length;l++){
-							var status
+							var status, verf, trtype
 							if(result.data[k].transactions[l].status == "UnPaid"){
                     status =  `<span class="label label-default">Unpaid</span>`
 						}else{
 							status =  `<span class="label label-success">Paid</span>`
 						}
+						/// set type
+
+						if(result.data[k].transactions[l].transactionsType == "Real"){
+									trtype =  `<span class="label label-info">Real</span>`
+					}else{
+						trtype =  `<span class="label label-warning">Estimation</span>`
+					}
+						//set verf
+						if(result.data[k].transactions[l].verification == "UnVerified"){
+									verf =  `<span class="label label-default">UnVerified</span>`
+					}else{
+						verf =  `<span class="label label-success">Verified</span>`
+					}
 						var date = new Date(result.data[k].transactions[l].createdAt)
 						var getMonth = date.getMonth()+1
 						var getDate = date.getDate()
@@ -228,7 +263,9 @@
 											<td>${priceDel}</td>
 											<td>${result.data[k].transactions[l].recipient}</td>
 											<td>${result.data[k].transactions[l].bank}</td>
+											<td>${trtype}</td>
 											<td id=${result.data[k].transactions[l]._id}label>${status}</td>
+											<td >${verf}</td>
 											<td><a href="#" data-id='${result.data[k].transactions[l]._id}'class="remove update-trx button  button-mini button-rounded button-green"  title="Update this item">Process</a>
 											</td>
 										</tr>

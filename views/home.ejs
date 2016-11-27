@@ -2,41 +2,32 @@
 <html dir="ltr" lang="en-US">
 
 <head>
-
-	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<meta name="author" content="SemiColonWeb" />
-
-	<!-- Stylesheets
-	============================================= -->
 	<link href="http://fonts.googleapis.com/css?family=Poppins:300,400,400italic,600,700|Montserrat:400,700|Merriweather" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" href="css-global/bootstrap.css" type="text/css" />
-	<link rel="stylesheet" href="css/style.css" type="text/css" />
-	<link rel="stylesheet" href="css-global/dark.css" type="text/css" />
+	<link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
+	<link rel="stylesheet" href="style.css" type="text/css" />
+	<link rel="stylesheet" href="css/dark.css" type="text/css" />
 
 	<!-- Media Agency Demo Specific Stylesheet -->
+	<link rel="stylesheet" href="demos/app-landing/app-landing.css" type="text/css" />
 	<!-- / -->
 
-	<link rel="stylesheet" href="css-global/font-icons.css" type="text/css" />
-	<link rel="stylesheet" href="css/et-line/et-line.css" type="text/css" />
-	<link rel="stylesheet" href="css-global/animate.css" type="text/css" />
-	<link rel="stylesheet" href="css-global/magnific-popup.css" type="text/css" />
-	<link rel="stylesheet" href="css-global/components/bs-filestyle.css" type="text/css" />
+	<link rel="stylesheet" href="css/font-icons.css" type="text/css" />
+	<link rel="stylesheet" href="one-page/css/et-line.css" type="text/css" />
+	<link rel="stylesheet" href="css/animate.css" type="text/css" />
+	<link rel="stylesheet" href="css/magnific-popup.css" type="text/css" />
 
-
-	<link rel="stylesheet" href="css/fonts.css" type="text/css" />
+	<link rel="stylesheet" href="demos/app-landing/css/fonts.css" type="text/css" />
 
 	<!-- Bootstrap Switch CSS -->
-	<link rel="stylesheet" href="css-global/components/bs-switches.css" type="text/css" />
+	<link rel="stylesheet" href="css/components/bs-switches.css" type="text/css" />
 
-	<link rel="stylesheet" href="css-global/responsive.css" type="text/css" />
+	<link rel="stylesheet" href="css/responsive.css" type="text/css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<!--[if lt IE 9]>
 		<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
 	<![endif]-->
 
-	<link rel="stylesheet" href="css/colors.css" type="text/css" />
-	<link rel="stylesheet" href="css/app-landing.css" type="text/css" />
-
+		<link rel="stylesheet" href="demos/app-landing/css/colors.css" type="text/css" />
 
 	<!-- Document Title
 	============================================= -->
@@ -50,55 +41,43 @@
 
 <body class="stretched">
 
+
+	<header id="header" class="full-header no-sticky">
+
+		<div id="header-wrap">
+
+			<div class="container clearfix">
+
+				<div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+
+				<!-- Logo
+				============================================= -->
+				<div id="logo">
+					<a href="/home" class="standard-logo" data-dark-logo="images/logo-super.png"><img src="images/logo-super.svg" width="200"alt="Superman Logo"></a>
+					<a href="/home" class="retina-logo" data-dark-logo="images/logo-super.png"><img src="images/logo-super.png" width="200"alt="Superman Logo"></a>
+			</div><!-- #logo end -->
+
+				<!-- Primary Navigation
+				============================================= -->
+				<nav id="primary-menu">
+					<ul>
+						<li><a href="#"><div> <%= name%> </div></a>
+							<ul>
+								<li><a href="#" data-toggle="modal" data-target="#change-profile">  <img id="profilePict" src='<%= profilepict%>'
+								 class="" alt=""  width="30" height="30"> Change Profile</a></li>
+								<li><a href="/logout">Logout</a>
+
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</nav><!-- #primary-menu end -->
+			</div>
+		</div>
+	</header><!-- #header end -->
 	<!-- Document Wrapper
 	============================================= -->
 	<div id="wrapper" class="clearfix">
-		<header id="header" class="full-header no-sticky">
-
-			<div id="header-wrap">
-
-				<div class="container clearfix">
-
-					<div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
-
-					<!-- Logo
-					============================================= -->
-					<div id="logo">
-						<a href="index.html" class="standard-logo" data-dark-logo="images/logo-super.png"><img src="images/logo-super.svg" width="200"alt="Superman Logo"></a>
-						<a href="index.html" class="retina-logo" data-dark-logo="images/logo-super.png"><img src="images/logo-super.png" width="200"alt="Superman Logo"></a>
-					</div><!-- #logo end -->
-
-					<!-- Primary Navigation
-					============================================= -->
-					<nav id="primary-menu">
-
-						<ul>
-							<li><a href="#" data-href="#section-nextgen"><div>Explore</div></a>
-								<ul>
-									<li><a href="#" data-href="#section-nextgen"><div>NextGen Framework</div></a></li>
-									<li><a href="#" data-href="#section-stunning-graphics"><div>Stunning Graphics</div></a></li>
-									<li><a href="#" data-href="#section-secured-solutions"><div>Secured Solutions</div></a></li>
-								</ul>
-							</li>
-							<li class="dropdown ">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><img src='<%= profilepict%>'
-									 class="img-rounded" alt="Cinque Terre" width="30" height="30"> <%= name%> <b class="caret"></b></a>
-								<ul class="dropdown-menu" role="menu" class="margin-top:-30px;">
-								<li><a href="#" data-toggle="modal" data-target="#change-profile"> Profile</a></li>
-								<li><a href="#">My Transaction</a></li>
-								<li class="divider"></li>
-								<li><a href="/logout">Logout</a></li>
-								</ul>
-							</li>
-						</ul>
-
-					</nav><!-- #primary-menu end -->
-
-				</div>
-
-			</div>
-
-		</header><!-- #header end -->
 
 		<!-- Header
 		============================================= -->
@@ -118,7 +97,7 @@
 							<div class="modal-body">
 								<div class="modal-content">
 									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+										<button type="button" class="close" id="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 										<h4 class="modal-title" id="myModalLabel">Change Profile</h4>
 									</div>
 
@@ -183,7 +162,7 @@
 								<a href="#ptab1" class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-1">1</a>
 								<h5>Items Detail</h5>
 							</li>
-							<li class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="ptab2" aria-labelledby="ui-id-2" aria-selected="false" aria-expanded="false">
+							<li class="ui-state-default ui-corner-top ui-state-disabled" role="tab" tabindex="-1" aria-controls="ptab2" aria-labelledby="ui-id-2" aria-selected="false" aria-expanded="false">
 								<a href="#ptab2" class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-2">2</a>
 								<h5>Account Detail</h5>
 							</li>
@@ -274,6 +253,13 @@
 
 																	</tr>
 																	<span id="btn-plus" class="button button-3d nomargin fright"><i class="icon-line-circle-plus"></i></span>
+																	<label class="font-body capitalize" for="transactions-type">Transactions Type</label>
+																	<select id="transactions-type" name="type" value="" class="form-control">
+																	<option value="" selected="selected"></option>
+																	<option value="Real">Real</option>
+																	<option value="Estimation">Estimation</option>
+																	</select>
+
 
 																</tbody>
 
@@ -332,7 +318,11 @@
 			                        <label class="control-label">:</label>
 															<label id="nominalsummary"></label>
 			                      </div>
-
+														<div class="form-group">
+			                        <label for="inputText" class="control-label">Transactions Type</label>
+			                        <label class="control-label">:</label>
+															<label id="trtype"></label>
+			                      </div>
 			                      <div class="form-group">
 			                        <label class="control-label">Keterangan</label>
 			                        <label class="control-label">:</label>
@@ -496,28 +486,29 @@
 					bindquantity()
 			})
 			$("#post-message").unbind().on("click", function(event) {
-						event.preventDefault()
-
-							uploadimagemessage($('#form-message'))
-
+				event.preventDefault()
+				if($('#file-input').val() || $("#content-text").val()) uploadimagemessage($('#form-message'))
 			})
 			function uploadimagemessage(image) {
 				var form = document.forms.namedItem("image-message")
 				var formData = new FormData(form)
 				formData.append("content",$("#content-text").val())
-				console.log(formData,"postData");
+
 				$.ajax({
 						url: '/api/messages',
 						type: 'POST',
 						data:  formData,
+						dataType: 'json',
 						mimeType:"multipart/form-data",
 						contentType: false,
 						cache: false,
 						processData:false,
 						success:function(result, textStatus, jqXHR)
 						{
-
-							location.reload()
+							$('input,textarea').each(function(e){
+							$(this).val("")
+							})
+							resultPost(result)
 						},
 						error: function(jqXHR, textStatus, errorThrown)
 						{
@@ -526,39 +517,49 @@
 				});
 			}
 			function postMessage(content) {
-
-
-						$.ajax({
-								url: '/api/messages',
-								type: 'POST',
-								data: content,
-								success: function(result) {
+				var form = document.forms.namedItem("image-message")
+				var formData = new FormData(form)
+				formData.append("content",content)
+				$.ajax({
+						url: '/api/messages',
+						type: 'POST',
+						data:  formData,
+						dataType: 'json',
+						mimeType:"multipart/form-data",
+						contentType: false,
+						cache: false,
+						processData:false,
+						success: function(result) {
+										 $(".removeLater").val('');
 										resultPost(result)
 								}
 						})
 			}
-			$('#profile-form-modal-photo').bind('change', function() {
-					//  alert('This file size is: ' + this.files[0].size/1024/1024 + "MB");
+			$('#transactions-type').bind('change', function() {
+					$('#trtype').html($(this).val())
 			 });
 			$("#profile-form-modal-submit").unbind().on("click", function(event) {
 				$("#formphoto").submit(function(e){
 						event.preventDefault()
+						e.preventDefault()
 
 						var formObj = $(this);
 				    var formURL = formObj.attr("action");
 				    var formData = new FormData(this);
-						console.log(formData,"postData");
+
 				    $.ajax({
 				        url: formURL,
 				    		type: 'POST',
 				        data:  formData,
+								dataType: 'json',
 				    		mimeType:"multipart/form-data",
 								contentType: false,
 							 	cache: false,
 							 	processData:false,
 								success:function(result, textStatus, jqXHR)
 								{
-									location.reload()
+									$("#profilePict").attr("src",result.data.profilePicture)
+									$('#close').trigger( "click" )
 								},
 								error: function(jqXHR, textStatus, errorThrown)
 								{
@@ -573,7 +574,8 @@
 				$("#ajaxform").submit(function(e)
 				{
 						var postData = $(this).serializeArray();
-						console.log(postData);
+						 $('#ptab4').html(`<div><center><img src='/images/preloader@2x.gif' /></center></div>`)
+
 						var formURL = $(this).attr("action");
 						$.ajax(
 						{
@@ -583,7 +585,7 @@
 								success:function(result, textStatus, jqXHR)
 								{
 										if(result.success){
-											console.log(result);
+
 											$('#ptab4').html(`<div class="alert alert-success" >
 												<strong>Thank You.</strong> Your order will be processed once we verify the Payment.
 											</div>`)
@@ -602,18 +604,32 @@
 											Account: <b>${result.data.account}</b><br>
 											Bank: <b>${result.data.bank}</b><br>
 											Ammount: <b>Rp. ${totalsetor}</b><br>
+											Type: <b>${result.data.transactionsType}</b><br>
 											Notes: <b>${result.data.notes}</b><br>
 											------------------------<br>
 											Item Details:<br>
 											------------------------<br>
 											${itemdetail}`
-											console.log(content)
+											var listrequestHTML = `
+											<tr>
+												<td>${~~($(`#${result.warehouseId}bodylistgudang tr`).length+1)}</td>
+												<td>${result.data.userId.name}</td>
+												<td>IDR ${totalsetor}</td>
+												<td><span class="label label-success">${result.data.status}</span></td>
+											</tr>`
+											$(`#${result.warehouseId}bodylistgudang`).append(listrequestHTML)
+											$('input,textarea').each(function(e){
+											$(this).val("")
+											})
 											postMessage(content)
 										} else{
 											$('#ptab4').html(`<div class="alert alert-danger" >
 												<strong>Sorry.</strong> Your order not Aproved,  Please Check Inputs Detail.
 											</div>`)
 										}
+										setTimeout(function functionName() {
+											$('#ui-id-1').trigger('click')
+										},300)
 								},
 								error: function(jqXHR, textStatus, errorThrown)
 								{
@@ -683,7 +699,7 @@
 						dataType: 'json',
 						resetForm: true,
 						success: function(data) {
-							console.log(data);
+
 							if (getStartedFormLoader == 'button') {
 								defButton.html(defButtonText);
 							} else {
@@ -738,11 +754,11 @@ function resultPost (result){
 		<div class="panel-heading">
 			<div class="spost clearfix">
 				<div class="entry-image">
-					<a href="#" class="nobg"><img class="img-circle" src="images/testimonials/1.jpg" alt=""></a>
+					<a href="#" class="nobg"><img class="img-circle" src="${result.data.userId.profilePicture}" alt=""></a>
 				</div>
 				<div class="entry-c">
 					<div class="entry-title">
-						<h4><a href="#">Ivan Gerard</a></h4>
+						<h4><a href="#">${result.data.userId.name}</a></h4>
 					</div>
 					<ul class="entry-meta">
 						<li>${postedtime}</li>
@@ -768,6 +784,12 @@ function resultPost (result){
 	</div>
 	`
 	$(insidePost).insertAfter('#kotak-post')
+	$('.comment-like-btn').each(function(){
+		var id = $(this).attr('mark')
+		$(this).on('click',function () {
+			addLike(id)
+		})
+	})
 	bindcommentbox()
 }
 ///////// List of function //////////
@@ -775,7 +797,7 @@ function resultPost (result){
 		    $.get({
 		        url: "/api/messages/",
 		        success: function(result) {
-							console.log(result);
+
 							for (var i in result.data){
 								var time = new Date(result.data[i].createdAt)
 								var nowtime = new Date()
@@ -794,12 +816,8 @@ function resultPost (result){
 								}else if(diffSeconds > 0){
 									postedtime = `${diffSeconds} seconds ago`
 								}
-								var imgsrc
-								if(result.data[i].userId.profilePicture){
-									imgsrc = result.data[i].userId.profilePicture
-								}else{
-									imgsrc = "images/testimonials/1.jpg"
-								}
+
+								var imgsrc = result.data[i].userId.profilePicture || "/images/testimonials/1.jpg"
 								var imagemessage
 								if(result.data[i].image != ""){
 									imagemessage = `<img src='${result.data[i].image}'>`
@@ -887,7 +905,6 @@ function resultPost (result){
 					 url: '/api/messages/like/'+id,
 					 type: 'PUT',
 					 success: function(result) {
-						 console.log(id,"like")
 				 			$(`#${id}btn-comment-like`).html(`<i class="icon-like"></i> ${result.count} Likes`)
 					 }
 			 })
@@ -935,7 +952,6 @@ function resultPost (result){
 
  						}
  					});
- 					console.log($(this).val())
  					$(this).val("")
  				}
  			})
@@ -946,7 +962,7 @@ function resultPost (result){
 			$.get({
 					url: "/api/transactions/",
 					success: function(result) {
-						console.log(result.data)
+
 						for (var k in result.data){
 							var listgudangHTML = `<div class="panel panel-default">
 								<div class="panel-heading">
@@ -962,7 +978,7 @@ function resultPost (result){
 											<th>Status</th>
 										</tr>
 										</thead>
-										<tbody id='bodylistgudang'>
+										<tbody id='${result.data[k]._id}bodylistgudang'>
 
 
 										</tbody>
@@ -985,7 +1001,7 @@ function resultPost (result){
 										<td>IDR ${nominalDel}</td>
 										<td><span class="label label-success">${result.data[k].transactions[i].status}</span></td>
 									</tr>`
-									$('#bodylistgudang').append(listrequestHTML)
+									$(`#${result.data[k]._id}bodylistgudang`).append(listrequestHTML)
 								}
 							}
 
@@ -999,7 +1015,11 @@ function resultPost (result){
 		$('.detail-rekening').each(function () {
 			var id = $(this).attr('id')
 			$(this).on('keyup',function () {
-				$(`#${id}summary`).html($(`#${id}`).val())
+				if(id=='nominal') {
+					$(`#${id}summary`).html('Rp '+$(`#${id}`).val().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"))
+				} else {
+						$(`#${id}summary`).html($(`#${id}`).val())
+				}
 			})
 		})
 		function bindprice() {
@@ -1048,9 +1068,9 @@ function resultPost (result){
 		function filltabel(id) {
 			var rowid = $(`#${id}item`).attr('id')
 			var itemname = $(`#${id}item`).val()
-			var itemprice = $(`#${id}price`).val()
-			var itemquantity = $(`#${id}quantity`).val()
-			var itemtotal = $(`#${id}total`).val()
+			var itemprice = $(`#${id}price`).val().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+			var itemquantity = $(`#${id}quantity`).val().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+			var itemtotal = $(`#${id}total`).val().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
 			if(itemname!='' && itemprice!='' && itemquantity!='' && itemname!= undefined && itemprice!=undefined && itemquantity!=undefined){
 						$(`#${rowid}detail`).remove()
 						var trdetail = `<tr id=${rowid}detail>
@@ -1065,8 +1085,34 @@ function resultPost (result){
 
 			}
 		}
+		function clear_form_elements(ele) {
+
+        $(ele).find(':input').each(function() {
+					console.log($(this),"asdas");
+            switch(this.type) {
+                case 'password':
+                case 'select-multiple':
+                case 'select-one':
+                case 'text':
+                case 'textarea':
+                    $(this).val('');
+                    break;
+                case 'checkbox':
+                case 'radio':
+                    this.checked = false;
+            }
+        });
+
+    }
 		bindprice()
 		bindquantity()
+		// $( "li .ui-state-default" ).each(function (e) {
+		// 	$(this).unbind('click')
+		// })
+		// $( "#ui-id-1" ).unbind('click')
+		// $( "#ui-id-2" ).unbind('click')
+		// $( "#ui-id-3" ).unbind('click')
+		// $( "#ui-id-4" ).unbind('click')
 	</script>
 
 </body>
