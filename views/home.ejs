@@ -73,10 +73,17 @@
 					<nav id="primary-menu">
 
 						<ul>
-							<li class="dropdown">
+							<li><a href="#" data-href="#section-nextgen"><div>Explore</div></a>
+								<ul>
+									<li><a href="#" data-href="#section-nextgen"><div>NextGen Framework</div></a></li>
+									<li><a href="#" data-href="#section-stunning-graphics"><div>Stunning Graphics</div></a></li>
+									<li><a href="#" data-href="#section-secured-solutions"><div>Secured Solutions</div></a></li>
+								</ul>
+							</li>
+							<li class="dropdown ">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><img src='<%= profilepict%>'
 									 class="img-rounded" alt="Cinque Terre" width="30" height="30"> <%= name%> <b class="caret"></b></a>
-								<ul class="dropdown-menu" role="menu">
+								<ul class="dropdown-menu" role="menu" class="margin-top:-30px;">
 								<li><a href="#" data-toggle="modal" data-target="#change-profile"> Profile</a></li>
 								<li><a href="#">My Transaction</a></li>
 								<li class="divider"></li>
