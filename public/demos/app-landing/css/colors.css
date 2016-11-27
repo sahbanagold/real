@@ -199,7 +199,7 @@ input.switch-toggle-round:checked + label:before,
 
 .border-color,
 .process-steps li.active a,
-.process-steps li.ui-tabs-active a,
+.process-steps li.ui-tabs-active button,
 .tagcloud a:hover,
 .pagination > .active > a,
 .pagination > .active > span,

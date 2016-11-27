@@ -159,11 +159,11 @@
 											<div id="processTabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all ">
 												<ul class="process-steps bottommargin clearfix ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
 							<li id="li1" class="ui-state-default ui-corner-top ui-tabs-active ui-state-active" role="tab" tabindex="0" aria-controls="ptab1" aria-labelledby="ui-id-1" aria-selected="true" aria-expanded="true">
-								<a href="#ptab1" class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-1">1</a>
+								<button href="#ptab1"   disabled="disabled"   class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-1">1</button>
 								<h5>Items Detail</h5>
 							</li>
 							<li id="li2" class="ui-state-default ui-corner-top ui-state-disabled" role="tab" tabindex="-1" aria-controls="ptab2" aria-labelledby="ui-id-2" aria-selected="false" aria-expanded="false">
-								<a href="#ptab2" class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-2">2</a>
+								<button href="#ptab2"   disabled="disabled"   class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-2">2</button>
 								<h5>Account Detail</h5>
 							</li>
 							<li id="li3" class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="ptab3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false">
@@ -458,6 +458,9 @@
 			listItems()
 			bindprice()
 			bindquantity()
+			$("#li1").html(`
+			<a href="#ptab1" class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-1">1</a>
+			<h5>Items Detail</h5>`)
 			// <li id="li1" class="ui-state-default ui-corner-top ui-tabs-active ui-state-active" role="tab" tabindex="0" aria-controls="ptab1" aria-labelledby="ui-id-1" aria-selected="true" aria-expanded="true">
 			// 	<a href="#ptab1" class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-1">1</a>
 			// 	<h5>Items Detail</h5>
@@ -474,9 +477,48 @@
 			// 	<button href="#ptab4" disabled="disabled"   class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-4">4</button>
 			// 	<h5>Complete</h5>
 			// </li>
+			function ptab1btn() {
+				$("#li1").html(`
+				<a href="#ptab1" class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-1">1</a>
+				<h5>Items Detail</h5>`)
+				$("#li1").attr("aria-expanded","true")
+				$("#li1").attr("aria-selected","true")
+				$("#li2").attr("aria-expanded","false")
+				$("#li2").attr("aria-selected","false")
+				$("#li3").attr("aria-expanded","false")
+				$("#li3").attr("aria-selected","false")
+				$("#li3").removeClass("ui-state-active")
+				$("#li3").removeClass("ui-tabs-active")
+				$("#li2").removeClass("ui-state-active")
+				$("#li2").removeClass("ui-tabs-active")
+				$("#li1").addClass("ui-state-active")
+				$("#li1").addClass("ui-tabs-active")
+				$("#ptab3").attr("aria-hidden","true")
+				$("#ptab2").attr("aria-hidden","true")
+				$("#ptab1").attr("aria-hidden","false")
+				$("#ptab2").css("display","none")
+				$("#ptab3").css("display","none")
+				$("#ptab1").css("display","block")
+			}
 			$('#checkoutbtn').on('click',function () {
-				$("#li2").attr("aria-expanded1","true")
+				$("#li2").html(`
+				<a href="#ptab2" class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-2">2</a>
+				<h5>Account Detail</h5>`)
+				$("#li2").attr("aria-expanded","true")
 				$("#li2").attr("aria-selected","true")
+				$("#li3").attr("aria-expanded","false")
+				$("#li3").attr("aria-selected","false")
+				$("#li3").removeClass("ui-state-active")
+				$("#li3").removeClass("ui-tabs-active")
+				$("#li1").removeClass("ui-state-active")
+				$("#li1").removeClass("ui-tabs-active")
+				$("#li2").addClass("ui-state-active")
+				$("#li2").addClass("ui-tabs-active")
+				$("#ptab2").attr("aria-hidden","true")
+				$("#ptab3").attr("aria-hidden","false")
+				$("#ptab2").css("display","block")
+				$("#ptab3").css("display","none")
+				$("#ptab1").css("display","none")
 			})
 			$("#nextbtn").on('click',function () {
 				$("#li3").html(`
@@ -699,7 +741,7 @@
 											</div>`)
 										}
 										setTimeout(function functionName() {
-											$('#ui-id-1').trigger('click')
+											ptab1btn()
 											$("#li4").removeClass("ui-tabs-active")
 											$('#ptab4').html("")
 										},1700)
