@@ -8,27 +8,33 @@
 	<!-- Stylesheets
 	============================================= -->
 	<link href="http://fonts.googleapis.com/css?family=Poppins:300,400,400italic,600,700|Montserrat:400,700|Merriweather" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" href="css-global/bootstrap.css" type="text/css" />
-	<link rel="stylesheet" href="css/style.css" type="text/css" />
-	<link rel="stylesheet" href="css-global/dark.css" type="text/css" />
-	<!-- Media Agency Demo Specific Stylesheet -->
-	<link rel="stylesheet" href="css/app-landing.css" type="text/css" />
-	<!-- / -->
-	<link rel="stylesheet" href="css-global/font-icons.css" type="text/css" />
-	<link rel="stylesheet" href="css/et-line/et-line.css" type="text/css" />
-	<link rel="stylesheet" href="css-global/animate.css" type="text/css" />
-	<link rel="stylesheet" href="css-global/magnific-popup.css" type="text/css" />
-	<link rel="stylesheet" href="css/fonts.css" type="text/css" />
-	<!-- Bootstrap Switch CSS -->
-	<link rel="stylesheet" href="css-global/components/bs-switches.css" type="text/css" />
+	<link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
+	<link rel="stylesheet" href="style.css" type="text/css" />
+	<link rel="stylesheet" href="css/dark.css" type="text/css" />
 
-	<link rel="stylesheet" href="css-global/responsive.css" type="text/css" />
+	<!-- Media Agency Demo Specific Stylesheet -->
+	<link rel="stylesheet" href="demos/app-landing/app-landing.css" type="text/css" />
+	<!-- / -->
+
+	<link rel="stylesheet" href="css/font-icons.css" type="text/css" />
+	<link rel="stylesheet" href="one-page/css/et-line.css" type="text/css" />
+	<link rel="stylesheet" href="css/animate.css" type="text/css" />
+	<link rel="stylesheet" href="css/magnific-popup.css" type="text/css" />
+
+	<link rel="stylesheet" href="demos/app-landing/css/fonts.css" type="text/css" />
+
+	<!-- Bootstrap Switch CSS -->
+	<link rel="stylesheet" href="css/components/bs-switches.css" type="text/css" />
+
+	<link rel="stylesheet" href="css/responsive.css" type="text/css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<!--[if lt IE 9]>
 		<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
 	<![endif]-->
-	<link rel="stylesheet" href="css/colors.css" type="text/css" />
+
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/sweetalert2/6.1.1/sweetalert2.min.css">
+
+		<link rel="stylesheet" href="demos/app-landing/css/colors.css" type="text/css" />
 	<!-- Document Title
 	============================================= -->
 
@@ -45,21 +51,37 @@
 		<!-- Header
 		============================================= -->
 
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav navbar-right nobottommargin">
-			<li><a href="#"></a></li>
-			<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Ivan Gerard <b class="caret"></b></a>
-				<ul class="dropdown-menu" role="menu">
-				<li><a href="#">Profile</a></li>
-				<li><a href="#">My Transaction</a></li>
+		<header id="header" class="full-header no-sticky">
 
-				<li class="divider"></li>
-				<li><a href="#">Logout</a></li>
-				</ul>
-			</li>
-			</ul>
-		</div>
+			<div id="header-wrap">
+
+				<div class="container clearfix">
+
+					<div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+
+					<!-- Logo
+					============================================= -->
+					<div id="logo">
+						<a href="/home" class="standard-logo" data-dark-logo="images/logo-super.png"><img src="images/logo-super.svg" width="200"alt="Superman Logo"></a>
+						<a href="/home" class="retina-logo" data-dark-logo="images/logo-super.png"><img src="images/logo-super.png" width="200"alt="Superman Logo"></a>
+				</div><!-- #logo end -->
+					<!-- Primary Navigation
+					============================================= -->
+					<nav id="primary-menu">
+						<ul>
+							<li><a href="#"><div> <%= name%> </div></a>
+								<ul>
+									<li><a href="#" data-toggle="modal" data-target="#change-profile">  <img id="profilePict" src='<%= profilepict%>'
+									 class="" alt=""  width="30" height="30"> Change Profile</a></li>
+									<li><a href="/logout">Logout</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</nav><!-- #primary-menu end -->
+				</div>
+			</div>
+		</header>
 
 		<!-- Content
 		============================================= -->
@@ -77,7 +99,8 @@
 								<ul class="nav nav-tabs nav-justified">
 									<li class="active"><a href="/cms-transaction"><i class="icon-note"></i> Transaction</a></li>
 									<li class=""><a href="/cms-user"><i class="icon-user4"></i> User</a></li>
-									<li class=""><a href="/cms-gudang"><i class="icon-home2"></i> Gudang</a></li>
+									<li class=""><a href="/cms-gudang"><i class="icon-home2"></i> Warehouse</a></li>
+									<li class=""><a href="/cms-item"><i class="icon-cube"></i> Item</a></li>
 						</ul>
 						<br>
 
@@ -141,6 +164,86 @@
 			</div>
 
 		</section><!-- #content end -->
+		<button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">52000</button>
+
+		<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-body">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel">Details Transaciton</h4>
+						</div>
+						<div class="modal-body">
+							<div class="table-responsive">
+													<table class="table table-bordered table-striped">
+													  <colgroup>
+														<col class="col-xs-3">
+														<col class="col-xs-1">
+														<col class="col-xs-2">
+														<col class="col-xs-2">
+													  </colgroup>
+													  <thead>
+														<tr>
+														  <th>Item Name</th>
+														  <th>Item Price</th>
+															<th>Item Quantity</</th>
+															<th>Item Total Price</</th>
+														</tr>
+													  </thead>
+													  <tbody>
+														<tr>
+														  <td>
+															Cangkul
+														  </td>
+														  <td>2000</td>
+															<td>30</td>
+															<td>60000</td>
+														</tr>
+														<tr>
+														  <td>
+															Cangkul
+														  </td>
+														  <td>2000</td>
+															<td>30</td>
+															<td>60000</td>
+														</tr>
+														<tr>
+														  <td>
+															Cangkul
+														  </td>
+														  <td>2000</td>
+															<td>30</td>
+															<td>60000</td>
+														</tr>
+														<tr>
+														  <td>
+															Cangkul
+														  </td>
+														  <td>2000</td>
+															<td>30</td>
+															<td>60000</td>
+														</tr>
+														<tr>
+														  <td>
+															Cangkul
+														  </td>
+														  <td>2000</td>
+															<td>30</td>
+															<td>60000</td>
+														</tr>
+													  </tbody>
+
+													</table>
+												  </div>
+						</div>
+						<div class="modal-footer">
+									<h5><b>Total Transaction : 500000</b>		</h5>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<footer id="footer" style="background-color: #FFF;">
 

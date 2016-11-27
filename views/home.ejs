@@ -2,41 +2,32 @@
 <html dir="ltr" lang="en-US">
 
 <head>
-
-	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<meta name="author" content="SemiColonWeb" />
-
-	<!-- Stylesheets
-	============================================= -->
 	<link href="http://fonts.googleapis.com/css?family=Poppins:300,400,400italic,600,700|Montserrat:400,700|Merriweather" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" href="css-global/bootstrap.css" type="text/css" />
-	<link rel="stylesheet" href="css/style.css" type="text/css" />
-	<link rel="stylesheet" href="css-global/dark.css" type="text/css" />
+	<link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
+	<link rel="stylesheet" href="style.css" type="text/css" />
+	<link rel="stylesheet" href="css/dark.css" type="text/css" />
 
 	<!-- Media Agency Demo Specific Stylesheet -->
+	<link rel="stylesheet" href="demos/app-landing/app-landing.css" type="text/css" />
 	<!-- / -->
 
-	<link rel="stylesheet" href="css-global/font-icons.css" type="text/css" />
-	<link rel="stylesheet" href="css/et-line/et-line.css" type="text/css" />
-	<link rel="stylesheet" href="css-global/animate.css" type="text/css" />
-	<link rel="stylesheet" href="css-global/magnific-popup.css" type="text/css" />
-	<link rel="stylesheet" href="css-global/components/bs-filestyle.css" type="text/css" />
+	<link rel="stylesheet" href="css/font-icons.css" type="text/css" />
+	<link rel="stylesheet" href="one-page/css/et-line.css" type="text/css" />
+	<link rel="stylesheet" href="css/animate.css" type="text/css" />
+	<link rel="stylesheet" href="css/magnific-popup.css" type="text/css" />
 
-
-	<link rel="stylesheet" href="css/fonts.css" type="text/css" />
+	<link rel="stylesheet" href="demos/app-landing/css/fonts.css" type="text/css" />
 
 	<!-- Bootstrap Switch CSS -->
-	<link rel="stylesheet" href="css-global/components/bs-switches.css" type="text/css" />
+	<link rel="stylesheet" href="css/components/bs-switches.css" type="text/css" />
 
-	<link rel="stylesheet" href="css-global/responsive.css" type="text/css" />
+	<link rel="stylesheet" href="css/responsive.css" type="text/css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<!--[if lt IE 9]>
 		<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
 	<![endif]-->
 
-	<link rel="stylesheet" href="css/colors.css" type="text/css" />
-	<link rel="stylesheet" href="css/app-landing.css" type="text/css" />
-
+		<link rel="stylesheet" href="demos/app-landing/css/colors.css" type="text/css" />
 
 	<!-- Document Title
 	============================================= -->
@@ -50,48 +41,43 @@
 
 <body class="stretched">
 
+
+	<header id="header" class="full-header no-sticky">
+
+		<div id="header-wrap">
+
+			<div class="container clearfix">
+
+				<div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+
+				<!-- Logo
+				============================================= -->
+				<div id="logo">
+					<a href="/home" class="standard-logo" data-dark-logo="images/logo-super.png"><img src="images/logo-super.svg" width="200"alt="Superman Logo"></a>
+					<a href="/home" class="retina-logo" data-dark-logo="images/logo-super.png"><img src="images/logo-super.png" width="200"alt="Superman Logo"></a>
+			</div><!-- #logo end -->
+
+				<!-- Primary Navigation
+				============================================= -->
+				<nav id="primary-menu">
+					<ul>
+						<li><a href="#"><div> <%= name%> </div></a>
+							<ul>
+								<li><a href="#" data-toggle="modal" data-target="#change-profile">  <img id="profilePict" src='<%= profilepict%>'
+								 class="" alt=""  width="30" height="30"> Change Profile</a></li>
+								<li><a href="/logout">Logout</a>
+
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</nav><!-- #primary-menu end -->
+			</div>
+		</div>
+	</header><!-- #header end -->
 	<!-- Document Wrapper
 	============================================= -->
 	<div id="wrapper" class="clearfix">
-		<header id="header" class="full-header no-sticky">
-
-			<div id="header-wrap">
-
-				<div class="container clearfix">
-
-					<div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
-
-					<!-- Logo
-					============================================= -->
-					<div id="logo">
-						<a href="index.html" class="standard-logo" data-dark-logo="images/logo-super.png"><img src="images/logo-super.svg" width="200"alt="Superman Logo"></a>
-						<a href="index.html" class="retina-logo" data-dark-logo="images/logo-super.png"><img src="images/logo-super.png" width="200"alt="Superman Logo"></a>
-					</div><!-- #logo end -->
-
-					<!-- Primary Navigation
-					============================================= -->
-					<nav id="primary-menu">
-
-						<ul>
-							<li class="dropdown">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><img id="profilePict" src='<%= profilepict%>'
-									 class="img-rounded" alt="Cinque Terre" width="30" height="30"> <%= name%> <b class="caret"></b></a>
-								<ul class="dropdown-menu" role="menu">
-								<li><a href="#" data-toggle="modal" data-target="#change-profile"> Profile</a></li>
-								<li><a href="#">My Transaction</a></li>
-								<li class="divider"></li>
-								<li><a href="/logout">Logout</a></li>
-								</ul>
-							</li>
-						</ul>
-
-					</nav><!-- #primary-menu end -->
-
-				</div>
-
-			</div>
-
-		</header><!-- #header end -->
 
 		<!-- Header
 		============================================= -->
@@ -417,7 +403,7 @@
 
 									<div class="">
 										Copyrights &copy; 2016 All Rights Reserved by ivangerard.com<br>
-										<div class="copyright-links"><a href="#">Terms of Use</a> / <a href="#">Privacy Policy</a></div>
+										<div class="copyright-links"><a href="#">Terms of Use</a> / <a href="#">Privacy Policy</a> / <a href="/cms-transaction">Admin Panel</a></div>
 									</div>
 
 								</div>
