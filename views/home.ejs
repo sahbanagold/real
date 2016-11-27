@@ -873,6 +873,7 @@ function resultPost (result){
 								</div>
 								`
 								$(insideHTML).insertAfter('#kotak-post')
+								console.log(result.data[i]);
 								for (var j= 0 ; j< result.data[i].comments.length;j++){
 								var commentHTML = `
 								<div class="entry-image">
@@ -880,7 +881,7 @@ function resultPost (result){
 								</div>
 								<div class="entry-c">
 									<div class="entry-title">
-										<h4><a href="#">Ivan Gerard</a></h4>
+										<h4><a href="#">${result.data[i].comments[j].commenter.name}</a></h4>
 										${result.data[i].comments[j].comment}
 										<p></p>
 									</div>
@@ -948,7 +949,7 @@ function resultPost (result){
  							</div>
  							<div class="entry-c">
  								<div class="entry-title">
- 									<h4><a href="#">Ivan Gerard</a></h4>
+ 									<h4><a href="#">${data.name}</a></h4>
  									${commenttext}
  									<p></p>
  								</div>

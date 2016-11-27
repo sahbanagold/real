@@ -1,4 +1,5 @@
 let Messages = require('../models/messages')
+let Users = require('../models/users')
 const path = require('path')
 exports.MessagesDelete = function(req,res,next){
   if (!req.isAuthenticated()) {
@@ -118,14 +119,16 @@ exports.MessagesCommentPut = function(req,res,next){
   }
   Messages.find({_id: req.params.id},(err,data)=>{
     console.log(req.body, "ini test command body");
-    data[0].comments.push({commenter: req.session.userId, comment: req.body.comment})
-    console.log(data[0].comments,"tst comment masuk");
-    data[0].save((err) => {
-      if(err){
-        console.log(err)
-        return res.json({success: false, message: "save new comment failed"})
-      }
-      res.json({success: true, message: "save new comment success", count: data[0].comments.length})
+    Users.findOne({_id:req.session.userId},function (err, user) {
+      data[0].comments.push({commenter: user, comment: req.body.comment})
+      console.log(data[0].comments,"tst comment masuk");
+      data[0].save((err) => {
+        if(err){
+          console.log(err)
+          return res.json({success: false, message: "save new comment failed"})
+        }
+        res.json({success: true, message: "save new comment success", count: data[0].comments.length, name: req.session.name})
+      })
     })
   })
 }
