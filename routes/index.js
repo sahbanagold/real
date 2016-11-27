@@ -43,6 +43,15 @@ router.get('/cms-gudang', function(req, res, next) {
 });
 
 
+router.get('/cms-item', function(req, res, next) {
+  if(req.session.role && req.session.role.indexOf(0) >= 0){
+  res.render('cms-dashboard.item.ejs', { title: 'Superman - Dashboard ',profilepict:req.session.profilePict, name: req.session.name });
+} else {
+  res.redirect('/')
+}
+});
+
+
 router.post('/', function(req, res, next) {
   console.log(req.body, "form")
   res.send({ success: true });
