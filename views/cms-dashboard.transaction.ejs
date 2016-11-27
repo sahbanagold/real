@@ -299,34 +299,34 @@
 						})
 
 					}
-					$('#list-transaction tr').each(function (e) {
-						var idtransaction = $(this).attr('id')
-						$(this).bind('hover')
-						$(this).popover({
-			        html : true,
-			        content: function() {
-								var contentdetail = `<div id='hoverdetail'><center><img src='/images/preloader@2x.gif' /></center></div>`
-								$.get({
-									url: `/api/transactions/${idtransaction}`,
-									success: function (result) {
-										var contentdetail2 = ""
-										for (var i = 0; i < result.data.items.length; i++) {
-											var totalprice = (result.data.items[i].totalprice+"").replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
-											contentdetail2 += `Item Name: <b>${result.data.items[i].name}</b><br>
-											Item Price: <b>${result.data.items[i].price}</b><br>
-											Item Quantity: <b>${result.data.items[i].quantity}</b><br>
-											Total Price: <b>Rp. ${totalprice}</b><br><br>`
-										}
-										$('#hoverdetail').html(contentdetail2)
-									}
-								})
-			          return contentdetail
-			        },
-			        title: function() {
-			          return 'Transaction detail: ';
-			        }
-			    })
-					})
+					// $('#list-transaction tr').each(function (e) {
+					// 	var idtransaction = $(this).attr('id')
+					// 	$(this).bind('hover')
+					// 	$(this).popover({
+			    //     html : true,
+			    //     content: function() {
+					// 			var contentdetail = `<div id='hoverdetail'><center><img src='/images/preloader@2x.gif' /></center></div>`
+					// 			$.get({
+					// 				url: `/api/transactions/${idtransaction}`,
+					// 				success: function (result) {
+					// 					var contentdetail2 = ""
+					// 					for (var i = 0; i < result.data.items.length; i++) {
+					// 						var totalprice = (result.data.items[i].totalprice+"").replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+					// 						contentdetail2 += `Item Name: <b>${result.data.items[i].name}</b><br>
+					// 						Item Price: <b>${result.data.items[i].price}</b><br>
+					// 						Item Quantity: <b>${result.data.items[i].quantity}</b><br>
+					// 						Total Price: <b>Rp. ${totalprice}</b><br><br>`
+					// 					}
+					// 					$('#hoverdetail').html(contentdetail2)
+					// 				}
+					// 			})
+			    //       return contentdetail
+			    //     },
+			    //     title: function() {
+			    //       return 'Transaction detail: ';
+			    //     }
+			    // })
+					// })
 					$("button[class*='btn-primary']").each(function () {
 						var iddetail = $(this).attr('mark')
 

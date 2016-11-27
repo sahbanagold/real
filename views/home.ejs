@@ -193,10 +193,8 @@
 																</thead>
 																<tbody>
 																	<tr class="cart_item">
-
-
 																		<td class="cart-product-name" id="itemnameinput1">
-																			<input type="text" id="1item" mark="1" class="item" name="itemname" size="15">
+
 																		</td>
 
 																		<td class="cart-product-price">
@@ -220,7 +218,7 @@
 
 
 																		<td class="cart-product-name" id="itemnameinput2">
-																			<input type="text" id="2item" mark="2" class="item" name="itemname" size="15">
+
 																		</td>
 
 																		<td class="cart-product-price">
@@ -253,12 +251,16 @@
 
 																	</tr>
 																	<span id="btn-plus" class="button button-3d nomargin fright"><i class="icon-line-circle-plus"></i></span>
-																	<label class="font-body capitalize" for="transactions-type">Transactions Type</label>
-																	<select id="transactions-type" name="type" value="" class="form-control">
-																	<option value="" selected="selected"></option>
-																	<option value="Real">Real</option>
-																	<option value="Estimation">Estimation</option>
-																	</select>
+
+																	<div class="col-xs-6">
+																			<label class="font-body capitalize" for="transactions-type">Transactions Type</label>
+																		<select id="transactions-type" name="type" value="" class="form-control selectpicker">
+																		<option value="" selected="selected"></option>
+																		<option value="Real">Real</option>
+																		<option value="Estimation">Estimation</option>
+																		</select>
+																	</div>
+
 
 
 																</tbody>
@@ -464,7 +466,7 @@
 
 
 					<td class="cart-product-name">
-					<select id=${++trindex}item mark=${trindex} name="itemname" value="" class="selectpicker item" size="15">
+					<select id=${++trindex}item mark=${trindex} name="itemname" value="" class="selectpicker form-control item">
 					${itemsglobal}
 					</select>
 					</td>
@@ -970,10 +972,10 @@ function resultPost (result){
  							listItems += `<option value="${result.data[k].name}" >${result.data[k].name}</option>`
  						}
 						itemsglobal = listItems
-						var listItemsOptions1 = `<select id="1item" mark="1" name="itemname" value="" class="selectpicker item" size="15">
+						var listItemsOptions1 = `<select id="1item" mark="1" name="itemname" value="" class="selectpicker form-control item">
 						${listItems}
 						</select>`
-						var listItemsOptions2 = `<select id="2item" mark="2" name="itemname" value="" class="selectpicker item" size="15">
+						var listItemsOptions2 = `<select id="2item" mark="2" name="itemname" value="" class="selectpicker form-control item">
 						${listItems}
 						</select>`
 						$('#itemnameinput1').html(listItemsOptions1)
