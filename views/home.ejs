@@ -1056,6 +1056,11 @@ function resultPost (result){
 						e.preventDefault()
 					}
 			})
+			$('#nominal').unbind('keypress').bind("keypress", function(e) {
+					if (e.keyCode < 48 || e.keyCode > 57) {
+						e.preventDefault()
+					}
+			})
 			$('.price').each(function(){
 				var id = $(this).attr('id')
 				var mark = $(this).attr('mark')
