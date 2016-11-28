@@ -1074,6 +1074,7 @@ function resultPost (result){
 
  							$(`#${id}btn-comment-list`).html(`<i class="icon-comments"></i> ${data.count} Comments`)
 							var imgprofile = "/images/testimonials/1.jpg"
+							console.log(data);
 							if(data.data.profilePicture !== "") imgprofile = data.data.profilePicture
  							var commentHTML = `
  							<div class="panel-footer">
