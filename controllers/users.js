@@ -79,6 +79,7 @@ exports.userRegisterPost = function(req, res, next) {
   newUser.userEmail = req.body.email
   newUser.role = [1]
   newUser.encryptedPassword = newUser.generateHash(req.body.password)
+  newUser.profilePicture = "/images/testimonials/1.jpg"
   newUser.isActive = 'Active'
   newUser.save(function (err) {
     if(err){
