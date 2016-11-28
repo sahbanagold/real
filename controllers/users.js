@@ -73,8 +73,10 @@ exports.fixProfile = function(req, res) {
     datas.forEach((data)=>{
       if(data.profilePicture == undefined){
         data.profilePicture = "/images/testimonials/1.jpg"
-        data.save(function (err) {        
+        data.save(function (err) {
+      
         })
+      }
     })
     res.json({success: true, message: "user has been deactivated", data: datas})
   })
