@@ -51,7 +51,7 @@ app.use('/', express.static(path.join(__dirname, 'public')))
 
 mongoose.Promise = global.Promise;
 app.use(fileUpload())
-mongoose.connect('mongodb://localhost:27017/superman')
+mongoose.connect('mongodb://localhost:27017/supermanapp') // ganti DB
 
 app.use('/', routes)
 
