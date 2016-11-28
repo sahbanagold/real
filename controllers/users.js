@@ -64,6 +64,21 @@ exports.findName = function(req, res) {
     res.json({success: true, message: "user has been deactivated", data: data})
   })
 }
+exports.fixProfile = function(req, res) {
+  User.find({},function (err,datas) {
+    if(err){
+      console.log(err)
+      return res.json({success: false, message: "something error, no user found"})
+    }
+    datas.forEach((data)=>{
+      if(data.profilePicture == undefined){
+        data.profilePicture = "/images/testimonials/1.jpg"
+        data.save(function (err) {        
+        })
+    })
+    res.json({success: true, message: "user has been deactivated", data: datas})
+  })
+}
 exports.userGet = function(req, res) {
   User.find({_id: req.params.id},function (err,user) {
     if(err){
