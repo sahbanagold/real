@@ -29,7 +29,7 @@ exports.AllMessagesGet = function(req,res,next){
   if (!req.isAuthenticated()) {
     return res.redirect('/');
   }
-    Messages.find({}).sort({date:-1}).populate('userId').exec((err,data) => {
+    Messages.find({}).sort({date:-1}).populate('userId').populate({path:'comments.commenter',model:'users'}).exec((err,data) => {
       if(err){
         console.log(err)
         return res.json({success: false, message: "message not found "})
@@ -120,7 +120,7 @@ exports.MessagesCommentPut = function(req,res,next){
   Messages.find({_id: req.params.id},(err,data)=>{
     console.log(req.body, "ini test command body");
     Users.findOne({_id:req.session.userId},function (err, user) {
-      data[0].comments.push({commenter: user, comment: req.body.comment})
+      data[0].comments.push({commenter: user._id, comment: req.body.comment})
       console.log(data[0].comments,"tst comment masuk");
       data[0].save((err) => {
         if(err){

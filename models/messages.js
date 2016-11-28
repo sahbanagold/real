@@ -9,9 +9,15 @@ const messageSchema =  new Schema({
   content: String,
   image:String,
   comments: [{
-    commenter:Object,
+    commenter:{
+      type: Schema.Types.ObjectId,
+      ref: 'users'
+    },
     comment: String,
-    likes: [Object]
+    likes: [{
+      type: Schema.Types.ObjectId,
+      ref: 'users'
+    }]
   }],
   likes: [
     {

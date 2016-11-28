@@ -687,6 +687,7 @@
 								success:function(result, textStatus, jqXHR)
 								{
 									$("#profilePict").attr("src",result.data.profilePicture)
+									console.log(result, "ini result profilePicture");
 									$('#close').trigger( "click" )
 								},
 								error: function(jqXHR, textStatus, errorThrown)
@@ -938,6 +939,7 @@ function resultPost (result){
 		    $.get({
 		        url: "/api/messages/",
 		        success: function(result) {
+							console.log(result);
 
 							for (var i in result.data){
 								var time = new Date(result.data[i].createdAt)
@@ -1258,7 +1260,7 @@ function resultPost (result){
 		function clear_form_elements(ele) {
 
         $(ele).find(':input').each(function() {
-					
+
             switch(this.type) {
                 case 'password':
                 case 'select-multiple':
