@@ -5,7 +5,7 @@ exports.itemGet = function(req, res) {
   if (!req.isAuthenticated()) {
     return res.redirect('/');
   }
-  if(req.session.role && req.session.role.indexOf() >= 0){
+  if(req.session.role && req.session.role.indexOf(1) >= 0){
   Items.find({},function (err,data) {
     if(err){
       console.log(err)
