@@ -884,6 +884,12 @@ function resultPost (result){
 	}else if(diffSeconds > 0){
 		postedtime = `${diffSeconds} seconds ago`
 	}
+	var imagemessage = ""
+	if(result.data.image != ""){
+		imagemessage = `<img src='${result.data.image}'>`
+	}else{
+		imagemessage = ""
+	}
 	var insidePost = `
 	<div class="panel panel-success">
 		<div class="panel-heading">
@@ -903,7 +909,7 @@ function resultPost (result){
 		</div>
 		<div class="panel-body">
 		${result.data.content}<br>
-		${result.data.image}
+		${imagemessage}
 		</div>
 		<div class="panel-footer">
 		<a href="#${result.data._id}likes" mark=${result.data._id} class="leftmargin-sm comment-like-btn" id=${result.data._id}btn-comment-like><i class="icon-like"></i> ${result.data.likes.length} Likes</a>
@@ -986,7 +992,7 @@ function resultPost (result){
 									<div class="panel-footer">
 
 									<a href="#${result.data[i]._id}likes" mark=${result.data[i]._id} class="leftmargin-sm comment-like-btn" id=${result.data[i]._id}btn-comment-like><i class="icon-like"></i> ${result.data[i].likes.length} Likes</a>
-									<a href="#${result.data[i]._id}btn-comment-list" mark=${result.data[i]._id} class="leftmargin-sm comment-list-btn" id=${result.data[i]._id}btn-comment-list><i class="icon-comments"></i> ${result.data[i].comments.length} Comments</a>
+									<a  mark=${result.data[i]._id} class="leftmargin-sm comment-list-btn" id=${result.data[i]._id}btn-comment-list><i class="icon-comments"></i> ${result.data[i].comments.length} Comments</a>
 									</div>
 											<div class="panel-footer" id=${result.data[i]._id}panel-footer>
 												<input type="text" id="template-contactform-subject" mark=${result.data[i]._id} name="template-contactform-subject" value="" class="required sm-form-control comment-box" aria-required="true">
@@ -998,11 +1004,11 @@ function resultPost (result){
 								</div>
 								`
 								$(insideHTML).insertAfter('#kotak-post')
-								console.log(result.data[i]);
+
 								for (var j= 0 ; j< result.data[i].comments.length;j++){
 								var commentHTML = `
 								<div class="entry-image">
-									<a href="#" class="nobg"><img class="img-circle" src="images/testimonials/1.jpg" alt=""></a>
+									<a href="#" class="nobg"><img class="img-circle" src="${result.data[i].comments[j].commenter.profilePicture}" alt=""></a>
 								</div>
 								<div class="entry-c">
 									<div class="entry-title">
@@ -1065,16 +1071,19 @@ function resultPost (result){
  						contentType: "application/json; charset=utf-8",
 
  						success: function(data) {
+
  							$(`#${id}btn-comment-list`).html(`<i class="icon-comments"></i> ${data.count} Comments`)
+							var imgprofile = "/images/testimonials/1.jpg"
+							if(data.data.profilePicture !== "") imgprofile = data.data.profilePicture
  							var commentHTML = `
  							<div class="panel-footer">
  							<div class="spost clearfix" style="display: block;">
  							<div class="entry-image">
- 								<a href="#" class="nobg"><img class="img-circle" src="images/testimonials/1.jpg" alt=""></a>
+ 								<a href="#" class="nobg"><img class="img-circle" src="${imgprofile}" alt=""></a>
  							</div>
  							<div class="entry-c">
  								<div class="entry-title">
- 									<h4><a href="#">${data.name}</a></h4>
+ 									<h4><a href="#">${data.data.name}</a></h4>
  									${commenttext}
  									<p></p>
  								</div>
@@ -1249,7 +1258,7 @@ function resultPost (result){
 		function clear_form_elements(ele) {
 
         $(ele).find(':input').each(function() {
-					console.log($(this),"asdas");
+					
             switch(this.type) {
                 case 'password':
                 case 'select-multiple':

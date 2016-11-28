@@ -127,7 +127,7 @@ exports.MessagesCommentPut = function(req,res,next){
           console.log(err)
           return res.json({success: false, message: "save new comment failed"})
         }
-        res.json({success: true, message: "save new comment success", count: data[0].comments.length, name: req.session.name})
+        res.json({success: true, message: "save new comment success", count: data[0].comments.length, name: req.session.name, data: user})
       })
     })
   })

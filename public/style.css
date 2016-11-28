@@ -13524,4 +13524,6 @@ body:not(.no-transition) #wrapper,
 	margin:0!important;
 	padding:0!important
 }
-
+.comment-list-btn:hover{
+	cursor: pointer;
+}
