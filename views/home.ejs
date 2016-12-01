@@ -740,12 +740,14 @@
 											Item Details:<br>
 											------------------------<br>
 											${itemdetail}`
+											var status = `<span class="label label-success">${result.data.status}</span>`
+											if (result.data.status == 'UnPaid') status = `<span class="label label-danger">${result.data.status}</span>`
 											var listrequestHTML = `
 											<tr>
 												<td>${~~($(`#${result.warehouseId}bodylistgudang tr`).length+1)}</td>
 												<td>${result.data.userId.name}</td>
 												<td>IDR ${totalsetor}</td>
-												<td><span class="label label-success">${result.data.status}</span></td>
+												<td>${status}</td>
 											</tr>`
 											$(`#${result.warehouseId}bodylistgudang`).append(listrequestHTML)
 											$('input,textarea').each(function(e){
@@ -1073,7 +1075,7 @@ function resultPost (result){
  						success: function(data) {
 
  							$(`#${id}btn-comment-list`).html(`<i class="icon-comments"></i> ${data.count} Comments`)
-							var imgprofile = "/images/testimonials/1.jpg"							
+							var imgprofile = "/images/testimonials/1.jpg"
 							if(data.data.profilePicture !== "") imgprofile = data.data.profilePicture
  							var commentHTML = `
  							<div class="panel-footer">
