@@ -961,6 +961,7 @@ function resultPost (result){
 		})
 	})
 	bindcommentbox()
+	getlike()
 }
 ///////// List of function //////////
 		 function getMessages() {
@@ -1068,9 +1069,38 @@ function resultPost (result){
 
 									bindcommentbox()
 									bindviewProfileMessage()
+									getlike()
 									}
 		        }
 		    })
+		 }
+		 function getlike() {
+			 console.log('you are here broo');
+			 $('.comment-like-btn').each(function (e) {
+ 				var idmessage = $(this).attr('mark')
+				$('#hoverdetail').html("")
+ 				$(this).bind('hover')
+ 				$(this).popover({
+ 					html : true,
+ 					content: function() {
+ 						var contentdetail = `<div ><center><ul id='hoverdetail'></ul></center></div>`
+ 						$.get({
+ 							url: `/api/messages/like/${idmessage}`,
+ 							success: function (result) {
+ 								var contentdetail2 = ""
+ 								for (var i = 0; i < result.data.likes.length; i++) {
+ 									contentdetail2 += `<li>${result.data.likes[i].name}</li>`
+ 								}
+ 								$('#hoverdetail').html(contentdetail2)
+ 							}
+ 						})
+ 						return contentdetail
+ 					},
+ 					title: function() {
+ 						return 'People who like this is: ';
+ 					}
+ 			})
+ 			})
 		 }
 		 function addLike(id){
 			 $.ajax({

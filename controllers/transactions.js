@@ -72,7 +72,7 @@ exports.allTransactionsGet = function(req,res,next){
           {createdAt:{$gt: startDate, $lt: dateMidnight}},
           {status: "UnPaid"}]
         }])
-        .sort({date:-1}).populate('userId').exec((err,transactions) => {
+        .sort({date:-1}).populate('userId','name profilePicture').exec((err,transactions) => {
         if(err){
           console.log(err)
           return res.json({success: false, message: "transaction not found"})
@@ -180,7 +180,7 @@ exports.transactionsPost = function(req,res,next){
           console.log(err)
           return
         }
-        newTransactions.populate('userId').populate(function (err, saved) {
+        newTransactions.populate('userId','name profilePicture').populate(function (err, saved) {
           if (err){
             console.log(err)
             return

@@ -1,6 +1,7 @@
 let Messages = require('../models/messages')
 let Users = require('../models/users')
 const path = require('path')
+
 exports.MessagesDelete = function(req,res,next){
   if (!req.isAuthenticated()) {
     return res.redirect('/');
@@ -11,6 +12,18 @@ exports.MessagesDelete = function(req,res,next){
         return res.json({success: false, message: "failed to delete, message not found "})
       }
       res.json({success: true, message: "delete warehouse success"})
+    })
+}
+exports.MessagesGetLike = function(req,res,next){
+  if (!req.isAuthenticated()) {
+    return res.redirect('/');
+  }
+    Messages.findOne({_id:req.params.id},{'likes':1}).populate('likes','name profilePicture').exec((err,data) => {
+      if(err){
+        console.log(err)
+        return res.json({success: false, message: "message not found "})
+      }
+      res.json({success: true, data: data})
     })
 }
 exports.MessagesGet = function(req,res,next){
@@ -29,7 +42,7 @@ exports.AllMessagesGet = function(req,res,next){
   if (!req.isAuthenticated()) {
     return res.redirect('/');
   }
-    Messages.find({}).sort({date:-1}).populate('userId').populate({path:'comments.commenter',model:'users'}).exec((err,data) => {
+    Messages.find({}).sort({date:-1}).populate('userId','name profilePicture').populate('comments.commenter','name profilePicture').exec((err,data) => {
       if(err){
         console.log(err)
         return res.json({success: false, message: "message not found "})
@@ -81,7 +94,7 @@ exports.MessagesPost = function(req,res,next){
                console.log(err)
                return res.json({success: false,message: "message not found"})
              }
-             Messages.findOne({_id: newMessage._id}).populate('userId').exec(function (err, message) {
+             Messages.findOne({_id: newMessage._id}).populate('userId','name profilePicture').exec(function (err, message) {
                if (err){
                  console.log(err)
                  return res.json({success: false,message: "message not found"})
@@ -99,7 +112,7 @@ exports.MessagesPost = function(req,res,next){
 
           return res.json({success: false, message: "save new message failed"})
         }
-        Messages.findOne({_id: newMessage._id}).populate('userId').exec(function (err, message) {
+        Messages.findOne({_id: newMessage._id}).populate('userId','name profilePicture').exec(function (err, message) {
           if (err){
             console.log(err)
             return res.json({success: false,message: "message not found"})

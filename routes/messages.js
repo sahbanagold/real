@@ -9,5 +9,6 @@ router.post('/',messages.MessagesPost)
 // router.post('/image',messages.imageMessagesPost)
 router.put('/comment/:id',messages.MessagesCommentPut)
 router.put('/like/:id',messages.MessagesLikePut)
+router.get('/like/:id',messages.MessagesGetLike)
 
 module.exports = router;

@@ -40,12 +40,12 @@ exports.warehousePut = function(req,res,next){
 }
 
 exports.warehouseGet = function(req,res,next){
-    Warehouse.find({_id: req.params.id}).populate('userId').exec((err,data) => {
+    Warehouse.find({_id: req.params.id}).populate('userId','name profilePicture isActive').exec((err,data) => {
       res.json(data)
     })
 }
 exports.warehouseGetAll = function(req,res,next){
-    Warehouse.find({}).populate('userId').exec((err,data) => {
+    Warehouse.find({}).populate('userId', 'name profilePicture isActive').exec((err,data) => {
       res.json(data)
     })
 }
