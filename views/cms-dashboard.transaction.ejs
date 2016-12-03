@@ -283,7 +283,7 @@
 						`
 									<tr data-trigger='hover' id=${result.transactions[l]._id} data-placement="top">
 										<td >${verf}</td>
-										<td>${getMonth+'-'+getDate+'-'+getYear}<br>${getHours+'-'+getMinutes+'-'+getSeconds}</td>
+										<td>${getMonth+'-'+getDate+'-'+getYear}<br>${getHours+':'+getMinutes+':'+getSeconds}</td>
 										<td><span style="font-size:12px">PIC : ${result.transactions[l].userId.name}</span></td>
 										<td><button mark=${result.transactions[l]._id} class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Rp. ${priceDel}</button></td>
 										<td>${trtype}</td>
