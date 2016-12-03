@@ -247,57 +247,57 @@
 				url: "/api/transactions/",
 				success: function(result) {
 					for (var k in result.data){
-						for(var l =0 ;l<result.data[k].transactions.length;l++){
-							var status, verf, trtype
-							if(result.data[k].transactions[l].status == "UnPaid"){
-                    status =  `<span class="label label-default">Unpaid</span>`
-						}else{
-							status =  `<span class="label label-success">Paid</span>`
-						}
-						/// set type
 
-						if(result.data[k].transactions[l].transactionsType == "Real"){
-									trtype =  `<span class="label label-info">Real</span>`
+
+					}
+					for(var l =0 ;l<result.transactions.length;l++){
+						var status, verf, trtype
+						if(result.transactions[l].status == "UnPaid"){
+									status =  `<span class="label label-default">Unpaid</span>`
 					}else{
-						trtype =  `<span class="label label-warning">Estimation</span>`
+						status =  `<span class="label label-success">Paid</span>`
 					}
-						//set verf
-						if(result.data[k].transactions[l].verification == "UnVerified"){
-									verf =  `<span class="label label-default">UnVerified</span>`
-					}else{
-						verf =  `<span class="label label-success">Verified</span>`
-					}
-						var date = new Date(result.data[k].transactions[l].createdAt)
-						var getMonth = date.getMonth()+1
-						var getDate = date.getDate()
-						var getYear = date.getYear()+1900
-						var price = String(result.data[k].transactions[l].nominal);
-						var priceDel = price.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
-							var listdataHTML =
-							`
-										<tr data-trigger='hover' id=${result.data[k].transactions[l]._id} data-placement="top">
-											<td >${verf}</td>
-											<td>${getMonth+'-'+getDate+'-'+getYear}</td>
-											<td>${result.data[k].name}
-											<br /><span style="font-size:12px">PIC : ${result.data[k].transactions[l].userId.name}</span></td>
-											<td><button mark=${result.data[k].transactions[l]._id} class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Rp. ${priceDel}</button></td>
-											<td>${trtype}</td>
-											<td>${result.data[k].transactions[l].recipient}</td>
-											<td>${result.data[k].transactions[l].bank}<br>${result.data[k].transactions[l].account}</td>
-											<td >${result.data[k].transactions[l].notes}</td>
-											<td id=${result.data[k].transactions[l]._id}label>${status}</td>
-											<td><a href="#" data-id='${result.data[k].transactions[l]._id}'class="remove update-trx button  button-mini button-rounded button-green"  title="Update this item">Process</a>
-											</td>
-										</tr>
-							`
-						$('#list-transaction').prepend(listdataHTML)
-						}
+					/// set type
 
-						$(".update-trx").click(function() {
-								updateTrx($(this).attr('data-id'))
-						})
-
+					if(result.transactions[l].transactionsType == "Real"){
+								trtype =  `<span class="label label-info">Real</span>`
+				}else{
+					trtype =  `<span class="label label-warning">Estimation</span>`
+				}
+					//set verf
+					if(result.transactions[l].verification == "UnVerified"){
+								verf =  `<span class="label label-default">UnVerified</span>`
+				}else{
+					verf =  `<span class="label label-success">Verified</span>`
+				}
+					var date = new Date(result.transactions[l].createdAt)
+					var getMonth = date.getMonth()+1
+					var getDate = date.getDate()
+					var getYear = date.getYear()+1900
+					var price = String(result.transactions[l].nominal);
+					var priceDel = price.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+						var listdataHTML =
+						`
+									<tr data-trigger='hover' id=${result.transactions[l]._id} data-placement="top">
+										<td >${verf}</td>
+										<td>${getMonth+'-'+getDate+'-'+getYear}</td>
+										<td><span style="font-size:12px">PIC : ${result.transactions[l].userId.name}</span></td>
+										<td><button mark=${result.data[k].transactions[l]._id} class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Rp. ${priceDel}</button></td>
+										<td>${trtype}</td>
+										<td>${result.transactions[l].recipient}</td>
+										<td>${result.transactions[l].bank}<br>${result.transactions[l].account}</td>
+										<td >${result.transactions[l].notes}</td>
+										<td id=${result.transactions[l]._id}label>${status}</td>
+										<td><a href="#" data-id='${result.transactions[l]._id}'class="remove update-trx button  button-mini button-rounded button-green"  title="Update this item">Process</a>
+										</td>
+									</tr>
+						`
+					$('#list-transaction').prepend(listdataHTML)
 					}
+
+											$(".update-trx").click(function() {
+													updateTrx($(this).attr('data-id'))
+											})
 					// $('#list-transaction tr').each(function (e) {
 					// 	var idtransaction = $(this).attr('id')
 					// 	$(this).bind('hover')

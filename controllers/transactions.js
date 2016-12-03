@@ -65,6 +65,7 @@ exports.allTransactionsGet = function(req,res,next){
       return res.json({success: false, message: "error, wareHouse not found"})
     }
     let datas = []
+    let transactions = []
     let i = 1
     data.forEach((warehouse)=>{
       Transactions.find({userId: warehouse.userId}).or([
@@ -72,7 +73,7 @@ exports.allTransactionsGet = function(req,res,next){
           {createdAt:{$gt: startDate, $lt: dateMidnight}},
           {status: "UnPaid"}]
         }])
-        .sort({date:-1}).populate('userId','name profilePicture').exec((err,transactions) => {
+        .sort({date:-1}).populate('userId','_id name profilePicture').exec((err,transaction) => {
         if(err){
           console.log(err)
           return res.json({success: false, message: "transaction not found"})
@@ -84,27 +85,29 @@ exports.allTransactionsGet = function(req,res,next){
           profilePictureThumb: warehouse.profilePictureThumb,
           type: warehouse.type,
           _id: warehouse._id,
-          location: warehouse.location,
-          transactions: transactions
+          location: warehouse.location
           })
+          transactions = [...transaction]
 
         datas.push(newobject)
         if(i++ == data.length){
 
           var p1 =  new Promise(function (resolve, reject) {
               console.log('ok sorted');
-              resolve(datas.sort(function (a,b) {
+              resolve(transactions.sort(function (a,b) {
                 console.log('whyw whuwhuw why why');
-                a = new Date(a.transactions.createdAt).getTime();
-                b = new Date(b.transactions.createdAt).getTime();
+                a = new Date(a.createdAt).getTime();
+                b = new Date(b.createdAt).getTime();
                 return a>b ? -1 : a<b ? 1 : 0;
               }))
             })
             p1.then(function () {
-                res.json({success: true, data: datas})
+                res.json({success: true, data: datas, transactions: transactions})
             })
         }
       })
+      //////////
+
     })
 
   })

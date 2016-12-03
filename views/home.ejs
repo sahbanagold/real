@@ -783,7 +783,7 @@ type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
 												<td>IDR ${totalsetor}</td>
 												<td>${status}</td>
 											</tr>`
-											$(`#${result.warehouseId}bodylistgudang`).append(listrequestHTML)
+											$(`#${result.data.userId._id}bodylistgudang`).append(listrequestHTML)
 											$('input,textarea').each(function(e){
 											$(this).val("")
 											$(this).trigger('keyup')
@@ -1210,7 +1210,7 @@ function resultPost (result){
 											<th>Status</th>
 										</tr>
 										</thead>
-										<tbody id='${result.data[k]._id}bodylistgudang'>
+										<tbody id='${result.data[k].userId}bodylistgudang'>
 
 
 										</tbody>
@@ -1221,20 +1221,20 @@ function resultPost (result){
 							$('#listgudang').prepend(listgudangHTML)
 
 
-							if(result.data[k].transactions){
-								for (let i = 0; i < result.data[k].transactions.length; i++) {
-									var nominal = String(result.data[k].transactions[i].nominal);
+							if(result.transactions){
+								for (let i = 0; i < result.transactions.length; i++) {
+									var nominal = String(result.transactions[i].nominal);
 									var nominalDel = nominal.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
-									var status = `<span class="label label-success">${result.data[k].transactions[i].status}</span>`
-									if (result.data[k].transactions[i].status == 'UnPaid') status = `<span class="label label-danger">${result.data[k].transactions[i].status}</span>`
+									var status = `<span class="label label-success">${result.transactions[i].status}</span>`
+									if (result.transactions[i].status == 'UnPaid') status = `<span class="label label-danger">${result.transactions[i].status}</span>`
 									var listrequestHTML = `
 									<tr>
 										<td>${~~(i+1)}</td>
-										<td>${result.data[k].transactions[i].recipient}</td>
+										<td>${result.transactions[i].recipient}</td>
 										<td>IDR ${nominalDel}</td>
 										<td>${status}</td>
 									</tr>`
-									$(`#${result.data[k]._id}bodylistgudang`).append(listrequestHTML)
+									$(`#${result.data[k].userId}bodylistgudang`).append(listrequestHTML)
 								}
 							}
 
