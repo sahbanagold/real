@@ -274,8 +274,8 @@
 					var getMonth = date.getMonth()+1
 					var getDate = date.getDate()
 					var getYear = date.getYear()+1900
-					var price = String(result.transactions[l].nominal);
-					var priceDel = price.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+					var price = String(result.transactions[l].nominal)
+					var priceDel = price.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
 						var listdataHTML =
 						`
 									<tr data-trigger='hover' id=${result.transactions[l]._id} data-placement="top">

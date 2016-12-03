@@ -1225,6 +1225,11 @@ function resultPost (result){
 						}
 						if(result.transactions){
 							for (let i = 0; i < result.transactions.length; i++) {
+								var date = new Date(result.transactions[i].createdAt)
+								var getMonth = date.getMonth()+1
+								var getDate = date.getDate()
+								var getYear = date.getYear()+1900
+
 								var nominal = String(result.transactions[i].nominal);
 								var nominalDel = nominal.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
 								var status = `<span class="label label-success">${result.transactions[i].status}</span>`
@@ -1233,7 +1238,12 @@ function resultPost (result){
 								<tr>
 									<td>${~~($(`#${result.transactions[i].userId._id}bodylistgudang tr`).length+1)}</td>
 									<td>${result.transactions[i].recipient}</td>
-									<td>IDR ${nominalDel}</td>
+									<td>IDR ${nominalDel}<br>var date = new Date(result.transactions[l].createdAt)
+									var getMonth = date.getMonth()+1
+									var getDate = date.getDate()
+									var getYear = date.getYear()+1900
+									var price = String(result.transactions[l].nominal)
+									var priceDel = price.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")</td>
 									<td>${status}</td>
 								</tr>`
 								$(`#${result.transactions[i].userId._id}bodylistgudang`).append(listrequestHTML)
