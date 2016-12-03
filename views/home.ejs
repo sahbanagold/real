@@ -1221,25 +1221,26 @@ function resultPost (result){
 							$('#listgudang').prepend(listgudangHTML)
 
 
-							if(result.transactions){
-								for (let i = 0; i < result.transactions.length; i++) {
-									var nominal = String(result.transactions[i].nominal);
-									var nominalDel = nominal.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
-									var status = `<span class="label label-success">${result.transactions[i].status}</span>`
-									if (result.transactions[i].status == 'UnPaid') status = `<span class="label label-danger">${result.transactions[i].status}</span>`
-									var listrequestHTML = `
-									<tr>
-										<td>${~~(i+1)}</td>
-										<td>${result.transactions[i].recipient}</td>
-										<td>IDR ${nominalDel}</td>
-										<td>${status}</td>
-									</tr>`
-									$(`#${result.transactions[i].userId._id}bodylistgudang`).append(listrequestHTML)
-								}
-							}
-
 
 						}
+						if(result.transactions){
+							for (let i = 0; i < result.transactions.length; i++) {
+								var nominal = String(result.transactions[i].nominal);
+								var nominalDel = nominal.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+								var status = `<span class="label label-success">${result.transactions[i].status}</span>`
+								if (result.transactions[i].status == 'UnPaid') status = `<span class="label label-danger">${result.transactions[i].status}</span>`
+								var listrequestHTML = `
+								<tr>
+									<td>${~~($(`#${result.transactions[i].userId._id}bodylistgudang tr`).length+1)}</td>
+									<td>${result.transactions[i].recipient}</td>
+									<td>IDR ${nominalDel}</td>
+									<td>${status}</td>
+								</tr>`
+								$(`#${result.transactions[i].userId._id}bodylistgudang`).append(listrequestHTML)
+							}
+						}
+
+
 					}
 			})
 
