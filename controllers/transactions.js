@@ -90,6 +90,10 @@ exports.allTransactionsGet = function(req,res,next){
 
         datas.push(newobject)
         if(i++ == data.length){
+          console.log('entered get transactions');
+            datas.sort(function (a,b) {
+               return a.transactions.createdAt> b.transactions.createdAt ? -1 : a.transactions.createdAt < b.transactions.createdAt ? 1 : 0
+            })
             res.json({success: true, data: datas})
         }
 
