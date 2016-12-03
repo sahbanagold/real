@@ -92,9 +92,10 @@ exports.allTransactionsGet = function(req,res,next){
         if(i++ == data.length){
 
             datas.sort(function (a,b) {
-              a = new Date(a.transactions.createdAt);
-              b = new Date(b.transactions.createdAt);
-              return a>b ? -1 : a<b ? 1 : 0;               
+              console.log('ok sorted');
+              a = new Date(a.transactions.createdAt).getTime();
+              b = new Date(b.transactions.createdAt).getTime();
+              return a>b ? -1 : a<b ? 1 : 0;
             })
             res.json({success: true, data: datas})
         }
