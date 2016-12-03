@@ -91,15 +91,19 @@ exports.allTransactionsGet = function(req,res,next){
         datas.push(newobject)
         if(i++ == data.length){
 
-            datas.sort(function (a,b) {
+          var p1 =  new Promise(function (resolve, reject) {
               console.log('ok sorted');
-              a = new Date(a.transactions.createdAt).getTime();
-              b = new Date(b.transactions.createdAt).getTime();
-              return a>b ? -1 : a<b ? 1 : 0;
+              resolve(datas.sort(function (a,b) {
+                console.log('whyw whuwhuw why why');
+                a = new Date(a.transactions.createdAt).getTime();
+                b = new Date(b.transactions.createdAt).getTime();
+                return a>b ? -1 : a<b ? 1 : 0;
+              }))
             })
-            res.json({success: true, data: datas})
+            p1.then(function () {
+                res.json({success: true, data: datas})
+            })
         }
-
       })
     })
 
