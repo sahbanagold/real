@@ -1238,12 +1238,7 @@ function resultPost (result){
 								<tr>
 									<td>${~~($(`#${result.transactions[i].userId._id}bodylistgudang tr`).length+1)}</td>
 									<td>${result.transactions[i].recipient}</td>
-									<td>IDR ${nominalDel}<br>var date = new Date(result.transactions[l].createdAt)
-									var getMonth = date.getMonth()+1
-									var getDate = date.getDate()
-									var getYear = date.getYear()+1900
-									var price = String(result.transactions[l].nominal)
-									var priceDel = price.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")</td>
+									<td>IDR ${nominalDel}<br>${getMonth+'-'+getDate+'-'+getYear}</td>
 									<td>${status}</td>
 								</tr>`
 								$(`#${result.transactions[i].userId._id}bodylistgudang`).append(listrequestHTML)
