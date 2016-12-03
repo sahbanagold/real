@@ -87,7 +87,7 @@ exports.allTransactionsGet = function(req,res,next){
           _id: warehouse._id,
           location: warehouse.location
           })
-          transactions = [transactions,...transaction]
+          transactions = [...transactions,...transaction]
 
         datas.push(newobject)
         if(i++ == data.length){
