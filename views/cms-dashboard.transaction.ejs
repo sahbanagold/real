@@ -259,10 +259,10 @@
 			listTransaction()
 		})
 		$('#filter').unbind().on('click',function (e) {
-			
+
 			if ($('#datepicker').val() !== "") {
 				$.post({
-						url: "/api/transactions/",
+						url: "/api/transactions/filter",
 						data: {date: $('#datepicker').val()},
 						success: function(result) {
 							if(result.transactions.length > 0)	{
