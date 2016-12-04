@@ -42,6 +42,7 @@ exports.transactionsFilterGet = function(req,res,next){
 // Maps.find({createdAt:{$gt: startDate, $lt: dateMidnight}}).exec(function(err,result){
 
 exports.allTransactionsGet = function(req,res,next){
+
   if (!req.isAuthenticated()) {
     return res.redirect('/');
   }
@@ -221,6 +222,70 @@ exports.transactionsPut = function(req,res,next){
         }
         res.json({success: true,message: "success save transaction payment status", data: transaction[0]})
     })
+  })
+}
+exports.transactionsFilterPost = function(req,res,next){
+
+  if (!req.isAuthenticated()) {
+    return res.redirect('/');
+  }
+  let startDate = new Date(req.body.date)
+  let dateMidnight = new Date(req.body.date)
+
+  startDate.setSeconds(0);
+  startDate.setHours(0);
+  startDate.setMinutes(0);
+
+  dateMidnight.setHours(23);
+  dateMidnight.setMinutes(59);
+  dateMidnight.setSeconds(59);
+
+  Warehouse.find({},(err,data) => {
+    if(err){
+      console.log(err)
+      return res.json({success: false, message: "error, wareHouse not found"})
+    }
+    let datas = []
+    let transactions = []
+    let i = 1
+    data.forEach((warehouse)=>{
+      Transactions.find({userId: warehouse.userId,createdAt:{$gt: startDate, $lt: dateMidnight}})
+        .sort({date:-1}).populate('userId','_id name profilePicture').exec((err,transaction) => {
+        if(err){
+          console.log(err)
+          return res.json({success: false, message: "transaction not found"})
+        }
+        let newobject = Object.assign({},{
+          userId: warehouse.userId,
+          name: warehouse.name,
+          profilePicture: warehouse.profilePicture,
+          profilePictureThumb: warehouse.profilePictureThumb,
+          type: warehouse.type,
+          _id: warehouse._id,
+          location: warehouse.location
+          })
+          transactions = [...transactions,...transaction]
+
+        datas.push(newobject)
+        if(i++ == data.length){
+
+          var p1 =  new Promise(function (resolve, reject) {
+              console.log('ok sorted');
+              resolve(transactions.sort(function (a,b) {
+                console.log('whyw whuwhuw why why');
+                a = new Date(a.createdAt).getTime();
+                b = new Date(b.createdAt).getTime();
+                return a>b ? -1 : a<b ? 1 : 0;
+              }))
+            })
+            p1.then(function () {
+                res.json({success: true, data: datas, transactions: transactions})
+            })
+        }
+      })
+
+    })
+
   })
 }
 exports.transactionsVerificationPost = function(req,res,next){

@@ -35,6 +35,8 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/sweetalert2/6.1.1/sweetalert2.min.css">
 
 		<link rel="stylesheet" href="demos/app-landing/css/colors.css" type="text/css" />
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 	<!-- Document Title
 	============================================= -->
 
@@ -109,6 +111,25 @@
 
 								<div class="col-md-12">
 									<div class="table-responsive">
+										<div class="row">
+											<form class="navbar-form navbar-left" role="search">
+											  <div class="form-group">
+													<label for="">Filter By Date: </label>
+											    <input type="text" class="form-control" id="datepicker" name="date">
+											  </div>
+											  <button class="btn btn-default button button-3d button-rounded button-green" id="filter"><i class="icon-search "></i>Filter</button>
+												<button class="btn btn-default button button-3d button-rounded button-red" id="clear-filter"><i class="icon-refresh"></i>Clear Filter</button>
+											</form>
+											<!-- <div class="col-md-6">
+											<p>Filter By Date: <input type="text" id="datepicker" class="form-control"></p>
+											</div>
+											<div class="col-md-6">
+												<button class="button button-3d button-rounded button-green" data-toggle="modal" data-target="#myModal"><i class="icon-search "></i>Filter</button>
+												<button class="button button-3d button-rounded button-red" data-toggle="modal" data-target="#myModal"><i class="icon-trash "></i>Clear Filter</button>
+											</div> -->
+										</div>
+
+
 				<table class="table table-bordered table-striped">
 					<colgroup>
 						<col class="col-xs-1">
@@ -221,6 +242,7 @@
 	<!-- External JavaScripts
 	============================================= -->
 	<script type="text/javascript" src="js/jquery.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script type="text/javascript" src="js/plugins.js"></script>
 	<script src="https://cdn.jsdelivr.net/sweetalert2/6.1.1/sweetalert2.min.js"></script>
 	<script type="text/javascript" src="js/components/bs-datatable.js"></script>
@@ -231,9 +253,136 @@
 
 	<script>
 	$(document).ready(function() {
-
+		$( "#datepicker" ).datepicker({ dateFormat: 'mm-dd-yy' })
 		listTransaction()
+		$('#filter').unbind().on('click',function () {
+			listTransaction()
+		})
+		$('#filter').unbind().on('click',function () {
+			if ($('#datepicker').val() !== "") {
+				$.post({
+						url: "/api/transactions/",
+						data: {date: $('#datepicker').val()},
+						success: function(result) {
+							if(result.transactions.length > 0)	{
+								$('#list-transaction').children().remove()
+								for(var l =0 ;l<result.transactions.length;l++){
+									var status, verf, trtype
+									if(result.transactions[l].status == "UnPaid"){
+												status =  `<span class="label label-default">Unpaid</span>`
+								}else{
+									status =  `<span class="label label-success">Paid</span>`
+								}
+								/// set type
 
+								if(result.transactions[l].transactionsType == "Real"){
+											trtype =  `<span class="label label-info">Real</span>`
+							}else{
+								trtype =  `<span class="label label-warning">Estimation</span>`
+							}
+								//set verf
+								if(result.transactions[l].verification == "UnVerified"){
+											verf =  `<span class="label label-default">UnVerified</span>`
+							}else{
+								verf =  `<span class="label label-success">Verified</span>`
+							}
+								var date = new Date(result.transactions[l].createdAt)
+								var getMonth = date.getMonth()+1
+								var getDate = date.getDate()
+								var getYear = date.getYear()+1900
+								var getHours = date.getHours()
+								var getMinutes = date.getMinutes()
+								var getSeconds = date.getSeconds()
+								var price = String(result.transactions[l].nominal)
+								var priceDel = price.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+									var listdataHTML =
+									`
+												<tr data-trigger='hover' id=${result.transactions[l]._id} data-placement="top">
+													<td >${verf}</td>
+													<td>${getMonth+'-'+getDate+'-'+getYear}<br>${getHours+':'+getMinutes+':'+getSeconds}</td>
+													<td><span style="font-size:12px">PIC : ${result.transactions[l].userId.name}</span></td>
+													<td><button mark=${result.transactions[l]._id} class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Rp. ${priceDel}</button></td>
+													<td>${trtype}</td>
+													<td>${result.transactions[l].recipient}</td>
+													<td>${result.transactions[l].bank}<br>${result.transactions[l].account}</td>
+													<td >${result.transactions[l].notes}</td>
+													<td id=${result.transactions[l]._id}label>${status}</td>
+													<td><a href="#" data-id='${result.transactions[l]._id}'class="remove update-trx button  button-mini button-rounded button-green"  title="Update this item">Process</a>
+													</td>
+												</tr>
+									`
+								$('#list-transaction').prepend(listdataHTML)
+								}
+
+														$(".update-trx").click(function() {
+																updateTrx($(this).attr('data-id'))
+														})
+
+								$("button[class*='btn-primary']").each(function () {
+									var iddetail = $(this).attr('mark')
+
+									$(this).unbind().on('click',function () {
+										var contentdetailreload = `<div id='hoverdetailreload'><center><img src='/images/preloader@2x.gif' /></center></div>`
+										$(contentdetailreload).insertAfter('#modal-header')
+										$('#modal-body-detail').remove()
+										$('#modal-footer').remove()
+										$.get({
+											url: `/api/transactions/${iddetail}`,
+											success: function (result) {
+												var rowdetail = ''
+												var grandtotal = 0
+												for (var i = 0; i < result.data.items.length; i++) {
+													var total = result.data.items[i].totalprice
+													grandtotal += total
+													var totalprice = (total+"").replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+													rowdetail += `<tr>
+														<td>
+														${result.data.items[i].name}
+														</td>
+														<td>${result.data.items[i].price}</td>
+														<td>${result.data.items[i].quantity}</td>
+														<td>Rp. ${totalprice}</td>
+													</tr>`
+												}
+												var detailHTML = `<div class="modal-body" id="modal-body-detail">
+													<div class="table-responsive">
+																			<table class="table table-bordered table-striped">
+																				<colgroup>
+																				<col class="col-xs-3">
+																				<col class="col-xs-1">
+																				<col class="col-xs-2">
+																				<col class="col-xs-2">
+																				</colgroup>
+																				<thead>
+																				<tr>
+																					<th>Item Name</th>
+																					<th>Item Price</th>
+																					<th>Item Quantity</</th>
+																					<th>Item Total Price</</th>
+																				</tr>
+																				</thead>
+																				<tbody>
+																				${rowdetail}
+																				</tbody>
+
+																			</table>
+																			</div>
+												</div>
+												<div class="modal-footer" id="modal-footer">
+															<h5><b>Total Transaction : Rp. ${(grandtotal+'').replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")}</b>		</h5>
+												</div>`
+												$('#hoverdetailreload').remove()
+												$(detailHTML).insertAfter('#modal-header')
+											}
+										})
+									})
+								})
+							}
+						}
+				})
+			}
+
+		})
 
 
 		jQuery( "#tabs-profile" ).on( "tabsactivate", function( event, ui ) {
@@ -246,10 +395,7 @@
 		$.get({
 				url: "/api/transactions/",
 				success: function(result) {
-					for (var k in result.data){
-
-
-					}
+				$('#list-transaction').children().remove()
 					for(var l =0 ;l<result.transactions.length;l++){
 						var status, verf, trtype
 						if(result.transactions[l].status == "UnPaid"){
@@ -418,13 +564,7 @@ function updateTrx(id){
 		})
 	})
 })
-
-
-
-
-
-
-	}
+}
 
 	</script>
 
