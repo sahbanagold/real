@@ -112,7 +112,7 @@
 								<div class="col-md-12">
 									<div class="table-responsive">
 										<div class="row">
-											<form class="navbar-form navbar-left" role="search">
+											<form class="navbar-form navbar-left" role="search" id="form-filter">
 											  <div class="form-group">
 													<label for="">Filter By Date: </label>
 											    <input type="text" class="form-control" id="datepicker" name="date">
@@ -259,7 +259,9 @@
 			listTransaction()
 		})
 		$('#filter').unbind().on('click',function (e) {
-
+			$("#form-filter").submit(function(e){
+					event.preventDefault()
+			})
 			if ($('#datepicker').val() !== "") {
 				$.post({
 						url: "/api/transactions/filter",
