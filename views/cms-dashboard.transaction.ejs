@@ -255,10 +255,11 @@
 	$(document).ready(function() {
 		$( "#datepicker" ).datepicker({ dateFormat: 'mm-dd-yy' })
 		listTransaction()
-		$('#filter').unbind().on('click',function () {
+		$('#clear-filter').unbind().on('click',function () {
 			listTransaction()
 		})
-		$('#filter').unbind().on('click',function () {
+		$('#filter').unbind().on('click',function (e) {
+			
 			if ($('#datepicker').val() !== "") {
 				$.post({
 						url: "/api/transactions/",
