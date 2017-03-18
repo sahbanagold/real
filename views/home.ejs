@@ -998,13 +998,11 @@ function getLastMessageId() {
 		        success: function(result) {
 
 							lastMessageActive = result.data[result.data.length-1]
-							
-							var loadMoreButton = ` <div id='messages-load-more-div'>
-																				<br>
+
+							// <button class='button button-border button-large button-white button-light' id='messages-load-more-btn'>
+							var loadMoreButton = ` <div id='messages-load-more-btn' style='border-style: solid; border-width: 3px; border-radius:5px; border-color: #dff0d8; width:100%; cursor: pointer;'>
 																				<center>
-																					<button class='btn btn-primary' id='messages-load-more-btn'>
-																					<i class='glyphicon glyphicon-trash'></i>
-																					Load More </button>
+																					<span style='margin:0; padding:0; font-size: 20px; line-height: 50px; letter-spacing: 3px;'>LOAD MORE</span>
 																				</center>
 																			</div> `
 							$(loadMoreButton).insertAfter('#kotak-post')
@@ -1087,7 +1085,7 @@ function getLastMessageId() {
 				 </div>
 				 `
 
-				 $(insideHTML).insertBefore('#messages-load-more-div')
+				 $(insideHTML).insertBefore('#messages-load-more-btn')
 
 				 for (var j= 0 ; j< result.data[i].comments.length;j++){
 					 var commentHTML = `
