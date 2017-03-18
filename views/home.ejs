@@ -468,6 +468,8 @@ type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
 	<script>
 		var trindexdetail = 1
 		var itemsglobal = ""
+		var lastMessageActive = null
+		var lastMessage = null
 		function bindviewProfileMessage() {
 
 			$('.entry-image a img').each(function () {
@@ -486,6 +488,7 @@ type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
 			var trindex = 2
 			var trindexdetail = 1
 			getMessages()
+			getLastMessageId()
 			listgudang()
 			listItems()
 			bindprice()
@@ -907,11 +910,18 @@ function resultPost (result){
 	var nowtime = new Date()
 	var postedtime
 	var timeDiff = Math.abs(nowtime.getTime() - time.getTime());
+	var diffYears = Math.floor(timeDiff / (1000 * 3600 * 24 *365))
+	var diffMonths = Math.floor(timeDiff / (1000 * 3600 * 24 * 30))
 	var diffDays = Math.floor(timeDiff / (1000 * 3600 * 24))
 	var diffHours = Math.floor(timeDiff / (1000 * 3600))
 	var diffMinutes = Math.floor(timeDiff / (1000 * 60))
 	var diffSeconds = Math.ceil(timeDiff / (1000))
-	if(diffDays > 0){
+
+	if(diffYears > 0){
+		postedtime = `${diffYears} years ago`
+	}else if(diffMonths > 0){
+		postedtime = `${diffMonths} months ago`
+	}else if(diffDays > 0){
 		postedtime = `${diffDays} days ago`
 	} else if(diffHours > 0){
 		postedtime = `${diffHours} hours ago`
@@ -970,119 +980,169 @@ function resultPost (result){
 	bindcommentbox()
 	getlike()
 }
+
+// set The Last Message pointer comparison
+function getLastMessageId() {
+	$.get({
+		url: "/api/messages/lastMessage",
+		success: function(response){
+
+			if (response.success) lastMessage = response.data
+		}
+	})
+}
 ///////// List of function //////////
 		 function getMessages() {
 		    $.get({
 		        url: "/api/messages/",
 		        success: function(result) {
 
-							for (var i in result.data){
-								var time = new Date(result.data[i].createdAt)
-								var nowtime = new Date()
-								var postedtime
-								var timeDiff = Math.abs(nowtime.getTime() - time.getTime());
-								var diffDays = Math.floor(timeDiff / (1000 * 3600 * 24))
-								var diffHours = Math.floor(timeDiff / (1000 * 3600))
-								var diffMinutes = Math.floor(timeDiff / (1000 * 60))
-								var diffSeconds = Math.ceil(timeDiff / (1000))
-								if(diffDays > 0){
-									postedtime = `${diffDays} days ago`
-								} else if(diffHours > 0){
-									postedtime = `${diffHours} hours ago`
-								}else if(diffMinutes > 0){
-									postedtime = `${diffMinutes} minutes ago`
-								}else if(diffSeconds > 0){
-									postedtime = `${diffSeconds} seconds ago`
-								}
-
-								var imgsrc = result.data[i].userId.profilePicture || "/images/testimonials/1.jpg"
-								var imagemessage
-								if(result.data[i].image != ""){
-									imagemessage = `<img src='${result.data[i].image}'>`
-								}else{
-									imagemessage = ""
-								}
-
-				        var insideHTML =
-				        `
-								<div class="panel panel-success">
-									<div class="panel-heading">
-										<div class="spost clearfix">
-											<div class="entry-image">
-												<a class="nobg"><img class="img-circle" src=${imgsrc} alt="" data-toggle="modal" data-target="#modalprofilemessage"></a>
-											</div>
-											<div class="entry-c">
-												<div class="entry-title">
-													<h4><a href="#">${result.data[i].userId.name}</a></h4>
-												</div>
-												<ul class="entry-meta">
-													<li>${postedtime}</li>
-												</ul>
-											</div>
-										</div>
-									</div>
-									<div class="panel-body">
-									${result.data[i].content}<br>
-									${imagemessage}
-
-									</div>
-									<div class="panel-footer">
-
-									<a href="#${result.data[i]._id}likes" mark=${result.data[i]._id} class="leftmargin-sm comment-like-btn" id=${result.data[i]._id}btn-comment-like data-trigger='hover' data-placement="top"><i class="icon-like"></i> ${result.data[i].likes.length} Likes</a>
-									<a  mark=${result.data[i]._id} class="leftmargin-sm comment-list-btn" id=${result.data[i]._id}btn-comment-list><i class="icon-comments"></i> ${result.data[i].comments.length} Comments</a>
-									</div>
-											<div class="panel-footer" id=${result.data[i]._id}panel-footer>
-												<input type="text" id="template-contactform-subject" mark=${result.data[i]._id} name="template-contactform-subject" value="" class="required sm-form-control comment-box" aria-required="true">
-												<div class="spost clearfix" id=${result.data[i]._id}comment-list>
-											</div>
-
-										</div>
-
-								</div>
-								`
-								$(insideHTML).insertAfter('#kotak-post')
-
-								for (var j= 0 ; j< result.data[i].comments.length;j++){
-								var commentHTML = `
-								<div class="entry-image">
-									<a class="nobg"><img class="img-circle" src="${result.data[i].comments[j].commenter.profilePicture}" alt="" data-toggle="modal" data-target="#modalprofilemessage"></a>
-								</div>
-								<div class="entry-c">
-									<div class="entry-title">
-										<h4><a href="#">${result.data[i].comments[j].commenter.name}</a></h4>
-										${result.data[i].comments[j].comment}
-										<p></p>
-									</div>
-									<ul class="entry-meta">
-									</ul>
-								</div>
-								`
-
-								$(`#${result.data[i]._id}comment-list`).prepend(commentHTML)
-									}
-									$(`#${result.data[i]._id}comment-list`).hide()
-									$('.comment-list-btn').each(function(){
-										var id = $(this).attr('mark')
-										$(this).on('click',function () {
-											$(`#${id}comment-list`).show()
-										})
-									})
-									$('.comment-like-btn').each(function(){
-										var id = $(this).attr('mark')
-										$(this).on('click',function () {
-											addLike(id)
-										})
-									})
-
-									bindcommentbox()
-									bindviewProfileMessage()
-									getlike()
-									}
+							lastMessageActive = result.data[result.data.length-1]
+							
+							var loadMoreButton = ` <div id='messages-load-more-div'>
+																				<br>
+																				<center>
+																					<button class='btn btn-primary' id='messages-load-more-btn'>
+																					<i class='glyphicon glyphicon-trash'></i>
+																					Load More </button>
+																				</center>
+																			</div> `
+							$(loadMoreButton).insertAfter('#kotak-post')
+							createMessageElement(result)
+							$('#messages-load-more-btn').on('click',loadMoreListener)
 		        }
 		    })
 		 }
+		 function createMessageElement(result) {
+			 for (var i = 0; i < result.data.length; i++ ){
+				 var time = new Date(result.data[i].createdAt)
+				 var nowtime = new Date()
+				 var postedtime
+				 var timeDiff = Math.abs(nowtime.getTime() - time.getTime());
+				 var timeDiff = Math.abs(nowtime.getTime() - time.getTime());
+			 	var diffYears = Math.floor(timeDiff / (1000 * 3600 * 24 *365))
+			 	var diffMonths = Math.floor(timeDiff / (1000 * 3600 * 24 * 30))
+			 	var diffDays = Math.floor(timeDiff / (1000 * 3600 * 24))
+			 	var diffHours = Math.floor(timeDiff / (1000 * 3600))
+			 	var diffMinutes = Math.floor(timeDiff / (1000 * 60))
+			 	var diffSeconds = Math.ceil(timeDiff / (1000))
+
+			 	if(diffYears > 0){
+			 		postedtime = `${diffYears} years ago`
+			 	}else if(diffMonths > 0){
+			 		postedtime = `${diffMonths} months ago`
+			 	}else if(diffDays > 0){
+			 		postedtime = `${diffDays} days ago`
+			 	} else if(diffHours > 0){
+			 		postedtime = `${diffHours} hours ago`
+			 	}else if(diffMinutes > 0){
+			 		postedtime = `${diffMinutes} minutes ago`
+			 	}else if(diffSeconds > 0){
+			 		postedtime = `${diffSeconds} seconds ago`
+			 	}
+
+				 var imgsrc = result.data[i].userId.profilePicture || "/images/testimonials/1.jpg"
+				 var imagemessage
+				 if(result.data[i].image != ""){
+					 imagemessage = `<img src='${result.data[i].image}'>`
+				 }else{
+					 imagemessage = ""
+				 }
+
+				 var insideHTML =
+				 `
+				 <div class="panel panel-success">
+					 <div class="panel-heading">
+						 <div class="spost clearfix">
+							 <div class="entry-image">
+								 <a class="nobg"><img class="img-circle" src=${imgsrc} alt="" data-toggle="modal" data-target="#modalprofilemessage"></a>
+							 </div>
+							 <div class="entry-c">
+								 <div class="entry-title">
+									 <h4><a href="#">${result.data[i].userId.name}</a></h4>
+								 </div>
+								 <ul class="entry-meta">
+									 <li>${postedtime}</li>
+								 </ul>
+							 </div>
+						 </div>
+					 </div>
+					 <div class="panel-body">
+					 ${result.data[i].content}<br>
+					 ${imagemessage}
+
+					 </div>
+					 <div class="panel-footer">
+
+					 <a href="#${result.data[i]._id}likes" mark=${result.data[i]._id} class="leftmargin-sm comment-like-btn" id=${result.data[i]._id}btn-comment-like data-trigger='hover' data-placement="top"><i class="icon-like"></i> ${result.data[i].likes.length} Likes</a>
+					 <a  mark=${result.data[i]._id} class="leftmargin-sm comment-list-btn" id=${result.data[i]._id}btn-comment-list><i class="icon-comments"></i> ${result.data[i].comments.length} Comments</a>
+					 </div>
+							 <div class="panel-footer" id=${result.data[i]._id}panel-footer>
+								 <input type="text" id="template-contactform-subject" mark=${result.data[i]._id} name="template-contactform-subject" value="" class="required sm-form-control comment-box" aria-required="true">
+								 <div class="spost clearfix" id=${result.data[i]._id}comment-list>
+							 </div>
+
+						 </div>
+
+				 </div>
+				 `
+
+				 $(insideHTML).insertBefore('#messages-load-more-div')
+
+				 for (var j= 0 ; j< result.data[i].comments.length;j++){
+					 var commentHTML = `
+					 <div class="entry-image">
+						 <a class="nobg"><img class="img-circle" src="${result.data[i].comments[j].commenter.profilePicture}" alt="" data-toggle="modal" data-target="#modalprofilemessage"></a>
+					 </div>
+					 <div class="entry-c">
+						 <div class="entry-title">
+							 <h4><a href="#">${result.data[i].comments[j].commenter.name}</a></h4>
+							 ${result.data[i].comments[j].comment}
+							 <p></p>
+						 </div>
+						 <ul class="entry-meta">
+						 </ul>
+					 </div>
+					 `
+
+					 $(`#${result.data[i]._id}comment-list`).prepend(commentHTML)
+				 }
+				 $(`#${result.data[i]._id}comment-list`).hide()
+				 $('.comment-list-btn').each(function(){
+					 var id = $(this).attr('mark')
+					 $(this).on('click',function () {
+						 $(`#${id}comment-list`).show()
+					 })
+				 })
+				 $('.comment-like-btn').each(function(){
+					 var id = $(this).attr('mark')
+					 $(this).on('click',function () {
+						 addLike(id)
+					 })
+				 })
+
+				 bindcommentbox()
+				 bindviewProfileMessage()
+				 getlike()
+				 }
+		 }
+		 function loadMoreListener(e) {
+		 	e.preventDefault()
+			e.stopImmediatePropagation()
+			if(new Date(lastMessageActive.createdAt) > new Date(lastMessage.createdAt)){
+				$.get({
+					url:'/api/messages/loadMore/'+lastMessageActive._id,
+					success: function (response) {
+							if (response.success && response.data[0]) {
+								lastMessageActive = response.data[response.data.length-1]
+								createMessageElement(response)
+							}
+					}
+				})
+			}
+		 }
 		 function getlike() {
-			 console.log('you are here broo');
+
 			 $('.comment-like-btn').each(function (e) {
  				var idmessage = $(this).attr('mark')
 				$('#hoverdetail').html("")

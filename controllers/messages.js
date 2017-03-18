@@ -42,12 +42,62 @@ exports.AllMessagesGet = function(req,res,next){
   if (!req.isAuthenticated()) {
     return res.redirect('/');
   }
-    Messages.find({}).sort({date:-1}).populate('userId','name profilePicture').populate('comments.commenter','name profilePicture').exec((err,data) => {
+    Messages.find({})
+    .sort({createdAt:-1})
+    .populate('userId','name profilePicture')
+    .populate('comments.commenter','name profilePicture')
+    .limit(10)
+    .exec((err,data) => {
       if(err){
         console.log(err)
         return res.json({success: false, message: "message not found "})
       }
+
       res.json({success: true, data:data})
+    })
+}
+
+exports.loadMoreMessagesGet = function(req,res,next){
+  if (!req.isAuthenticated()) {
+    return res.redirect('/');
+  }
+    Messages
+      .findOne({_id:req.params.id})
+      .then(message=>{
+          if(message){
+            Messages.find({createdAt:{$lt:new Date(message.createdAt)}})
+            .sort({createdAt:-1})
+            .populate('userId','name profilePicture')
+            .populate('comments.commenter','name profilePicture')
+            .limit(10)
+            .exec((err,data) => {
+              if(err){
+                console.log(err)
+                return res.json({success: false, message: "message not found "})
+              }
+
+              res.json({success: true, data:data})
+            })
+          } else{
+            return res.json({success: false, message: "message not found "})
+          }
+      })
+
+}
+
+exports.lastMessageIdGet = function (req,res,next) {
+  if (!req.isAuthenticated()) {
+    return res.redirect('/');
+  }
+    Messages.findOne({})
+    .sort({createdAt:1})
+    .exec((err,data) => {
+      if(err){
+        console.log(err)
+        return res.json({success: false, message: "message not found "})
+      }
+
+      res.json({success: true,message:"last message data content", data:data, lastId: data._id})
     })
 }
 // exports.imageMessagesPost = function(req,res,next){

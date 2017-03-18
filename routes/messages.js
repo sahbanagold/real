@@ -2,8 +2,12 @@ let express = require('express');
 let router = express.Router();
 let messages = require('../controllers/messages')
 
-router.get('/:id',messages.MessagesGet)
+
 router.get('/',messages.AllMessagesGet)
+router.get('/lastMessage/',messages.lastMessageIdGet)
+router.get('/loadMore/:id',messages.loadMoreMessagesGet)
+router.get('/:id',messages.MessagesGet)
+
 router.delete('/:id',messages.MessagesDelete)
 router.post('/',messages.MessagesPost)
 // router.post('/image',messages.imageMessagesPost)
