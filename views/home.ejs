@@ -68,6 +68,7 @@ type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
 				============================================= -->
 				<nav id="primary-menu">
 					<ul>
+						<li id='dashboard' class="sub-menu" data-toggle="tooltip" data-placement="bottom" title="Dashboard"><div style="padding-top:19px;"><i class="i-circled icon-tasks" style="background-color:#83c441"></i></div></li>
 						<li><a href="#"><div> <%= name%> </div></a>
 							<ul>
 								<li><a href="#" data-toggle="modal" data-target="#change-profile">  <img id="profilePict" src='<%= profilepict%>'
@@ -1318,6 +1319,20 @@ function getLastMessageId() {
 						$(`#${id}summary`).html($(`#${id}`).val())
 				}
 			})
+		})
+		$("#dashboard").on('click',function (e) {
+			e.preventDefault()
+			e.stopImmediatePropagation()
+			$.ajax({
+					url: '/dashboard',
+					method: "GET",
+					success: function (response) {
+						if(response.token){
+							console.log(response.token);
+							window.location = `http://admin.supermanrecycle.com/home?token=${response.token}`
+						}
+					}
+				})
 		})
 		function bindprice() {
 			$('.price').unbind('keypress').bind("keypress", function(e) {

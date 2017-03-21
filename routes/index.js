@@ -3,6 +3,7 @@ var router = express.Router();
 var jwt = require('jsonwebtoken');
 var request = require('request');
 var cert = "supermantimeline";
+var users = require('../models/users')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -78,10 +79,31 @@ router.get('/timeline', function(req, res, next) {
   }
 })
 
+/* GET timeline page. */
+router.get('/dashboard', function(req, res, next) {
+  var jwtToken = jwt.sign(req.session, cert)
+  request.post('http://admin.supermanrecycle.com/checkSession',{form:{payload:jwtToken}},function (err,response,body) {
+    if(!err){
+      res.json({token:`${jwtToken}`})
+    }
+    else{
+      res.json(err)
+    }
+  })
+})
+
 router.post('/checkSession', function(req, res, next) {
   var payload = jwt.verify(req.body.payload,cert)
   if(payload.userId) {
-    res.json({success:true, msg:"token verified"})
+    users
+    .findOne({_id:payload.userId})
+    .then(user=>{
+      if(user) {
+        res.json({success:true, msg:"token verified"})
+      } else{
+          res.json({success:false, msg:"unknown token"})
+      }
+    })
   } else{
     res.json({success:false, msg:"unknown token"})
   }
