@@ -92,12 +92,12 @@ exports.lastMessageIdGet = function (req,res,next) {
     Messages.findOne({})
     .sort({createdAt:1})
     .exec((err,data) => {
-      if(err){
+      if(data){
+        res.json({success: true,message:"last message data content", data:data, lastId: data._id})
+      } else {
         console.log(err)
         return res.json({success: false, message: "message not found "})
       }
-
-      res.json({success: true,message:"last message data content", data:data, lastId: data._id})
     })
 }
 // exports.imageMessagesPost = function(req,res,next){
