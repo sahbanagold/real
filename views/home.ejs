@@ -1,627 +1,639 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en-US">
 
-<head>
-	<link href="http://fonts.googleapis.com/css?family=Poppins:300,400,400italic,600,700|Montserrat:400,700|Merriweather" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" href="/css/bootstrap.css" type="text/css" />
-	<link rel="stylesheet" href="/style.css" type="text/css" />
-	<link rel="stylesheet" href="/css/dark.css" type="text/css" />
+	<head>
+		<link href="http://fonts.googleapis.com/css?family=Poppins:300,400,400italic,600,700|Montserrat:400,700|Merriweather" rel="stylesheet" type="text/css"/>
+		<link rel="stylesheet" href="/css/bootstrap.css" type="text/css"/>
+		<link rel="stylesheet" href="/style.css" type="text/css"/>
+		<link rel="stylesheet" href="/css/dark.css" type="text/css"/>
 
-	<!-- Media Agency Demo Specific Stylesheet -->
-	<link rel="stylesheet" href="/demos/app-landing/app-landing.css" type="text/css" />
-	<!-- / -->
+		<!-- Media Agency Demo Specific Stylesheet -->
+		<link rel="stylesheet" href="/demos/app-landing/app-landing.css" type="text/css"/>
+		<!-- / -->
 
-	<link rel="stylesheet" href="/css/font-icons.css" type="text/css" />
-	<link rel="stylesheet" href="/one-page/css/et-line.css" type="text/css" />
-	<link rel="stylesheet" href="/css/animate.css" type="text/css" />
-	<link rel="stylesheet" href="/css/magnific-popup.css" type="text/css" />
+		<link rel="stylesheet" href="/css/font-icons.css" type="text/css"/>
+		<link rel="stylesheet" href="/one-page/css/et-line.css" type="text/css"/>
+		<link rel="stylesheet" href="/css/animate.css" type="text/css"/>
+		<link rel="stylesheet" href="/css/magnific-popup.css" type="text/css"/>
 
-	<link rel="stylesheet" href="/demos/app-landing/css/fonts.css" type="text/css" />
+		<link rel="stylesheet" href="/demos/app-landing/css/fonts.css" type="text/css"/>
 
-	<!-- Bootstrap Switch CSS -->
-	<link rel="stylesheet" href="/css/components/bs-switches.css" type="text/css" />
+		<!-- Bootstrap Switch CSS -->
+		<link rel="stylesheet" href="/css/components/bs-switches.css" type="text/css"/>
 
-	<link rel="stylesheet" href="/css/responsive.css" type="text/css" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<!--[if lt IE 9]>
-		<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
-	<![endif]-->
+		<link rel="stylesheet" href="/css/responsive.css" type="text/css"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<!--[if lt IE 9]> <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script> <![endif]-->
 
-		<link rel="stylesheet" href="/demos/app-landing/css/colors.css" type="text/css" />
+		<link rel="stylesheet" href="/demos/app-landing/css/colors.css" type="text/css"/>
 
-	<!-- Document Title
+		<!-- Document Title
 	============================================= -->
-	<title>Superman Application| Recycle Company</title>
+		<title>Superman Application| Recycle Company</title>
 
+		<!--Start of Zendesk Chat Script-->
+		<script type="text/javascript">
+			window.$zopim || (function (d, s) {
+				var z = $zopim = function (c) {
+						z._.push(c)
+					},
+					$ = z.s = d.createElement(s),
+					e = d.getElementsByTagName(s)[0];
+				z.set = function (o) {
+					z.set._.push(o)
+				};
+				z._ = [];
+				z.set._ = [];
+				$.async = !0;
+				$.setAttribute('charset', 'utf-8');
+				$.src = 'https://v2.zopim.com/?4PPbcLOYIPjnFuhkiWmiFE6R0Luv6Ayv';
+				z.t =+ new Date;
+				$.type = 'text/javascript';
+				e.parentNode.insertBefore($, e)
+			})(document, 'script');
+		</script>
+		<!--End of Zendesk Chat Script-->
+	</head>
 
-<!--Start of Zendesk Chat Script-->
-<script type="text/javascript">
-window.$zopim||(function(d,s){var z=$zopim=function(c){
-z._.push(c)},$=z.s=
-d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
-_.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
-$.src='https://v2.zopim.com/?4PPbcLOYIPjnFuhkiWmiFE6R0Luv6Ayv';z.t=+new Date;$.
-type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
-</script>
-<!--End of Zendesk Chat Script-->
-</head>
+	<body class="stretched">
 
-<body class="stretched">
+		<header id="header" class="full-header no-sticky">
 
+			<div id="header-wrap">
 
-	<header id="header" class="full-header no-sticky">
-
-		<div id="header-wrap">
-
-			<div class="container clearfix">
-
-				<div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
-
-				<!-- Logo
-				============================================= -->
-				<div id="logo">
-					<a href="/home" class="standard-logo" data-dark-logo="images/logo-super.svg"><img src="images/logo-super.svg" width="200"alt="Superman Logo"></a>
-					<a href="/home" class="retina-logo" data-dark-logo="images/logo-super.svg"><img src="images/logo-super.svg" width="200"alt="Superman Logo"></a>
-			</div><!-- #logo end -->
-
-				<!-- Primary Navigation
-				============================================= -->
-				<nav id="primary-menu">
-					<ul>
-						<li id='dashboard' class="sub-menu" data-toggle="tooltip" data-placement="bottom" title="Dashboard"><div style="padding-top:19px;"><i class="i-circled icon-tasks" style="background-color:#83c441"></i></div></li>
-						<li><a href="#"><div> <%= name%> </div></a>
-							<ul>
-								<li><a href="#" data-toggle="modal" data-target="#change-profile">  <img id="profilePict" src='<%= profilepict%>'
-								 class="" alt=""  width="30" height="30"> Change Profile</a></li>
-								<li><a href="/logout">Logout</a>
-
-								</li>
-							</ul>
-						</li>
-					</ul>
-				</nav><!-- #primary-menu end -->
-			</div>
-		</div>
-	</header><!-- #header end -->
-	<!-- Document Wrapper
-	============================================= -->
-	<div id="wrapper" class="clearfix">
-
-		<!-- Header
-		============================================= -->
-
-		<!-- #header end -->
-
-
-
-		<!-- Content
-		============================================= -->
-		<section id="content">
-
-			<div class="content-wrap">
 				<div class="container clearfix">
-					<div class="modal fade" id="change-profile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-body">
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" id="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-										<h4 class="modal-title" id="myModalLabel">Change Profile</h4>
-									</div>
 
-									<div class="modal-body">
-										<form action="/api/users/profile/upload" method="post" class="nobottommargin" enctype="multipart/form-data" id="formphoto">
-											<div class="col_full">
-												<label class="font-body capitalize" for="profile-form-modal-photo">Change Profile Picture</label>
-														<input type="file" id="profile-form-modal-photo" name="photo">
-											</div>
-											<div class="col_full nobottommargin">
-												<button class="button button-rounded nomargin" id="profile-form-modal-submit" name="register-form-modal-submit" type="submit" value="register">Submit</button>
-											</div>
-										</form>
+					<div id="primary-menu-trigger">
+						<i class="icon-reorder"></i>
+					</div>
+
+					<!-- Logo
+				============================================= -->
+					<div id="logo">
+						<a href="/home" class="standard-logo" data-dark-logo="images/logo-super.svg"><img src="images/logo-super.svg" width="200" alt="Superman Logo"></a>
+						<a href="/home" class="retina-logo" data-dark-logo="images/logo-super.svg"><img src="images/logo-super.svg" width="200" alt="Superman Logo"></a>
+					</div>
+					<!-- #logo end -->
+
+					<!-- Primary Navigation
+				============================================= -->
+					<nav id="primary-menu">
+						<ul>
+							<li id='dashboard' class="sub-menu" data-toggle="tooltip" data-placement="bottom" title="Dashboard">
+								<div style="padding-top:19px;">
+									<i class="i-circled icon-tasks" style="background-color:#83c441"></i>
+								</div>
+							</li>
+							<li>
+								<a href="#">
+									<div>
+										<%= name%>
 									</div>
-									<div class="modal-footer">
-										<span class"error"></span>
+								</a>
+								<ul>
+									<li>
+										<a href="#" data-toggle="modal" data-target="#change-profile">
+											<img id="profilePict" src='<%= profilepict%>' class="" alt="" width="30" height="30">
+											Change Profile</a>
+									</li>
+									<li>
+										<a href="/logout">Logout</a>
+
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</nav>
+					<!-- #primary-menu end -->
+				</div>
+			</div>
+		</header>
+		<!-- #header end -->
+		<!-- Document Wrapper
+	============================================= -->
+		<div id="wrapper" class="clearfix">
+
+			<!-- Header
+		============================================= -->
+
+			<!-- #header end -->
+
+			<!-- Content
+		============================================= -->
+			<section id="content">
+
+				<div class="content-wrap">
+					<div class="container clearfix">
+						<div class="modal fade" id="change-profile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-body">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" id="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+											<h4 class="modal-title" id="myModalLabel">Change Profile</h4>
+										</div>
+
+										<div class="modal-body">
+											<form action="/api/users/profile/upload" method="post" class="nobottommargin" enctype="multipart/form-data" id="formphoto">
+												<div class="col_full">
+													<label class="font-body capitalize" for="profile-form-modal-photo">Change Profile Picture</label>
+													<input type="file" id="profile-form-modal-photo" name="photo">
+												</div>
+												<div class="col_full nobottommargin">
+													<button class="button button-rounded nomargin" id="profile-form-modal-submit" name="register-form-modal-submit" type="submit" value="register">Submit</button>
+												</div>
+											</form>
+										</div>
+										<div class="modal-footer">
+											<span class"error"></span>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
 
+						<div class="col_three_fifth" id="content-list">
+							<div class="panel panel-default" id="kotak-post">
+								<div class="panel-body">
+									<div class="tabs clearfix ui-tabs ui-widget ui-widget-content ui-corner-all" id="tab-3">
 
+										<ul class="tab-nav tab-nav2 clearfix ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
+											<li class="ui-state-default ui-corner-top ui-tabs-active ui-state-active" role="tab" tabindex="0" aria-controls="tabs-9" aria-labelledby="ui-id-21" aria-selected="true" aria-expanded="true">
+												<a href="#tabs-post" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-21">
+													<i class="icon-home2 norightmargin"></i>
+												</a>
+											</li>
+											<li class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="tabs-10" aria-labelledby="ui-id-22" aria-selected="false" aria-expanded="false">
+												<a href="#tabs-transaction" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-22">Request Transaction</a>
+											</li>
 
-					<div class="col_three_fifth" id="content-list" >
-						<div class="panel panel-default" id="kotak-post">
-							<div class="panel-body">
-								<div class="tabs clearfix ui-tabs ui-widget ui-widget-content ui-corner-all" id="tab-3">
-
-									<ul class="tab-nav tab-nav2 clearfix ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
-										<li class="ui-state-default ui-corner-top ui-tabs-active ui-state-active" role="tab" tabindex="0" aria-controls="tabs-9" aria-labelledby="ui-id-21" aria-selected="true" aria-expanded="true"><a href="#tabs-post" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-21"><i class="icon-home2 norightmargin"></i></a></li>
-										<li class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="tabs-10" aria-labelledby="ui-id-22" aria-selected="false" aria-expanded="false"><a href="#tabs-transaction" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-22">Request Transaction</a></li>
-
-									</ul>
-									<div class="tab-container">
-										<div class="tab-content clearfix ui-tabs-panel ui-widget-content ui-corner-bottom" id="tabs-post" aria-labelledby="ui-id-21" role="tabpanel" aria-hidden="false" style="display: block;">
-											<form  id="form-message" action="" name="image-message" enctype="multipart/form-data">
-												<textarea class="required sm-form-control" id="content-text" name="content-text" rows="6" cols="30" aria-required="true"></textarea>
+										</ul>
+										<div class="tab-container">
+											<div class="tab-content clearfix ui-tabs-panel ui-widget-content ui-corner-bottom" id="tabs-post" aria-labelledby="ui-id-21" role="tabpanel" aria-hidden="false" style="display: block;">
+												<form id="form-message" action="" name="image-message" enctype="multipart/form-data">
+													<textarea class="required sm-form-control" id="content-text" name="content-text" rows="6" cols="30" aria-required="true"></textarea>
 													<div class="image-upload">
-													    <label for="file-input">
-													        <i class="icon-line-camera" style="font-size:20px"></i> Upload
-													    </label>
-													    <input id="file-input" type="file" name="photo" style="display:none"/>
+														<label for="file-input">
+															<i class="icon-line-camera" style="font-size:20px"></i>
+															Upload
+														</label>
+														<input id="file-input" type="file" name="photo" style="display:none"/>
 													</div>
 													<!-- <div class="col-md-6">
 														<br>
 														<input id="input-11" name="input11[]" type="file" multiple class="file-loading" accept="image/*">
 													</div> -->
 
+													<button type="submit" id="post-message" class="button button-3d button-small button-rounded button-green fright topmargin-sm">Post</a>
 
-												<button type="submit" id="post-message" class="button button-3d button-small button-rounded button-green fright topmargin-sm">Post</a>
+												</form>
 
-											</form>
+											</div>
 
-										</div>
+											<div class="tab-content clearfix ui-tabs-panel ui-widget-content ui-corner-bottom " id="tabs-transaction" aria-labelledby="ui-id-22" role="tabpanel" aria-hidden="true" style="display: none;">
+												<div id="processTabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all ">
+													<ul class="process-steps bottommargin clearfix ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
+														<li id="li1" class="ui-state-default ui-corner-top ui-tabs-active ui-state-active" role="tab" tabindex="0" aria-controls="ptab1" aria-labelledby="ui-id-1" aria-selected="true" aria-expanded="true">
+															<button href="#ptab1" disabled="disabled" class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-1">1</button>
+															<h5>Items Detail</h5>
+														</li>
+														<li id="li2" class="ui-state-default ui-corner-top ui-state-disabled" role="tab" tabindex="-1" aria-controls="ptab2" aria-labelledby="ui-id-2" aria-selected="false" aria-expanded="false">
+															<button href="#ptab2" disabled="disabled" class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-2">2</button>
+															<h5>Account Detail</h5>
+														</li>
+														<li id="li3" class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="ptab3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false">
+															<button href="#ptab3" disabled="disabled" class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-3">3</button>
+															<h5>Summary</h5>
+														</li>
+														<li id="li4" class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="ptab4" aria-labelledby="ui-id-4" aria-selected="false" aria-expanded="false">
+															<button href="#ptab4" disabled="disabled" class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-4">4</button>
+															<h5>Complete</h5>
+														</li>
+													</ul>
+													<form role="form" id="ajaxform" method="POST" action="/api/transactions">
+														<div id="ptab1" aria-labelledby="ui-id-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-hidden="false" style="display: block;">
 
+															<h2 class="center">Input Your Transaction In Here !</h2>
 
-										<div class="tab-content clearfix ui-tabs-panel ui-widget-content ui-corner-bottom " id="tabs-transaction" aria-labelledby="ui-id-22" role="tabpanel" aria-hidden="true" style="display: none;">
-											<div id="processTabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all ">
-												<ul class="process-steps bottommargin clearfix ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
-							<li id="li1" class="ui-state-default ui-corner-top ui-tabs-active ui-state-active" role="tab" tabindex="0" aria-controls="ptab1" aria-labelledby="ui-id-1" aria-selected="true" aria-expanded="true">
-								<button href="#ptab1"   disabled="disabled"   class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-1">1</button>
-								<h5>Items Detail</h5>
-							</li>
-							<li id="li2" class="ui-state-default ui-corner-top ui-state-disabled" role="tab" tabindex="-1" aria-controls="ptab2" aria-labelledby="ui-id-2" aria-selected="false" aria-expanded="false">
-								<button href="#ptab2"   disabled="disabled"   class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-2">2</button>
-								<h5>Account Detail</h5>
-							</li>
-							<li id="li3" class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="ptab3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false">
-								<button href="#ptab3"   disabled="disabled"   class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-3">3</button>
-								<h5>Summary</h5>
-							</li>
-							<li id="li4" class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="ptab4" aria-labelledby="ui-id-4" aria-selected="false" aria-expanded="false">
-								<button href="#ptab4" disabled="disabled"   class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-4">4</button>
-								<h5>Complete</h5>
-							</li>
-						</ul>
-												<form role="form" id="ajaxform" method="POST" action="/api/transactions">
-													<div id="ptab1" aria-labelledby="ui-id-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-hidden="false" style="display: block;">
+															<div class="table-responsive">
 
-														<h2 class="center">Input Your Transaction In Here !</h2>
+																<table class="table cart">
+																	<thead>
+																		<tr>
+																			<th class="cart-product-name">Items</th>
+																			<th class="cart-product-price">Unit Price</th>
+																			<th class="cart-product-quantity">Quantity</th>
+																			<th class="cart-product-subtotal">Total</th>
+																		</tr>
+																	</thead>
+																	<tbody>
+																		<tr class="cart_item">
+																			<td class="cart-product-name" id="itemnameinput1"></td>
 
-														<div class="table-responsive">
+																			<td class="cart-product-price">
+																				<span class="amount">IDR
+																					<input class="price" mark="1" type="text" id="1price" name="itemprice" size="5"></span>
+																			</td>
 
-															<table class="table cart">
-																<thead>
-																	<tr>
-																		<th class="cart-product-name">Items</th>
-																		<th class="cart-product-price">Unit Price</th>
-																		<th class="cart-product-quantity">Quantity</th>
-																		<th class="cart-product-subtotal">Total</th>
-																	</tr>
-																</thead>
-																<tbody>
-																	<tr class="cart_item">
-																		<td class="cart-product-name" id="itemnameinput1">
-																		</td>
+																			<td class="cart-product-quantity">
+																				<div class="clearfix">
 
-																		<td class="cart-product-price">
-																			<span class="amount">IDR <input class="price" mark="1" type="text" id="1price" name="itemprice" size="5"></span>
-																		</td>
+																					<span class="amount">
+																						<input class="quantity" mark="1" type="text" id="1quantity" name="quantity" size="5">
+																						KG</span>
 
-																		<td class="cart-product-quantity">
-																			<div class="clearfix">
+																				</div>
+																			</td>
 
-																				<span class="amount"> <input class="quantity" mark="1" type="text" id="1quantity" name="quantity" size="5"> KG</span>
+																			<td class="cart-product-subtotal">
+																				<span class="amount">IDR
+																					<b id="1">0</b>
+																					<b>,00</b>
+																				</span>
+																				<input type="hidden" id="1total" name="totalprice">
+																			</td>
+																		</tr>
+																		<tr class="cart_item">
 
-																			</div>
-																		</td>
+																			<td class="cart-product-name" id="itemnameinput2"></td>
 
-																		<td class="cart-product-subtotal">
-																			<span class="amount">IDR <b id="1">0</b><b>,00</b></span>
-																			<input type="hidden" id="1total" name="totalprice">
-																		</td>
-																	</tr>
-																	<tr class="cart_item">
+																			<td class="cart-product-price">
+																				<span class="amount">IDR
+																					<input class="price" mark="2" type="text" id="2price" name="itemprice" size="5"></span>
+																			</td>
 
+																			<td class="cart-product-quantity">
+																				<div class="clearfix">
 
-																		<td class="cart-product-name" id="itemnameinput2">
+																					<span class="amount">
+																						<input class="quantity" mark="2" type="text" id="2quantity" name="quantity" size="5">
+																						KG</span>
 
-																		</td>
+																				</div>
+																			</td>
 
-																		<td class="cart-product-price">
-																			<span class="amount">IDR <input class="price" mark="2" type="text" id="2price" name="itemprice" size="5"></span>
-																		</td>
+																			<td class="cart-product-subtotal">
+																				<span class="amount">IDR
+																					<b id="2">0</b>
+																					<b>,00</b>
+																				</span>
+																				<input type="hidden" id="2total" name="totalprice">
+																			</td>
+																		</tr>
 
-																		<td class="cart-product-quantity">
-																			<div class="clearfix">
+																		<tr id="btnadd">
+																			<td></td>
+																			<td></td>
+																			<td></td>
+																			<td></td>
 
-																				<span class="amount"> <input class="quantity" mark="2" type="text" id="2quantity" name="quantity" size="5"> KG</span>
+																		</tr>
 
-																			</div>
-																		</td>
-
-																		<td class="cart-product-subtotal">
-																			<span class="amount">IDR <b id="2">0</b><b>,00</b></span>
-																			<input type="hidden" id="2total" name="totalprice">
-																		</td>
-																	</tr>
-
-																	<tr id="btnadd">
-																		<td>
-																		</td>
-																		<td>
-																		</td>
-																		<td>
-																		</td>
-																		<td></td>
-
-
-																	</tr>
-
-
-																	<div class="col-xs-6">
+																		<div class="col-xs-6">
 																			<label class="font-body capitalize" for="transactions-type">Transactions Type</label>
-																		<select id="transactions-type" name="type" value="" class="form-control selectpicker">
-																		<option value="" selected="selected"></option>
-																		<option value="Real">Real</option>
-																		<option value="Estimation">Estimation</option>
-																		</select>
-																	</div>
-																	<div class="col-xs-6">
-																		<span id="btn-plus" class="fright"><i class="i-circled icon-line-circle-plus" style="background-color:#83c441"></i></span>
-																	</div>
+																			<select id="transactions-type" name="type" value="" class="form-control selectpicker">
+																				<option value="" selected="selected"></option>
+																				<option value="Real">Real</option>
+																				<option value="Estimation">Estimation</option>
+																			</select>
+																		</div>
+																		<div class="col-xs-6">
+																			<span id="btn-plus" class="fright">
+																				<i class="i-circled icon-line-circle-plus" style="background-color:#83c441"></i>
+																			</span>
+																		</div>
 
+																	</tbody>
 
+																</table>
 
-																</tbody>
+															</div>
 
-															</table>
+															<a href="#" id="checkoutbtn" class="button button-3d nomargin fright tab-linker" rel="2">Checkout ⇒</a>
 
 														</div>
+														<div id="ptab2" aria-labelledby="ui-id-2" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-hidden="true" style="display: none;">
+															<div class="form-group">
+																<label for="inputText">Nama Penerima</label>
+																<input type="text" class="form-control detail-rekening" id="penerima" name="penerima" placeholder="Rony">
+															</div>
+															<div class="form-group">
+																<label for="inputText">Nomor Rekening</label>
+																<input type="text" class="form-control detail-rekening" id="rekening" name="rekening" placeholder="1234 4567 1239 8457">
+															</div>
+															<div class="form-group">
+																<label for="inputText">Nama Bank</label>
+																<input type="text" class="form-control detail-rekening" id="bank" name="bank" placeholder="BRI">
+															</div>
+															<div class="form-group">
+																<label for="inputText">Nominal</label>
+																<input type="text" class="form-control detail-rekening" id="nominal" name="nominal" placeholder="5000000">
+															</div>
 
-														<a href="#" id="checkoutbtn" class="button button-3d nomargin fright tab-linker" rel="2">Checkout ⇒</a>
+															<div class="form-group">
+																<label>Keterangan</label>
+																<textarea id="keterangan" class="form-control detail-rekening" placeholder="Tambahkan keterangan..." value="test keterangan" name="keterangan" rows="3"></textarea>
+															</div>
 
-													</div>
-													<div id="ptab2" aria-labelledby="ui-id-2" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-hidden="true" style="display: none;">
-														<div class="form-group">
-			                        <label for="inputText" >Nama Penerima</label>
-			                          <input type="text" class="form-control detail-rekening" id="penerima" name="penerima" placeholder="Rony">
-			                      </div>
-			                      <div class="form-group">
-			                        <label for="inputText">Nomor Rekening</label>
-			                          <input type="text" class="form-control detail-rekening" id="rekening" name="rekening" placeholder="1234 4567 1239 8457">
-			                      </div>
-			                      <div class="form-group">
-			                        <label for="inputText">Nama Bank</label>
-			                          <input type="text" class="form-control detail-rekening" id="bank" name="bank" placeholder="BRI">
-			                      </div>
-			                      <div class="form-group">
-			                        <label for="inputText">Nominal</label>
-			                        <input type="text" class="form-control detail-rekening" id="nominal" name="nominal" placeholder="5000000">
-			                      </div>
+															<div class="line"></div>
+															<a id="previous1" href="#" class="button button-3d nomargin tab-linker" rel="1">Previous</a>
+															<a id="nextbtn" href="#" class="button button-3d nomargin fright tab-linker" rel="3">Next</a>
+														</div>
+														<div id="ptab3" aria-labelledby="ui-id-3" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-hidden="true" style="display: none;">
+															<div class="form-group">
+																<label for="inputText" class="control-label">Nama Penerima</label>
+																<label class="control-label">:</label>
+																<label id="penerimasummary"></label>
+															</div>
+															<div class="form-group">
+																<label for="inputText" class="control-label">Nomor Rekening</label>
+																<label class="control-label">:</label>
+																<label id="rekeningsummary"></label>
+															</div>
+															<div class="form-group">
+																<label for="inputText" class="control-label">Nama Bank</label>
+																<label class="control-label">:</label>
+																<label id="banksummary"></label>
+															</div>
+															<div class="form-group">
+																<label for="inputText" class="control-label">Nominal</label>
+																<label class="control-label">:</label>
+																<label id="nominalsummary"></label>
+															</div>
+															<div class="form-group">
+																<label for="inputText" class="control-label">Transactions Type</label>
+																<label class="control-label">:</label>
+																<label id="trtype"></label>
+															</div>
+															<div class="form-group">
+																<label class="control-label">Keterangan</label>
+																<label class="control-label">:</label>
+																<label id="keterangansummary"></label>
+															</div>
+															<table class="table">
+																<caption id="tablecaption">Detail Item</caption>
+																<thead>
+																	<tr>
+																		<th></th>
+																		<th>Nama Item</th>
+																		<th>Harga (Rp)</th>
+																		<th>Quantity (Kg)</th>
+																		<th>Total Harga Item (Rp)</th>
+																	</tr>
+																</thead>
+																<tbody id="tabeldetail"></tbody>
+															</table>
+															<div class="line"></div>
+															<a href="#" id='previous2' class="button button-3d nomargin tab-linker" rel="2">Previous</a>
+															<button id="order" class="button button-3d nomargin fright tab-linker" rel="4">Complete Order</button>
+														</div>
+														<div id="ptab4" aria-labelledby="ui-id-4" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-hidden="true" style="display: none;"></div>
+													</form>
+												</div>
+											</div>
+											<div class="tab-content clearfix ui-tabs-panel ui-widget-content ui-corner-bottom" id="tabs-11" aria-labelledby="ui-id-23" role="tabpanel" aria-hidden="true" style="display: none;">
+												<p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per
+													conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
+												Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna
+												ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum.
+												Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.
+											</div>
+											<div class="tab-content clearfix ui-tabs-panel ui-widget-content ui-corner-bottom" id="tabs-12" aria-labelledby="ui-id-24" role="tabpanel" aria-hidden="true" style="display: none;">
+												Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere,
+												felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.
+											</div>
 
-			                      <div class="form-group">
-			                        <label>Keterangan</label>
-			                        <textarea id="keterangan" class="form-control detail-rekening" placeholder="Tambahkan keterangan..." value="test keterangan" name="keterangan" rows="3"></textarea>
-			                      </div>
+										</div>
 
-														<div class="line"></div>
-														<a id="previous1" href="#" class="button button-3d nomargin tab-linker" rel="1">Previous</a>
-														<a id="nextbtn" href="#" class="button button-3d nomargin fright tab-linker" rel="3" >Next</a>
-													</div>
-													<div id="ptab3" aria-labelledby="ui-id-3" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-hidden="true" style="display: none;">
-														<div class="form-group">
-			                        <label for="inputText" class="control-label">Nama Penerima</label>
-			                        <label class="control-label">:</label>
-			                        <label id="penerimasummary"></label>
-			                      </div>
-			                      <div class="form-group">
-			                        <label for="inputText" class="control-label">Nomor Rekening</label>
-			                        <label class="control-label">:</label>
-			                        <label id="rekeningsummary"></label>
-			                      </div>
-			                      <div class="form-group">
-			                        <label for="inputText" class="control-label">Nama Bank</label>
-			                        <label class="control-label">:</label>
-															<label id="banksummary"></label>
-			                      </div>
-			                      <div class="form-group">
-			                        <label for="inputText" class="control-label">Nominal</label>
-			                        <label class="control-label">:</label>
-															<label id="nominalsummary"></label>
-			                      </div>
-														<div class="form-group">
-			                        <label for="inputText" class="control-label">Transactions Type</label>
-			                        <label class="control-label">:</label>
-															<label id="trtype"></label>
-			                      </div>
-			                      <div class="form-group">
-			                        <label class="control-label">Keterangan</label>
-			                        <label class="control-label">:</label>
-															<label id="keterangansummary"></label>
-			                      </div>
-			                      <table class="table">
-			                  <caption id="tablecaption">Detail Item</caption>
-			                  <thead>
-			                    <tr>
-			                      <th></th>
-			                      <th>Nama Item</th>
-			                      <th>Harga (Rp)</th>
-			                      <th>Quantity (Kg)</th>
-			                      <th>Total Harga Item (Rp)</th>
-			                    </tr>
-			                  </thead>
-			                  <tbody id="tabeldetail">
-			                  </tbody>
-			                </table>
-														<div class="line"></div>
-														<a href="#" id='previous2' class="button button-3d nomargin tab-linker" rel="2">Previous</a>
-														<button id="order" class="button button-3d nomargin fright tab-linker" rel="4">Complete Order</button>
-													</div>
-													<div id="ptab4" aria-labelledby="ui-id-4" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-hidden="true" style="display: none;">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col_two_fifth col_last  nomargin" id="listgudang"></div>
 
-													</div>
-												</form>
+					</div>
+				</div>
+
+			</section>
+			<!-- #content end -->
+			<div id="modalprofilemessage" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-body">
+						<div class="modal-content">
+							<div class="modal-header" id="modal-header-message">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Footer
+		============================================= -->
+			<footer id="footer" style="background-color: #FFF;">
+
+				<div class="container">
+
+					<!-- Footer Widgets
+				============================================= -->
+					<div class="footer-widgets-wrap clearfix">
+						<div class="row clearfix">
+
+							<div class="col-md-5">
+
+								<div class="widget clearfix">
+									<div class="row clearfix">
+
+										<div class="">
+											Copyrights &copy; 2016 All Rights Reserved by ivangerard.com<br>
+											<div class="copyright-links">
+												<a href="#">Terms of Use</a>
+												/
+												<a href="#">Privacy Policy</a>
+												/
+												<a href="/cms-transaction">Admin Panel</a>
 											</div>
 										</div>
-										<div class="tab-content clearfix ui-tabs-panel ui-widget-content ui-corner-bottom" id="tabs-11" aria-labelledby="ui-id-23" role="tabpanel" aria-hidden="true" style="display: none;">
-											<p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per
-												conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
-											Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna
-											ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum.
-											Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.
-										</div>
-										<div class="tab-content clearfix ui-tabs-panel ui-widget-content ui-corner-bottom" id="tabs-12" aria-labelledby="ui-id-24" role="tabpanel" aria-hidden="true" style="display: none;">
-											Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis
-											lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.
-										</div>
 
 									</div>
-
 								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col_two_fifth col_last  nomargin" id="listgudang">
 
-
-					</div>
-
-
-
-
-
-				</div>
-			</div>
-
-		</section>
-		<!-- #content end -->
-		<div id="modalprofilemessage" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-sm">
-				<div class="modal-body">
-					<div class="modal-content">
-						<div class="modal-header" id="modal-header-message">
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						</div>
-
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- Footer
-		============================================= -->
-		<footer id="footer" style="background-color: #FFF;">
-
-			<div class="container">
-
-				<!-- Footer Widgets
-				============================================= -->
-				<div class="footer-widgets-wrap clearfix">
-					<div class="row clearfix">
-
-						<div class="col-md-5">
-
-							<div class="widget clearfix">
-								<div class="row clearfix">
-
-									<div class="">
-										Copyrights &copy; 2016 All Rights Reserved by ivangerard.com<br>
-										<div class="copyright-links"><a href="#">Terms of Use</a> / <a href="#">Privacy Policy</a> / <a href="/cms-transaction">Admin Panel</a></div>
-									</div>
-
-								</div>
 							</div>
 
 						</div>
-
-
-
 					</div>
+
 				</div>
 
-			</div>
-
-			<!-- Copyrights
+				<!-- Copyrights
 			============================================= -->
 
+			</footer>
+			<!-- #footer end -->
 
-		</footer>
-		<!-- #footer end -->
+		</div>
+		<!-- #wrapper end -->
 
-	</div>
-	<!-- #wrapper end -->
-
-	<!-- Go To Top
+		<!-- Go To Top
 	============================================= -->
-	<div id="gotoTop" class="icon-angle-up"></div>
+		<div id="gotoTop" class="icon-angle-up"></div>
 
-	<!-- External JavaScripts
+		<!-- External JavaScripts
 	============================================= -->
-	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/plugins.js"></script>
-	<script type="text/javascript" src="js/components/bs-filestyle.js"></script>
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/plugins.js"></script>
+		<script type="text/javascript" src="js/components/bs-filestyle.js"></script>
 
-
-	<!-- Footer Scripts
+		<!-- Footer Scripts
 	============================================= -->
-	<script type="text/javascript" src="js/functions.js"></script>
+		<script type="text/javascript" src="js/functions.js"></script>
 
-	<script>
-		var trindexdetail = 1
-		var itemsglobal = ""
-		var lastMessageActive = null
-		var lastMessage = null
-		function bindviewProfileMessage() {
-
-			$('.entry-image a img').each(function () {
-				var imgsrc = $(this).attr('src')
-				$(this).bind('click',function () {
-					viewProfileMessage(imgsrc)
-				})
-			})
-		}
-		function viewProfileMessage(image) {
-			$('#profilemessage').remove()
-			var contentdetailreload = `<div id='profilemessage'><center><img src='${image}' /></center></div>`
-			$(contentdetailreload).insertAfter('#modal-header-message')
-		}
-		jQuery(document).ready(function($) {
-			var trindex = 2
+		<script>
 			var trindexdetail = 1
-			getMessages()
-			getLastMessageId()
-			listgudang()
-			listItems()
-			bindprice()
-			bindquantity()
+			var itemsglobal = ""
+			var lastMessageActive = null
+			var lastMessage = null
+			function bindviewProfileMessage() {
 
-			$('#previous1').unbind().on('click',function () {
-				ptab1btn()
-			})
-			$('#previous2').unbind().on('click',function () {
-				ptab2btn()
-			})
-			$("#li1").html(`
+				$('.entry-image a img').each(function () {
+					var imgsrc = $(this).attr('src')
+					$(this).bind('click', function () {
+						viewProfileMessage(imgsrc)
+					})
+				})
+			}
+			function viewProfileMessage(image) {
+				$('#profilemessage').remove()
+				var contentdetailreload = `<div id='profilemessage'><center><img src='${image}' /></center></div>`
+				$(contentdetailreload).insertAfter('#modal-header-message')
+			}
+			jQuery(document).ready(function ($) {
+				var trindex = 2
+				var trindexdetail = 1
+				getMessages()
+				getLastMessageId()
+				listgudang()
+				listItems()
+				bindprice()
+				bindquantity()
+
+				$('#previous1').unbind().on('click', function () {
+					ptab1btn()
+				})
+				$('#previous2').unbind().on('click', function () {
+					ptab2btn()
+				})
+				$("#li1").html(`
 			<a href="#ptab1" class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-1">1</a>
 			<h5>Items Detail</h5>`)
-			// <li id="li1" class="ui-state-default ui-corner-top ui-tabs-active ui-state-active" role="tab" tabindex="0" aria-controls="ptab1" aria-labelledby="ui-id-1" aria-selected="true" aria-expanded="true">
-			// 	<a href="#ptab1" class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-1">1</a>
-			// 	<h5>Items Detail</h5>
-			// </li>
-			// <li id="li2" class="ui-state-default ui-corner-top ui-state-disabled" role="tab" tabindex="-1" aria-controls="ptab2" aria-labelledby="ui-id-2" aria-selected="false" aria-expanded="false">
-			// 	<a href="#ptab2" class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-2">2</a>
-			// 	<h5>Account Detail</h5>
-			// </li>
-			// <li id="li3" class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="ptab3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false">
-			// 	<button href="#ptab3"   disabled="disabled"   class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-3">3</button>
-			// 	<h5>Summary</h5>
-			// </li>
-			// <li id="li4" class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="ptab4" aria-labelledby="ui-id-4" aria-selected="false" aria-expanded="false">
-			// 	<button href="#ptab4" disabled="disabled"   class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-4">4</button>
-			// 	<h5>Complete</h5>
-			// </li>
-			function ptab1btn() {
-				$("#li1").html(`
+				// <li id="li1" class="ui-state-default ui-corner-top ui-tabs-active ui-state-active" role="tab" tabindex="0" aria-controls="ptab1" aria-labelledby="ui-id-1" aria-selected="true" aria-expanded="true"> 	<a href="#ptab1" class="i-circled i-bordered
+				// i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-1">1</a> 	<h5>Items Detail</h5> </li> <li id="li2" class="ui-state-default ui-corner-top ui-state-disabled" role="tab" tabindex="-1" aria-controls="ptab2"
+				// aria-labelledby="ui-id-2" aria-selected="false" aria-expanded="false"> 	<a href="#ptab2" class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-2">2</a> 	<h5>Account Detail</h5> </li> <li id="li3"
+				// class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="ptab3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false"> 	<button href="#ptab3"   disabled="disabled"   class="i-circled i-bordered i-alt divcenter
+				// ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-3">3</button> 	<h5>Summary</h5> </li> <li id="li4" class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="ptab4" aria-labelledby="ui-id-4" aria-selected="false"
+				// aria-expanded="false"> 	<button href="#ptab4" disabled="disabled"   class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-4">4</button> 	<h5>Complete</h5> </li>
+				function ptab1btn() {
+					$("#li1").html(`
 				<a href="#ptab1" class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-1">1</a>
 				<h5>Items Detail</h5>`)
-				$("#li1").attr("aria-expanded","true")
-				$("#li1").attr("aria-selected","true")
-				$("#li2").attr("aria-expanded","false")
-				$("#li2").attr("aria-selected","false")
-				$("#li3").attr("aria-expanded","false")
-				$("#li3").attr("aria-selected","false")
-				$("#li3").removeClass("ui-state-active")
-				$("#li3").removeClass("ui-tabs-active")
-				$("#li2").removeClass("ui-state-active")
-				$("#li2").removeClass("ui-tabs-active")
-				$("#li1").addClass("ui-state-active")
-				$("#li1").addClass("ui-tabs-active")
-				$("#ptab3").attr("aria-hidden","true")
-				$("#ptab2").attr("aria-hidden","true")
-				$("#ptab1").attr("aria-hidden","false")
-				$("#ptab2").css("display","none")
-				$("#ptab3").css("display","none")
-				$("#ptab1").css("display","block")
-			}
-			$('#checkoutbtn').unbind().on('click',function () {
-				ptab2btn()
-			})
-			$("#nextbtn").on('click',function () {
-				if($('#penerima').val() == "" || $('#rekening').val() == "" || $('#bank').val() == "" || $('#nominal').val() == "" ){
-					return
+					$("#li1").attr("aria-expanded", "true")
+					$("#li1").attr("aria-selected", "true")
+					$("#li2").attr("aria-expanded", "false")
+					$("#li2").attr("aria-selected", "false")
+					$("#li3").attr("aria-expanded", "false")
+					$("#li3").attr("aria-selected", "false")
+					$("#li3").removeClass("ui-state-active")
+					$("#li3").removeClass("ui-tabs-active")
+					$("#li2").removeClass("ui-state-active")
+					$("#li2").removeClass("ui-tabs-active")
+					$("#li1").addClass("ui-state-active")
+					$("#li1").addClass("ui-tabs-active")
+					$("#ptab3").attr("aria-hidden", "true")
+					$("#ptab2").attr("aria-hidden", "true")
+					$("#ptab1").attr("aria-hidden", "false")
+					$("#ptab2").css("display", "none")
+					$("#ptab3").css("display", "none")
+					$("#ptab1").css("display", "block")
 				}
-				$("#li3").html(`
+				$('#checkoutbtn').unbind().on('click', function () {
+					ptab2btn()
+				})
+				$("#nextbtn").on('click', function () {
+					if ($('#penerima').val() == "" || $('#rekening').val() == "" || $('#bank').val() == "" || $('#nominal').val() == "") {
+						return
+					}
+					$("#li3").html(`
 				<a href="#ptab3" class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-3">3</a>
 				<h5>Summary</h5>`)
-				$("#li2").attr("aria-expanded","false")
-				$("#li2").attr("aria-selected","false")
-				$("#li3").attr("aria-expanded","true")
-				$("#li3").attr("aria-selected","true")
-				$("#li2").removeClass("ui-state-active")
-				$("#li2").removeClass("ui-tabs-active")
-				$("#li3").addClass("ui-state-active")
-				$("#li3").addClass("ui-tabs-active")
-				$("#ptab2").attr("aria-hidden","true")
-				$("#ptab3").attr("aria-hidden","false")
-				$("#ptab2").css("display","none")
-				$("#ptab3").css("display","block")
+					$("#li2").attr("aria-expanded", "false")
+					$("#li2").attr("aria-selected", "false")
+					$("#li3").attr("aria-expanded", "true")
+					$("#li3").attr("aria-selected", "true")
+					$("#li2").removeClass("ui-state-active")
+					$("#li2").removeClass("ui-tabs-active")
+					$("#li3").addClass("ui-state-active")
+					$("#li3").addClass("ui-tabs-active")
+					$("#ptab2").attr("aria-hidden", "true")
+					$("#ptab3").attr("aria-hidden", "false")
+					$("#ptab2").css("display", "none")
+					$("#ptab3").css("display", "block")
 
-			})
-			function ptab2btn() {
-				$("#li2").html(`
+				})
+				function ptab2btn() {
+					$("#li2").html(`
 				<a href="#ptab2" class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-2">2</a>
 				<h5>Account Detail</h5>`)
-				$("#li2").attr("aria-expanded","true")
-				$("#li2").attr("aria-selected","true")
-				$("#li3").attr("aria-expanded","false")
-				$("#li3").attr("aria-selected","false")
-				$("#li3").removeClass("ui-state-active")
-				$("#li3").removeClass("ui-tabs-active")
-				$("#li1").removeClass("ui-state-active")
-				$("#li1").removeClass("ui-tabs-active")
-				$("#li2").addClass("ui-state-active")
-				$("#li2").addClass("ui-tabs-active")
-				$("#ptab2").attr("aria-hidden","true")
-				$("#ptab3").attr("aria-hidden","false")
-				$("#ptab2").css("display","block")
-				$("#ptab3").css("display","none")
-				$("#ptab1").css("display","none")
-			}
-			function btnptab3() {
-				$("#li4").html(`
+					$("#li2").attr("aria-expanded", "true")
+					$("#li2").attr("aria-selected", "true")
+					$("#li3").attr("aria-expanded", "false")
+					$("#li3").attr("aria-selected", "false")
+					$("#li3").removeClass("ui-state-active")
+					$("#li3").removeClass("ui-tabs-active")
+					$("#li1").removeClass("ui-state-active")
+					$("#li1").removeClass("ui-tabs-active")
+					$("#li2").addClass("ui-state-active")
+					$("#li2").addClass("ui-tabs-active")
+					$("#ptab2").attr("aria-hidden", "true")
+					$("#ptab3").attr("aria-hidden", "false")
+					$("#ptab2").css("display", "block")
+					$("#ptab3").css("display", "none")
+					$("#ptab1").css("display", "none")
+				}
+				function btnptab3() {
+					$("#li4").html(`
 				<a href="#ptab4" class="i-circled i-bordered i-alt divcenter ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-4">4</a>
 				<h5>Complete</h5>`)
-				$("#li2").attr("aria-expanded","false")
-				$("#li2").attr("aria-selected","false")
-				$("#li3").attr("aria-expanded","false")
-				$("#li3").attr("aria-selected","false")
-				$("#li4").attr("aria-expanded","true")
-				$("#li4").attr("aria-selected","true")
-				$("#li2").removeClass("ui-state-active")
-				$("#li3").removeClass("ui-state-active")
-				$("#li2").removeClass("ui-state-active")
-				$("#li3").removeClass("ui-tabs-active")
-				$("#li4").addClass("ui-tabs-active")
-				$("#li4").addClass("ui-state-active")
-				$("#ptab2").attr("aria-hidden","true")
-				$("#ptab3").attr("aria-hidden","true")
-				$("#ptab4").attr("aria-hidden","false")
-				$("#ptab2").css("display","none")
-				$("#ptab3").css("display","none")
-				$("#ptab4").css("display","block")
-			}
+					$("#li2").attr("aria-expanded", "false")
+					$("#li2").attr("aria-selected", "false")
+					$("#li3").attr("aria-expanded", "false")
+					$("#li3").attr("aria-selected", "false")
+					$("#li4").attr("aria-expanded", "true")
+					$("#li4").attr("aria-selected", "true")
+					$("#li2").removeClass("ui-state-active")
+					$("#li3").removeClass("ui-state-active")
+					$("#li2").removeClass("ui-state-active")
+					$("#li3").removeClass("ui-tabs-active")
+					$("#li4").addClass("ui-tabs-active")
+					$("#li4").addClass("ui-state-active")
+					$("#ptab2").attr("aria-hidden", "true")
+					$("#ptab3").attr("aria-hidden", "true")
+					$("#ptab4").attr("aria-hidden", "false")
+					$("#ptab2").css("display", "none")
+					$("#ptab3").css("display", "none")
+					$("#ptab4").css("display", "block")
+				}
 
-			$("#input-11").fileinput({
-				maxFileCount: 10,
-				allowedFileTypes: ["image", "video"]
-			});
+				$("#input-11").fileinput({
+					maxFileCount: 10,
+					allowedFileTypes: ["image", "video"]
+				});
 
-			$("#btn-plus").on("click", function(event) {
-				var newtr = `<tr class="cart_item">
+				$("#btn-plus").on("click", function (event) {
+					var newtr = `<tr class="cart_item">
 
 
 					<td class="cart-product-name">
-					<select id=${++trindex}item mark=${trindex} name="itemname" value="" class="selectpicker form-control item">
+					<select id=${++ trindex}item mark=${trindex} name="itemname" value="" class="selectpicker form-control item">
 					${itemsglobal}
 					</select>
 					</td>
@@ -645,128 +657,123 @@ type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
 					$(newtr).insertBefore('#btnadd')
 					bindprice()
 					bindquantity()
-			})
-			$("#post-message").unbind().on("click", function(event) {
-				event.preventDefault()
-				if($('#file-input').val() || $("#content-text").val()) uploadimagemessage($('#form-message'))
-			})
-			function cleartotal() {
-				$("b").each(function () {
-					$(this).html("")
 				})
-			}
-			function uploadimagemessage(image) {
-				var form = document.forms.namedItem("image-message")
-				var formData = new FormData(form)
-				formData.append("content",$("#content-text").val())
+				$("#post-message").unbind().on("click", function (event) {
+					event.preventDefault()
+					if ($('#file-input').val() || $("#content-text").val())
+						uploadimagemessage($('#form-message'))
+				})
+				function cleartotal() {
+					$("b").each(function () {
+						$(this).html("")
+					})
+				}
+				function uploadimagemessage(image) {
+					var form = document.forms.namedItem("image-message")
+					var formData = new FormData(form)
+					formData.append("content", $("#content-text").val())
 
-				$.ajax({
+					$.ajax({
 						url: '/api/messages',
 						type: 'POST',
-						data:  formData,
+						data: formData,
 						dataType: 'json',
-						mimeType:"multipart/form-data",
+						mimeType: "multipart/form-data",
 						contentType: false,
 						cache: false,
-						processData:false,
-						success:function(result, textStatus, jqXHR)
-						{
-							$('input,textarea').each(function(e){
-							$(this).val("")
+						processData: false,
+						success: function (result, textStatus, jqXHR) {
+							$('input,textarea').each(function (e) {
+								$(this).val("")
 							})
 							resultPost(result)
 						},
-						error: function(jqXHR, textStatus, errorThrown)
-						{
-								//if fails
+						error: function (jqXHR, textStatus, errorThrown) {
+							//if fails
 						}
-				});
-			}
-			function postMessage(content) {
-				var form = document.forms.namedItem("image-message")
-				var formData = new FormData(form)
-				formData.append("content",content)
-				$.ajax({
+					});
+				}
+				function postMessage(content) {
+					var form = document.forms.namedItem("image-message")
+					var formData = new FormData(form)
+					formData.append("content", content)
+					$.ajax({
 						url: '/api/messages',
 						type: 'POST',
-						data:  formData,
+						data: formData,
 						dataType: 'json',
-						mimeType:"multipart/form-data",
+						mimeType: "multipart/form-data",
 						contentType: false,
 						cache: false,
-						processData:false,
-						success: function(result) {
-										 $(".removeLater").val('');
-										resultPost(result)
-								}
-						})
-			}
-			$('#transactions-type').bind('change', function() {
+						processData: false,
+						success: function (result) {
+							$(".removeLater").val('');
+							resultPost(result)
+						}
+					})
+				}
+				$('#transactions-type').bind('change', function () {
 					$('#trtype').html($(this).val())
-			 });
-			$("#profile-form-modal-submit").unbind().on("click", function(event) {
-				$("#formphoto").submit(function(e){
+				});
+				$("#profile-form-modal-submit").unbind().on("click", function (event) {
+					$("#formphoto").submit(function (e) {
 						event.preventDefault()
 						e.preventDefault()
 
 						var formObj = $(this);
-				    var formURL = formObj.attr("action");
-				    var formData = new FormData(this);
+						var formURL = formObj.attr("action");
+						var formData = new FormData(this);
 
-				    $.ajax({
-				        url: formURL,
-				    		type: 'POST',
-				        data:  formData,
-								dataType: 'json',
-				    		mimeType:"multipart/form-data",
-								contentType: false,
-							 	cache: false,
-							 	processData:false,
-								success:function(result, textStatus, jqXHR)
-								{
-									$("#profilePict").attr("src",result.data.profilePicture)
-									$('#close').trigger( "click" )
-								},
-								error: function(jqXHR, textStatus, errorThrown)
-								{
-										//if fails
-								}
+						$.ajax({
+							url: formURL,
+							type: 'POST',
+							data: formData,
+							dataType: 'json',
+							mimeType: "multipart/form-data",
+							contentType: false,
+							cache: false,
+							processData: false,
+							success: function (result, textStatus, jqXHR) {
+								$("#profilePict").attr("src", result.data.profilePicture)
+								$('#close').trigger("click")
+							},
+							error: function (jqXHR, textStatus, errorThrown) {
+								//if fails
+							}
 						});
 
+					})
+					$("#formphoto").submit()
 				})
-				$("#formphoto").submit()
-			})
-			$("#order").unbind().on("click", function(event) {
-				btnptab3()
-				$("#ajaxform").submit(function(e)
-				{
+				$("#order").unbind().on("click", function (event) {
+					btnptab3()
+					$("#ajaxform").submit(function (e) {
 						var postData = $(this).serializeArray();
-						 $('#ptab4').html(`<div><center><img src='/images/preloader@2x.gif' /></center></div>`)
+						$('#ptab4').html(`<div><center><img src='/images/preloader@2x.gif' /></center></div>`)
 
 						var formURL = $(this).attr("action");
-						$.ajax(
-						{
-								url : formURL,
-								type: "POST",
-								data : postData,
-								success:function(result, textStatus, jqXHR)
-								{
-										if(result.success){
+						$.ajax({
+							url: formURL,
+							type: "POST",
+							data: postData,
+							success: function (result, textStatus, jqXHR) {
+								console.log(result);
+								if (result.success) {
 
-											$('#ptab4').html(`<div class="alert alert-success" >
+									$('#ptab4').html(`<div class="alert alert-success" >
 												<strong>Thank You.</strong> Your order will be processed once you verify the request Payment.
 												Please check your email to verify your request.
 											</div>`)
-											var itemdetail = ""
-											for (var i = 0; i < result.data.items.length; i++) {
-												var totalprice = (result.data.items[i].totalprice+"").replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
-												itemdetail += `Item Name: <b>${result.data.items[i].name}</b><br>
+									var itemdetail = ""
+									for (var i = 0; i < result.data.items.length; i++) {
+										var totalprice = (result.data.items[i].totalprice + "").replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+										itemdetail += `Item Name: <b>${result.data.items[i].name}</b><br>
 												Item Price: <b>${result.data.items[i].price}</b><br>
 												Item Quantity: <b>${result.data.items[i].quantity}</b><br>
 												Total Price: <b>Rp. ${totalprice}</b><br><br>`
-											}
-											var totalsetor = (result.data.nominal+"").replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
-											var content = `<b>${result.data.userId.name}</b> request Payment to:<br>
+									}
+									var totalsetor = (result.data.nominal + "").replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+									var content = `<b>${result.data.userId.name}</b> request Payment to:<br>
 											------------------------<br>
 											Penerima: <b>${result.data.recipient}</b><br>
 											Account: <b>${result.data.account}</b><br>
@@ -778,166 +785,170 @@ type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
 											Item Details:<br>
 											------------------------<br>
 											${itemdetail}`
-											var status = `<span class="label label-success">${result.data.status}</span>`
-											if (result.data.status == 'UnPaid') status = `<span class="label label-danger">${result.data.status}</span>`
-											var listrequestHTML = `
+									var status = `<span class="label label-success">${result.data.status}</span>`
+									if (result.data.status == 'UnPaid')
+										status = `<span class="label label-danger">${result.data.status}</span>`
+									var listrequestHTML = `
 											<tr>
-												<td>${~~($(`#${result.warehouseId}bodylistgudang tr`).length+1)}</td>
+												<td>${ ~~ ($(`#${result.warehouseId}bodylistgudang tr`).length + 1)}</td>
 												<td>${result.data.userId.name}</td>
 												<td>IDR ${totalsetor}</td>
 												<td>${status}</td>
 											</tr>`
-											$(`#${result.data.userId._id}bodylistgudang`).append(listrequestHTML)
-											$('input,textarea').each(function(e){
-											$(this).val("")
-											$(this).trigger('keyup')
-											})
-											postMessage(content)
-										} else{
-											$('#ptab4').html(`<div class="alert alert-danger" >
+									$(`#${result.data.userId._id}bodylistgudang`).append(listrequestHTML)
+									$('input,textarea').each(function (e) {
+										$(this).val("")
+										$(this).trigger('keyup')
+									})
+									postMessage(content)
+								} else {
+									$('#ptab4').html(`<div class="alert alert-danger" >
 												<strong>Sorry.</strong> Your order not Aproved,  Please Check Inputs Detail.
 											</div>`)
-										}
-										setTimeout(function functionName() {
-											ptab1btn()
-											cleartotal()
-											$('#tabeldetail').html("")
-											$("#li4").removeClass("ui-tabs-active")
-											$('#ptab4').html("")
-										},1700)
-								},
-								error: function(jqXHR, textStatus, errorThrown)
-								{
-										//if fails
 								}
+								setTimeout(function functionName() {
+									ptab1btn()
+									cleartotal()
+									$('#tabeldetail').html("")
+									$("#li4").removeClass("ui-tabs-active")
+									$('#ptab4').html("")
+								}, 1700)
+							},
+							error: function (jqXHR, textStatus, errorThrown) {
+								//if fails
+							}
 						});
 						e.preventDefault()
+					})
+					$("#ajaxform").submit()
 				})
-				$("#ajaxform").submit()
-			})
-			$( "#processTabs" ).tabs({ show: { effect: "fade", duration: 400 } });
-			$( ".tab-linker" ).click(function() {
-				$( "#processTabs" ).tabs("option", "active", $(this).attr('rel') - 1)
-				return false
-			})
+				$("#processTabs").tabs({
+					show: {
+						effect: "fade",
+						duration: 400
+					}
+				});
+				$(".tab-linker").click(function () {
+					$("#processTabs").tabs("option", "active", $(this).attr('rel') - 1)
+					return false
+				})
 
+				function pricingSwitcher(elementCheck, elementParent, elementPricing) {
+					elementParent.find('.pts-left,.pts-right').removeClass('pts-switch-active');
+					elementPricing.find('.pts-switch-content-left,.pts-switch-content-right').addClass('hidden');
 
-			function pricingSwitcher(elementCheck, elementParent, elementPricing) {
-				elementParent.find('.pts-left,.pts-right').removeClass('pts-switch-active');
-				elementPricing.find('.pts-switch-content-left,.pts-switch-content-right').addClass('hidden');
-
-				if (elementCheck.filter(':checked').length > 0) {
-					elementParent.find('.pts-right').addClass('pts-switch-active');
-					elementPricing.find('.pts-switch-content-right').removeClass('hidden');
-				} else {
-					elementParent.find('.pts-left').addClass('pts-switch-active');
-					elementPricing.find('.pts-switch-content-left').removeClass('hidden');
+					if (elementCheck.filter(':checked').length > 0) {
+						elementParent.find('.pts-right').addClass('pts-switch-active');
+						elementPricing.find('.pts-switch-content-right').removeClass('hidden');
+					} else {
+						elementParent.find('.pts-left').addClass('pts-switch-active');
+						elementPricing.find('.pts-switch-content-left').removeClass('hidden');
+					}
 				}
-			}
 
-			$('.pts-switcher').each(function() {
-				var element = $(this),
-					elementCheck = element.find(':checkbox'),
-					elementParent = $(this).parents('.pricing-tenure-switcher'),
-					elementPricing = $(elementParent.attr('data-container'));
+				$('.pts-switcher').each(function () {
+					var element = $(this),
+						elementCheck = element.find(':checkbox'),
+						elementParent = $(this).parents('.pricing-tenure-switcher'),
+						elementPricing = $(elementParent.attr('data-container'));
 
-				pricingSwitcher(elementCheck, elementParent, elementPricing);
-
-				elementCheck.on('change', function() {
 					pricingSwitcher(elementCheck, elementParent, elementPricing);
+
+					elementCheck.on('change', function () {
+						pricingSwitcher(elementCheck, elementParent, elementPricing);
+					});
+				});
+
+				// Get Started From Validation
+				var getStartedForm = $('#get-started-form'),
+					getStartedFormAlert = getStartedForm.attr('data-alert-type'),
+					getStartedFormLoader = getStartedForm.attr('data-loader'),
+					getStartedFormResult = getStartedForm.find('.contact-form-result'),
+					getStartedFormRedirect = getStartedForm.attr('data-redirect');
+
+				getStartedForm.validate({
+					submitHandler: function (form) {
+
+						getStartedFormResult.hide();
+
+						if (getStartedFormLoader == 'button') {
+							var defButton = $(form).find('button'),
+								defButtonText = defButton.html();
+
+							defButton.html('<i class="icon-line-loader icon-spin nomargin"></i>');
+						} else {
+							$(form).find('.form-process').fadeIn();
+						}
+
+						$(form).ajaxSubmit({
+							target: getStartedFormResult,
+							dataType: 'json',
+							resetForm: true,
+							success: function (data) {
+
+								if (getStartedFormLoader == 'button') {
+									defButton.html(defButtonText);
+								} else {
+									$(form).find('.form-process').fadeOut();
+								}
+								if (data.alert != 'error' && getStartedFormRedirect) {
+									window.location.replace(getStartedFormRedirect);
+									return true;
+								}
+								if (getStartedFormAlert == 'inline') {
+									if (data.alert == 'error') {
+										var alertType = 'alert-danger';
+									} else {
+										var alertType = 'alert-success';
+									}
+
+									getStartedFormResult.addClass('alert ' + alertType).html(data.message).slideDown(400);
+								} else {
+									getStartedFormResult.attr('data-notify-type', data.alert).attr('data-notify-msg', data.message).html('');
+									SEMICOLON.widget.notifications(getStartedFormResult);
+								}
+							}
+						});
+					}
+				});
+				$('[data-pricing-plan]').click(function () {
+					getStartedForm.find('#get-started-form-package').val($(this).attr('data-pricing-plan'));
+					getStartedForm.find('#modal-get-started-package').html($(this).attr('data-pricing-plan'));
 				});
 			});
+			//////////////////////////
+			function resultPost(result) {
+				var time = new Date(result.data.createdAt)
+				var nowtime = new Date()
+				var postedtime
+				var timeDiff = Math.abs(nowtime.getTime() - time.getTime());
+				var diffYears = Math.floor(timeDiff / (1000 * 3600 * 24 * 365))
+				var diffMonths = Math.floor(timeDiff / (1000 * 3600 * 24 * 30))
+				var diffDays = Math.floor(timeDiff / (1000 * 3600 * 24))
+				var diffHours = Math.floor(timeDiff / (1000 * 3600))
+				var diffMinutes = Math.floor(timeDiff / (1000 * 60))
+				var diffSeconds = Math.ceil(timeDiff / (1000))
 
-			// Get Started From Validation
-			var getStartedForm = $('#get-started-form'),
-				getStartedFormAlert = getStartedForm.attr('data-alert-type'),
-				getStartedFormLoader = getStartedForm.attr('data-loader'),
-				getStartedFormResult = getStartedForm.find('.contact-form-result'),
-				getStartedFormRedirect = getStartedForm.attr('data-redirect');
-
-			getStartedForm.validate({
-				submitHandler: function(form) {
-
-					getStartedFormResult.hide();
-
-					if (getStartedFormLoader == 'button') {
-						var defButton = $(form).find('button'),
-							defButtonText = defButton.html();
-
-						defButton.html('<i class="icon-line-loader icon-spin nomargin"></i>');
-					} else {
-						$(form).find('.form-process').fadeIn();
-					}
-
-					$(form).ajaxSubmit({
-						target: getStartedFormResult,
-						dataType: 'json',
-						resetForm: true,
-						success: function(data) {
-
-							if (getStartedFormLoader == 'button') {
-								defButton.html(defButtonText);
-							} else {
-								$(form).find('.form-process').fadeOut();
-							}
-							if (data.alert != 'error' && getStartedFormRedirect) {
-								window.location.replace(getStartedFormRedirect);
-								return true;
-							}
-							if (getStartedFormAlert == 'inline') {
-								if (data.alert == 'error') {
-									var alertType = 'alert-danger';
-								} else {
-									var alertType = 'alert-success';
-								}
-
-								getStartedFormResult.addClass('alert ' + alertType).html(data.message).slideDown(400);
-							} else {
-								getStartedFormResult.attr('data-notify-type', data.alert).attr('data-notify-msg', data.message).html('');
-								SEMICOLON.widget.notifications(getStartedFormResult);
-							}
-						}
-					});
+				if (diffYears > 0) {
+					postedtime = `${diffYears} years ago`
+				} else if (diffMonths > 0) {
+					postedtime = `${diffMonths} months ago`
+				} else if (diffDays > 0) {
+					postedtime = `${diffDays} days ago`
+				} else if (diffHours > 0) {
+					postedtime = `${diffHours} hours ago`
+				} else if (diffMinutes > 0) {
+					postedtime = `${diffMinutes} minutes ago`
+				} else if (diffSeconds > 0) {
+					postedtime = `${diffSeconds} seconds ago`
 				}
-			});
-			$('[data-pricing-plan]').click(function() {
-				getStartedForm.find('#get-started-form-package').val($(this).attr('data-pricing-plan'));
-				getStartedForm.find('#modal-get-started-package').html($(this).attr('data-pricing-plan'));
-			});
-		});
-//////////////////////////
-function resultPost (result){
-	var time = new Date(result.data.createdAt)
-	var nowtime = new Date()
-	var postedtime
-	var timeDiff = Math.abs(nowtime.getTime() - time.getTime());
-	var diffYears = Math.floor(timeDiff / (1000 * 3600 * 24 *365))
-	var diffMonths = Math.floor(timeDiff / (1000 * 3600 * 24 * 30))
-	var diffDays = Math.floor(timeDiff / (1000 * 3600 * 24))
-	var diffHours = Math.floor(timeDiff / (1000 * 3600))
-	var diffMinutes = Math.floor(timeDiff / (1000 * 60))
-	var diffSeconds = Math.ceil(timeDiff / (1000))
-
-	if(diffYears > 0){
-		postedtime = `${diffYears} years ago`
-	}else if(diffMonths > 0){
-		postedtime = `${diffMonths} months ago`
-	}else if(diffDays > 0){
-		postedtime = `${diffDays} days ago`
-	} else if(diffHours > 0){
-		postedtime = `${diffHours} hours ago`
-	}else if(diffMinutes > 0){
-		postedtime = `${diffMinutes} minutes ago`
-	}else if(diffSeconds > 0){
-		postedtime = `${diffSeconds} seconds ago`
-	}
-	var imagemessage = ""
-	if(result.data.image != ""){
-		imagemessage = `<img src='${result.data.image}'>`
-	}else{
-		imagemessage = ""
-	}
-	var insidePost = `
+				var imagemessage = ""
+				if (result.data.image != "") {
+					imagemessage = `<img src='${result.data.image}'>`
+				} else {
+					imagemessage = ""
+				}
+				var insidePost = `
 	<div class="panel panel-success">
 		<div class="panel-heading">
 			<div class="spost clearfix">
@@ -971,85 +982,86 @@ function resultPost (result){
 			</div>
 	</div>
 	`
-	$(insidePost).insertAfter('#kotak-post')
-	$('.comment-like-btn').each(function(){
-		var id = $(this).attr('mark')
-		$(this).on('click',function () {
-			addLike(id)
-		})
-	})
-	bindcommentbox()
-	getlike()
-}
+				$(insidePost).insertAfter('#kotak-post')
+				$('.comment-like-btn').each(function () {
+					var id = $(this).attr('mark')
+					$(this).on('click', function () {
+						addLike(id)
+					})
+				})
+				bindcommentbox()
+				getlike()
+			}
 
-// set The Last Message pointer comparison
-function getLastMessageId() {
-	$.get({
-		url: "/api/messages/lastMessage",
-		success: function(response){
+			// set The Last Message pointer comparison
+			function getLastMessageId() {
+				$.get({
+					url: "/api/messages/lastMessage",
+					success: function (response) {
 
-			if (response.success) lastMessage = response.data
-		}
-	})
-}
-///////// List of function //////////
-		 function getMessages() {
-		    $.get({
-		        url: "/api/messages/",
-		        success: function(result) {
+						if (response.success)
+							lastMessage = response.data
+					}
+				})
+			}
+			///////// List of function //////////
+			function getMessages() {
+				$.get({
+					url: "/api/messages/",
+					success: function (result) {
+						console.log(result);
 
-							lastMessageActive = result.data[result.data.length-1]
+						lastMessageActive = result.data[result.data.length - 1]
 
-							// <button class='button button-border button-large button-white button-light' id='messages-load-more-btn'>
-							var loadMoreButton = ` <div id='messages-load-more-btn' style='border-style: solid; border-width: 3px; border-radius:5px; border-color: #dff0d8; width:100%; cursor: pointer;'>
+						// <button class='button button-border button-large button-white button-light' id='messages-load-more-btn'>
+						var loadMoreButton = ` <div id='messages-load-more-btn' style='border-style: solid; border-width: 3px; border-radius:5px; border-color: #dff0d8; width:100%; cursor: pointer;'>
 																				<center>
 																					<span style='margin:0; padding:0; font-size: 20px; line-height: 50px; letter-spacing: 3px;'>LOAD MORE</span>
 																				</center>
 																			</div> `
-							$(loadMoreButton).insertAfter('#kotak-post')
-							createMessageElement(result)
-							$('#messages-load-more-btn').on('click',loadMoreListener)
-		        }
-		    })
-		 }
-		 function createMessageElement(result) {
-			 for (var i = 0; i < result.data.length; i++ ){
-				 var time = new Date(result.data[i].createdAt)
-				 var nowtime = new Date()
-				 var postedtime
-				 var timeDiff = Math.abs(nowtime.getTime() - time.getTime());
-				 var timeDiff = Math.abs(nowtime.getTime() - time.getTime());
-			 	var diffYears = Math.floor(timeDiff / (1000 * 3600 * 24 *365))
-			 	var diffMonths = Math.floor(timeDiff / (1000 * 3600 * 24 * 30))
-			 	var diffDays = Math.floor(timeDiff / (1000 * 3600 * 24))
-			 	var diffHours = Math.floor(timeDiff / (1000 * 3600))
-			 	var diffMinutes = Math.floor(timeDiff / (1000 * 60))
-			 	var diffSeconds = Math.ceil(timeDiff / (1000))
+						$(loadMoreButton).insertAfter('#kotak-post')
+						createMessageElement(result)
+						$('#messages-load-more-btn').on('click', loadMoreListener)
+					}
+				})
+			}
+			function createMessageElement(result) {
+				for (var i = 0; i < result.data.length; i++) {
+					var time = new Date(result.data[i].createdAt)
+					var nowtime = new Date()
+					var postedtime
+					var timeDiff = Math.abs(nowtime.getTime() - time.getTime());
+					var timeDiff = Math.abs(nowtime.getTime() - time.getTime());
+					var diffYears = Math.floor(timeDiff / (1000 * 3600 * 24 * 365))
+					var diffMonths = Math.floor(timeDiff / (1000 * 3600 * 24 * 30))
+					var diffDays = Math.floor(timeDiff / (1000 * 3600 * 24))
+					var diffHours = Math.floor(timeDiff / (1000 * 3600))
+					var diffMinutes = Math.floor(timeDiff / (1000 * 60))
+					var diffSeconds = Math.ceil(timeDiff / (1000))
 
-			 	if(diffYears > 0){
-			 		postedtime = `${diffYears} years ago`
-			 	}else if(diffMonths > 0){
-			 		postedtime = `${diffMonths} months ago`
-			 	}else if(diffDays > 0){
-			 		postedtime = `${diffDays} days ago`
-			 	} else if(diffHours > 0){
-			 		postedtime = `${diffHours} hours ago`
-			 	}else if(diffMinutes > 0){
-			 		postedtime = `${diffMinutes} minutes ago`
-			 	}else if(diffSeconds > 0){
-			 		postedtime = `${diffSeconds} seconds ago`
-			 	}
+					if (diffYears > 0) {
+						postedtime = `${diffYears} years ago`
+					} else if (diffMonths > 0) {
+						postedtime = `${diffMonths} months ago`
+					} else if (diffDays > 0) {
+						postedtime = `${diffDays} days ago`
+					} else if (diffHours > 0) {
+						postedtime = `${diffHours} hours ago`
+					} else if (diffMinutes > 0) {
+						postedtime = `${diffMinutes} minutes ago`
+					} else if (diffSeconds > 0) {
+						postedtime = `${diffSeconds} seconds ago`
+					}
 
-				 var imgsrc = result.data[i].userId.profilePicture || "/images/testimonials/1.jpg"
-				 var imagemessage
-				 if(result.data[i].image != ""){
-					 imagemessage = `<img src='${result.data[i].image}'>`
-				 }else{
-					 imagemessage = ""
-				 }
+					var imgsrc = result.data[i].userId.profilePicture || "/images/testimonials/1.jpg"
+					var imagemessage
+					if (result.data[i].image != "") {
+						imagemessage = `<img src='${result.data[i].image}'>`
+					} else {
+						imagemessage = ""
+					}
 
-				 var insideHTML =
-				 `
+					var insideHTML = `
 				 <div class="panel panel-success">
 					 <div class="panel-heading">
 						 <div class="spost clearfix">
@@ -1086,10 +1098,10 @@ function getLastMessageId() {
 				 </div>
 				 `
 
-				 $(insideHTML).insertBefore('#messages-load-more-btn')
+					$(insideHTML).insertBefore('#messages-load-more-btn')
 
-				 for (var j= 0 ; j< result.data[i].comments.length;j++){
-					 var commentHTML = `
+					for (var j = 0; j < result.data[i].comments.length; j++) {
+						var commentHTML = `
 					 <div class="entry-image">
 						 <a class="nobg"><img class="img-circle" src="${result.data[i].comments[j].commenter.profilePicture}" alt="" data-toggle="modal" data-target="#modalprofilemessage"></a>
 					 </div>
@@ -1104,104 +1116,105 @@ function getLastMessageId() {
 					 </div>
 					 `
 
-					 $(`#${result.data[i]._id}comment-list`).prepend(commentHTML)
-				 }
-				 $(`#${result.data[i]._id}comment-list`).hide()
-				 $('.comment-list-btn').each(function(){
-					 var id = $(this).attr('mark')
-					 $(this).on('click',function () {
-						 $(`#${id}comment-list`).show()
-					 })
-				 })
-				 $('.comment-like-btn').each(function(){
-					 var id = $(this).attr('mark')
-					 $(this).on('click',function () {
-						 addLike(id)
-					 })
-				 })
+						$(`#${result.data[i]._id}comment-list`).prepend(commentHTML)
+					}
+					$(`#${result.data[i]._id}comment-list`).hide()
+					$('.comment-list-btn').each(function () {
+						var id = $(this).attr('mark')
+						$(this).on('click', function () {
+							$(`#${id}comment-list`).show()
+						})
+					})
+					$('.comment-like-btn').each(function () {
+						var id = $(this).attr('mark')
+						$(this).on('click', function () {
+							addLike(id)
+						})
+					})
 
-				 bindcommentbox()
-				 bindviewProfileMessage()
-				 getlike()
-				 }
-		 }
-		 function loadMoreListener(e) {
-		 	e.preventDefault()
-			e.stopImmediatePropagation()
-			if(new Date(lastMessageActive.createdAt) > new Date(lastMessage.createdAt)){
-				$.get({
-					url:'/api/messages/loadMore/'+lastMessageActive._id,
-					success: function (response) {
+					bindcommentbox()
+					bindviewProfileMessage()
+					getlike()
+				}
+			}
+			function loadMoreListener(e) {
+				e.preventDefault()
+				e.stopImmediatePropagation()
+				if (new Date(lastMessageActive.createdAt) > new Date(lastMessage.createdAt)) {
+					$.get({
+						url: '/api/messages/loadMore/' + lastMessageActive._id,
+						success: function (response) {
 							if (response.success && response.data[0]) {
-								lastMessageActive = response.data[response.data.length-1]
+								lastMessageActive = response.data[response.data.length - 1]
 								createMessageElement(response)
 							}
+						}
+					})
+				}
+			}
+			function getlike() {
+
+				$('.comment-like-btn').each(function (e) {
+					var idmessage = $(this).attr('mark')
+					$('#hoverdetail').html("")
+					$(this).bind('hover')
+					$(this).popover({
+						html: true,
+						content: function () {
+							var contentdetail = `<div ><center><ul id='hoverdetail'></ul></center></div>`
+							$.get({
+								url: `/api/messages/like/${idmessage}`,
+								success: function (result) {
+									var contentdetail2 = ""
+									for (var i = 0; i < result.data.likes.length; i++) {
+										contentdetail2 += `<li>${result.data.likes[i].name}</li>`
+									}
+									$('#hoverdetail').html(contentdetail2)
+								}
+							})
+							return contentdetail
+						},
+						title: function () {
+							return 'People who like this is: ';
+						}
+					})
+				})
+			}
+			function addLike(id) {
+				$.ajax({
+					url: '/api/messages/like/' + id,
+					type: 'PUT',
+					success: function (result) {
+						$(`#${id}btn-comment-like`).html(`<i class="icon-like"></i> ${result.count} Likes`)
 					}
 				})
 			}
-		 }
-		 function getlike() {
+			function bindcommentbox() {
+				$('.comment-box').unbind('keyup').bind("keyup", function (e) {
 
-			 $('.comment-like-btn').each(function (e) {
- 				var idmessage = $(this).attr('mark')
-				$('#hoverdetail').html("")
- 				$(this).bind('hover')
- 				$(this).popover({
- 					html : true,
- 					content: function() {
- 						var contentdetail = `<div ><center><ul id='hoverdetail'></ul></center></div>`
- 						$.get({
- 							url: `/api/messages/like/${idmessage}`,
- 							success: function (result) {
- 								var contentdetail2 = ""
- 								for (var i = 0; i < result.data.likes.length; i++) {
- 									contentdetail2 += `<li>${result.data.likes[i].name}</li>`
- 								}
- 								$('#hoverdetail').html(contentdetail2)
- 							}
- 						})
- 						return contentdetail
- 					},
- 					title: function() {
- 						return 'People who like this is: ';
- 					}
- 			})
- 			})
-		 }
-		 function addLike(id){
-			 $.ajax({
-					 url: '/api/messages/like/'+id,
-					 type: 'PUT',
-					 success: function(result) {
-				 			$(`#${id}btn-comment-like`).html(`<i class="icon-like"></i> ${result.count} Likes`)
-					 }
-			 })
-		 }
-		 function bindcommentbox() {
-			 $('.comment-box').unbind('keyup').bind("keyup", function(e) {
+					var enterkey = event.keyCode
+					var inputtext = $(this)
+					var id = $(this).attr("mark")
 
- 				var enterkey = event.keyCode
- 				var inputtext =  $(this)
- 				var id = $(this).attr("mark")
+					if (enterkey == 13) {
+						var commenttext = $(this).val()
+						$.ajax({
+							url: `/api/messages/comment/${id}`,
+							type: 'PUT',
+							dataType: 'json',
+							headers: {
+								"X-HTTP-Method-Override": "PUT"
+							},
+							data: JSON.stringify({comment: commenttext}),
+							contentType: "application/json; charset=utf-8",
 
- 				if(enterkey == 13){
- 					var commenttext = $(this).val()
- 					$.ajax({
- 						url: `/api/messages/comment/${id}`,
- 						type: 'PUT',
- 						dataType: 'json',
- 						headers: {"X-HTTP-Method-Override": "PUT"},
- 						data: JSON.stringify({
- 							comment: commenttext
- 							}),
- 						contentType: "application/json; charset=utf-8",
+							success: function (data) {
 
- 						success: function(data) {
-
- 							$(`#${id}btn-comment-list`).html(`<i class="icon-comments"></i> ${data.count} Comments`)
-							var imgprofile = "/images/testimonials/1.jpg"
-							if(data.data.profilePicture !== "") imgprofile = data.data.profilePicture
- 							var commentHTML = `
+								$(`#${id}btn-comment-list`).html(`<i class="icon-comments"></i> ${data.count} Comments`)
+								var imgprofile = "/images/testimonials/1.jpg"
+								if (data.data.profilePicture !== "")
+									imgprofile = data.data.profilePicture
+								var commentHTML = `
  							<div class="panel-footer">
  							<div class="spost clearfix" style="display: block;">
  							<div class="entry-image">
@@ -1219,23 +1232,23 @@ function getLastMessageId() {
  							</div>
  							</div>
  							`
- 							$(commentHTML).insertAfter(inputtext)
+								$(commentHTML).insertAfter(inputtext)
 
- 						}
- 					});
- 					$(this).val("")
- 				}
- 			})
+							}
+						});
+						$(this).val("")
+					}
+				})
 
-		 }
-		 function listItems() {
-			 $.get({
- 					url: "/api/items/",
- 					success: function(result) {
+			}
+			function listItems() {
+				$.get({
+					url: "/api/items/",
+					success: function (result) {
 						var listItems = ""
- 						for (var k in result.data){
- 							listItems += `<option value="${result.data[k].name}" >${result.data[k].name}</option>`
- 						}
+						for (var k in result.data) {
+							listItems += `<option value="${result.data[k].name}" >${result.data[k].name}</option>`
+						}
 						itemsglobal = listItems
 						var listItemsOptions1 = `<select id="1item" mark="1" name="itemname" value="" class="selectpicker form-control item">
 						${listItems}
@@ -1245,16 +1258,16 @@ function getLastMessageId() {
 						</select>`
 						$('#itemnameinput1').html(listItemsOptions1)
 						$('#itemnameinput2').html(listItemsOptions2)
- 					}
- 			})
-		 }
-		function listgudang() {
+					}
+				})
+			}
+			function listgudang() {
 
-			$.get({
+				$.get({
 					url: "/api/transactions/",
-					success: function(result) {
-
-						for (var k in result.data){
+					success: function (result) {
+						console.log(result);
+						for (var k in result.data) {
 							var listgudangHTML = `<div class="panel panel-default">
 								<div class="panel-heading">
 									<h3 class="panel-title ">${result.data[k].name}</h3>
@@ -1269,7 +1282,7 @@ function getLastMessageId() {
 											<th>Status</th>
 										</tr>
 										</thead>
-										<tbody id='${result.data[k].userId}bodylistgudang'>
+										<tbody id='${result.data[k].userId._id}bodylistgudang'>
 
 
 										</tbody>
@@ -1278,119 +1291,116 @@ function getLastMessageId() {
 							</div>
 							`
 							$('#listgudang').prepend(listgudangHTML)
+							if (result.data[k].transactions[0]) {
+								for (let i = 0; i < result.data[k].transactions.length; i++) {
+									var date = new Date(result.data[k].transactions[i].createdAt)
+									var getMonth = date.getMonth() + 1
+									var getDate = date.getDate()
+									var getYear = date.getYear() + 1900
 
-
-
-						}
-						if(result.transactions){
-							for (let i = 0; i < result.transactions.length; i++) {
-								var date = new Date(result.transactions[i].createdAt)
-								var getMonth = date.getMonth()+1
-								var getDate = date.getDate()
-								var getYear = date.getYear()+1900
-
-								var nominal = String(result.transactions[i].nominal);
-								var nominalDel = nominal.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
-								var status = `<span class="label label-success">${result.transactions[i].status}</span>`
-								if (result.transactions[i].status == 'UnPaid') status = `<span class="label label-danger">${result.transactions[i].status}</span>`
-								var listrequestHTML = `
-								<tr>
-									<td>${~~($(`#${result.transactions[i].userId._id}bodylistgudang tr`).length+1)}</td>
-									<td>${result.transactions[i].recipient}</td>
-									<td>IDR ${nominalDel}<br>${getMonth+'-'+getDate+'-'+getYear}</td>
-									<td>${status}</td>
-								</tr>`
-								$(`#${result.transactions[i].userId._id}bodylistgudang`).append(listrequestHTML)
+									var nominal = String(result.data[k].transactions[i].nominal);
+									var nominalDel = nominal.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+									var status = `<span class="label label-success">${result.data[k].transactions[i].status}</span>`
+									if (result.data[k].transactions[i].status == 'UnPaid')
+										status = `<span class="label label-danger">${result.data[k].transactions[i].status}</span>`
+									var listrequestHTML = `
+									<tr>
+										<td>${ ~~ ($(`#${result.data[k].userId._id}bodylistgudang tr`).length + 1)}</td>
+										<td>${result.data[k].transactions[i].recipient}</td>
+										<td>IDR ${nominalDel}<br>${getMonth + '-' + getDate + '-' + getYear}</td>
+										<td>${status}</td>
+									</tr>`
+									$(`#${result.data[k].userId._id}bodylistgudang`).append(listrequestHTML)
+								}
 							}
-						}
 
+						}
 
 					}
-			})
+				})
 
-
-		}
-		$('.detail-rekening').each(function () {
-			var id = $(this).attr('id')
-			$(this).on('keyup',function () {
-				if(id=='nominal') {
-					$(`#${id}summary`).html('Rp '+$(`#${id}`).val().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"))
-				} else {
+			}
+			$('.detail-rekening').each(function () {
+				var id = $(this).attr('id')
+				$(this).on('keyup', function () {
+					if (id == 'nominal') {
+						$(`#${id}summary`).html('Rp ' + $(`#${id}`).val().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"))
+					} else {
 						$(`#${id}summary`).html($(`#${id}`).val())
-				}
+					}
+				})
 			})
-		})
-		$("#dashboard").on('click',function (e) {
-			e.preventDefault()
-			e.stopImmediatePropagation()
-			$.ajax({
+			$("#dashboard").on('click', function (e) {
+				e.preventDefault()
+				e.stopImmediatePropagation()
+				$.ajax({
 					url: '/dashboard',
 					method: "GET",
 					success: function (response) {
-						if(response.token){
+						if (response.token) {
 							console.log(response.token);
 							window.location = `http://admin.supermanrecycle.com/home?token=${response.token}`
 						}
 					}
 				})
-		})
-		function bindprice() {
-			$('.price').unbind('keypress').bind("keypress", function(e) {
+			})
+			function bindprice() {
+				$('.price').unbind('keypress').bind("keypress", function (e) {
 					if (e.keyCode < 48 || e.keyCode > 57) {
 						e.preventDefault()
 					}
-			})
-			$('#nominal').unbind('keypress').bind("keypress", function(e) {
+				})
+				$('#nominal').unbind('keypress').bind("keypress", function (e) {
 					if (e.keyCode < 48 || e.keyCode > 57) {
 						e.preventDefault()
 					}
-			})
-			$('.price').each(function(){
-				var id = $(this).attr('id')
-				var mark = $(this).attr('mark')
+				})
+				$('.price').each(function () {
+					var id = $(this).attr('id')
+					var mark = $(this).attr('mark')
 
-				$(this).on('keyup',function () {
-					var prc = parseInt($(`#${id}`).val())
-					var qty = parseInt($(`#${mark}quantity`).val())
-					$(`#${mark}`).html(prc*qty)
-					$(`#${mark}total`).val(prc*qty)
-					filltabel(mark)
+					$(this).on('keyup', function () {
+						var prc = parseInt($(`#${id}`).val())
+						var qty = parseInt($(`#${mark}quantity`).val())
+						$(`#${mark}`).html(prc * qty)
+						$(`#${mark}total`).val(prc * qty)
+						filltabel(mark)
+					})
 				})
-			})
-		}
-		function bindquantity() {
-			$('.quantity').unbind('keypress').bind("keypress", function(e) {
+			}
+			function bindquantity() {
+				$('.quantity').unbind('keypress').bind("keypress", function (e) {
 					if (e.keyCode < 48 || e.keyCode > 57) {
 						e.preventDefault()
 					}
-			})
-			$('.item').each(function(){
-				var mark = $(this).attr('mark')
-				$(this).on('keyup',function () {
-					filltabel(mark)
 				})
-			})
-			$('.quantity').each(function(){
-				var id = $(this).attr('id')
-				var mark = $(this).attr('mark')
-				$(this).on('keyup',function () {
-					var qty = parseInt($(`#${id}`).val())
-					var prc = parseInt($(`#${mark}price`).val())
-					$(`#${mark}`).html(prc*qty)
-					$(`#${mark}total`).val(prc*qty)
-					filltabel(mark)
+				$('.item').each(function () {
+					var mark = $(this).attr('mark')
+					$(this).on('keyup', function () {
+						filltabel(mark)
+					})
 				})
-			})
-		}
-		function filltabel(id) {
-			var rowid = $(`#${id}item`).attr('id')
-			var itemname = $(`#${id}item`).val()
-			var itemprice = $(`#${id}price`).val().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
-			var itemquantity = $(`#${id}quantity`).val().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
-			var itemtotal = $(`#${id}total`).val().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
-			if(itemname!='' && itemprice!='' && itemquantity!='' && itemname!= undefined && itemprice!=undefined && itemquantity!=undefined){
-						$(`#${rowid}detail`).remove()
-						var trdetail = `<tr id=${rowid}detail>
+				$('.quantity').each(function () {
+					var id = $(this).attr('id')
+					var mark = $(this).attr('mark')
+					$(this).on('keyup', function () {
+						var qty = parseInt($(`#${id}`).val())
+						var prc = parseInt($(`#${mark}price`).val())
+						$(`#${mark}`).html(prc * qty)
+						$(`#${mark}total`).val(prc * qty)
+						filltabel(mark)
+					})
+				})
+			}
+			function filltabel(id) {
+				var rowid = $(`#${id}item`).attr('id')
+				var itemname = $(`#${id}item`).val()
+				var itemprice = $(`#${id}price`).val().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+				var itemquantity = $(`#${id}quantity`).val().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+				var itemtotal = $(`#${id}total`).val().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+				if (itemname != '' && itemprice != '' && itemquantity != '' && itemname != undefined && itemprice != undefined && itemquantity != undefined) {
+					$(`#${rowid}detail`).remove()
+					var trdetail = `<tr id=${rowid}detail>
 						<th scope="row"></th>
 						<td>${itemname}</td>
 						<td>${itemprice}</td>
@@ -1399,40 +1409,32 @@ function getLastMessageId() {
 					</tr>`
 					$('#tabeldetail').append(trdetail)
 
+				}
+			}
+			function clear_form_elements(ele) {
+
+				$(ele).find(':input').each(function () {
+
+					switch (this.type) {
+						case 'password':
+						case 'select-multiple':
+						case 'select-one':
+						case 'text':
+						case 'textarea':
+							$(this).val('');
+							break;
+						case 'checkbox':
+						case 'radio':
+							this.checked = false;
+					}
+				});
 
 			}
-		}
-		function clear_form_elements(ele) {
+			bindprice()
+			bindquantity()
+			// $( "li .ui-state-default" ).each(function (e) { 	$(this).unbind('click') }) $( "#ui-id-1" ).unbind('click') $( "#ui-id-2" ).unbind('click') $( "#ui-id-3" ).unbind('click') $( "#ui-id-4" ).unbind('click')
+		</script>
 
-        $(ele).find(':input').each(function() {
-
-            switch(this.type) {
-                case 'password':
-                case 'select-multiple':
-                case 'select-one':
-                case 'text':
-                case 'textarea':
-                    $(this).val('');
-                    break;
-                case 'checkbox':
-                case 'radio':
-                    this.checked = false;
-            }
-        });
-
-    }
-		bindprice()
-		bindquantity()
-		// $( "li .ui-state-default" ).each(function (e) {
-		// 	$(this).unbind('click')
-		// })
-		// $( "#ui-id-1" ).unbind('click')
-		// $( "#ui-id-2" ).unbind('click')
-		// $( "#ui-id-3" ).unbind('click')
-		// $( "#ui-id-4" ).unbind('click')
-	</script>
-
-</body>
-
+	</body>
 
 </html>

@@ -3,9 +3,9 @@ let Users = require('../models/users')
 const path = require('path')
 
 exports.MessagesDelete = function(req,res,next){
-  if (!req.isAuthenticated()) {
-    return res.redirect('/');
-  }
+  // if (!req.isAuthenticated()) {
+  //   return res.redirect('/');
+  // }
     Messages.remove({_id: req.params.id},(err,data) => {
       if(err){
         console.log(err)
@@ -15,9 +15,9 @@ exports.MessagesDelete = function(req,res,next){
     })
 }
 exports.MessagesGetLike = function(req,res,next){
-  if (!req.isAuthenticated()) {
-    return res.redirect('/');
-  }
+  // if (!req.isAuthenticated()) {
+  //   return res.redirect('/');
+  // }
     Messages.findOne({_id:req.params.id},{'likes':1}).populate('likes','name profilePicture').exec((err,data) => {
       if(err){
         console.log(err)
@@ -27,25 +27,26 @@ exports.MessagesGetLike = function(req,res,next){
     })
 }
 exports.MessagesGet = function(req,res,next){
-  if (!req.isAuthenticated()) {
-    return res.redirect('/');
-  }
+  // if (!req.isAuthenticated()) {
+  //   return res.redirect('/');
+  // }
     Messages.find({_id: req.params.id}).sort({date:-1}).exec((err,data) => {
       if(err){
         console.log(err)
         return res.json({success: false, message: "message not found "})
       }
+      data.map(msg=>{
+
+      })
       res.json({success: true, data: data})
     })
 }
 exports.AllMessagesGet = function(req,res,next){
-  if (!req.isAuthenticated()) {
-    return res.redirect('/');
-  }
+  // if (!req.isAuthenticated()) {
+  //   return res.redirect('/');
+  // }
     Messages.find({})
     .sort({createdAt:-1})
-    .populate('userId','name profilePicture')
-    .populate('comments.commenter','name profilePicture')
     .limit(10)
     .exec((err,data) => {
       if(err){
@@ -53,14 +54,15 @@ exports.AllMessagesGet = function(req,res,next){
         return res.json({success: false, message: "message not found "})
       }
 
+
       res.json({success: true, data:data})
     })
 }
 
 exports.loadMoreMessagesGet = function(req,res,next){
-  if (!req.isAuthenticated()) {
-    return res.redirect('/');
-  }
+  // if (!req.isAuthenticated()) {
+  //   return res.redirect('/');
+  // }
     Messages
       .findOne({_id:req.params.id})
       .then(message=>{
@@ -86,9 +88,9 @@ exports.loadMoreMessagesGet = function(req,res,next){
 }
 
 exports.lastMessageIdGet = function (req,res,next) {
-  if (!req.isAuthenticated()) {
-    return res.redirect('/');
-  }
+  // if (!req.isAuthenticated()) {
+  //   return res.redirect('/');
+  // }
     Messages.findOne({})
     .sort({createdAt:1})
     .exec((err,data) => {
@@ -117,15 +119,20 @@ exports.lastMessageIdGet = function (req,res,next) {
 //   //   })
 // }
 exports.MessagesPost = function(req,res,next){
-  if (!req.isAuthenticated()) {
-    return res.redirect('/');
-  }
+  // if (!req.isAuthenticated()) {
+  //   return res.redirect('/');
+  // }
   var item_image
   var realpath
   console.log(req.files,"realpath luar")
   let newMessage = new Messages()
   newMessage.content = req.body.content
-  newMessage.userId = req.session.userId
+  newMessage.userId = {
+    _id : req.session.userId,
+    userEmail: req.session.email,
+    profilePicture: req.session.profilePict,
+    name: req.session.name
+  }
   newMessage.tags = req.body.tags
 
       if (req.files.photo.name != "") {
@@ -167,7 +174,7 @@ exports.MessagesPost = function(req,res,next){
             console.log(err)
             return res.json({success: false,message: "message not found"})
           }
-          res.json({success: true,message: "success save message", data: message})
+          res.json({success: true,message: "success save message", data: newMessage})
         })
       })
     }
@@ -177,28 +184,30 @@ exports.MessagesPost = function(req,res,next){
 
 }
 exports.MessagesCommentPut = function(req,res,next){
-  if (!req.isAuthenticated()) {
-    return res.redirect('/');
-  }
+  // if (!req.isAuthenticated()) {
+  //   return res.redirect('/');
+  // }
   Messages.find({_id: req.params.id},(err,data)=>{
     console.log(req.body, "ini test command body");
-    Users.findOne({_id:req.session.userId},function (err, user) {
-      data[0].comments.push({commenter: user._id, comment: req.body.comment})
-      console.log(data[0].comments,"tst comment masuk");
-      data[0].save((err) => {
-        if(err){
-          console.log(err)
-          return res.json({success: false, message: "save new comment failed", err: err})
-        }
-        res.json({success: true, message: "save new comment success", count: data[0].comments.length, name: req.session.name, data: user})
-      })
+    data[0].comments.push({commenter: {
+      _id : req.session.userId,
+      userEmail: req.session.email,
+      profilePicture: req.session.profilePict,
+      name: req.session.name
+    }, comment: req.body.comment})
+    data[0].save((err) => {
+      if(err){
+        console.log(err)
+        return res.json({success: false, message: "save new comment failed", err: err})
+      }
+      res.json({success: true, message: "save new comment success", count: data[0].comments.length, name: req.session.name, data: user})
     })
   })
 }
 exports.MessagesLikePut = function(req,res,next){
-  if (!req.isAuthenticated()) {
-    return res.redirect('/');
-  }
+  // if (!req.isAuthenticated()) {
+  //   return res.redirect('/');
+  // }
   Messages.findOne({_id: req.params.id},(err,data)=>{
     if(err){
         return res.json({success: false, message: "post not found"})

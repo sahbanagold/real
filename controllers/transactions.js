@@ -1,6 +1,9 @@
 let Transactions = require('../models/transactions')
 let Warehouse = require('../models/warehouse')
 let verification = require('../helper/verification')
+var request = require('request');
+var mongoose = require('mongoose');
+
 exports.transactionsGet = function(req,res,next){
   if (!req.isAuthenticated()) {
     return res.redirect('/');
@@ -43,9 +46,9 @@ exports.transactionsFilterGet = function(req,res,next){
 
 exports.allTransactionsGet = function(req,res,next){
 
-  if (!req.isAuthenticated()) {
-    return res.redirect('/');
-  }
+  // if (!req.isAuthenticated()) {
+  //   return res.redirect('/');
+  // }
   let startDate = new Date()
   let dateMidnight = new Date(startDate)
 
@@ -59,59 +62,119 @@ exports.allTransactionsGet = function(req,res,next){
   //
   // dateMidnight.setDate(dateMidnight.getDate()-1)
   // startDate.setDate(startDate.getDate()-1)
+  request('http://admin.supermanrecycle.com/api/warehouses', function (error, response, body) {
+    console.log('error:', error); // Print the error if one occurred
+    console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+    var warehouses = JSON.parse(body)
+    if(warehouses[0]){
 
-  Warehouse.find({},(err,data) => {
-    if(err){
-      console.log(err)
-      return res.json({success: false, message: "error, wareHouse not found"})
-    }
-    let datas = []
-    let transactions = []
-    let i = 1
-    data.forEach((warehouse)=>{
-      Transactions.find({userId: warehouse.userId}).or([
-        { $or: [
-          {createdAt:{$gt: startDate, $lt: dateMidnight}},
-          {status: "UnPaid"}]
-        }])
-        .sort({date:-1}).populate('userId','_id name profilePicture').exec((err,transaction) => {
-        if(err){
-          console.log(err)
-          return res.json({success: false, message: "transaction not found"})
-        }
-        let newobject = Object.assign({},{
-          userId: warehouse.userId,
-          name: warehouse.name,
-          profilePicture: warehouse.profilePicture,
-          profilePictureThumb: warehouse.profilePictureThumb,
-          type: warehouse.type,
-          _id: warehouse._id,
-          location: warehouse.location
-          })
-          transactions = [...transactions,...transaction]
-
-        datas.push(newobject)
-        if(i++ == data.length){
-
-          var p1 =  new Promise(function (resolve, reject) {
-              console.log('ok sorted');
-              resolve(transactions.sort(function (a,b) {
-                console.log('whyw whuwhuw why why');
-                a = new Date(a.createdAt).getTime();
-                b = new Date(b.createdAt).getTime();
-                return a>b ? -1 : a<b ? 1 : 0;
-              }))
+      let datas = []
+      let transactions = []
+      let i = 1
+      warehouses.forEach((warehouse)=>{
+        Transactions.find({"userId._id": warehouse.userId._id}).or([
+          { $or: [
+            {createdAt:{$gt: startDate, $lt: dateMidnight}},
+            {status: "UnPaid"}]
+          }])
+          .sort({date:-1}).populate('_id name profilePicture').exec((err,transaction) => {
+          if(err){
+            console.log(err)
+            return res.json({success: false, message: "transaction not found"})
+          }
+          let newobject = Object.assign({},{
+            userId: {
+              _id : req.session.userId,
+              userEmail: req.session.email,
+              profilePicture: req.session.profilePict,
+              name: req.session.name
+            },
+            name: warehouse.name,
+            profilePicture: warehouse.profilePicture,
+            profilePictureThumb: warehouse.profilePictureThumb,
+            type: warehouse.type,
+            _id: warehouse._id,
+            location: warehouse.location
             })
-            p1.then(function () {
-                res.json({success: true, data: datas, transactions: transactions})
-            })
-        }
+            newobject.transactions = [...transactions,...transaction]
+
+          datas.push(newobject)
+          if(i++ == warehouses.length){
+
+            var p1 =  new Promise(function (resolve, reject) {
+                console.log('ok sorted');
+                resolve(transactions.sort(function (a,b) {
+                  console.log('whyw whuwhuw why why');
+                  a = new Date(a.createdAt).getTime();
+                  b = new Date(b.createdAt).getTime();
+                  return a>b ? -1 : a<b ? 1 : 0;
+                }))
+              })
+              p1.then(function () {
+                  res.json({success: true, data: datas, transactions: transactions})
+              })
+          }
+        })
+        //////////
+
       })
-      //////////
 
-    })
-
-  })
+    } else{
+      res.json({success: false, message: "something error, no user found"})
+    }
+  });
+  // Warehouse.find({},(err,data) => {
+  //   if(err){
+  //     console.log(err)
+  //     return res.json({success: false, message: "error, wareHouse not found"})
+  //   }
+  //   let datas = []
+  //   let transactions = []
+  //   let i = 1
+  //   data.forEach((warehouse)=>{
+  //     Transactions.find({userId: warehouse.userId}).or([
+  //       { $or: [
+  //         {createdAt:{$gt: startDate, $lt: dateMidnight}},
+  //         {status: "UnPaid"}]
+  //       }])
+  //       .sort({date:-1}).populate('userId','_id name profilePicture').exec((err,transaction) => {
+  //       if(err){
+  //         console.log(err)
+  //         return res.json({success: false, message: "transaction not found"})
+  //       }
+  //       let newobject = Object.assign({},{
+  //         userId: warehouse.userId,
+  //         name: warehouse.name,
+  //         profilePicture: warehouse.profilePicture,
+  //         profilePictureThumb: warehouse.profilePictureThumb,
+  //         type: warehouse.type,
+  //         _id: warehouse._id,
+  //         location: warehouse.location
+  //         })
+  //         transactions = [...transactions,...transaction]
+  //
+  //       datas.push(newobject)
+  //       if(i++ == data.length){
+  //
+  //         var p1 =  new Promise(function (resolve, reject) {
+  //             console.log('ok sorted');
+  //             resolve(transactions.sort(function (a,b) {
+  //               console.log('whyw whuwhuw why why');
+  //               a = new Date(a.createdAt).getTime();
+  //               b = new Date(b.createdAt).getTime();
+  //               return a>b ? -1 : a<b ? 1 : 0;
+  //             }))
+  //           })
+  //           p1.then(function () {
+  //               res.json({success: true, data: datas, transactions: transactions})
+  //           })
+  //       }
+  //     })
+  //     //////////
+  //
+  //   })
+  //
+  // })
 }
 /////
 // exports.allTransactionsGet = function(req,res,next){
@@ -150,9 +213,9 @@ exports.allTransactionsGet = function(req,res,next){
 //   })
 // }
 exports.transactionsPost = function(req,res,next){
-  if (!req.isAuthenticated()) {
-    return res.redirect('/');
-  }
+  // if (!req.isAuthenticated()) {
+  //   return res.redirect('/');
+  // }
   let newItems = []
   console.log(req.body)
   if(req.body.itemname){
@@ -179,7 +242,15 @@ exports.transactionsPost = function(req,res,next){
 
   if(newItems.length > 0){
     let newTransactions = new Transactions()
-      newTransactions.userId= req.session.userId
+    console.log(req.session.userId,req.session.email,'check userIds');
+    var newId2 = new mongoose.mongo.ObjectId();
+      newTransactions._id= newId2
+      newTransactions.userId= {
+        _id : req.session.userId,
+        userEmail: req.session.email,
+        profilePicture: req.session.profilePict,
+        name: req.session.name
+      }
       newTransactions.nominal= req.body.nominal
       newTransactions.recipient= req.body.penerima
       newTransactions.account= req.body.rekening
@@ -195,14 +266,15 @@ exports.transactionsPost = function(req,res,next){
           console.log(err)
           return
         }
-        newTransactions.populate('userId','name profilePicture').populate(function (err, saved) {
-          if (err){
-            console.log(err)
-            return
-          }
-          console.log(saved, "saved new transactions here");
-          verification.verify(saved._id,saved.userId.userEmail,req,res)
-        })
+        // newTransactions.populate('userId','name profilePicture').populate(function (err, saved) {
+        //   if (err){
+        //     console.log(err)
+        //     return
+        //   }
+        //   console.log(saved, "saved new transactions here");
+        //   verification.verify(saved._id,req.session.userEmail,req,res)
+        // })
+        verification.verify(newTransactions._id,req.session.email,req,res)
       })
   } else{
     res.json({success: false,message: "no transactions saved"})
@@ -210,9 +282,9 @@ exports.transactionsPost = function(req,res,next){
 }
 
 exports.transactionsPut = function(req,res,next){
-  if (!req.isAuthenticated()) {
-    return res.redirect('/');
-  }
+  // if (!req.isAuthenticated()) {
+  //   return res.redirect('/');
+  // }
     Transactions.find({_id: req.params.id},(err,transaction) => {
       transaction[0].status = "Paid"
       transaction[0].save(function (err) {
@@ -226,9 +298,9 @@ exports.transactionsPut = function(req,res,next){
 }
 exports.transactionsFilterPost = function(req,res,next){
 
-  if (!req.isAuthenticated()) {
-    return res.redirect('/');
-  }
+  // if (!req.isAuthenticated()) {
+  //   return res.redirect('/');
+  // }
   let startDate = new Date(req.body.date)
   let dateMidnight = new Date(req.body.date)
 
@@ -250,7 +322,7 @@ exports.transactionsFilterPost = function(req,res,next){
     let i = 1
     data.forEach((warehouse)=>{
       Transactions.find({userId: warehouse.userId,createdAt:{$gt: startDate, $lt: dateMidnight}})
-        .sort({date:-1}).populate('userId','_id name profilePicture').exec((err,transaction) => {
+        .sort({date:-1}).populate('_id name profilePicture').exec((err,transaction) => {
         if(err){
           console.log(err)
           return res.json({success: false, message: "transaction not found"})
@@ -289,8 +361,8 @@ exports.transactionsFilterPost = function(req,res,next){
   })
 }
 exports.transactionsVerificationPost = function(req,res,next){
-  if (!req.isAuthenticated()) {
-    return res.redirect('/');
-  }
+  // if (!req.isAuthenticated()) {
+  //   return res.redirect('/');
+  // }
   verification.sendVerificationsMail(req,res)
 }

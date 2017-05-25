@@ -1,4 +1,5 @@
 let Warehouse = require('../models/warehouse')
+var request = require('request');
 exports.warehouseDelete = function(req,res,next){
     Warehouse.remove({_id: req.params.id},(err,data) => {
       if(err){
@@ -40,12 +41,34 @@ exports.warehousePut = function(req,res,next){
 }
 
 exports.warehouseGet = function(req,res,next){
-    Warehouse.find({_id: req.params.id}).populate('userId','name profilePicture isActive').exec((err,data) => {
-      res.json(data)
-    })
+  request('http://admin.supermanrecycle.com/api/warehouses', function (error, response, body) {
+    console.log('error:', error); // Print the error if one occurred
+    console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+    var warehouses = JSON.parse(body)
+    if(warehouses[0]){
+
+      res.json({success: true, data: warehouses})
+    } else{
+      res.json({success: false, message: "something error, no user found"})
+    }
+  });
+    // Warehouse.find({_id: req.params.id}).populate('userId','name profilePicture isActive').exec((err,data) => {
+    //   res.json(data)
+    // })
 }
 exports.warehouseGetAll = function(req,res,next){
-    Warehouse.find({}).populate('userId', 'name profilePicture isActive').exec((err,data) => {
-      res.json(data)
-    })
+  request('http://admin.supermanrecycle.com/api/warehouses', function (error, response, body) {
+    console.log('error:', error); // Print the error if one occurred
+    console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+    var warehouses = JSON.parse(body)
+    if(warehouses[0]){
+
+      res.json({success: true, data: warehouses})
+    } else{
+      res.json({success: false, message: "something error, no user found"})
+    }
+  });
+    // Warehouse.find({}).populate('userId', 'name profilePicture isActive').exec((err,data) => {
+    //   res.json(data)
+    // })
 }

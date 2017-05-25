@@ -2,34 +2,19 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const messageSchema =  new Schema({
-  userId: {
-    type: Schema.Types.ObjectId,
-    ref: 'users'
-  },
+  userId: Object,
   content: String,
   image:String,
   comments: [{
-    commenter:{
-      type: Schema.Types.ObjectId,
-      ref: 'users'
-    },
+    commenter:Object,
     comment: String,
-    likes: [{
-      type: Schema.Types.ObjectId,
-      ref: 'users'
-    }]
+    likes: [Object]
   }],
   likes: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'users'
-    }
+    Object
   ],
   tags: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'users'
-    }
+    Object
   ]
 }, {
   timestamps: true

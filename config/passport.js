@@ -1,5 +1,8 @@
 var LocalStrategy = require('passport-local').Strategy;
 const Users = require('../models/users.js')
+var request = require('request');
+var bcrypt   = require('bcrypt-nodejs');
+
 
 
 function validateEmail(email) {
@@ -18,7 +21,7 @@ module.exports = function(passport) {
     // used to serialize the user for the session
 
     passport.serializeUser(function(user, done) {
-      done(null, user.id);
+      done(null, user._id);
     });
 
 
@@ -42,6 +45,7 @@ module.exports = function(passport) {
       passReqToCallback : true
     }, function(req, email, password, done) {
     //kalo ada user
+
       Users.findOne({ 'userEmail' :  email }, function(err, user) {
         if (err){
           return done(err);
@@ -76,24 +80,27 @@ module.exports = function(passport) {
       passwordField : 'password',
       passReqToCallback : true // allows us to pass back the entire request to the callback
     }, function(req, email, password, done) {
-
-      Users.findOne({ 'userEmail' :  email }, function(err, user) {
-        if (err){
-          return done(err);
-        }
-        if(user){
-          if(user.encryptedPassword == null){
+      request('http://admin.supermanrecycle.com/api/users/list', function (error, response, body) {
+        console.log('error:', error); // Print the error if one occurred
+        console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+        var users = JSON.parse(body)
+        var user = users.filter(function (userObj) {
+          return (userObj.userEmail === email)
+        })
+        if(user[0]){
+          if(user[0].encryptedPassword == null){
             return done(null, false, req.flash('loginMessage', 'Please check your email to setup your password'));
           } else {
-            if (!user.validPassword(password)){
+            if (!bcrypt.compareSync(password, user[0].encryptedPassword)){
               return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
             }
-            req.session.role = user.role
-            req.session.userId = user._id
-            req.session.email = user.userEmail
-            req.session.profilePict = user.profilePicture
-            req.session.name = user.name
-            return done(null, user);
+            console.log(user[0],'check user');
+            req.session.role = user[0].role
+            req.session.userId = user[0]._id
+            req.session.email = user[0].userEmail
+            req.session.profilePict = user[0].profilePicture
+            req.session.name = user[0].name
+            return done(null, user[0]);
           }
         } else {
           if (!user){
@@ -101,6 +108,30 @@ module.exports = function(passport) {
           }
         }
       });
+      // Users.findOne({ 'userEmail' :  email }, function(err, user) {
+      //   if (err){
+      //     return done(err);
+      //   }
+      //   if(user){
+      //     if(user.encryptedPassword == null){
+      //       return done(null, false, req.flash('loginMessage', 'Please check your email to setup your password'));
+      //     } else {
+      //       if (!user.validPassword(password)){
+      //         return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
+      //       }
+      //       req.session.role = user.role
+      //       req.session.userId = user._id
+      //       req.session.email = user.userEmail
+      //       req.session.profilePict = user.profilePicture
+      //       req.session.name = user.name
+      //       return done(null, user);
+      //     }
+      //   } else {
+      //     if (!user){
+      //       return done(null, false, req.flash('loginMessage', 'No user found.'));
+      //     }
+      //   }
+      // });
     }));
 
 

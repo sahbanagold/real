@@ -4,6 +4,7 @@ var async = require('async');
 var crypto = require('crypto');
 var nodemailer = require('nodemailer');
 var warehouseid = ""
+var request = require('request');
 
 exports.verify = function (id,email,req,res) {
   async.waterfall([
@@ -23,9 +24,10 @@ exports.verify = function (id,email,req,res) {
         transaction.verificationToken = token;
         transaction.verificationTokenExpires = Date.now() + 3600000; // expire in 1 hour
         transaction.save(function(err) {
-          Transactions.findOne({ _id: id}).populate('userId').exec(function(err, tr) {
-          done(err, token, tr);
-          })
+          done(err, token, transaction);
+          // Transactions.findOne({ _id: id}).populate('userId').exec(function(err, tr) {
+          //
+          // })
         });
       });
     },
@@ -48,11 +50,29 @@ exports.verify = function (id,email,req,res) {
 
       transporter.sendMail(mailOptions, function(err) {
         req.flash('info', { msg: 'An email has been sent to ' + email + ' with further instructions.' })
-
-        Warehouse.findOne({userId: transaction.userId},function (err,warehouse) {
-            warehouseid = warehouse._id
+        request('http://admin.supermanrecycle.com/api/warehouses', function (error, response, body) {
+          console.log('error:', error); // Print the error if one occurred
+          console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+          var warehouses = JSON.parse(body)
+          console.log(transaction,'transaction');
+          var warehouse = warehouses.filter(function (userObj) {
+            console.log(typeof userObj.userId,userObj.userId,'userId');
+            console.log(typeof transaction.userId,transaction.userId);
+            return userObj.userId._id == transaction.userId._id
+          })
+          console.log(warehouse,'check warehouse---------------');
+          if(warehouse[0]){
+            warehouseid = warehouse[0]._id
+            transaction.userId = warehouse[0].userId
             res.json({success: true,message: "success save transactions", data: transaction, warehouseId : warehouseid})
-        })
+          } else{
+            res.json({success: false, message: "something error, no user found"})
+          }
+        });
+        // Warehouse.findOne({userId: transaction.userId},function (err,warehouse) {
+        //     warehouseid = warehouse._id
+        //     res.json({success: true,message: "success save transactions", data: transaction, warehouseId : warehouseid})
+        // })
       })
     }
   ])
